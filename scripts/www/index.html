@@ -1,11 +1,659 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>股票交易费用计算器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.5;
+            padding: 20px 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef1f6;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #3498db;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-row select {
+            flex: 1;
+        }
+        
+        .form-row .btn {
+            padding: 14px 16px;
+            background-color: #f0f7ff;
+            color: #3498db;
+            border: 1px solid #3498db;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .form-row .btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: #f9fafb;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .result-value {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .positive {
+            color: #e74c3c;
+        }
+        
+        .negative {
+            color: #2ecc71;
+        }
+        
+        .fee-detail {
+            background-color: #f9fafb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+        
+        .fee-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #3498db;
+            font-size: 16px;
+        }
+        
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .fee-label {
+            color: #666;
+        }
+        
+        .fee-value {
+            font-weight: 500;
+        }
+        
+        .total-fee {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+            font-style: italic;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .section {
+                padding: 16px;
+            }
+            
+            .section-title {
+                font-size: 17px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .form-row .btn {
+                width: 100%;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        
+        .section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 设置板块 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-cog"></i>
+                设置
+            </div>
+            <div class="form-group">
+                <label for="commission-rate">佣金费率</label>
+                <div class="form-row">
+                    <select id="commission-rate">
+                        <option value="0.00025">0.025%</option>
+                        <option value="0.00015">0.015%</option>
+                        <option value="0.00010">0.010%</option>
+                    </select>
+                    <button type="button" id="set-default-btn" class="btn">
+                        <i class="fas fa-save"></i> 设为默认
+                    </button>
+                </div>
+                <div class="hint" id="default-hint">当前默认费率: 0.025%</div>
+            </div>
+        </div>
+        
+        <!-- 总览板块 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-chart-line"></i>
+                总览
+            </div>
+            <div class="form-group">
+                <label for="buy-price">买入股价 (元)</label>
+                <input type="number" id="buy-price" min="0" step="0.01" placeholder="请输入买入股价" value="10.00">
+            </div>
+            
+            <div class="form-group">
+                <label for="sell-price">卖出股价 (元)</label>
+                <input type="number" id="sell-price" min="0" step="0.01" placeholder="请输入卖出股价" value="12.00">
+            </div>
+            
+            <div class="form-group">
+                <label for="lot">手数 (每手100股)</label>
+                <input type="number" id="lot" min="1" step="1" placeholder="请输入交易手数" value="10">
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">买入金额</span>
+                <span class="result-value" id="buy-amount">10,000.00 元</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">卖出金额</span>
+                <span class="result-value" id="sell-amount">12,000.00 元</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">总费用</span>
+                <span class="result-value" id="total-fee">45.10 元</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">净盈利</span>
+                <span class="result-value" id="net-profit">1,954.90 元</span>
+            </div>
+        </div>
+        
+        <!-- 费用详情板块 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-file-invoice-dollar"></i>
+                费用详情
+            </div>
+            
+            <div class="fee-detail">
+                <div class="fee-title">买入费用</div>
+                
+                <div class="fee-item">
+                    <span class="fee-label">佣金</span>
+                    <span class="fee-value" id="buy-commission">5.00 元</span>
+                </div>
+                
+                <div class="fee-item">
+                    <span class="fee-label">过户费 (0.001%)</span>
+                    <span class="fee-value" id="buy-transfer-fee">0.10 元</span>
+                </div>
+                
+                <div class="fee-item total-fee">
+                    <span class="fee-label">买入总费用</span>
+                    <span class="fee-value" id="buy-total-fee">5.10 元</span>
+                </div>
+            </div>
+            
+            <div class="fee-detail">
+                <div class="fee-title">卖出费用</div>
+                
+                <div class="fee-item">
+                    <span class="fee-label">佣金</span>
+                    <span class="fee-value" id="sell-commission">5.00 元</span>
+                </div>
+                
+                <div class="fee-item">
+                    <span class="fee-label">印花税 (0.1%)</span>
+                    <span class="fee-value" id="sell-stamp-tax">12.00 元</span>
+                </div>
+                
+                <div class="fee-item">
+                    <span class="fee-label">过户费 (0.001%)</span>
+                    <span class="fee-value" id="sell-transfer-fee">0.10 元</span>
+                </div>
+                
+                <div class="fee-item total-fee">
+                    <span class="fee-label">卖出总费用</span>
+                    <span class="fee-value" id="sell-total-fee">17.10 元</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>股票交易费用计算器 | 数据仅供参考，实际费用以券商为准</p>
+        </div>
+    </div>
+
+    <script>
+        // 默认佣金费率设置
+        let defaultCommissionRate = 0.00025; // 默认值: 0.025%
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 从localStorage加载默认费率
+            const savedDefaultRate = localStorage.getItem('defaultCommissionRate');
+            if (savedDefaultRate) {
+                defaultCommissionRate = parseFloat(savedDefaultRate);
+            }
+            
+            // 设置下拉框默认值
+            setSelectValue('commission-rate', defaultCommissionRate);
+            
+            // 更新提示信息
+            updateDefaultHint();
+            
+            // 初始化计算
+            calculateAll();
+            
+            // 设置事件监听器
+            setupEventListeners();
+        });
+        
+        // 设置下拉框的值
+        function setSelectValue(elementId, value) {
+            const selectElement = document.getElementById(elementId);
+            if (!selectElement) return;
+            
+            const valueStr = value.toString();
+            for (let i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].value === valueStr) {
+                    selectElement.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+        
+        // 更新默认费率提示
+        function updateDefaultHint() {
+            const ratePercent = (defaultCommissionRate * 100).toFixed(3);
+            const hintElement = document.getElementById('default-hint');
+            if (hintElement) {
+                hintElement.textContent = `当前默认费率: ${ratePercent}%`;
+            }
+        }
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 佣金费率下拉框事件
+            const commissionRateEl = document.getElementById('commission-rate');
+            if (commissionRateEl) {
+                // 移除现有监听器
+                commissionRateEl.replaceWith(commissionRateEl.cloneNode(true));
+                
+                // 重新获取元素
+                const newCommissionRateEl = document.getElementById('commission-rate');
+                
+                // 添加新监听器
+                newCommissionRateEl.addEventListener('change', calculateAll);
+                newCommissionRateEl.addEventListener('input', calculateAll);
+            }
+            
+            // 其他输入框事件
+            const buyPriceEl = document.getElementById('buy-price');
+            const sellPriceEl = document.getElementById('sell-price');
+            const lotEl = document.getElementById('lot');
+            
+            if (buyPriceEl) {
+                buyPriceEl.addEventListener('input', calculateAll);
+            }
+            if (sellPriceEl) {
+                sellPriceEl.addEventListener('input', calculateAll);
+            }
+            if (lotEl) {
+                lotEl.addEventListener('input', calculateAll);
+            }
+            
+            // 设为默认按钮事件
+            const setDefaultBtn = document.getElementById('set-default-btn');
+            if (setDefaultBtn) {
+                setDefaultBtn.addEventListener('click', function() {
+                    const commissionRateEl = document.getElementById('commission-rate');
+                    if (commissionRateEl) {
+                        const selectedRate = parseFloat(commissionRateEl.value);
+                        defaultCommissionRate = selectedRate;
+                        
+                        // 保存到localStorage
+                        localStorage.setItem('defaultCommissionRate', defaultCommissionRate.toString());
+                        
+                        // 更新提示信息
+                        updateDefaultHint();
+                        
+                        // 显示成功提示
+                        showMessage('默认费率设置成功！', 'success');
+                    }
+                });
+            }
+            
+            // 输入验证
+            validateInputs();
+        }
+        
+        // 显示提示消息
+        function showMessage(message, type) {
+            // 移除已有的消息
+            const existingMessage = document.querySelector('.message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // 创建新消息
+            const messageEl = document.createElement('div');
+            messageEl.className = `message ${type}`;
+            messageEl.textContent = message;
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-weight: 500;
+                z-index: 1000;
+                animation: fadeInOut 3s ease forwards;
+            `;
+            
+            if (type === 'success') {
+                messageEl.style.backgroundColor = '#2ecc71';
+                messageEl.style.color = 'white';
+                messageEl.style.boxShadow = '0 4px 12px rgba(46, 204, 113, 0.3)';
+            } else {
+                messageEl.style.backgroundColor = '#e74c3c';
+                messageEl.style.color = 'white';
+                messageEl.style.boxShadow = '0 4px 12px rgba(231, 76, 60, 0.3)';
+            }
+            
+            // 添加动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(messageEl);
+            
+            // 3秒后移除消息
+            setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.remove();
+                }
+            }, 3000);
+        }
+        
+        // 格式化货币显示
+        function formatCurrency(value) {
+            return value.toLocaleString('zh-CN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' 元';
+        }
+        
+        // 计算佣金（不足5元按5元收取）
+        function calculateCommission(amount, rate) {
+            const commission = amount * rate;
+            return commission < 5 ? 5 : commission;
+        }
+        
+        // 计算所有费用和金额
+        function calculateAll() {
+            console.log('开始计算...');
+            
+            // 获取输入值
+            const commissionRateEl = document.getElementById('commission-rate');
+            const commissionRate = commissionRateEl ? parseFloat(commissionRateEl.value) || defaultCommissionRate : defaultCommissionRate;
+            
+            const buyPriceEl = document.getElementById('buy-price');
+            const buyPrice = buyPriceEl ? parseFloat(buyPriceEl.value) || 0 : 0;
+            
+            const sellPriceEl = document.getElementById('sell-price');
+            const sellPrice = sellPriceEl ? parseFloat(sellPriceEl.value) || 0 : 0;
+            
+            const lotEl = document.getElementById('lot');
+            const lot = lotEl ? parseInt(lotEl.value) || 0 : 0;
+            
+            // 计算买入和卖出金额
+            const shareCount = lot * 100; // 总股数
+            const buyAmount = buyPrice * shareCount;
+            const sellAmount = sellPrice * shareCount;
+            
+            // 计算买入费用
+            const buyCommission = calculateCommission(buyAmount, commissionRate);
+            const buyTransferFee = buyAmount * 0.00001; // 0.001%
+            const buyTotalFee = buyCommission + buyTransferFee;
+            
+            // 计算卖出费用
+            const sellCommission = calculateCommission(sellAmount, commissionRate);
+            const sellStampTax = sellAmount * 0.001; // 0.1%
+            const sellTransferFee = sellAmount * 0.00001; // 0.001%
+            const sellTotalFee = sellCommission + sellStampTax + sellTransferFee;
+            
+            // 计算总费用和净盈利
+            const totalFee = buyTotalFee + sellTotalFee;
+            const netProfit = sellAmount - buyAmount - totalFee;
+            
+            console.log('计算结果:', {
+                佣金费率: commissionRate,
+                买入金额: buyAmount,
+                卖出金额: sellAmount,
+                买入佣金: buyCommission,
+                卖出佣金: sellCommission,
+                总费用: totalFee,
+                净盈利: netProfit
+            });
+            
+            // 更新UI显示
+            updateUI(
+                buyAmount, sellAmount, totalFee, netProfit,
+                buyCommission, buyTransferFee, buyTotalFee,
+                sellCommission, sellStampTax, sellTransferFee, sellTotalFee
+            );
+        }
+        
+        // 更新所有UI元素
+        function updateUI(
+            buyAmount, sellAmount, totalFee, netProfit,
+            buyCommission, buyTransferFee, buyTotalFee,
+            sellCommission, sellStampTax, sellTransferFee, sellTotalFee
+        ) {
+            // 更新总览板块
+            const buyAmountEl = document.getElementById('buy-amount');
+            const sellAmountEl = document.getElementById('sell-amount');
+            const totalFeeEl = document.getElementById('total-fee');
+            const netProfitEl = document.getElementById('net-profit');
+            
+            if (buyAmountEl) buyAmountEl.textContent = formatCurrency(buyAmount);
+            if (sellAmountEl) sellAmountEl.textContent = formatCurrency(sellAmount);
+            if (totalFeeEl) totalFeeEl.textContent = formatCurrency(totalFee);
+            
+            // 更新净盈利（根据正负值设置颜色）
+            if (netProfitEl) {
+                if (netProfit >= 0) {
+                    netProfitEl.className = 'result-value positive';
+                    netProfitEl.textContent = formatCurrency(netProfit);
+                } else {
+                    netProfitEl.className = 'result-value negative';
+                    netProfitEl.textContent = '-' + formatCurrency(Math.abs(netProfit));
+                }
+            }
+            
+            // 更新买入费用详情
+            const buyCommissionEl = document.getElementById('buy-commission');
+            const buyTransferFeeEl = document.getElementById('buy-transfer-fee');
+            const buyTotalFeeEl = document.getElementById('buy-total-fee');
+            
+            if (buyCommissionEl) buyCommissionEl.textContent = formatCurrency(buyCommission);
+            if (buyTransferFeeEl) buyTransferFeeEl.textContent = formatCurrency(buyTransferFee);
+            if (buyTotalFeeEl) buyTotalFeeEl.textContent = formatCurrency(buyTotalFee);
+            
+            // 更新卖出费用详情
+            const sellCommissionEl = document.getElementById('sell-commission');
+            const sellStampTaxEl = document.getElementById('sell-stamp-tax');
+            const sellTransferFeeEl = document.getElementById('sell-transfer-fee');
+            const sellTotalFeeEl = document.getElementById('sell-total-fee');
+            
+            if (sellCommissionEl) sellCommissionEl.textContent = formatCurrency(sellCommission);
+            if (sellStampTaxEl) sellStampTaxEl.textContent = formatCurrency(sellStampTax);
+            if (sellTransferFeeEl) sellTransferFeeEl.textContent = formatCurrency(sellTransferFee);
+            if (sellTotalFeeEl) sellTotalFeeEl.textContent = formatCurrency(sellTotalFee);
+            
+            console.log('UI更新完成');
+        }
+        
+        // 添加输入框限制，防止负数
+        function validateInputs() {
+            const inputs = ['buy-price', 'sell-price', 'lot'];
+            
+            inputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('change', function() {
+                        if (parseFloat(this.value) < 0) {
+                            this.value = Math.abs(parseFloat(this.value));
+                            calculateAll();
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
 </html>
