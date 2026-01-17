@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>股票交易费用计算器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.5;
+            padding: 12px 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 顶部导航栏 */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: #f0f2f5;
+            padding: 0 0 8px 0;
+            margin-bottom: 8px;
+            z-index: 100;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 5px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #3498db;
+            border: 1px solid transparent;
+        }
+        
+        .tab.active {
+            background-color: #e3f2fd !important; /* 使用!important确保优先级 */
+            background-color: #e3f2fd;
+            color: #3498db;
+            border-color: #3498db;
+            box-shadow: 0 0 0 1px #3498db;
+        }
+        
+        .tab:hover {
+            background-color: #e3f2fd;
+            color: #3498db;
+        }
+        
+        .tab:active {
+            background-color: #e3f2fd !important;
+            color: #3498db !important;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .stock-content {
+            display: none;
+        }
+        
+        .stock-content.active {
+            display: block;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 8px;
+            border: 1px solid #eef1f6;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eef1f6;
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .section-title-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #3498db;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .save-btn {
+            padding: 8px 16px;
+            background-color: #e3f2fd;
+            color: #3498db;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .save-btn:hover {
+            background-color: #e3f2fd;
+            color: #3498db;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.2);
+        }
+        
+        .save-btn:active {
+            background-color: #3498db !important;
+            color: white !important;
+            transform: translateY(0);
+        }
+        
+        .save-btn:active i {
+            color: white !important;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+            width: 120px;
+            flex-shrink: 0;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .form-control {
+            flex: 1;
+            min-width: 0;
+            position: relative;
+        }
+        
+        .number-input-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .number-input-container input {
+            width: 100%;
+            padding: 12px 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #f9fafb;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            height: 44px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .number-input-container input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+        
+        .number-btn {
+            position: absolute;
+            top: 0;
+            width: 36px;
+            height: 100%;
+            background-color: #f5f7fa;
+            border: 1px solid #e0e0e0;
+            color: #3498db;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+        
+        .number-input-container.focused .number-btn,
+        .number-input-container input:focus ~ .number-btn.plus,
+        .number-input-container input:focus ~ .number-btn.minus {
+            border-color: #3498db;
+        }
+        
+        .number-input-container.focused .number-btn.minus,
+        .number-input-container input:focus ~ .number-btn.minus {
+            border-right: none;
+        }
+        
+        .number-input-container.focused .number-btn.plus,
+        .number-input-container input:focus ~ .number-btn.plus {
+            border-left: none;
+        }
+        
+        .number-btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .number-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .number-btn.minus {
+            left: 0;
+            border-radius: 8px 0 0 8px;
+            border-right: none;
+        }
+        
+        .number-btn.plus {
+            right: 0;
+            border-radius: 0 8px 8px 0;
+            border-left: none;
+        }
+        
+        .form-row select, .form-row input:not(.number-input-container input) {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #f9fafb;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            height: 44px;
+            box-sizing: border-box;
+        }
+        
+        .form-row select:focus, .form-row input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .result-value {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .positive {
+            color: #e74c3c !important;
+        }
+        
+        .negative {
+            color: #2ecc71 !important;
+        }
+        
+        .fee-detail {
+            background-color: #f9fafb;
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 10px;
+            border: 1px solid #eef1f6;
+        }
+        
+        .fee-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #3498db;
+            font-size: 15px;
+        }
+        
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .fee-label {
+            color: #666;
+        }
+        
+        .fee-value {
+            font-weight: 500;
+        }
+        
+        .total-fee {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 12px;
+            color: #999;
+            font-size: 12px;
+            padding: 10px 0;
+        }
+        
+        /* 新增样式 */
+        .price-change {
+            font-size: 12px;
+            margin-top: 4px;
+            min-height: 16px;
+            font-weight: 500;
+        }
+        
+        .lot-label {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        .rate-unit {
+            font-size: 14px;
+            color: #666;
+            margin-left: 4px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px 10px;
+            }
+            
+            .header {
+                margin-bottom: 6px;
+                padding-bottom: 6px;
+            }
+            
+            .tab {
+                padding: 10px 4px;
+                font-size: 13px;
+            }
+            
+            .section {
+                padding: 16px;
+                margin-bottom: 6px;
+            }
+            
+            .section-title {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+            
+            .form-row {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .form-label {
+                width: 100px;
+                font-size: 13px;
+            }
+            
+            .number-input-container input {
+                padding: 10px 36px;
+                font-size: 14px;
+                height: 42px;
+            }
+            
+            .number-btn {
+                width: 34px;
+                font-size: 15px;
+            }
+            
+            .form-row select, .form-row input:not(.number-input-container input) {
+                padding: 10px 12px;
+                font-size: 14px;
+                height: 42px;
+            }
+            
+            .save-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .form-label {
+                width: 90px;
+                font-size: 12px;
+            }
+            
+            .number-input-container input {
+                padding: 8px 32px;
+                font-size: 13px;
+                height: 40px;
+            }
+            
+            .number-btn {
+                width: 32px;
+                font-size: 14px;
+            }
+            
+            .form-row select, .form-row input:not(.number-input-container input) {
+                padding: 8px 10px;
+                font-size: 13px;
+                height: 40px;
+            }
+            
+            .save-btn {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            animation: fadeIn 0.4s ease forwards;
+        }
+        
+        .placeholder-text {
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="header">
+        <div class="tabs">
+            <div class="tab active" data-tab="1" id="tab-1">股票1</div>
+            <div class="tab" data-tab="2" id="tab-2">股票2</div>
+            <div class="tab" data-tab="3" id="tab-3">股票3</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 股票1内容 -->
+        <div class="stock-content active" id="stock-1">
+            <!-- 总览板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-chart-line"></i>
+                        总览
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            买入股价 (元)
+                            <div class="price-change placeholder-text" id="buy-price-change-1">涨跌幅 --</div>
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="buy-price-container-1">
+                                <button type="button" class="number-btn minus" data-target="buy-price-1" data-step="0.01">−</button>
+                                <input type="text" id="buy-price-1" min="0" step="0.01" placeholder="0.00">
+                                <button type="button" class="number-btn plus" data-target="buy-price-1" data-step="0.01">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            卖出股价 (元)
+                            <div class="price-change placeholder-text" id="sell-price-change-1">涨跌幅 --</div>
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="sell-price-container-1">
+                                <button type="button" class="number-btn minus" data-target="sell-price-1" data-step="0.01">−</button>
+                                <input type="text" id="sell-price-1" min="0" step="0.01" placeholder="0.00">
+                                <button type="button" class="number-btn plus" data-target="sell-price-1" data-step="0.01">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            数量（手）
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="lot-container-1">
+                                <button type="button" class="number-btn minus" data-target="lot-1" data-step="1">−</button>
+                                <input type="number" id="lot-1" min="1" step="1" placeholder="1">
+                                <button type="button" class="number-btn plus" data-target="lot-1" data-step="1">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">价差收益</span>
+                    <span class="result-value placeholder-text" id="price-diff-profit-1">--</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">买入金额</span>
+                    <span class="result-value placeholder-text" id="buy-amount-1">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">卖出金额</span>
+                    <span class="result-value placeholder-text" id="sell-amount-1">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">总费用</span>
+                    <span class="result-value placeholder-text" id="total-fee-1">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">净盈利</span>
+                    <span class="result-value placeholder-text" id="net-profit-1">-- 元</span>
+                </div>
+            </div>
+            
+            <!-- 费用详情板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        费用详情
+                    </div>
+                </div>
+                
+                <div class="fee-detail">
+                    <div class="fee-title">买入费用</div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">佣金</span>
+                        <span class="fee-value placeholder-text" id="buy-commission-1">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                        <span class="fee-value placeholder-text" id="buy-transfer-fee-1">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item total-fee">
+                        <span class="fee-label">买入总费用</span>
+                        <span class="fee-value placeholder-text" id="buy-total-fee-1">-- 元</span>
+                    </div>
+                </div>
+                
+                <div class="fee-detail">
+                    <div class="fee-title">卖出费用</div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">佣金</span>
+                        <span class="fee-value placeholder-text" id="sell-commission-1">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">印花税<span class="rate-unit">(5‱)</span></span>
+                        <span class="fee-value placeholder-text" id="sell-stamp-tax-1">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                        <span class="fee-value placeholder-text" id="sell-transfer-fee-1">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item total-fee">
+                        <span class="fee-label">卖出总费用</span>
+                        <span class="fee-value placeholder-text" id="sell-total-fee-1">-- 元</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 设置板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-cog"></i>
+                        设置
+                    </div>
+                    <button type="button" class="save-btn" data-stock="1">
+                        <i class="fas fa-save"></i> 保存
+                    </button>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">股票名称</span>
+                        <div class="form-control">
+                            <input type="text" id="stock-name-1" placeholder="请输入股票名称">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">昨日收盘价</span>
+                        <div class="form-control">
+                            <input type="number" id="yesterday-close-price-1" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">佣金费率</span>
+                        <div class="form-control">
+                            <select id="commission-rate-1">
+                                <option value="0.00025">2.5‱</option>
+                                <option value="0.00015">1.5‱</option>
+                                <option value="0.00010">1.0‱</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 股票2内容 -->
+        <div class="stock-content" id="stock-2">
+            <!-- 总览板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-chart-line"></i>
+                        总览
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            买入股价 (元)
+                            <div class="price-change placeholder-text" id="buy-price-change-2">涨跌幅 --</div>
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="buy-price-container-2">
+                                <button type="button" class="number-btn minus" data-target="buy-price-2" data-step="0.01">−</button>
+                                <input type="text" id="buy-price-2" min="0" step="0.01" placeholder="0.00">
+                                <button type="button" class="number-btn plus" data-target="buy-price-2" data-step="0.01">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            卖出股价 (元)
+                            <div class="price-change placeholder-text" id="sell-price-change-2">涨跌幅 --</div>
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="sell-price-container-2">
+                                <button type="button" class="number-btn minus" data-target="sell-price-2" data-step="0.01">−</button>
+                                <input type="text" id="sell-price-2" min="0" step="0.01" placeholder="0.00">
+                                <button type="button" class="number-btn plus" data-target="sell-price-2" data-step="0.01">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            数量（手）
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="lot-container-2">
+                                <button type="button" class="number-btn minus" data-target="lot-2" data-step="1">−</button>
+                                <input type="number" id="lot-2" min="1" step="1" placeholder="1">
+                                <button type="button" class="number-btn plus" data-target="lot-2" data-step="1">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">价差收益</span>
+                    <span class="result-value placeholder-text" id="price-diff-profit-2">--</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">买入金额</span>
+                    <span class="result-value placeholder-text" id="buy-amount-2">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">卖出金额</span>
+                    <span class="result-value placeholder-text" id="sell-amount-2">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">总费用</span>
+                    <span class="result-value placeholder-text" id="total-fee-2">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">净盈利</span>
+                    <span class="result-value placeholder-text" id="net-profit-2">-- 元</span>
+                </div>
+            </div>
+            
+            <!-- 费用详情板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        费用详情
+                    </div>
+                </div>
+                
+                <div class="fee-detail">
+                    <div class="fee-title">买入费用</div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">佣金</span>
+                        <span class="fee-value placeholder-text" id="buy-commission-2">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                        <span class="fee-value placeholder-text" id="buy-transfer-fee-2">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item total-fee">
+                        <span class="fee-label">买入总费用</span>
+                        <span class="fee-value placeholder-text" id="buy-total-fee-2">-- 元</span>
+                    </div>
+                </div>
+                
+                <div class="fee-detail">
+                    <div class="fee-title">卖出费用</div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">佣金</span>
+                        <span class="fee-value placeholder-text" id="sell-commission-2">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">印花税<span class="rate-unit">(5‱)</span></span>
+                        <span class="fee-value placeholder-text" id="sell-stamp-tax-2">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                        <span class="fee-value placeholder-text" id="sell-transfer-fee-2">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item total-fee">
+                        <span class="fee-label">卖出总费用</span>
+                        <span class="fee-value placeholder-text" id="sell-total-fee-2">-- 元</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 设置板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-cog"></i>
+                        设置
+                    </div>
+                    <button type="button" class="save-btn" data-stock="2">
+                        <i class="fas fa-save"></i> 保存
+                    </button>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">股票名称</span>
+                        <div class="form-control">
+                            <input type="text" id="stock-name-2" placeholder="请输入股票名称">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">昨日收盘价</span>
+                        <div class="form-control">
+                            <input type="number" id="yesterday-close-price-2" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">佣金费率</span>
+                        <div class="form-control">
+                            <select id="commission-rate-2">
+                                <option value="0.00025">2.5‱</option>
+                                <option value="0.00015">1.5‱</option>
+                                <option value="0.00010">1.0‱</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 股票3内容 -->
+        <div class="stock-content" id="stock-3">
+            <!-- 总览板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-chart-line"></i>
+                        总览
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            买入股价 (元)
+                            <div class="price-change placeholder-text" id="buy-price-change-3">涨跌幅 --</div>
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="buy-price-container-3">
+                                <button type="button" class="number-btn minus" data-target="buy-price-3" data-step="0.01">−</button>
+                                <input type="text" id="buy-price-3" min="0" step="0.01" placeholder="0.00">
+                                <button type="button" class="number-btn plus" data-target="buy-price-3" data-step="0.01">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            卖出股价 (元)
+                            <div class="price-change placeholder-text" id="sell-price-change-3">涨跌幅 --</div>
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="sell-price-container-3">
+                                <button type="button" class="number-btn minus" data-target="sell-price-3" data-step="0.01">−</button>
+                                <input type="text" id="sell-price-3" min="0" step="0.01" placeholder="0.00">
+                                <button type="button" class="number-btn plus" data-target="sell-price-3" data-step="0.01">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-label">
+                            数量（手）
+                        </div>
+                        <div class="form-control">
+                            <div class="number-input-container" id="lot-container-3">
+                                <button type="button" class="number-btn minus" data-target="lot-3" data-step="1">−</button>
+                                <input type="number" id="lot-3" min="1" step="1" placeholder="1">
+                                <button type="button" class="number-btn plus" data-target="lot-3" data-step="1">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">价差收益</span>
+                    <span class="result-value placeholder-text" id="price-diff-profit-3">--</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">买入金额</span>
+                    <span class="result-value placeholder-text" id="buy-amount-3">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">卖出金额</span>
+                    <span class="result-value placeholder-text" id="sell-amount-3">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">总费用</span>
+                    <span class="result-value placeholder-text" id="total-fee-3">-- 元</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">净盈利</span>
+                    <span class="result-value placeholder-text" id="net-profit-3">-- 元</span>
+                </div>
+            </div>
+            
+            <!-- 费用详情板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        费用详情
+                    </div>
+                </div>
+                
+                <div class="fee-detail">
+                    <div class="fee-title">买入费用</div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">佣金</span>
+                        <span class="fee-value placeholder-text" id="buy-commission-3">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                        <span class="fee-value placeholder-text" id="buy-transfer-fee-3">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item total-fee">
+                        <span class="fee-label">买入总费用</span>
+                        <span class="fee-value placeholder-text" id="buy-total-fee-3">-- 元</span>
+                    </div>
+                </div>
+                
+                <div class="fee-detail">
+                    <div class="fee-title">卖出费用</div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">佣金</span>
+                        <span class="fee-value placeholder-text" id="sell-commission-3">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">印花税<span class="rate-unit">(5‱)</span></span>
+                        <span class="fee-value placeholder-text" id="sell-stamp-tax-3">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item">
+                        <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                        <span class="fee-value placeholder-text" id="sell-transfer-fee-3">-- 元</span>
+                    </div>
+                    
+                    <div class="fee-item total-fee">
+                        <span class="fee-label">卖出总费用</span>
+                        <span class="fee-value placeholder-text" id="sell-total-fee-3">-- 元</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 设置板块 -->
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-title-left">
+                        <i class="fas fa-cog"></i>
+                        设置
+                    </div>
+                    <button type="button" class="save-btn" data-stock="3">
+                        <i class="fas fa-save"></i> 保存
+                    </button>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">股票名称</span>
+                        <div class="form-control">
+                            <input type="text" id="stock-name-3" placeholder="请输入股票名称">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">昨日收盘价</span>
+                        <div class="form-control">
+                            <input type="number" id="yesterday-close-price-3" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <span class="form-label">佣金费率</span>
+                        <div class="form-control">
+                            <select id="commission-rate-3">
+                                <option value="0.00025">2.5‱</option>
+                                <option value="0.00015">1.5‱</option>
+                                <option value="0.00010">1.0‱</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>股票交易费用计算器 | 版权所有 · 归去来兮</p>
+        </div>
+    </div>
+
+    <script>
+        // 当前激活的股票索引
+        let activeStock = 1;
+        
+        // 默认设置
+        const defaultSettings = {
+            1: {
+                stockName: '',
+                yesterdayClosePrice: 0,
+                commissionRate: 0.00025
+            },
+            2: {
+                stockName: '',
+                yesterdayClosePrice: 0,
+                commissionRate: 0.00025
+            },
+            3: {
+                stockName: '',
+                yesterdayClosePrice: 0,
+                commissionRate: 0.00025
+            }
+        };
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 从localStorage加载所有股票设置
+            loadAllStockSettings();
+            
+            // 设置事件监听器
+            setupEventListeners();
+            
+            // 初始化所有股票
+            for (let i = 1; i <= 3; i++) {
+                setInitialValues(i);
+                resetAllValues(i);
+                updatePriceChangeDisplays(i);
+                updateTabName(i);
+            }
+        });
+        
+        // 从localStorage加载所有股票设置
+        function loadAllStockSettings() {
+            for (let i = 1; i <= 3; i++) {
+                const savedStockName = localStorage.getItem(`stockName_${i}`);
+                const savedYesterdayClosePrice = localStorage.getItem(`yesterdayClosePrice_${i}`);
+                const savedCommissionRate = localStorage.getItem(`commissionRate_${i}`);
+                
+                if (savedStockName) defaultSettings[i].stockName = savedStockName;
+                if (savedYesterdayClosePrice) defaultSettings[i].yesterdayClosePrice = parseFloat(savedYesterdayClosePrice);
+                if (savedCommissionRate) defaultSettings[i].commissionRate = parseFloat(savedCommissionRate);
+            }
+        }
+        
+        // 设置初始值
+        function setInitialValues(stockId) {
+            // 设置默认值
+            document.getElementById(`stock-name-${stockId}`).value = defaultSettings[stockId].stockName;
+            const yesterdayClosePrice = defaultSettings[stockId].yesterdayClosePrice;
+            document.getElementById(`yesterday-close-price-${stockId}`).value = 
+                yesterdayClosePrice > 0 ? yesterdayClosePrice.toFixed(2) : '';
+            document.getElementById(`buy-price-${stockId}`).value = '';
+            document.getElementById(`sell-price-${stockId}`).value = '';
+            document.getElementById(`lot-${stockId}`).value = '1'; // 手数默认为1
+            
+            // 设置下拉框默认值
+            setSelectValue(`commission-rate-${stockId}`, defaultSettings[stockId].commissionRate);
+        }
+        
+        // 设置下拉框的值
+        function setSelectValue(elementId, value) {
+            const selectElement = document.getElementById(elementId);
+            if (!selectElement) return;
+            
+            const valueStr = value.toString();
+            for (let i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].value === valueStr) {
+                    selectElement.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+        
+        // 重置所有值为未计算状态
+        function resetAllValues(stockId) {
+            // 更新总览板块为--
+            const priceDiffProfitEl = document.getElementById(`price-diff-profit-${stockId}`);
+            const buyAmountEl = document.getElementById(`buy-amount-${stockId}`);
+            const sellAmountEl = document.getElementById(`sell-amount-${stockId}`);
+            const totalFeeEl = document.getElementById(`total-fee-${stockId}`);
+            const netProfitEl = document.getElementById(`net-profit-${stockId}`);
+            
+            if (priceDiffProfitEl) {
+                priceDiffProfitEl.textContent = '--';
+                priceDiffProfitEl.className = 'result-value placeholder-text';
+            }
+            if (buyAmountEl) {
+                buyAmountEl.textContent = '-- 元';
+                buyAmountEl.className = 'result-value placeholder-text';
+            }
+            if (sellAmountEl) {
+                sellAmountEl.textContent = '-- 元';
+                sellAmountEl.className = 'result-value placeholder-text';
+            }
+            if (totalFeeEl) {
+                totalFeeEl.textContent = '-- 元';
+                totalFeeEl.className = 'result-value placeholder-text';
+            }
+            if (netProfitEl) {
+                netProfitEl.textContent = '-- 元';
+                netProfitEl.className = 'result-value placeholder-text';
+            }
+            
+            // 更新费用详情为--
+            const feeElements = [
+                `buy-commission-${stockId}`, `buy-transfer-fee-${stockId}`, `buy-total-fee-${stockId}`,
+                `sell-commission-${stockId}`, `sell-stamp-tax-${stockId}`, `sell-transfer-fee-${stockId}`, `sell-total-fee-${stockId}`
+            ];
+            
+            feeElements.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = '-- 元';
+                    el.className = 'fee-value placeholder-text';
+                }
+            });
+        }
+        
+        // 格式化数字为两位小数，不足补0，四舍五入
+        function formatNumber(value) {
+            // 如果是空值，返回空字符串
+            if (value === '' || value === null || value === undefined) {
+                return '';
+            }
+            
+            // 转换为数字
+            const num = parseFloat(value);
+            
+            // 如果是NaN，返回空字符串
+            if (isNaN(num)) {
+                return '';
+            }
+            
+            // 四舍五入保留两位小数
+            return Math.round(num * 100) / 100;
+        }
+        
+        // 四舍五入保留两位小数并返回字符串
+        function roundToTwoDecimals(value) {
+            if (isNaN(value)) return 0;
+            return Math.round(value * 100) / 100;
+        }
+        
+        // 格式化百分比显示，保留两位小数，四舍五入
+        function formatPercent(value) {
+            if (isNaN(value)) return '';
+            const rounded = Math.round(value * 100) / 100;
+            const sign = rounded >= 0 ? '+' : '';
+            return `涨跌幅 ${sign}${rounded.toFixed(2)}%`;
+        }
+        
+        // 检查买入相关字段是否有值
+        function areBuyFieldsFilled(stockId) {
+            const buyPriceEl = document.getElementById(`buy-price-${stockId}`);
+            const lotEl = document.getElementById(`lot-${stockId}`);
+            
+            const buyPrice = buyPriceEl ? parseFloat(buyPriceEl.value) || 0 : 0;
+            const lot = lotEl ? parseInt(lotEl.value) || 0 : 0;
+            
+            return buyPrice > 0 && lot > 0;
+        }
+        
+        // 检查卖出相关字段是否有值
+        function areSellFieldsFilled(stockId) {
+            const sellPriceEl = document.getElementById(`sell-price-${stockId}`);
+            const lotEl = document.getElementById(`lot-${stockId}`);
+            
+            const sellPrice = sellPriceEl ? parseFloat(sellPriceEl.value) || 0 : 0;
+            const lot = lotEl ? parseInt(lotEl.value) || 0 : 0;
+            
+            return sellPrice > 0 && lot > 0;
+        }
+        
+        // 检查所有必填字段是否已填写
+        function areAllRequiredFieldsFilled(stockId) {
+            return areBuyFieldsFilled(stockId) && areSellFieldsFilled(stockId);
+        }
+        
+        // 计算涨跌幅
+        function calculatePriceChange(price, stockId) {
+            const yesterdayCloseEl = document.getElementById(`yesterday-close-price-${stockId}`);
+            const yesterdayClosePrice = yesterdayCloseEl ? parseFloat(yesterdayCloseEl.value) || 0 : 0;
+            
+            if (yesterdayClosePrice <= 0 || price <= 0) return null;
+            
+            return ((price - yesterdayClosePrice) / yesterdayClosePrice) * 100;
+        }
+        
+        // 计算价差收益百分比
+        function calculatePriceDiffProfit(buyPrice, sellPrice, stockId) {
+            const yesterdayCloseEl = document.getElementById(`yesterday-close-price-${stockId}`);
+            const yesterdayClosePrice = yesterdayCloseEl ? parseFloat(yesterdayCloseEl.value) || 0 : 0;
+            
+            if (yesterdayClosePrice <= 0 || buyPrice <= 0 || sellPrice <= 0) return null;
+            
+            return ((sellPrice - buyPrice) / yesterdayClosePrice) * 100;
+        }
+        
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 标签页切换事件
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 移除所有标签的active类
+                    document.querySelectorAll('.tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    
+                    // 添加当前标签的active类
+                    this.classList.add('active');
+                    
+                    // 隐藏所有股票内容
+                    document.querySelectorAll('.stock-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // 显示当前股票内容
+                    document.getElementById(`stock-${tabId}`).classList.add('active');
+                    
+                    // 更新当前激活的股票
+                    activeStock = parseInt(tabId);
+                });
+            });
+            
+            // 保存按钮事件
+            document.querySelectorAll('.save-btn').forEach(btn => {
+                btn.addEventListener('mousedown', function() {
+                    this.style.backgroundColor = '#3498db';
+                    this.style.color = 'white';
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.color = 'white';
+                    }
+                });
+                
+                btn.addEventListener('mouseup', function() {
+                    this.style.backgroundColor = '';
+                    this.style.color = '';
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.color = '';
+                    }
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                    this.style.color = '';
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.color = '';
+                    }
+                });
+                
+                btn.addEventListener('click', function() {
+                    const stockId = this.getAttribute('data-stock');
+                    saveStockSettings(stockId);
+                });
+            });
+            
+            // 导航栏按钮点击效果
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('mousedown', function() {
+                    this.style.backgroundColor = '#e3f2fd';
+                    this.style.color = '#3498db';
+                });
+                
+                tab.addEventListener('mouseup', function() {
+                    if (this.classList.contains('active')) {
+                        this.style.backgroundColor = '#f5f7fa';
+                        this.style.color = '#3498db';
+                    }
+                });
+                
+                tab.addEventListener('mouseleave', function() {
+                    if (this.classList.contains('active')) {
+                        this.style.backgroundColor = '#f5f7fa';
+                        this.style.color = '#3498db';
+                    }
+                });
+            });
+            
+            // 为每个股票设置输入框事件监听器
+            for (let stockId = 1; stockId <= 3; stockId++) {
+                setupStockEventListeners(stockId);
+            }
+            
+            // 输入验证
+            validateInputs();
+        }
+        
+        // 更新标签页名称
+        function updateTabName(stockId) {
+            const stockNameEl = document.getElementById(`stock-name-${stockId}`);
+            const tabEl = document.getElementById(`tab-${stockId}`);
+            
+            if (stockNameEl && tabEl) {
+                const stockName = stockNameEl.value.trim();
+                if (stockName) {
+                    tabEl.textContent = stockName;
+                } else {
+                    tabEl.textContent = `股票${stockId}`;
+                }
+            }
+        }
+        
+        // 为单个股票设置事件监听器
+        function setupStockEventListeners(stockId) {
+            // 输入框焦点事件
+            const numberInputs = document.querySelectorAll(`#stock-${stockId} .number-input-container input`);
+            numberInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    const container = this.closest('.number-input-container');
+                    if (container) {
+                        container.classList.add('focused');
+                    }
+                });
+                
+                input.addEventListener('blur', function() {
+                    const container = this.closest('.number-input-container');
+                    if (container) {
+                        container.classList.remove('focused');
+                    }
+                    
+                    // 失去焦点时格式化数值
+                    if (this.id === `buy-price-${stockId}` || this.id === `sell-price-${stockId}` || this.id === `yesterday-close-price-${stockId}`) {
+                        let value = this.value.trim();
+                        if (value === '') {
+                            this.value = '';
+                        } else {
+                            const formatted = formatNumber(value);
+                            this.value = formatted !== '' ? formatted.toFixed(2) : '';
+                        }
+                    }
+                    
+                    // 更新涨跌幅显示
+                    updatePriceChangeDisplays(stockId);
+                    
+                    // 更新计算
+                    triggerCalculations(stockId);
+                });
+            });
+            
+            // 加减按钮事件
+            document.querySelectorAll(`#stock-${stockId} .number-btn`).forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const step = parseFloat(this.getAttribute('data-step')) || 0.01;
+                    const input = document.getElementById(targetId);
+                    if (!input) return;
+                    
+                    let value = parseFloat(input.value) || 0;
+                    
+                    if (this.classList.contains('plus')) {
+                        value += step;
+                    } else if (this.classList.contains('minus')) {
+                        value = Math.max(0, value - step); // 最低为0
+                    }
+                    
+                    // 根据不同的输入框格式化
+                    if (targetId === `lot-${stockId}`) {
+                        // 手数为整数
+                        value = Math.max(1, Math.round(value)); // 最少1手
+                        input.value = value;
+                    } else {
+                        // 股价为两位小数
+                        input.value = roundToTwoDecimals(value).toFixed(2);
+                    }
+                    
+                    // 更新涨跌幅显示
+                    updatePriceChangeDisplays(stockId);
+                    
+                    // 触发计算
+                    triggerCalculations(stockId);
+                });
+            });
+            
+            // 佣金费率下拉框事件
+            const commissionRateEl = document.getElementById(`commission-rate-${stockId}`);
+            if (commissionRateEl) {
+                commissionRateEl.addEventListener('change', function() {
+                    triggerCalculations(stockId);
+                });
+            }
+            
+            // 股价输入框事件
+            const buyPriceEl = document.getElementById(`buy-price-${stockId}`);
+            const sellPriceEl = document.getElementById(`sell-price-${stockId}`);
+            const yesterdayClosePriceEl = document.getElementById(`yesterday-close-price-${stockId}`);
+            
+            // 买入股价实时更新
+            if (buyPriceEl) {
+                buyPriceEl.addEventListener('input', function() {
+                    let value = this.value;
+                    
+                    // 允许小数点，但只允许一个小数点
+                    if (value.includes('.')) {
+                        const parts = value.split('.');
+                        if (parts.length > 2) {
+                            value = parts[0] + '.' + parts.slice(1).join('');
+                        }
+                        
+                        // 限制小数点后最多两位
+                        if (parts[1] && parts[1].length > 2) {
+                            value = parts[0] + '.' + parts[1].substring(0, 2);
+                        }
+                    }
+                    
+                    // 更新值
+                    this.value = value;
+                    
+                    // 实时更新涨跌幅显示
+                    updatePriceChangeDisplays(stockId);
+                    
+                    // 实时触发计算
+                    triggerCalculations(stockId);
+                });
+            }
+            
+            // 卖出股价实时更新
+            if (sellPriceEl) {
+                sellPriceEl.addEventListener('input', function() {
+                    let value = this.value;
+                    
+                    // 允许小数点，但只允许一个小数点
+                    if (value.includes('.')) {
+                        const parts = value.split('.');
+                        if (parts.length > 2) {
+                            value = parts[0] + '.' + parts.slice(1).join('');
+                        }
+                        
+                        // 限制小数点后最多两位
+                        if (parts[1] && parts[1].length > 2) {
+                            value = parts[0] + '.' + parts[1].substring(0, 2);
+                        }
+                    }
+                    
+                    // 更新值
+                    this.value = value;
+                    
+                    // 实时更新涨跌幅显示
+                    updatePriceChangeDisplays(stockId);
+                    
+                    // 实时触发计算
+                    triggerCalculations(stockId);
+                });
+            }
+            
+            // 昨日收盘价实时更新
+            if (yesterdayClosePriceEl) {
+                yesterdayClosePriceEl.addEventListener('input', function() {
+                    let value = this.value;
+                    
+                    // 允许小数点，但只允许一个小数点
+                    if (value.includes('.')) {
+                        const parts = value.split('.');
+                        if (parts.length > 2) {
+                            value = parts[0] + '.' + parts.slice(1).join('');
+                        }
+                        
+                        // 限制小数点后最多两位
+                        if (parts[1] && parts[1].length > 2) {
+                            value = parts[0] + '.' + parts[1].substring(0, 2);
+                        }
+                    }
+                    
+                    // 更新值
+                    this.value = value;
+                    
+                    // 实时更新涨跌幅显示
+                    updatePriceChangeDisplays(stockId);
+                    
+                    // 实时触发计算
+                    triggerCalculations(stockId);
+                });
+            }
+            
+            // 手数输入框事件
+            const lotEl = document.getElementById(`lot-${stockId}`);
+            if (lotEl) {
+                lotEl.addEventListener('input', function() {
+                    let value = parseInt(this.value) || 0;
+                    if (value < 1) value = 1; // 最少1手
+                    this.value = value;
+                    
+                    // 实时触发计算
+                    triggerCalculations(stockId);
+                });
+            }
+            
+            // 股票名称输入框事件 - 更新标签页名称
+            const stockNameEl = document.getElementById(`stock-name-${stockId}`);
+            if (stockNameEl) {
+                stockNameEl.addEventListener('input', function() {
+                    updateTabName(stockId);
+                });
+                
+                stockNameEl.addEventListener('blur', function() {
+                    updateTabName(stockId);
+                });
+            }
+        }
+        
+        // 保存股票设置
+        function saveStockSettings(stockId) {
+            const stockNameEl = document.getElementById(`stock-name-${stockId}`);
+            const yesterdayClosePriceEl = document.getElementById(`yesterday-close-price-${stockId}`);
+            const commissionRateEl = document.getElementById(`commission-rate-${stockId}`);
+            
+            if (stockNameEl && yesterdayClosePriceEl && commissionRateEl) {
+                const stockName = stockNameEl.value.trim();
+                const yesterdayClosePrice = parseFloat(yesterdayClosePriceEl.value) || 0;
+                const commissionRate = parseFloat(commissionRateEl.value);
+                
+                // 更新默认设置
+                defaultSettings[stockId].stockName = stockName;
+                defaultSettings[stockId].yesterdayClosePrice = yesterdayClosePrice;
+                defaultSettings[stockId].commissionRate = commissionRate;
+                
+                // 保存到localStorage
+                localStorage.setItem(`stockName_${stockId}`, stockName);
+                localStorage.setItem(`yesterdayClosePrice_${stockId}`, yesterdayClosePrice.toString());
+                localStorage.setItem(`commissionRate_${stockId}`, commissionRate.toString());
+                
+                // 更新涨跌幅显示
+                updatePriceChangeDisplays(stockId);
+                
+                // 更新计算
+                triggerCalculations(stockId);
+                
+                // 更新标签页名称
+                updateTabName(stockId);
+                
+                // 显示成功提示
+                showMessage('设置保存成功！', 'success');
+            }
+        }
+        
+        // 更新涨跌幅显示
+        function updatePriceChangeDisplays(stockId) {
+            const buyPriceEl = document.getElementById(`buy-price-${stockId}`);
+            const sellPriceEl = document.getElementById(`sell-price-${stockId}`);
+            
+            const buyPrice = buyPriceEl ? parseFloat(buyPriceEl.value) || 0 : 0;
+            const sellPrice = sellPriceEl ? parseFloat(sellPriceEl.value) || 0 : 0;
+            
+            // 更新买入股价涨跌幅
+            const buyPriceChange = calculatePriceChange(buyPrice, stockId);
+            const buyPriceChangeEl = document.getElementById(`buy-price-change-${stockId}`);
+            if (buyPriceChangeEl) {
+                if (buyPriceChange !== null) {
+                    buyPriceChangeEl.textContent = formatPercent(buyPriceChange);
+                    buyPriceChangeEl.className = 'price-change';
+                    if (buyPriceChange >= 0) {
+                        buyPriceChangeEl.classList.add('positive');
+                        buyPriceChangeEl.classList.remove('negative');
+                        buyPriceChangeEl.classList.remove('placeholder-text');
+                    } else {
+                        buyPriceChangeEl.classList.add('negative');
+                        buyPriceChangeEl.classList.remove('positive');
+                        buyPriceChangeEl.classList.remove('placeholder-text');
+                    }
+                } else {
+                    buyPriceChangeEl.textContent = '涨跌幅 --';
+                    buyPriceChangeEl.className = 'price-change placeholder-text';
+                    buyPriceChangeEl.classList.remove('positive', 'negative');
+                }
+            }
+            
+            // 更新卖出股价涨跌幅
+            const sellPriceChange = calculatePriceChange(sellPrice, stockId);
+            const sellPriceChangeEl = document.getElementById(`sell-price-change-${stockId}`);
+            if (sellPriceChangeEl) {
+                if (sellPriceChange !== null) {
+                    sellPriceChangeEl.textContent = formatPercent(sellPriceChange);
+                    sellPriceChangeEl.className = 'price-change';
+                    if (sellPriceChange >= 0) {
+                        sellPriceChangeEl.classList.add('positive');
+                        sellPriceChangeEl.classList.remove('negative');
+                        sellPriceChangeEl.classList.remove('placeholder-text');
+                    } else {
+                        sellPriceChangeEl.classList.add('negative');
+                        sellPriceChangeEl.classList.remove('positive');
+                        sellPriceChangeEl.classList.remove('placeholder-text');
+                    }
+                } else {
+                    sellPriceChangeEl.textContent = '涨跌幅 --';
+                    sellPriceChangeEl.className = 'price-change placeholder-text';
+                    sellPriceChangeEl.classList.remove('positive', 'negative');
+                }
+            }
+            
+            // 更新价差收益
+            const priceDiffProfit = calculatePriceDiffProfit(buyPrice, sellPrice, stockId);
+            const priceDiffProfitEl = document.getElementById(`price-diff-profit-${stockId}`);
+            if (priceDiffProfitEl) {
+                if (priceDiffProfit !== null) {
+                    const rounded = Math.round(priceDiffProfit * 100) / 100;
+                    const sign = rounded >= 0 ? '+' : '';
+                    priceDiffProfitEl.textContent = `${sign}${rounded.toFixed(2)}%`;
+                    priceDiffProfitEl.className = 'result-value';
+                    if (priceDiffProfit >= 0) {
+                        priceDiffProfitEl.classList.add('positive');
+                        priceDiffProfitEl.classList.remove('negative');
+                    } else {
+                        priceDiffProfitEl.classList.add('negative');
+                        priceDiffProfitEl.classList.remove('positive');
+                    }
+                } else {
+                    priceDiffProfitEl.textContent = '--';
+                    priceDiffProfitEl.className = 'result-value placeholder-text';
+                    priceDiffProfitEl.classList.remove('positive', 'negative');
+                }
+            }
+        }
+        
+        // 触发计算
+        function triggerCalculations(stockId) {
+            // 检查买入相关字段并计算买入费用
+            if (areBuyFieldsFilled(stockId)) {
+                calculateBuyFees(stockId);
+            } else {
+                resetBuyFees(stockId);
+            }
+            
+            // 检查卖出相关字段并计算卖出费用
+            if (areSellFieldsFilled(stockId)) {
+                calculateSellFees(stockId);
+            } else {
+                resetSellFees(stockId);
+            }
+            
+            // 检查所有字段并计算总费用
+            if (areAllRequiredFieldsFilled(stockId)) {
+                calculateTotalFees(stockId);
+            } else {
+                resetTotalFees(stockId);
+            }
+        }
+        
+        // 显示提示消息
+        function showMessage(message, type) {
+            // 移除已有的消息
+            const existingMessage = document.querySelector('.message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // 创建新消息
+            const messageEl = document.createElement('div');
+            messageEl.className = `message ${type}`;
+            messageEl.textContent = message;
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 70px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-weight: 500;
+                z-index: 1000;
+                animation: fadeInOut 3s ease forwards;
+                text-align: center;
+                max-width: 90%;
+                background-color: #3498db;
+                color: white;
+                box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            `;
+            
+            // 添加动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(messageEl);
+            
+            // 3秒后移除消息
+            setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.remove();
+                }
+            }, 3000);
+        }
+        
+        // 格式化货币显示，确保两位小数，四舍五入（金额、费用等不需要加号）
+        function formatCurrency(value) {
+            const rounded = Math.round(value * 100) / 100;
+            return rounded.toLocaleString('zh-CN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' 元';
+        }
+        
+        // 格式化百分比显示，用于净盈利等需要显示正负号的
+        function formatCurrencyWithSign(value) {
+            const rounded = Math.round(value * 100) / 100;
+            const sign = rounded >= 0 ? '+' : '';
+            return sign + rounded.toLocaleString('zh-CN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' 元';
+        }
+        
+        // 计算佣金（不足5元按5元收取），四舍五入保留两位小数
+        function calculateCommission(amount, rate) {
+            const commission = amount * rate;
+            const rounded = Math.round(commission * 100) / 100;
+            return rounded < 5 ? 5 : rounded;
+        }
+        
+        // 计算买入费用
+        function calculateBuyFees(stockId) {
+            // 获取输入值
+            const commissionRateEl = document.getElementById(`commission-rate-${stockId}`);
+            const commissionRate = commissionRateEl ? parseFloat(commissionRateEl.value) || defaultSettings[stockId].commissionRate : defaultSettings[stockId].commissionRate;
+            
+            const buyPriceEl = document.getElementById(`buy-price-${stockId}`);
+            const buyPrice = buyPriceEl ? parseFloat(buyPriceEl.value) || 0 : 0;
+            
+            const lotEl = document.getElementById(`lot-${stockId}`);
+            const lot = lotEl ? parseInt(lotEl.value) || 0 : 0;
+            
+            // 计算买入金额
+            const shareCount = lot * 100; // 总股数
+            const buyAmount = roundToTwoDecimals(buyPrice * shareCount);
+            
+            // 计算买入费用 - 过户费调整为1‱
+            const buyCommission = calculateCommission(buyAmount, commissionRate);
+            const buyTransferFee = roundToTwoDecimals(buyAmount * 0.0001); // 1‱ = 0.0001
+            const buyTotalFee = roundToTwoDecimals(buyCommission + buyTransferFee);
+            
+            // 更新UI显示
+            updateBuyUI(stockId, buyAmount, buyCommission, buyTransferFee, buyTotalFee);
+        }
+        
+        // 计算卖出费用
+        function calculateSellFees(stockId) {
+            // 获取输入值
+            const commissionRateEl = document.getElementById(`commission-rate-${stockId}`);
+            const commissionRate = commissionRateEl ? parseFloat(commissionRateEl.value) || defaultSettings[stockId].commissionRate : defaultSettings[stockId].commissionRate;
+            
+            const sellPriceEl = document.getElementById(`sell-price-${stockId}`);
+            const sellPrice = sellPriceEl ? parseFloat(sellPriceEl.value) || 0 : 0;
+            
+            const lotEl = document.getElementById(`lot-${stockId}`);
+            const lot = lotEl ? parseInt(lotEl.value) || 0 : 0;
+            
+            // 计算卖出金额
+            const shareCount = lot * 100; // 总股数
+            const sellAmount = roundToTwoDecimals(sellPrice * shareCount);
+            
+            // 计算卖出费用 - 印花税为5‱，过户费调整为1‱
+            const sellCommission = calculateCommission(sellAmount, commissionRate);
+            const sellStampTax = roundToTwoDecimals(sellAmount * 0.0005); // 5‱ = 0.0005
+            const sellTransferFee = roundToTwoDecimals(sellAmount * 0.0001); // 1‱ = 0.0001
+            const sellTotalFee = roundToTwoDecimals(sellCommission + sellStampTax + sellTransferFee);
+            
+            // 更新UI显示
+            updateSellUI(stockId, sellAmount, sellCommission, sellStampTax, sellTransferFee, sellTotalFee);
+        }
+        
+        // 计算总费用
+        function calculateTotalFees(stockId) {
+            // 获取输入值
+            const buyPriceEl = document.getElementById(`buy-price-${stockId}`);
+            const buyPrice = buyPriceEl ? parseFloat(buyPriceEl.value) || 0 : 0;
+            
+            const sellPriceEl = document.getElementById(`sell-price-${stockId}`);
+            const sellPrice = sellPriceEl ? parseFloat(sellPriceEl.value) || 0 : 0;
+            
+            const lotEl = document.getElementById(`lot-${stockId}`);
+            const lot = lotEl ? parseInt(lotEl.value) || 0 : 0;
+            
+            // 计算买入和卖出金额
+            const shareCount = lot * 100; // 总股数
+            const buyAmount = roundToTwoDecimals(buyPrice * shareCount);
+            const sellAmount = roundToTwoDecimals(sellPrice * shareCount);
+            
+            // 获取买入和卖出费用
+            const buyTotalFeeEl = document.getElementById(`buy-total-fee-${stockId}`);
+            const sellTotalFeeEl = document.getElementById(`sell-total-fee-${stockId}`);
+            
+            const buyTotalFee = buyTotalFeeEl ? parseFloat(buyTotalFeeEl.textContent.replace(/[^0-9.-]+/g, '')) || 0 : 0;
+            const sellTotalFee = sellTotalFeeEl ? parseFloat(sellTotalFeeEl.textContent.replace(/[^0-9.-]+/g, '')) || 0 : 0;
+            
+            // 计算总费用和净盈利
+            const totalFee = roundToTwoDecimals(buyTotalFee + sellTotalFee);
+            const netProfit = roundToTwoDecimals(sellAmount - buyAmount - totalFee);
+            
+            // 更新总览UI显示
+            updateTotalUI(stockId, buyAmount, sellAmount, totalFee, netProfit);
+        }
+        
+        // 更新买入UI元素
+        function updateBuyUI(stockId, buyAmount, buyCommission, buyTransferFee, buyTotalFee) {
+            // 更新买入金额
+            const buyAmountEl = document.getElementById(`buy-amount-${stockId}`);
+            if (buyAmountEl) {
+                buyAmountEl.textContent = formatCurrency(buyAmount);
+                buyAmountEl.className = 'result-value';
+            }
+            
+            // 更新买入费用详情
+            const buyCommissionEl = document.getElementById(`buy-commission-${stockId}`);
+            const buyTransferFeeEl = document.getElementById(`buy-transfer-fee-${stockId}`);
+            const buyTotalFeeEl = document.getElementById(`buy-total-fee-${stockId}`);
+            
+            if (buyCommissionEl) {
+                buyCommissionEl.textContent = formatCurrency(buyCommission);
+                buyCommissionEl.className = 'fee-value';
+            }
+            if (buyTransferFeeEl) {
+                buyTransferFeeEl.textContent = formatCurrency(buyTransferFee);
+                buyTransferFeeEl.className = 'fee-value';
+            }
+            if (buyTotalFeeEl) {
+                buyTotalFeeEl.textContent = formatCurrency(buyTotalFee);
+                buyTotalFeeEl.className = 'fee-value total-fee';
+            }
+        }
+        
+        // 更新卖出UI元素
+        function updateSellUI(stockId, sellAmount, sellCommission, sellStampTax, sellTransferFee, sellTotalFee) {
+            // 更新卖出金额
+            const sellAmountEl = document.getElementById(`sell-amount-${stockId}`);
+            if (sellAmountEl) {
+                sellAmountEl.textContent = formatCurrency(sellAmount);
+                sellAmountEl.className = 'result-value';
+            }
+            
+            // 更新卖出费用详情
+            const sellCommissionEl = document.getElementById(`sell-commission-${stockId}`);
+            const sellStampTaxEl = document.getElementById(`sell-stamp-tax-${stockId}`);
+            const sellTransferFeeEl = document.getElementById(`sell-transfer-fee-${stockId}`);
+            const sellTotalFeeEl = document.getElementById(`sell-total-fee-${stockId}`);
+            
+            if (sellCommissionEl) {
+                sellCommissionEl.textContent = formatCurrency(sellCommission);
+                sellCommissionEl.className = 'fee-value';
+            }
+            if (sellStampTaxEl) {
+                sellStampTaxEl.textContent = formatCurrency(sellStampTax);
+                sellStampTaxEl.className = 'fee-value';
+            }
+            if (sellTransferFeeEl) {
+                sellTransferFeeEl.textContent = formatCurrency(sellTransferFee);
+                sellTransferFeeEl.className = 'fee-value';
+            }
+            if (sellTotalFeeEl) {
+                sellTotalFeeEl.textContent = formatCurrency(sellTotalFee);
+                sellTotalFeeEl.className = 'fee-value total-fee';
+            }
+        }
+        
+        // 更新总览UI元素
+        function updateTotalUI(stockId, buyAmount, sellAmount, totalFee, netProfit) {
+            // 更新总费用
+            const totalFeeEl = document.getElementById(`total-fee-${stockId}`);
+            if (totalFeeEl) {
+                totalFeeEl.textContent = formatCurrency(totalFee);
+                totalFeeEl.className = 'result-value';
+            }
+            
+            // 更新净盈利（根据正负值设置颜色）
+            const netProfitEl = document.getElementById(`net-profit-${stockId}`);
+            if (netProfitEl) {
+                netProfitEl.className = 'result-value';
+                if (netProfit >= 0) {
+                    netProfitEl.classList.add('positive');
+                    netProfitEl.textContent = formatCurrencyWithSign(netProfit);
+                } else {
+                    netProfitEl.classList.add('negative');
+                    netProfitEl.textContent = formatCurrencyWithSign(netProfit);
+                }
+            }
+        }
+        
+        // 重置买入费用
+        function resetBuyFees(stockId) {
+            // 重置买入金额
+            const buyAmountEl = document.getElementById(`buy-amount-${stockId}`);
+            if (buyAmountEl) {
+                buyAmountEl.textContent = '-- 元';
+                buyAmountEl.className = 'result-value placeholder-text';
+            }
+            
+            // 重置买入费用详情
+            const buyCommissionEl = document.getElementById(`buy-commission-${stockId}`);
+            const buyTransferFeeEl = document.getElementById(`buy-transfer-fee-${stockId}`);
+            const buyTotalFeeEl = document.getElementById(`buy-total-fee-${stockId}`);
+            
+            if (buyCommissionEl) {
+                buyCommissionEl.textContent = '-- 元';
+                buyCommissionEl.className = 'fee-value placeholder-text';
+            }
+            if (buyTransferFeeEl) {
+                buyTransferFeeEl.textContent = '-- 元';
+                buyTransferFeeEl.className = 'fee-value placeholder-text';
+            }
+            if (buyTotalFeeEl) {
+                buyTotalFeeEl.textContent = '-- 元';
+                buyTotalFeeEl.className = 'fee-value placeholder-text total-fee';
+            }
+        }
+        
+        // 重置卖出费用
+        function resetSellFees(stockId) {
+            // 重置卖出金额
+            const sellAmountEl = document.getElementById(`sell-amount-${stockId}`);
+            if (sellAmountEl) {
+                sellAmountEl.textContent = '-- 元';
+                sellAmountEl.className = 'result-value placeholder-text';
+            }
+            
+            // 重置卖出费用详情
+            const sellCommissionEl = document.getElementById(`sell-commission-${stockId}`);
+            const sellStampTaxEl = document.getElementById(`sell-stamp-tax-${stockId}`);
+            const sellTransferFeeEl = document.getElementById(`sell-transfer-fee-${stockId}`);
+            const sellTotalFeeEl = document.getElementById(`sell-total-fee-${stockId}`);
+            
+            if (sellCommissionEl) {
+                sellCommissionEl.textContent = '-- 元';
+                sellCommissionEl.className = 'fee-value placeholder-text';
+            }
+            if (sellStampTaxEl) {
+                sellStampTaxEl.textContent = '-- 元';
+                sellStampTaxEl.className = 'fee-value placeholder-text';
+            }
+            if (sellTransferFeeEl) {
+                sellTransferFeeEl.textContent = '-- 元';
+                sellTransferFeeEl.className = 'fee-value placeholder-text';
+            }
+            if (sellTotalFeeEl) {
+                sellTotalFeeEl.textContent = '-- 元';
+                sellTotalFeeEl.className = 'fee-value placeholder-text total-fee';
+            }
+        }
+        
+        // 重置总费用
+        function resetTotalFees(stockId) {
+            // 重置总费用和净盈利
+            const totalFeeEl = document.getElementById(`total-fee-${stockId}`);
+            const netProfitEl = document.getElementById(`net-profit-${stockId}`);
+            
+            if (totalFeeEl) {
+                totalFeeEl.textContent = '-- 元';
+                totalFeeEl.className = 'result-value placeholder-text';
+            }
+            
+            if (netProfitEl) {
+                netProfitEl.textContent = '-- 元';
+                netProfitEl.className = 'result-value placeholder-text';
+                netProfitEl.classList.remove('positive', 'negative');
+            }
+        }
+        
+        // 添加输入框限制，防止负数
+        function validateInputs() {
+            for (let stockId = 1; stockId <= 3; stockId++) {
+                const inputs = [`buy-price-${stockId}`, `sell-price-${stockId}`, `lot-${stockId}`, `yesterday-close-price-${stockId}`];
+                
+                inputs.forEach(inputId => {
+                    const input = document.getElementById(inputId);
+                    if (input) {
+                        input.addEventListener('change', function() {
+                            if (parseFloat(this.value) < 0) {
+                                this.value = Math.abs(parseFloat(this.value));
+                                updatePriceChangeDisplays(stockId);
+                                triggerCalculations(stockId);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
