@@ -532,6 +532,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /* 修复：防止小屏幕换行 */
+            flex-wrap: nowrap;
+            white-space: nowrap;
         }
         
         body.dark-theme .total-fee {
@@ -772,6 +775,20 @@
             .current-time {
                 font-size: 12px;
             }
+            
+            /* 修复：在小屏幕上确保总费用不换行 */
+            .total-fee {
+                font-size: 13px;
+            }
+            
+            .fee-label {
+                font-size: 13px;
+            }
+            
+            .fee-value {
+                font-size: 13px;
+                margin-left: 8px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -805,6 +822,21 @@
             /* 小屏幕时间字体调整 */
             .current-time {
                 font-size: 11px;
+            }
+            
+            /* 修复：在更小的屏幕上进一步调整费用布局 */
+            .total-fee {
+                font-size: 12px;
+            }
+            
+            .fee-label {
+                font-size: 12px;
+                min-width: 80px;
+            }
+            
+            .fee-value {
+                font-size: 12px;
+                margin-left: 4px;
             }
         }
         
@@ -1598,7 +1630,7 @@
                                     <span class="fee-value placeholder-text" id="sell-transfer-fee-3">-- 元</span>
                                 </div>
                                 
-                                <div class="fee-item total-fee {
+                                <div class="fee-item total-fee">
                                     <span class="fee-label">卖出总费用</span>
                                     <span class="fee-value placeholder-text" id="sell-total-fee-3">-- 元</span>
                                 </div>
@@ -2036,21 +2068,21 @@
             return !closestElement;
         }
         
-        // 设置页面滑动 - 完全重写的滑动逻辑
+        // 设置页面滑动 - 修复的滑动逻辑
         function setupPageSwipe() {
             const mainContent = document.querySelector('.main-content');
             
             // 计算页面宽度
             updatePageWidth();
             
-            // 鼠标事件
+            // 鼠标事件 - 简化版本
             mainContent.addEventListener('mousedown', startSwipe);
             document.addEventListener('mousemove', handleSwipe);
             document.addEventListener('mouseup', endSwipe);
             
-            // 触摸事件
-            mainContent.addEventListener('touchstart', startSwipe, { passive: false });
-            document.addEventListener('touchmove', handleSwipe, { passive: false });
+            // 触摸事件 - 简化版本
+            mainContent.addEventListener('touchstart', startSwipe, { passive: true });
+            document.addEventListener('touchmove', handleSwipe, { passive: true });
             document.addEventListener('touchend', endSwipe);
             
             // 点击标签页
@@ -2087,7 +2119,7 @@
             pageWidth = document.querySelector('.main-content').offsetWidth;
         }
         
-        // 开始滑动 - 完全重写
+        // 开始滑动 - 简化版本
         function startSwipe(e) {
             if (isAnimating) return;
             
@@ -2108,8 +2140,6 @@
             if (e.type.includes('mouse')) {
                 startX = e.clientX;
                 startY = e.clientY;
-                // 阻止默认行为，防止文本选择
-                e.preventDefault();
             } else {
                 startX = e.touches[0].clientX;
                 startY = e.touches[0].clientY;
@@ -2134,12 +2164,9 @@
             pagesContainer.style.transition = 'none';
         }
         
-        // 处理滑动 - 优化方向判断
+        // 处理滑动 - 简化版本
         function handleSwipe(e) {
             if (!isSwiping || isAnimating) return;
-            
-            // 阻止默认滚动行为
-            e.preventDefault();
             
             // 获取当前位置
             let currentX, currentY;
@@ -2155,18 +2182,27 @@
             const deltaX = currentX - startX;
             const deltaY = currentY - startY;
             
-            // 关键优化：更早判断滑动方向
-            // 如果已经有明显垂直移动，标记为垂直滚动
+            // 检查是否为垂直滚动
             if (!isVerticalScroll && Math.abs(deltaY) > VERTICAL_THRESHOLD) {
-                // 检查是否主要是垂直移动
-                if (Math.abs(deltaY) > Math.abs(deltaX) * 1.2) {
+                // 如果是垂直滚动，取消滑动
+                if (Math.abs(deltaY) > Math.abs(deltaX)) {
                     isVerticalScroll = true;
-                    return; // 如果是垂直滚动，不处理水平滑动
+                    isSwiping = false;
+                    const pagesContainer = document.getElementById('pages-container');
+                    pagesContainer.style.transition = '';
+                    return;
                 }
             }
             
-            // 只有水平移动超过阈值才开始真正滑动
+            // 允许垂直滚动时，不阻止默认行为
+            if (isVerticalScroll) {
+                return;
+            }
+            
+            // 如果有水平移动，阻止默认滚动
             if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+                e.preventDefault();
+                
                 const pagesContainer = document.getElementById('pages-container');
                 
                 // 计算新的位置（带阻力效果）
@@ -2188,12 +2224,18 @@
             }
         }
         
-        // 结束滑动 - 完全重写点击判断逻辑
+        // 结束滑动 - 简化版本
         function endSwipe(e) {
             if (!isSwiping) return;
             
             isSwiping = false;
             const pagesContainer = document.getElementById('pages-container');
+            
+            // 如果是垂直滚动，直接返回
+            if (isVerticalScroll) {
+                pagesContainer.style.transition = '';
+                return;
+            }
             
             // 获取结束位置
             let endX, endY;
@@ -2212,21 +2254,12 @@
             
             // 计算移动距离和时间
             const deltaX = endX - startX;
-            const deltaY = endY - startY;
             const touchDuration = Date.now() - touchStartTime;
-            const totalDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             
-            // 关键修复：多维度判断是否为点击
+            // 关键修复：简化点击判断
             const isClick = (
-                // 1. 时间很短
                 touchDuration < MAX_CLICK_TIME &&
-                // 2. 移动距离很小
-                Math.abs(deltaX) < MAX_CLICK_MOVE &&
-                Math.abs(deltaY) < MAX_CLICK_MOVE * 2 &&
-                // 3. 总移动距离很小
-                totalDistance < MAX_CLICK_MOVE * 2 &&
-                // 4. 不是垂直滚动
-                !isVerticalScroll
+                Math.abs(deltaX) < MAX_CLICK_MOVE
             );
             
             // 如果是点击，直接回到原位并返回
@@ -2240,28 +2273,11 @@
                 return;
             }
             
-            // 如果是垂直滚动，也回到原位
-            if (isVerticalScroll) {
-                pagesContainer.style.transition = 'transform 0.2s ease';
-                pagesContainer.style.transform = `translateX(${currentTranslate}px)`;
-                
-                setTimeout(() => {
-                    pagesContainer.style.transition = '';
-                }, 200);
-                return;
-            }
-            
             // 确定是否需要切换页面
             let targetPage = currentPage;
             
-            // 计算滑动百分比
-            const swipePercentage = Math.abs(deltaX) / pageWidth;
-            
-            // 判断滑动是否足够切换页面（考虑距离和速度）
-            const swipeVelocity = Math.abs(deltaX) / Math.max(touchDuration, 1);
-            const shouldSwitch = swipePercentage > 0.15 || swipeVelocity > 0.2;
-            
-            if (shouldSwitch && Math.abs(deltaX) > MIN_SWIPE_DISTANCE) {
+            // 判断滑动是否足够切换页面
+            if (Math.abs(deltaX) > MIN_SWIPE_DISTANCE) {
                 if (deltaX > 0) {
                     // 向右滑动，切换到前一页
                     targetPage = currentPage - 1;
