@@ -964,7 +964,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="buy-transfer-fee-copy-3">-- 元</span>
                                 </div>
                                 
@@ -988,7 +988,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="sell-transfer-fee-copy-3">-- 元</span>
                                 </div>
                                 
@@ -1022,7 +1022,7 @@
                                 <div class="form-row">
                                     <span class="form-label">昨日收盘价</span>
                                     <div class="form-control">
-                                        <input type="number" id="yesterday-close-price-copy-3" min="0" step="0.01" placeholder="0.00">
+                                        <input type="text" id="yesterday-close-price-copy-3" pattern="[0-9]*\.?[0-9]*" inputmode="decimal" placeholder="0.00">
                                     </div>
                                 </div>
                             </div>
@@ -1166,7 +1166,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="buy-transfer-fee-1">-- 元</span>
                                 </div>
                                 
@@ -1190,7 +1190,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="sell-transfer-fee-1">-- 元</span>
                                 </div>
                                 
@@ -1224,7 +1224,7 @@
                                 <div class="form-row">
                                     <span class="form-label">昨日收盘价</span>
                                     <div class="form-control">
-                                        <input type="number" id="yesterday-close-price-1" min="0" step="0.01" placeholder="0.00">
+                                        <input type="text" id="yesterday-close-price-1" pattern="[0-9]*\.?[0-9]*" inputmode="decimal" placeholder="0.00">
                                     </div>
                                 </div>
                             </div>
@@ -1368,7 +1368,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="buy-transfer-fee-2">-- 元</span>
                                 </div>
                                 
@@ -1392,7 +1392,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="sell-transfer-fee-2">-- 元</span>
                                 </div>
                                 
@@ -1426,7 +1426,7 @@
                                 <div class="form-row">
                                     <span class="form-label">昨日收盘价</span>
                                     <div class="form-control">
-                                        <input type="number" id="yesterday-close-price-2" min="0" step="0.01" placeholder="0.00">
+                                        <input type="text" id="yesterday-close-price-2" pattern="[0-9]*\.?[0-9]*" inputmode="decimal" placeholder="0.00">
                                     </div>
                                 </div>
                             </div>
@@ -1570,7 +1570,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="buy-transfer-fee-3">-- 元</span>
                                 </div>
                                 
@@ -1583,7 +1583,7 @@
                             <div class="fee-detail">
                                 <div class="fee-title">卖出费用</div>
                                 
-                                <div class="fee-item {
+                                <div class="fee-item">
                                     <span class="fee-label">佣金</span>
                                     <span class="fee-value placeholder-text" id="sell-commission-3">-- 元</span>
                                 </div>
@@ -1594,11 +1594,11 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="sell-transfer-fee-3">-- 元</span>
                                 </div>
                                 
-                                <div class="fee-item total-fee">
+                                <div class="fee-item total-fee {
                                     <span class="fee-label">卖出总费用</span>
                                     <span class="fee-value placeholder-text" id="sell-total-fee-3">-- 元</span>
                                 </div>
@@ -1628,7 +1628,7 @@
                                 <div class="form-row">
                                     <span class="form-label">昨日收盘价</span>
                                     <div class="form-control">
-                                        <input type="number" id="yesterday-close-price-3" min="0" step="0.01" placeholder="0.00">
+                                        <input type="text" id="yesterday-close-price-3" pattern="[0-9]*\.?[0-9]*" inputmode="decimal" placeholder="0.00">
                                     </div>
                                 </div>
                             </div>
@@ -1743,7 +1743,7 @@
                                 <span class="result-value placeholder-text" id="sell-amount-copy-1">-- 元</span>
                             </div>
                             
-                            <div class="result-item {
+                            <div class="result-item">
                                 <span class="result-label">总费用</span>
                                 <span class="result-value placeholder-text" id="total-fee-copy-1">-- 元</span>
                             </div>
@@ -1772,7 +1772,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="buy-transfer-fee-copy-1">-- 元</span>
                                 </div>
                                 
@@ -1796,7 +1796,7 @@
                                 </div>
                                 
                                 <div class="fee-item">
-                                    <span class="fee-label">过户费<span class="rate-unit">(1‱)</span></span>
+                                    <span class="fee-label">过户费<span class="rate-unit">(0.1‱)</span></span>
                                     <span class="fee-value placeholder-text" id="sell-transfer-fee-copy-1">-- 元</span>
                                 </div>
                                 
@@ -1830,7 +1830,7 @@
                                 <div class="form-row">
                                     <span class="form-label">昨日收盘价</span>
                                     <div class="form-control">
-                                        <input type="number" id="yesterday-close-price-copy-1" min="0" step="0.01" placeholder="0.00">
+                                        <input type="text" id="yesterday-close-price-copy-1" pattern="[0-9]*\.?[0-9]*" inputmode="decimal" placeholder="0.00">
                                     </div>
                                 </div>
                             </div>
@@ -1883,17 +1883,22 @@
         let currentPage = 0;
         let isSwiping = false;
         let startX = 0;
-        let currentX = 0;
-        let startTranslate = 0;
-        let currentTranslate = 0;
+        let startY = 0;
+        let isVerticalScroll = false;
         let isAnimating = false;
         let pageWidth = 0;
-        // 新增：用于区分点击和拖动的变量
-        let isClick = true;
+        let currentTranslate = 0;
+        
+        // 新的阈值设置
+        const SWIPE_THRESHOLD = 15; // 滑动阈值减小
+        const VERTICAL_THRESHOLD = 8; // 垂直滑动阈值
+        const MIN_SWIPE_DISTANCE = 30; // 最小滑动距离
+        const MAX_CLICK_TIME = 200; // 最大点击时间
+        const MAX_CLICK_MOVE = 8; // 点击最大移动距离
+        
+        // 时间记录
         let touchStartTime = 0;
-        const SWIPE_THRESHOLD = 30; // 滑动阈值，单位像素
-        const CLICK_TIME_THRESHOLD = 200; // 点击时间阈值，单位毫秒
-        let clickThresholdExceeded = false; // 标记是否已超过点击阈值
+        let lastTouchStartTime = 0;
         
         // 默认设置
         const defaultSettings = {
@@ -2013,10 +2018,27 @@
             });
         }
         
+        // 防止快速连续点击
+        function isRapidClick(now) {
+            const timeSinceLastTouch = now - lastTouchStartTime;
+            lastTouchStartTime = now;
+            return timeSinceLastTouch < 300; // 300ms内视为快速点击
+        }
+        
+        // 检查是否可滑动目标
+        function isSwipeableTarget(target) {
+            // 获取最接近的特定元素
+            const closestElement = target.closest(
+                'input, select, textarea, button, .save-btn, .number-btn, .theme-switch, .slider, .tab, .swipe-dot, i, .footer, .section-title'
+            );
+            
+            // 如果点击了这些元素或它们的子元素，不允许滑动
+            return !closestElement;
+        }
+        
         // 设置页面滑动 - 完全重写的滑动逻辑
         function setupPageSwipe() {
             const mainContent = document.querySelector('.main-content');
-            const pagesContainer = document.getElementById('pages-container');
             
             // 计算页面宽度
             updatePageWidth();
@@ -2027,8 +2049,8 @@
             document.addEventListener('mouseup', endSwipe);
             
             // 触摸事件
-            mainContent.addEventListener('touchstart', startSwipe);
-            document.addEventListener('touchmove', handleSwipe);
+            mainContent.addEventListener('touchstart', startSwipe, { passive: false });
+            document.addEventListener('touchmove', handleSwipe, { passive: false });
             document.addEventListener('touchend', endSwipe);
             
             // 点击标签页
@@ -2037,7 +2059,7 @@
                     if (isAnimating) return;
                     const pageIndex = parseInt(this.getAttribute('data-tab'));
                     if (pageIndex !== currentPage) {
-                        goToPage(pageIndex, false);
+                        goToPage(pageIndex);
                     }
                 });
             });
@@ -2048,7 +2070,7 @@
                     if (isAnimating) return;
                     const pageIndex = parseInt(this.getAttribute('data-page'));
                     if (pageIndex !== currentPage) {
-                        goToPage(pageIndex, false);
+                        goToPage(pageIndex);
                     }
                 });
             });
@@ -2065,155 +2087,152 @@
             pageWidth = document.querySelector('.main-content').offsetWidth;
         }
         
-        // 开始滑动
+        // 开始滑动 - 完全重写
         function startSwipe(e) {
             if (isAnimating) return;
             
-            // 检查点击的目标是否是输入框、按钮或选择框
+            // 防快速连续点击
+            const now = Date.now();
+            if (isRapidClick(now)) return;
+            
+            // 检查是否可滑动的目标
             const target = e.target;
-            const tagName = target.tagName.toLowerCase();
-            const isInput = tagName === 'input' || tagName === 'textarea' || tagName === 'select' || tagName === 'button';
-            
-            // 如果点击的是输入元素，则不触发滑动
-            if (isInput) {
+            if (!isSwipeableTarget(target)) {
                 return;
             }
             
-            // 检查是否是加减按钮的父容器
-            const isNumberBtn = target.closest('.number-btn') || target.closest('.number-input-container');
-            if (isNumberBtn) {
-                return;
-            }
+            // 记录开始时间和位置
+            touchStartTime = now;
             
-            // 检查是否是保存按钮
-            const isSaveBtn = target.closest('.save-btn');
-            if (isSaveBtn) {
-                return;
-            }
-            
-            // 检查是否是主题切换开关
-            const isThemeSwitch = target.closest('.theme-switch') || target.closest('.slider');
-            if (isThemeSwitch) {
-                return;
-            }
-            
-            // 检查是否是标签页或滑动指示器
-            const isTab = target.closest('.tab') || target.closest('.swipe-dot');
-            if (isTab) {
-                return;
-            }
-            
-            // 检查是否是section元素（内容区域）
-            const isSection = target.closest('.section');
-            if (!isSection) {
-                return; // 如果不是在section区域内，不触发滑动
-            }
-            
-            // 检查是否是footer
-            const isFooter = target.closest('.footer');
-            if (isFooter) {
-                return;
-            }
-            
-            // 检查是否是图标元素
-            const isIcon = target.closest('i');
-            if (isIcon) {
-                return;
-            }
-            
-            isSwiping = true;
-            isClick = true; // 默认假设是点击
-            clickThresholdExceeded = false;
-            touchStartTime = Date.now(); // 记录触摸开始时间
-            
-            const pagesContainer = document.getElementById('pages-container');
-            
-            // 获取初始位置
+            // 获取开始位置
             if (e.type.includes('mouse')) {
                 startX = e.clientX;
+                startY = e.clientY;
+                // 阻止默认行为，防止文本选择
+                e.preventDefault();
             } else {
                 startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
             }
+            
+            // 重置状态
+            isSwiping = true;
+            isVerticalScroll = false;
+            
+            const pagesContainer = document.getElementById('pages-container');
             
             // 获取当前transform值
             const transform = window.getComputedStyle(pagesContainer).transform;
             if (transform !== 'none') {
                 const matrix = new DOMMatrix(transform);
-                startTranslate = matrix.m41; // translateX值
+                currentTranslate = matrix.m41;
             } else {
-                startTranslate = -(currentPage + 1) * pageWidth; // 默认位置
+                currentTranslate = -(currentPage + 1) * pageWidth;
             }
             
-            currentTranslate = startTranslate;
-            
-            // 添加滑动类
+            // 禁用过渡动画，准备滑动
             pagesContainer.style.transition = 'none';
         }
         
-        // 处理滑动
+        // 处理滑动 - 优化方向判断
         function handleSwipe(e) {
             if (!isSwiping || isAnimating) return;
             
+            // 阻止默认滚动行为
             e.preventDefault();
             
-            const pagesContainer = document.getElementById('pages-container');
-            
-            // 获取当前鼠标/触摸位置
+            // 获取当前位置
+            let currentX, currentY;
             if (e.type.includes('mouse')) {
                 currentX = e.clientX;
+                currentY = e.clientY;
             } else {
                 currentX = e.touches[0].clientX;
+                currentY = e.touches[0].clientY;
             }
             
-            // 计算滑动距离
+            // 计算移动距离
             const deltaX = currentX - startX;
+            const deltaY = currentY - startY;
             
-            // 如果滑动距离超过阈值，则认为不是点击而是滑动
+            // 关键优化：更早判断滑动方向
+            // 如果已经有明显垂直移动，标记为垂直滚动
+            if (!isVerticalScroll && Math.abs(deltaY) > VERTICAL_THRESHOLD) {
+                // 检查是否主要是垂直移动
+                if (Math.abs(deltaY) > Math.abs(deltaX) * 1.2) {
+                    isVerticalScroll = true;
+                    return; // 如果是垂直滚动，不处理水平滑动
+                }
+            }
+            
+            // 只有水平移动超过阈值才开始真正滑动
             if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
-                isClick = false;
-                clickThresholdExceeded = true;
+                const pagesContainer = document.getElementById('pages-container');
+                
+                // 计算新的位置（带阻力效果）
+                let newTranslate = currentTranslate + deltaX * 0.8; // 添加阻力
+                
+                // 边界限制
+                const minTranslate = -4 * pageWidth;
+                const maxTranslate = 0;
+                
+                if (newTranslate > maxTranslate) {
+                    newTranslate = maxTranslate + (deltaX * 0.3); // 边界处增加阻力
+                }
+                if (newTranslate < minTranslate) {
+                    newTranslate = minTranslate + (deltaX * 0.3); // 边界处增加阻力
+                }
+                
+                // 应用transform
+                pagesContainer.style.transform = `translateX(${newTranslate}px)`;
             }
-            
-            // 计算新的位置
-            let newTranslate = startTranslate + deltaX;
-            
-            // 限制滑动边界 - 这是关键修复：确保不能滑动到实际内容之外
-            const minTranslate = -4 * pageWidth; // 最小位置（副本1）
-            const maxTranslate = 0; // 最大位置（副本3）
-            
-            if (newTranslate > maxTranslate) {
-                newTranslate = maxTranslate;
-            }
-            if (newTranslate < minTranslate) {
-                newTranslate = minTranslate;
-            }
-            
-            currentTranslate = newTranslate;
-            
-            // 应用transform
-            pagesContainer.style.transform = `translateX(${newTranslate}px)`;
         }
         
-        // 结束滑动
+        // 结束滑动 - 完全重写点击判断逻辑
         function endSwipe(e) {
             if (!isSwiping) return;
             
             isSwiping = false;
             const pagesContainer = document.getElementById('pages-container');
             
-            // 计算滑动距离和时间
-            const deltaX = currentX - startX;
+            // 获取结束位置
+            let endX, endY;
+            if (e.type.includes('mouse')) {
+                endX = e.clientX;
+                endY = e.clientY;
+            } else {
+                if (e.changedTouches && e.changedTouches[0]) {
+                    endX = e.changedTouches[0].clientX;
+                    endY = e.changedTouches[0].clientY;
+                } else {
+                    endX = startX;
+                    endY = startY;
+                }
+            }
+            
+            // 计算移动距离和时间
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
             const touchDuration = Date.now() - touchStartTime;
+            const totalDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             
-            // 提高点击判断的严格性
-            const isClickAction = isClick && 
-                                 touchDuration < 150 &&  // 缩短时间阈值
-                                 Math.abs(deltaX) < 15;  // 减小距离阈值
+            // 关键修复：多维度判断是否为点击
+            const isClick = (
+                // 1. 时间很短
+                touchDuration < MAX_CLICK_TIME &&
+                // 2. 移动距离很小
+                Math.abs(deltaX) < MAX_CLICK_MOVE &&
+                Math.abs(deltaY) < MAX_CLICK_MOVE * 2 &&
+                // 3. 总移动距离很小
+                totalDistance < MAX_CLICK_MOVE * 2 &&
+                // 4. 不是垂直滚动
+                !isVerticalScroll
+            );
             
-            // 如果是点击，则不进行页面切换
-            if (isClickAction) {
+            // 如果是点击，直接回到原位并返回
+            if (isClick) {
                 pagesContainer.style.transition = 'transform 0.2s ease';
-                pagesContainer.style.transform = `translateX(${startTranslate}px)`;
+                pagesContainer.style.transform = `translateX(${currentTranslate}px)`;
                 
                 setTimeout(() => {
                     pagesContainer.style.transition = '';
@@ -2221,28 +2240,48 @@
                 return;
             }
             
-            // 大幅提高滑动切换的阈值
-            const SWITCH_THRESHOLD = pageWidth * 0.25; // 需要滑动25%的页面宽度才切换
+            // 如果是垂直滚动，也回到原位
+            if (isVerticalScroll) {
+                pagesContainer.style.transition = 'transform 0.2s ease';
+                pagesContainer.style.transform = `translateX(${currentTranslate}px)`;
+                
+                setTimeout(() => {
+                    pagesContainer.style.transition = '';
+                }, 200);
+                return;
+            }
             
-            let targetVisualPage = currentPage;
+            // 确定是否需要切换页面
+            let targetPage = currentPage;
             
-            if (Math.abs(deltaX) > SWITCH_THRESHOLD) {
+            // 计算滑动百分比
+            const swipePercentage = Math.abs(deltaX) / pageWidth;
+            
+            // 判断滑动是否足够切换页面（考虑距离和速度）
+            const swipeVelocity = Math.abs(deltaX) / Math.max(touchDuration, 1);
+            const shouldSwitch = swipePercentage > 0.15 || swipeVelocity > 0.2;
+            
+            if (shouldSwitch && Math.abs(deltaX) > MIN_SWIPE_DISTANCE) {
                 if (deltaX > 0) {
-                    targetVisualPage = currentPage - 1;
+                    // 向右滑动，切换到前一页
+                    targetPage = currentPage - 1;
                 } else if (deltaX < 0) {
-                    targetVisualPage = currentPage + 1;
+                    // 向左滑动，切换到后一页
+                    targetPage = currentPage + 1;
                 }
             }
             
             // 处理循环边界
-            if (targetVisualPage < 0) targetVisualPage = 2;
-            else if (targetVisualPage > 2) targetVisualPage = 0;
+            if (targetPage < 0) targetPage = 2;
+            if (targetPage > 2) targetPage = 0;
             
-            if (targetVisualPage !== currentPage) {
-                goToPage(targetVisualPage);
+            // 执行页面切换
+            if (targetPage !== currentPage) {
+                goToPage(targetPage);
             } else {
+                // 回到原位
                 pagesContainer.style.transition = 'transform 0.3s ease';
-                pagesContainer.style.transform = `translateX(${startTranslate}px)`;
+                pagesContainer.style.transform = `translateX(${currentTranslate}px)`;
                 
                 setTimeout(() => {
                     pagesContainer.style.transition = '';
@@ -2251,14 +2290,14 @@
         }
         
         // 切换到指定页面
-        function goToPage(targetVisualPage) {
-            if (isAnimating || targetVisualPage < 0 || targetVisualPage > 2 || targetVisualPage === currentPage) return;
+        function goToPage(targetPage) {
+            if (isAnimating || targetPage < 0 || targetPage > 2 || targetPage === currentPage) return;
             
             isAnimating = true;
             const pagesContainer = document.getElementById('pages-container');
             
-            // 计算目标位置 (实际索引 = 视觉索引 + 1，因为第一个是副本3)
-            const targetTranslate = -(targetVisualPage + 1) * pageWidth;
+            // 计算目标位置
+            const targetTranslate = -(targetPage + 1) * pageWidth;
             
             // 使用CSS transition实现平滑动画
             pagesContainer.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
@@ -2266,24 +2305,22 @@
             
             // 动画结束后更新状态
             setTimeout(() => {
-                currentPage = targetVisualPage;
+                currentPage = targetPage;
                 
-                // 处理循环边界 - 关键修复：在动画结束后检查是否需要重置位置
+                // 处理循环边界
                 const currentPosition = parseFloat(pagesContainer.style.transform.replace('translateX(', '').replace('px)', ''));
                 
-                // 如果我们在副本页面，需要无动画跳转到真实页面
+                // 检查是否在副本页面，需要无动画跳转到真实页面
                 let needReset = false;
                 let resetPosition = null;
                 
                 // 检查是否在副本3页面（位置0）
                 if (currentPosition === 0 && currentPage !== 2) {
-                    // 我们在副本3页面，但当前页不是第3页，需要重置到真实第3页
                     needReset = true;
                     resetPosition = -3 * pageWidth;
                 }
                 // 检查是否在副本1页面（位置-4*pageWidth）
                 else if (currentPosition === -4 * pageWidth && currentPage !== 0) {
-                    // 我们在副本1页面，但当前页不是第1页，需要重置到真实第1页
                     needReset = true;
                     resetPosition = -1 * pageWidth;
                 }
@@ -2291,8 +2328,7 @@
                 if (needReset && resetPosition !== null) {
                     pagesContainer.style.transition = 'none';
                     pagesContainer.style.transform = `translateX(${resetPosition}px)`;
-                    // 强制重绘
-                    pagesContainer.offsetHeight;
+                    pagesContainer.offsetHeight; // 强制重绘
                 }
                 
                 // 更新UI状态
@@ -3187,7 +3223,7 @@
             
             // 计算买入费用 - 过户费调整为1‱
             const buyCommission = calculateCommission(buyAmount, commissionRate);
-            const buyTransferFee = roundToTwoDecimals(buyAmount * 0.0001); // 1‱ = 0.0001
+            const buyTransferFee = roundToTwoDecimals(buyAmount * 0.00001); // 1‱ = 0.0001
             const buyTotalFee = roundToTwoDecimals(buyCommission + buyTransferFee);
             
             // 更新UI显示
@@ -3215,7 +3251,7 @@
             // 计算卖出费用 - 印花税为5‱，过户费调整为1‱
             const sellCommission = calculateCommission(sellAmount, commissionRate);
             const sellStampTax = roundToTwoDecimals(sellAmount * 0.0005); // 5‱ = 0.0005
-            const sellTransferFee = roundToTwoDecimals(sellAmount * 0.0001); // 1‱ = 0.0001
+            const sellTransferFee = roundToTwoDecimals(sellAmount * 0.00001); // 1‱ = 0.0001
             const sellTotalFee = roundToTwoDecimals(sellCommission + sellStampTax + sellTransferFee);
             
             // 更新UI显示
