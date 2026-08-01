@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6G 通信：下一代制高点 · 全产业链投研分析</title>
+<style>
+:root{
+  --bg:#0a0f1e;
+  --bg-2:#0f1729;
+  --panel:#15203b;
+  --panel-2:#1c2a4a;
+  --line:#2a3656;
+  --text:#e8eef9;
+  --muted:#94a3c1;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+.wrap{max-width:1500px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#15203b 0%,#0a0f1e 60%,#1c2a4a 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(96,165,250,.20),transparent 70%);border-radius:50%}
+header.hero::after{content:"";position:absolute;bottom:-120px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(94,234,212,.12),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;position:relative}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px;position:relative}
+header.hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;position:relative}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:36px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 34px;margin-bottom:22px}
+section h2{font-size:21px;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--neutral);margin:18px 0 10px;font-weight:600}
+section h4{font-size:14px;color:var(--accent-2);margin:14px 0 8px}
+section p{color:var(--text);margin-bottom:10px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.kpi.bull::before{background:var(--bull)}
+.kpi.bear::before{background:var(--bear)}
+.kpi.neutral::before{background:var(--neutral)}
+.kpi.purple::before{background:var(--purple)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:20px;font-weight:700;color:var(--accent)}
+.kpi.bull .val{color:var(--bull)}
+.kpi.bear .val{color:var(--bear)}
+.kpi.neutral .val{color:var(--neutral)}
+.kpi.purple .val{color:var(--purple)}
+.kpi .delta{font-size:11px;margin-top:4px;color:var(--muted)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;table-layout:fixed}
+table.data th,table.data td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;white-space:nowrap;font-size:12.5px;letter-spacing:.2px}
+table.data th.wrap{white-space:normal;font-size:12px;line-height:1.3}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:center;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace;white-space:nowrap}
+table.data td.nowrap{white-space:nowrap}
+table.data td.bull{color:var(--bull);font-weight:600}
+table.data td.bear{color:var(--bear);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+table.data col{display:table-column}
+table.data td .tag{margin:0 auto}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.stack-bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center;margin:6px 0}
+.stack-bar-row .name{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack-bar{height:26px;border-radius:4px;overflow:hidden;background:var(--panel-2);display:flex;border:1px solid var(--line)}
+.stack-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a0f1e;font-weight:600;transition:width .3s;white-space:nowrap;padding:0 6px;min-width:fit-content}
+.stack-bar-row .val{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.bull{border-left-color:var(--bull);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent)}
+.callout.bear{border-left-color:var(--bear);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.callout.purple{border-left-color:var(--purple);background:linear-gradient(90deg,rgba(167,139,250,.08),transparent)}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2);font-weight:500}
+.tag.bull{background:rgba(52,211,153,.15);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.15);color:var(--bear)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--neutral)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.bull{border-left:3px solid var(--bull)}
+.card.bear{border-left:3px solid var(--bear)}
+.card.neutral{border-left:3px solid var(--neutral)}
+.card.purple{border-left:3px solid var(--purple)}
+.card h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h4 .icon{font-size:16px}
+.card .body{font-size:12.5px;color:var(--muted);line-height:1.7}
+.card .body p{margin-bottom:6px}
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.strategy{background:var(--panel-2);border-radius:10px;padding:18px;border:1px solid var(--line)}
+.strategy.aggressive{border-top:3px solid var(--bull)}
+.strategy.balanced{border-top:3px solid var(--neutral)}
+.strategy.conservative{border-top:3px solid var(--bear)}
+.strategy h4{font-size:14px;color:var(--accent);margin-bottom:8px}
+.strategy .target{font-size:11px;color:var(--muted);margin-bottom:4px}
+.strategy .price{font-size:18px;font-weight:700;color:var(--accent);margin:6px 0}
+.score-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.score{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.score .label{font-size:11px;color:var(--muted);margin-bottom:4px}
+.score .val{font-size:22px;font-weight:700}
+.score .desc{font-size:10px;color:var(--muted);margin-top:2px}
+.verdict{background:linear-gradient(135deg,var(--panel-2),var(--bg-2));border:2px solid var(--accent);border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+.verdict.bull{border-color:var(--bull)}
+.verdict.bear{border-color:var(--bear)}
+.verdict.neutral{border-color:var(--neutral)}
+.verdict .rating{font-size:32px;font-weight:700;color:var(--accent)}
+.verdict .rating.bull{color:var(--bull)}
+.verdict .rating.bear{color:var(--bear)}
+.verdict .rating.neutral{color:var(--neutral)}
+.verdict .horizon{font-size:13px;color:var(--muted);margin:8px 0}
+.verdict .logic{font-size:13px;color:var(--text);max-width:780px;margin:10px auto;text-align:left;line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:22px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>6G 通信 📡 下一代制高点 · 全产业链投研分析</h1>
+  <div class="sub">基于 IMT-2030 推进组 + 七大关键技术 + 中国 6G 试验 · 涵盖技术路线、产业链全景、A 股龙头、估值与操盘</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>📡 6G 通信</span>
+    <span>⚡ 1Tbps 速率</span>
+    <span>🛰️ 空天地一体化</span>
+    <span>💰 2030 万亿级</span>
+    <span>💼 操盘建议</span>
+    <span>🔬 20+ A 股龙头</span>
+    <span>⭐ 主题稀缺</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、6G 赛道速览：核心数据与里程碑</a></li>
+    <li><a href="#s2">二、全球格局与三大技术路线</a></li>
+    <li><a href="#s3">三、6G 产业链全景与上中下游</a></li>
+    <li><a href="#s4">四、A 股 20+ 龙头深度对比</a></li>
+    <li><a href="#s5">五、商业化时间表与应用场景</a></li>
+    <li><a href="#s6">六、估值定价与情景分析</a></li>
+    <li><a href="#s7">七、操盘策略与买卖节奏</a></li>
+    <li><a href="#s8">八、回报测算与终极展望</a></li>
+    <li><a href="#s9">九、风险提示与投资纪律</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 速览 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>6G 赛道速览：核心数据与里程碑</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">理论峰值速率</div><div class="val">1 Tbps</div><div class="delta">⭐ 5G 的 100 倍</div></div>
+    <div class="kpi purple"><div class="label">时延</div><div class="val">< 0.1 ms</div><div class="delta">⭐ 实时控制</div></div>
+    <div class="kpi neutral"><div class="label">2030 全球市场</div><div class="val">4000 亿 $</div><div class="delta">⭐ IEA 预测</div></div>
+    <div class="kpi bull"><div class="label">2035 全球市场</div><div class="val">2 万亿 $</div><div class="delta">⭐ 长期增长</div></div>
+    <div class="kpi bull"><div class="label">中国研发投入</div><div class="val">3000 亿-1 万亿</div><div class="delta">⭐ 政策强支持</div></div>
+    <div class="kpi bull"><div class="label">商用时间</div><div class="val">2030</div><div class="delta">⭐ 规模化商用</div></div>
+  </div>
+
+  <h3>1.1 关键事件节奏</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:58%"></colgroup>
+    <thead><tr><th>时点</th><th>事件</th><th>里程碑意义</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nowrap">2025-03</td>
+        <td>政府工作报告首次提"6G"</td>
+        <td>写入"十五五"未来产业重点培育</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2025-2026</td>
+        <td><b>6G 关键技术试验</b></td>
+        <td>中国全面启动试验验证</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-06</td>
+        <td>运营商启动早期商用试点</td>
+        <td>中国移动等数百亿投入研发</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-未来</td>
+        <td>54 国/地区启动 6G 研究</td>
+        <td>中国在专利申请上<b>全球领先</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap">2028-2029</td>
+        <td>6G 标准化制定期</td>
+        <td>3GPP Release 21/22 标准窗口</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2030</td>
+        <td><b>6G 规模化商用</b></td>
+        <td>首批 6G 网络部署开始</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple">
+    <strong>📡 核心结论</strong>：6G 是 <b>21 世纪下一代通信制高点</b>。从 5G 的 <b>1 Gbps 到 6G 的 1 Tbps</b>（1000 倍跃升），时延降至 <b>0.1 ms</b> 以下，2030 年全球市场规模 <b>4000 亿美元</b>，2035 年突破 <b>2 万亿美元</b>。A 股市场上，<b>通信主设备 + 卫星互联网 + 太赫兹 + 光模块</b> 是产业链四大核心环节，孕育 <b>20+ 龙头股</b> 的主题机会。
+  </div>
+</section>
+
+<!-- ========== 2. 全球格局 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>全球格局与三大技术路线</h2>
+
+  <h3>2.1 全球 6G 竞争格局</h3>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🇨🇳</span> 中国（领先）</h4>
+      <div class="body">
+        <p><b>主导机构</b>：IMT-2030 推进组</p>
+        <p><b>专利申请</b>：<b>全球领先</b>（40%+ 份额）</p>
+        <p><b>核心技术</b>：太赫兹、通感一体化、智能超表面</p>
+        <p><b>试验进展</b>：2026 完成关键技术试验</p>
+        <p><b>商用时间</b>：<b>2030 规模化</b></p>
+        <p><b>运营商</b>：中国移动/电信/联通联合研发</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🇺🇸</span> 美国（Next G Alliance）</h4>
+      <div class="body">
+        <p><b>主导机构</b>：Next G Alliance（ATIS）</p>
+        <p><b>重点方向</b>：6G for All</p>
+        <p><b>频段</b>：Sub-6 + 毫米波 + 太赫兹</p>
+        <p><b>挑战</b>：依赖私营巨头（高通、Intel）</p>
+        <p><b>进展</b>：技术研究阶段</p>
+        <p><b>商用时间</b>：约 2030</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🇪🇺</span> 欧盟（Hexa-X）</h4>
+      <div class="body">
+        <p><b>主导机构</b>：Hexa-X II 旗舰项目</p>
+        <p><b>重点方向</b>：可持续 6G</p>
+        <p><b>频段</b>：Sub-6 + 毫米波</p>
+        <p><b>优势</b>：诺基亚、爱立信</p>
+        <p><b>挑战</b>：研发资源分散</p>
+        <p><b>商用时间</b>：约 2030</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2.2 6G 关键性能指标 vs 5G</h3>
+  <table class="data">
+    <colgroup><col style="width:22%"><col style="width:18%"><col style="width:18%"><col style="width:22%"><col style="width:20%"></colgroup>
+    <thead><tr><th>指标</th><th>5G</th><th>6G</th><th>提升倍数</th><th>应用场景</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>峰值速率</b></td>
+        <td>10 Gbps</td>
+        <td><b>1 Tbps</b></td>
+        <td class="bull">100 倍</td>
+        <td>全息通信、浸入式 XR</td>
+      </tr>
+      <tr>
+        <td><b>时延</b></td>
+        <td>1 ms</td>
+        <td><b>< 0.1 ms</b></td>
+        <td class="bull">10 倍</td>
+        <td>工业控制、远程手术</td>
+      </tr>
+      <tr>
+        <td><b>连接密度</b></td>
+        <td>100 万/km²</td>
+        <td><b>1 亿/km²</b></td>
+        <td class="bull">100 倍</td>
+        <td>物联网、传感网络</td>
+      </tr>
+      <tr>
+        <td><b>频谱效率</b></td>
+        <td>30 bps/Hz</td>
+        <td><b>90 bps/Hz</b></td>
+        <td class="bull">3 倍</td>
+        <td>频谱利用率提升</td>
+      </tr>
+      <tr>
+        <td><b>能效</b></td>
+        <td>基准</td>
+        <td><b>×100</b></td>
+        <td class="bull">100 倍</td>
+        <td>绿色通信</td>
+      </tr>
+      <tr>
+        <td><b>覆盖</b></td>
+        <td>陆地</td>
+        <td><b>空天地海</b></td>
+        <td class="bull">全场景</td>
+        <td>卫星 + 海洋 + 沙漠</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>2.3 6G 六大关键技术</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">📡</span> 太赫兹通信</h4>
+      <div class="body">
+        <p><b>频段</b>：0.1-10 THz</p>
+        <p><b>速率</b>：100 Gbps-1 Tbps</p>
+        <p><b>应用</b>：超高速短距 + 卫星</p>
+        <p><b>挑战</b>：路径损耗大</p>
+        <p><b>中国</b>：国博电子 W 波段突破</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🌐</span> 通感一体化（ISAC）</h4>
+      <div class="body">
+        <p><b>特点</b>：通信 + 感知融合</p>
+        <p><b>应用</b>：自动驾驶、智慧城市</p>
+        <p><b>价值</b>：频谱效率提升 50%</p>
+        <p><b>挑战</b>：算法复杂度高</p>
+        <p><b>中国</b>：华工科技完成试验</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🎯</span> 智能超表面（RIS）</h4>
+      <div class="body">
+        <p><b>原理</b>：可编程反射电磁波</p>
+        <p><b>价值</b>：提升 6G 覆盖</p>
+        <p><b>频段</b>：Sub-6 + 毫米波</p>
+        <p><b>挑战</b>：硬件成本</p>
+        <p><b>中国</b>：信科移动已验证</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">🛰️</span> 空天地一体化</h4>
+      <div class="body">
+        <p><b>架构</b>：卫星 + 地面 + 无人机</p>
+        <p><b>应用</b>：全域覆盖</p>
+        <p><b>中国</b>：千帆 + GW 1.4 万颗</p>
+        <p><b>挑战</b>：协议融合</p>
+        <p><b>频率</b>：Ka/V</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🤖</span> AI 原生网络</h4>
+      <div class="body">
+        <p><b>特点</b>：AI 驱动网络</p>
+        <p><b>应用</b>：自治网络 + 智能调度</p>
+        <p><b>价值</b>：运营效率 ↑ 30%</p>
+        <p><b>挑战</b>：算力需求</p>
+        <p><b>中国</b>：三大运营商试点</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🔐</span> 量子通信</h4>
+      <div class="body">
+        <p><b>特点</b>：量子密钥 + 安全</p>
+        <p><b>应用</b>：6G 安全层</p>
+        <p><b>中国</b>：墨子号 + 京沪干线</p>
+        <p><b>挑战</b>：距离 + 成本</p>
+        <p><b>趋势</b>：QKD + 6G 融合</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. 产业链 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>6G 产业链全景与上中下游</h2>
+
+  <h3>3.1 产业链价值分布</h3>
+  <div class="chart-box">
+    <div class="chart-title">6G 产业链价值分布（2030 预测）</div>
+    <div class="stack-bar-row">
+      <div class="name">通信主设备</div>
+      <div class="stack-bar"><div style="width:40%;background:linear-gradient(90deg,#5eead4,#60a5fa)">≈ 40% 总价值</div></div>
+      <div class="val">⭐ 最大</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">卫星互联网</div>
+      <div class="stack-bar"><div style="width:25%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">≈ 25% 总价值</div></div>
+      <div class="val">⭐ 高弹性</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">光模块/光纤</div>
+      <div class="stack-bar"><div style="width:15%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">≈ 15% 总价值</div></div>
+      <div class="val">⭐ 高增长</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">太赫兹/射频</div>
+      <div class="stack-bar"><div style="width:10%;background:linear-gradient(90deg,#fb923c,#fbbf24)">≈ 10% 总价值</div></div>
+      <div class="val">⭐ 高壁垒</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">运营商/服务</div>
+      <div class="stack-bar"><div style="width:10%;background:linear-gradient(90deg,#f87171,#fb923c)">≈ 10% 总价值</div></div>
+      <div class="val">下游</div>
+    </div>
+  </div>
+
+  <h3>3.2 上中下游分布</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">⬆</span> 上游：核心元器件</h4>
+      <div class="body">
+        <p><b>太赫兹/射频芯片</b></p>
+        <p>• 国博电子（200GHz+ 射频组件）</p>
+        <p>• 铖昌科技（毫米波 T/R 芯片）</p>
+        <p>• 盛路通信（高频天线）</p>
+        <p><b>光器件/光模块</b></p>
+        <p>• 中际旭创（1.6T 光模块）</p>
+        <p>• 华工科技（光模块全球前五）</p>
+        <p>• 亨通光电（光纤光缆）</p>
+        <p><b>材料</b>：生益科技（高频基板）</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> 中游：设备 + 系统</h4>
+      <div class="body">
+        <p><b>通信主设备</b></p>
+        <p>• <b>中兴通讯</b>（6G 太赫兹 200+ 专利）</p>
+        <p>• <b>信科移动</b>（信通院系 6G 主力）</p>
+        <p>• 烽火通信（光通信主设备）</p>
+        <p><b>卫星互联网</b></p>
+        <p>• <b>中国卫通</b>（高轨 + 低轨）</p>
+        <p>• <b>中国卫星</b>（卫星制造）</p>
+        <p>• 上海瀚讯（千帆载荷）</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⬇</span> 下游：运营 + 应用</h4>
+      <div class="body">
+        <p><b>运营商</b></p>
+        <p>• 中国移动（6G 研发数百亿）</p>
+        <p>• 中国电信</p>
+        <p>• 中国联通</p>
+        <p><b>应用场景</b></p>
+        <p>• 智能交通（车联网）</p>
+        <p>• 工业互联网（远程控制）</p>
+        <p>• 智慧医疗（远程手术）</p>
+        <p>• 沉浸式 XR（VR/AR）</p>
+        <p>• 全息通信</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. A股龙头 ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>A 股 20+ 龙头深度对比</h2>
+
+  <h3>4.1 龙头综合卡片（按价值量排序）</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:10%"><col style="width:20%"><col style="width:36%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.10)">
+        <td><b>⭐ 中兴通讯</b></td><td>000063</td>
+        <td>通信主设备龙头</td>
+        <td>6G 太赫兹 200+ 专利，全球首个 6G 空口试验 1Tbps</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td><b>中国卫通</b></td><td>601698</td>
+        <td>高轨 + 低轨卫星</td>
+        <td>中国唯一自主商用卫星运营商，星网核心</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td><b>信科移动</b></td><td>688387</td>
+        <td>6G 研发主力</td>
+        <td>中国信通院系，太赫兹 + RIS 原型机已验证</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td>中国卫星</td><td>600118</td>
+        <td>卫星制造国家队</td>
+        <td>航天科技集团旗下，千帆 + GW 双重卡位</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>中国移动</td><td>600941</td>
+        <td>运营商龙头</td>
+        <td>全球最大 5G 运营商，6G 试验核心参与方</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>中际旭创</td><td>300308</td>
+        <td>光模块龙头</td>
+        <td>1.6T 光模块订单排产至 2026 年</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>海格通信</td><td>002465</td>
+        <td>军用通信 + 卫星</td>
+        <td>北斗导航终端市占率第一，6G 融合</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>信维通信</td><td>300136</td>
+        <td>射频天线</td>
+        <td>全球射频天线龙头，6G 智能超表面</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>亨通光电</td><td>600487</td>
+        <td>光纤光缆</td>
+        <td>全球唯一光纤 + 量子通信全链</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>华工科技</td><td>000988</td>
+        <td>光模块</td>
+        <td>光模块全球前五，1.6T 光模块订单</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>中天科技</td><td>600522</td>
+        <td>海洋通信</td>
+        <td>海底光缆全球 50%+ 市占率</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>国博电子</td><td>688375</td>
+        <td>太赫兹射频</td>
+        <td>国内唯一量产 200GHz+ 射频组件</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>铖昌科技</td><td>001270</td>
+        <td>毫米波 T/R 芯片</td>
+        <td>相控阵 T/R 芯片龙头，6G 卫星互联网</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>盛路通信</td><td>002446</td>
+        <td>高频天线</td>
+        <td>6G 高频天线 + 毫米波龙头</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>烽火通信</td><td>600498</td>
+        <td>光通信主设备</td>
+        <td>5G/6G 设备全球领先</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>上海瀚讯</td><td>300762</td>
+        <td>卫星载荷</td>
+        <td>千帆主要载荷供应商</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>三维通信</td><td>002115</td>
+        <td>卫星宽带</td>
+        <td>海卫通太赫兹 + 卫星宽带</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>通宇通讯</td><td>002792</td>
+        <td>毫米波天线</td>
+        <td>毫米波 Massive MIMO 天线</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>生益科技</td><td>600183</td>
+        <td>高频材料</td>
+        <td>高频高速基材，6G 关键材料</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>金信诺</td><td>300252</td>
+        <td>高频连接器</td>
+        <td>高频高速连接器 + SpaceX 板对板</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 板块 5 大龙头排名</h3>
+  <table class="data">
+    <colgroup><col style="width:10%"><col style="width:14%"><col style="width:14%"><col style="width:38%"><col style="width:24%"></colgroup>
+    <thead><tr><th>排名</th><th>公司</th><th>代码</th><th>投资亮点</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.12)">
+        <td class="num nowrap"><b>🥇 1</b></td>
+        <td><b>⭐ 中兴通讯</b></td><td>000063</td>
+        <td>通信主设备龙头 + 6G 太赫兹 200+ 专利 + 1Tbps 全球首个空口试验</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td class="num nowrap"><b>🥈 2</b></td>
+        <td><b>中国卫通</b></td><td>601698</td>
+        <td>中国唯一自主商用卫星运营商 + 千帆 + GW 双重卡位</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>🥉 3</b></td>
+        <td><b>信科移动</b></td><td>688387</td>
+        <td>中国信通院系 6G 研发主力 + 太赫兹 + RIS 原型机验证</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>4</b></td>
+        <td>中国移动</td><td>600941</td>
+        <td>全球最大 5G 运营商 + 6G 试验核心</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap"><b>5</b></td>
+        <td>中际旭创</td><td>300308</td>
+        <td>光模块龙头 + 1.6T 订单排产至 2026</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.3 核心龙头深度分析</h3>
+
+  <h4>① 中兴通讯（000063）— 通信主设备龙头</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏆</span> 卡位优势</h4>
+      <div class="body">
+        <p><b>全球通信设备龙头</b>，国内市占率 35%</p>
+        <p><b>6G 太赫兹专利 200+ 项</b>，全球领先</p>
+        <p>全球首个 6G 空口试验速率突破 <b>1 Tbps</b></p>
+        <p>5G 核心主设备供应商，6G 主力军</p>
+        <p>业务覆盖：5G/6G + 光通信 + 芯片 + 终端</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚠</span> 风险点</h4>
+      <div class="body">
+        <p>6G 商用在 <b>2030</b>，短期主题溢价</p>
+        <p>主业（5G）增速放缓</p>
+        <p>海外合规 + 美国制裁</p>
+        <p>研发投入大</p>
+        <p><b>估值</b>：2026E PE 25-35x（合理）</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>② 中国卫通（601698）— 6G 卫星互联网核心</h4>
+  <div class="callout bull">
+    <strong>🏆 中国唯一自主商用卫星运营商</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>核心卡位</b>：高轨 + 低轨双轨布局，6G 空天地一体化<b>必备</b></li>
+      <li><b>业务进展</b>：运营中星系列 + 参股中国星网（千帆 + GW）</li>
+      <li><b>频段</b>：Ka/V 频段，2026 计划新增 300 颗低轨卫星</li>
+      <li><b>技术</b>：高通量卫星 + 6G 融合通信</li>
+      <li><b>6G 价值</b>：6G 必须实现"空天地海"全覆盖，<b>卫星互联网是核心拼图</b></li>
+    </ul>
+  </div>
+
+  <h4>③ 信科移动（688387）— 6G 研发主力</h4>
+  <div class="callout purple">
+    <strong>🚀 中国信通院系 6G 研发主力军</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>核心卡位</b>：中国信科集团旗下，<b>6G 国家队</b></li>
+      <li><b>技术布局</b>：太赫兹 + 通感一体化（ISAC）+ 智能超表面（RIS）</li>
+      <li><b>太赫兹原型机</b>已通过验证</li>
+      <li><b>3GPP 标准</b>主导参与方</li>
+      <li><b>6G 价值</b>：从 5G 时代起就是中国通信标准制定者</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 5. 商业化时间表 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>商业化时间表与应用场景</h2>
+
+  <h3>5.1 商业化时间表</h3>
+  <div class="chart-box">
+    <div class="chart-title">6G 商业化时间表（2026-2030）</div>
+    <div class="stack-bar-row">
+      <div class="name">2025-2026（启动期）</div>
+      <div class="stack-bar"><div style="width:18%;background:linear-gradient(90deg,#34d399,#5eead4)">关键技术试验</div></div>
+      <div class="val">⭐ 试验</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2026-2028（标准期）</div>
+      <div class="stack-bar"><div style="width:35%;background:linear-gradient(90deg,#60a5fa,#5eead4)">3GPP 标准 + 早期试点</div></div>
+      <div class="val">⭐ 标准</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2028-2030（试商用）</div>
+      <div class="stack-bar"><div style="width:60%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">试商用 + 设备成熟</div></div>
+      <div class="val">⭐⭐ 试商用</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030（规模化商用）</div>
+      <div class="stack-bar"><div style="width:85%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">首批 6G 网络部署</div></div>
+      <div class="val">⭐⭐⭐ 商用元年</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030-2035（推广）</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#f87171,#fb923c)">全球推广 + 2 万亿 $</div></div>
+      <div class="val">🚀 终极</div>
+    </div>
+    <div class="chart-note">资料来源：中国信通院、IMT-2030 推进组、运营商规划。</div>
+  </div>
+
+  <h3>5.2 应用场景</h3>
+  <table class="data">
+    <colgroup><col style="width:20%"><col style="width:30%"><col style="width:25%"><col style="width:25%"></colgroup>
+    <thead><tr><th>场景</th><th>核心应用</th><th>市场空间</th><th>代表公司</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>卫星互联网</b></td>
+        <td>空天地一体化宽带</td>
+        <td>2026 用户 300 万+，市场 800 亿</td>
+        <td>中国卫通、信科移动</td>
+      </tr>
+      <tr>
+        <td><b>车联网</b></td>
+        <td>自动驾驶 + 智能交通</td>
+        <td>2030 万亿级</td>
+        <td>中兴通讯、信维通信</td>
+      </tr>
+      <tr>
+        <td><b>工业互联网</b></td>
+        <td>远程控制 + 工业 4.0</td>
+        <td>千亿级稳定</td>
+        <td>中兴通讯、信科移动</td>
+      </tr>
+      <tr>
+        <td><b>沉浸式 XR</b></td>
+        <td>VR/AR/全息通信</td>
+        <td>2030 高速增长</td>
+        <td>华工科技、中际旭创</td>
+      </tr>
+      <tr>
+        <td><b>远程手术</b></td>
+        <td>医疗 + 0.1ms 时延</td>
+        <td>百亿级</td>
+        <td>中兴通讯、海格通信</td>
+      </tr>
+      <tr>
+        <td><b>智慧城市</b></td>
+        <td>万物互联 + 传感</td>
+        <td>千亿级</td>
+        <td>海格通信、铖昌科技</td>
+      </tr>
+      <tr>
+        <td><b>6G 通信核心</b></td>
+        <td>运营商 + 设备商</td>
+        <td>底座级</td>
+        <td>中国移动、中兴通讯</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 6. 估值 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>估值定价与情景分析</h2>
+
+  <h3>6.1 板块整体估值锚定</h3>
+  <div class="grid-3">
+    <div class="card neutral">
+      <h4><span class="icon">📐</span> PE 估值（主题溢价）</h4>
+      <div class="body">
+        <p>2027E 板块净利 <b>80 亿+</b></p>
+        <p>合理 PE：<b>35-50x</b>（含主题溢价）</p>
+        <p>对应市值：<b>2800-4000 亿</b></p>
+        <p><b>结论</b>：当前市值部分反映</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">🔮</span> SOTP 估值（分部加总）</h4>
+      <div class="body">
+        <p>现有主业（5G）：<b>2500 亿</b></p>
+        <p>6G 增量（2030E）：<b>800-1500 亿</b></p>
+        <p>卫星互联网：<b>600-1000 亿</b></p>
+        <p><b>合理市值</b>：<b>4000-5000 亿</b></p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⚡</span> 重置成本（Safety Net）</h4>
+      <div class="body">
+        <p>研发投入 <b>3000 亿-1 万亿</b></p>
+        <p>卫星 + 6G 设备</p>
+        <p>中国 2030 商用</p>
+        <p><b>结论</b>：长期价值底线</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <strong>🎯 估值结论</strong>：当前 20+ 龙头整体市值约 <b>4000-5000 亿</b>，已<b>部分反映主题溢价</b>。后续上涨需依赖：① 6G 试验突破；② 运营商大额招标；③ 卫星互联网应用落地。板块整体 <b>5 年空间 2-3 倍</b>。
+  </div>
+
+  <h3>6.2 三档情景推演</h3>
+  <div class="grid-3">
+    <div class="card bear">
+      <h4><span class="icon">📉</span> 悲观情景（概率 25%）</h4>
+      <div class="body">
+        <p><b>假设</b>：6G 商用延期 + 主题退潮</p>
+        <p>板块 2026E 净利：<b>60 亿</b></p>
+        <p>目标估值：<b>25-35x</b></p>
+        <p>板块总市值：<b>1500-2100 亿</b></p>
+        <p>触发：6G 试验不顺 + 主业恶化</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📊</span> 中性情景（概率 50%）</h4>
+      <div class="body">
+        <p><b>假设</b>：6G 试验按时 + 卫星互联网部署</p>
+        <p>板块 2026E 净利：<b>100 亿</b></p>
+        <p>目标估值：<b>35-45x</b></p>
+        <p>板块总市值：<b>3500-4500 亿</b></p>
+        <p>触发：6G 试验 + 卫星组网</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 乐观情景（概率 25%）</h4>
+      <div class="body">
+        <p><b>假设</b>：6G 标准化加速 + 全球订单爆发</p>
+        <p>板块 2026E 净利：<b>150 亿+</b></p>
+        <p>目标估值：<b>50-80x</b></p>
+        <p>板块总市值：<b>7000-10000 亿</b></p>
+        <p>触发：商用元年 + 海外订单</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. 操盘策略 ========== -->
+<section id="s7">
+  <h2><span class="num">07</span>操盘策略与买卖节奏</h2>
+
+  <div class="verdict neutral">
+    <div class="rating">📡 政策 + 卫星 + 标准 · 三重驱动</div>
+    <div class="horizon">12 个月投资视角</div>
+    <div class="logic">
+      6G 是 <b>A 股最具想象空间的下一代通信制高点</b>。当前中国 <b>IMT-2030 推进组试验 + 千帆 + GW 双星座 + 1.6T 光模块量产</b>，构成<b>"政策+订单+技术"</b>三重共振。<b>建议作为主题仓位配置</b>（单只 ≤5%），采取"<b>分批建仓 + 龙头组合</b>"策略，目标 2026 年 <b>+30-50%</b> 收益。
+    </div>
+  </div>
+
+  <h3>7.1 多维度评分</h3>
+  <div class="score-board">
+    <div class="score"><div class="label">技术成熟度</div><div class="val" style="color:var(--orange)">5.0 / 10</div><div class="desc">⭐ 试验期</div></div>
+    <div class="score"><div class="label">政策催化</div><div class="val" style="color:var(--bull)">8.5 / 10</div><div class="desc">⭐ 写入报告</div></div>
+    <div class="score"><div class="label">估值水平</div><div class="val" style="color:var(--neutral)">5.5 / 10</div><div class="desc">⭐ 整体偏高</div></div>
+    <div class="score"><div class="label">业绩兑现</div><div class="val" style="color:var(--orange)">5.0 / 10</div><div class="desc">⭐ 部分兑现</div></div>
+    <div class="score"><div class="label">资金活跃度</div><div class="val" style="color:var(--bull)">8.0 / 10</div><div class="desc">⭐ 主题活跃</div></div>
+    <div class="score"><div class="label">订单确定性</div><div class="val" style="color:var(--bull)">7.5 / 10</div><div class="desc">⭐ 运营商</div></div>
+    <div class="score"><div class="label">综合评分</div><div class="val" style="color:var(--bull)">6.5 / 10</div><div class="desc">⭐⭐ 偏多</div></div>
+  </div>
+
+  <h3>7.2 三档操盘方案</h3>
+  <div class="strategy-grid">
+    <div class="strategy conservative">
+      <h4>🛡 保守型（风险厌恶）</h4>
+      <div class="target">目标：主设备龙头 + 长期持有</div>
+      <div class="price">建仓区间：<b>回调 -10%</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>5%</b></li>
+        <li>配置：中兴通讯 + 中国移动 + 中国卫通</li>
+        <li><b>止损位</b>：单只 -15%</li>
+        <li><b>止盈位</b>：分批 +50%/+100%</li>
+        <li>持有周期：12-24 个月</li>
+        <li>逻辑：龙头确定性 + 业绩兑现</li>
+      </ul>
+    </div>
+
+    <div class="strategy balanced">
+      <h4>⚖ 平衡型（推荐）</h4>
+      <div class="target">目标：5 家龙头组合 + 主题轮动</div>
+      <div class="price">建仓区间：<b>回调分批</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>10%</b></li>
+        <li>配置：中兴 25% + 中国卫通 20% + 信科移动 20% + 中际旭创 20% + 信维通信 15%</li>
+        <li><b>止损位</b>：组合 -10%</li>
+        <li><b>止盈位</b>：分批 +30%/+60%</li>
+        <li>持有周期：6-12 个月</li>
+        <li>逻辑：龙头组合 + 卫星互联网弹性</li>
+      </ul>
+    </div>
+
+    <div class="strategy aggressive">
+      <h4>⚡ 激进型（涨停板套利）</h4>
+      <div class="target">目标：政策催化 + 涨停板</div>
+      <div class="price">建仓区间：<b>政策窗口前</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>15%</b></li>
+        <li>配置：弹性标的（中兴 + 信科 + 中际旭创）</li>
+        <li><b>止损位</b>：单只 -8%</li>
+        <li><b>止盈位</b>：涨停后分批止盈</li>
+        <li>持有周期：1-3 个月</li>
+        <li>逻辑：事件驱动 + 短线博弈</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>7.3 关键买卖节奏</h3>
+  <div class="callout bull">
+    <strong>🟢 买入触发条件（任一满足）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>《十五五》6G 专项规划正式发布</li>
+      <li>6G <b>关键技术试验</b>突破（2026 完成）</li>
+      <li>3GPP Release 21 标准制定中<b>中国方案入选</b></li>
+      <li>运营商 <b>6G 大额招标</b>（如中国移动 5G 升级版）</li>
+      <li>卫星互联网 <b>1.6T 光模块</b>订单放量</li>
+      <li>太赫兹 <b>商用试点</b>突破</li>
+    </ul>
+  </div>
+  <div class="callout bear">
+    <strong>🔴 卖出/止损触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>股价跌破 <b>支撑位 -15%</b>，<b>减半仓</b></li>
+      <li>股价跌破 <b>支撑位 -25%</b>，<b>清仓离场</b></li>
+      <li>6G 试验 <b>延期超 6 个月</b></li>
+      <li>3GPP 标准 <b>未采用中国方案</b></li>
+      <li>卫星互联网 <b>商业化不及预期</b></li>
+      <li>核心公司 <b>公告"主营业务不涉"</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 8. 回报测算 ========== -->
+<section id="s8">
+  <h2><span class="num">08</span>回报测算与终极展望</h2>
+
+  <div class="callout purple">
+    <strong>📡 终极结论</strong>：6G 是 <b>21 世纪下一代通信制高点</b>。2026 年中国完成 6G 关键技术试验，2030 年规模化商用。从 5G 的 1 Gbps 到 6G 的 1 Tbps（1000 倍跃升），A 股市场上，<b>通信主设备 + 卫星互联网 + 光模块 + 太赫兹</b> 是确定性最高的环节，<b>2030 年板块有望迎来戴维斯双击</b>。
+  </div>
+
+  <h3>8.1 三阶段回报预测</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 短期（2026 当前）</h4>
+      <div class="body">
+        <p><b>主题炒作弹性</b>：已兑现多次</p>
+        <p><b>典型催化</b>：6G 试验、卫星组网</p>
+        <p><b>风险</b>：2026 商用远期，主题跑在前面</p>
+        <p><b>建议</b>：小仓位（≤10%）波段操作</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">💰</span> 中期（2027-2030）</h4>
+      <div class="body">
+        <p><b>营收增量</b>：6G 设备订单释放</p>
+        <p><b>板块业绩</b>：从 0 增至 <b>100-150 亿/年</b></p>
+        <p><b>估值溢价</b>：PE <b>35-50x</b>，板块冲击 <b>5000 亿</b></p>
+        <p><b>目标价</b>：<b>龙头 +50-100%</b></p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🚀</span> 长期（2030+ 商用）</h4>
+      <div class="body">
+        <p><b>2030</b>：首批 6G 网络部署</p>
+        <p><b>2035</b>：2 万亿$市场，6G 全面普及</p>
+        <p><b>2050</b>：6G 与 AI 深度融合</p>
+        <p><b>板块长期空间</b>：3-5 倍</p>
+        <p><b>终极价值</b>：万物智联时代</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.2 投资逻辑三阶段</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🥇</span> 第一阶段（2026-2027）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>主题投资</b></p>
+        <p><b>受益</b>：主设备 + 卫星互联网</p>
+        <p><b>预期</b>：板块 +30-50%</p>
+        <p><b>关键节点</b>：6G 试验完成</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🥈</span> 第二阶段（2028-2030）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>成长投资</b></p>
+        <p><b>受益</b>：光模块 + 太赫兹</p>
+        <p><b>预期</b>：板块 +50-100%</p>
+        <p><b>关键节点</b>：6G 商用元年</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🥉</span> 第三阶段（2030+）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>价值投资</b></p>
+        <p><b>受益</b>：6G 运营商 + 应用</p>
+        <p><b>预期</b>：板块 +200-500%</p>
+        <p><b>关键节点</b>：6G 全面普及</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.3 终极展望：6G = 下一代制高点</h3>
+  <div class="verdict bull">
+    <div class="rating bull">📡 6G = 下一代通信制高点 · 2 万亿美元市场</div>
+    <div class="horizon">2026 → 2030 商用元年</div>
+    <div class="logic">
+      <b>为什么是 6G</b>：① <b>1 Tbps 速度</b>（5G 的 100 倍）；② <b>< 0.1 ms 时延</b>（实时控制）；③ <b>空天地海全覆盖</b>；④ <b>通感一体化</b>（通信 + 感知）；⑤ <b>AI 原生</b>（智能调度）。<br><br>
+      <b>商业化路线</b>：2026 关键技术试验 → 2028 标准制定 → 2030 规模化商用，市场规模 <b>2 万亿美元</b>，相当于<b>再造一个全球 5G + 互联网市场</b>。<br><br>
+      <b>A 股机会</b>：20+ 龙头股覆盖通信主设备 + 卫星互联网 + 光模块 + 太赫兹全环节，<b>中国在 6G 专利申请上全球领先</b>，是 <b>A 股未来 5-10 年最确定的方向之一</b>。<br><br>
+      <b>投资哲学</b>：这是<b>人类进入万物智联时代的关键一步</b>，错过它 = 错过未来 30 年的最大红利。
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. 风险 ========== -->
+<section id="s9">
+  <h2><span class="num">09</span>风险提示与投资纪律</h2>
+
+  <h3>9.1 主要风险因素</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 技术与标准化风险</h4>
+      <div class="body">
+        <p><b>① 关键技术</b>：太赫兹 / RIS / ISAC 尚未完全成熟</p>
+        <p><b>② 国际标准</b>：3GPP 标准尚未冻结</p>
+        <p><b>③ 路线图</b>：可能调整</p>
+        <p><b>④ 频谱分配</b>：6GHz / 毫米波 / 太赫兹</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 商业化与时间表风险</h4>
+      <div class="body">
+        <p><b>① 5G 投资未完全回收</b>：6G 面临类似困境</p>
+        <p><b>② 杀手级应用</b>：尚未出现</p>
+        <p><b>③ 应用场景</b>：有限的商业需求</p>
+        <p><b>④ 投入产出比</b>：研发投入巨大</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 投资风险</h4>
+      <div class="body">
+        <p><b>① 估值泡沫</b>：部分公司 PE 100x+</p>
+        <p><b>② 业绩占比低</b>：多数公司涉 6G 营收 < 10%</p>
+        <p><b>③ 价格战</b>：5G 设备价格战延续</p>
+        <p><b>④ 高波动</b>：主题股急涨急跌</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📋</span> 投资纪律建议</h4>
+      <div class="body">
+        <p><b>① 仓位管理</b>：单一龙头 ≤ 5%，主题仓位 ≤ 15%</p>
+        <p><b>② 止损纪律</b>：跌破 -15% 立即减仓</p>
+        <p><b>③ 跟踪试验</b>：每季关注 6G 试验进度</p>
+        <p><b>④ 业绩兑现</b>：跟踪招标与订单</p>
+        <p><b>⑤ 心理建设</b>：长期赛道，避免追涨</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bear">
+    <strong>🚨 最重要纪律</strong>：6G 是 <b>5-10 年长期赛道</b>，<b>短期主题波动剧烈</b>。<b>必须</b>坚持：<br>
+    • <b>组合配置</b>（不重仓单只），分散至 5-8 家龙头<br>
+    • <b>分批建仓</b>（主题回调 10%+ 再加仓）<br>
+    • <b>严格止损</b>（跌破 -15% 立即减仓）<br>
+    • <b>跟踪里程碑</b>（2026 试验 / 2028 标准 / 2030 商用）<br>
+    • <b>耐心持有</b>：这是下一代通信制高点的关键赛道，<b>不要被短期波动影响长期判断</b>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，<b>不构成任何投资建议</b>。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询，市场有风险，投资需谨慎。
+  </div>
+  © 2026 6G 通信：下一代制高点 全产业链投研分析 · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
