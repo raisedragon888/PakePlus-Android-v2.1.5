@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可控核聚变：终极能源赛道 全产业链投研分析</title>
+<style>
+:root{
+  --bg:#0a0f1e;
+  --bg-2:#0f1729;
+  --panel:#15203b;
+  --panel-2:#1c2a4a;
+  --line:#2a3656;
+  --text:#e8eef9;
+  --muted:#94a3c1;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+.wrap{max-width:1500px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#15203b 0%,#0a0f1e 60%,#1c2a4a 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(167,139,250,.20),transparent 70%);border-radius:50%}
+header.hero::after{content:"";position:absolute;bottom:-120px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(94,234,212,.15),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;position:relative}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px;position:relative}
+header.hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;position:relative}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:36px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 34px;margin-bottom:22px}
+section h2{font-size:21px;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--neutral);margin:18px 0 10px;font-weight:600}
+section h4{font-size:14px;color:var(--accent-2);margin:14px 0 8px}
+section p{color:var(--text);margin-bottom:10px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.kpi.bull::before{background:var(--bull)}
+.kpi.bear::before{background:var(--bear)}
+.kpi.neutral::before{background:var(--neutral)}
+.kpi.purple::before{background:var(--purple)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:20px;font-weight:700;color:var(--accent)}
+.kpi.bull .val{color:var(--bull)}
+.kpi.bear .val{color:var(--bear)}
+.kpi.neutral .val{color:var(--neutral)}
+.kpi.purple .val{color:var(--purple)}
+.kpi .delta{font-size:11px;margin-top:4px;color:var(--muted)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;table-layout:fixed}
+table.data th,table.data td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;white-space:nowrap;font-size:12.5px;letter-spacing:.2px}
+table.data th.wrap{white-space:normal;font-size:12px;line-height:1.3}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:center;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace;white-space:nowrap}
+table.data td.nowrap{white-space:nowrap}
+table.data td.bull{color:var(--bull);font-weight:600}
+table.data td.bear{color:var(--bear);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+table.data col{display:table-column}
+table.data td .tag{margin:0 auto}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.stack-bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center;margin:6px 0}
+.stack-bar-row .name{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack-bar{height:26px;border-radius:4px;overflow:hidden;background:var(--panel-2);display:flex;border:1px solid var(--line)}
+.stack-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a0f1e;font-weight:600;transition:width .3s;white-space:nowrap;padding:0 6px;min-width:fit-content}
+.stack-bar-row .val{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.bull{border-left-color:var(--bull);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent)}
+.callout.bear{border-left-color:var(--bear);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.callout.purple{border-left-color:var(--purple);background:linear-gradient(90deg,rgba(167,139,250,.08),transparent)}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2);font-weight:500}
+.tag.bull{background:rgba(52,211,153,.15);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.15);color:var(--bear)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--neutral)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.bull{border-left:3px solid var(--bull)}
+.card.bear{border-left:3px solid var(--bear)}
+.card.neutral{border-left:3px solid var(--neutral)}
+.card.purple{border-left:3px solid var(--purple)}
+.card h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h4 .icon{font-size:16px}
+.card .body{font-size:12.5px;color:var(--muted);line-height:1.7}
+.card .body p{margin-bottom:6px}
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.strategy{background:var(--panel-2);border-radius:10px;padding:18px;border:1px solid var(--line)}
+.strategy.aggressive{border-top:3px solid var(--bull)}
+.strategy.balanced{border-top:3px solid var(--neutral)}
+.strategy.conservative{border-top:3px solid var(--bear)}
+.strategy h4{font-size:14px;color:var(--accent);margin-bottom:8px}
+.strategy .target{font-size:11px;color:var(--muted);margin-bottom:4px}
+.strategy .price{font-size:18px;font-weight:700;color:var(--accent);margin:6px 0}
+.score-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.score{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.score .label{font-size:11px;color:var(--muted);margin-bottom:4px}
+.score .val{font-size:22px;font-weight:700}
+.score .desc{font-size:10px;color:var(--muted);margin-top:2px}
+.verdict{background:linear-gradient(135deg,var(--panel-2),var(--bg-2));border:2px solid var(--accent);border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+.verdict.bull{border-color:var(--bull)}
+.verdict.bear{border-color:var(--bear)}
+.verdict.neutral{border-color:var(--neutral)}
+.verdict .rating{font-size:32px;font-weight:700;color:var(--accent)}
+.verdict .rating.bull{color:var(--bull)}
+.verdict .rating.bear{color:var(--bear)}
+.verdict .rating.neutral{color:var(--neutral)}
+.verdict .horizon{font-size:13px;color:var(--muted);margin:8px 0}
+.verdict .logic{font-size:13px;color:var(--text);max-width:780px;margin:10px auto;text-align:left;line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:22px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>可控核聚变 ⚛️ 终极能源赛道 · 全产业链投研分析</h1>
+  <div class="sub">基于全球聚变实验进展 + A 股产业链 + 商业化时间表 · 站在基金经理视角 · 涵盖技术路线、龙头对比、估值定价、操盘策略</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>⚛️ 终极能源</span>
+    <span>🚀 EAST 1 亿度 1066 秒</span>
+    <span>🏗️ BEST 2027 建成</span>
+    <span>💡 2050 商用</span>
+    <span>💼 操盘建议</span>
+    <span>🔬 12 家 A 股龙头</span>
+    <span>⭐ 主题稀缺</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、赛道速览：核心数据与里程碑</a></li>
+    <li><a href="#s2">二、全球聚变实验格局与中国突破</a></li>
+    <li><a href="#s3">三、产业链全景与上中下游</a></li>
+    <li><a href="#s4">四、A 股 12 家龙头深度对比</a></li>
+    <li><a href="#s5">五、技术路线与商业化时间表</a></li>
+    <li><a href="#s6">六、估值定价与情景分析</a></li>
+    <li><a href="#s7">七、操盘策略与买卖节奏</a></li>
+    <li><a href="#s8">八、回报测算与终极展望</a></li>
+    <li><a href="#s9">九、风险提示与投资纪律</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 速览 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>赛道速览：核心数据与里程碑</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi neutral"><div class="label">全球市场规模(2024)</div><div class="val">≈ 3,313 亿美元</div><div class="delta">CAGR ~12%</div></div>
+    <div class="kpi bull"><div class="label">2030 全球市场</div><div class="val">≈ 5,000 亿美元</div><div class="delta">⭐ IEA 预测</div></div>
+    <div class="kpi purple"><div class="label">2035 中国装置市场</div><div class="val">≈ 2.26 万亿</div><div class="delta">⭐ 中信证券</div></div>
+    <div class="kpi bull"><div class="label">2050 全球市场</div><div class="val">≈ 40 万亿美元</div><div class="delta">⭐ IAEA 远景</div></div>
+    <div class="kpi neutral"><div class="label">EAST 世界纪录</div><div class="val">1 亿度 1066 秒</div><div class="delta">2025-01-20 合肥</div></div>
+    <div class="kpi bull"><div class="label">BEST 建成</div><div class="val">2027 年</div><div class="delta">⭐ 2030 发电</div></div>
+  </div>
+
+  <h3>1.1 关键事件节奏</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:58%"></colgroup>
+    <thead><tr><th>时点</th><th>事件</th><th>里程碑意义</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nowrap">2025-01-20</td>
+        <td><b>EAST 1 亿度 1066 秒</b></td>
+        <td>中国聚变从"科学"到"工程"的<b>历史转折点</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap">2025-10</td>
+        <td>BEST 主机部件研制成功</td>
+        <td>紧凑型聚变实验装置进入新阶段</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-01</td>
+        <td>BEST 目标发布</td>
+        <td>2030 年率先实现聚变净功率增益，"点亮第一盏灯"</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-03</td>
+        <td>中国加入《三倍核能宣言》</td>
+        <td>2050 年全球核能装机翻 3 倍</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-06-29</td>
+        <td><b>CRAFT 环向场磁体验收</b></td>
+        <td>582 吨超导磁体 100% 国产化，<b>联创光电涨停</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-06</td>
+        <td>ITER 第六次延期</td>
+        <td>首次等离子体推迟至 <b>2033-2034</b>，预算飙至 250 亿欧元</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple">
+    <strong>⚛️ 核心结论</strong>：可控核聚变是 <b>21 世纪最具颠覆性的终极能源赛道</b>。中国通过 <b>EAST → BEST → CFETR</b> 三步走战略，<b>目标 2030 发电演示</b>、<b>2035 并网</b>、<b>2050 商用</b>，节奏明显快于 ITER。A 股市场上，<b>高温超导带材 + 超导磁体 + 真空部件</b> 是产业链三大核心环节，孕育 <b>12+ 龙头股</b> 的主题机会。
+  </div>
+</section>
+
+<!-- ========== 2. 全球格局 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>全球聚变实验格局与中国突破</h2>
+
+  <h3>2.1 中国三步走战略</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🔬</span> EAST（已实现）</h4>
+      <div class="body">
+        <p><b>全超导托卡马克核聚变实验装置</b></p>
+        <p>位于安徽合肥，2006 年首次放电</p>
+        <p><b>2025-01-20</b>：1 亿度下 1066 秒高质量燃烧（世界纪录）</p>
+        <p>累计 <b>15 万+ 次实验</b>、<b>2000+ 专利</b></p>
+        <p><b>状态</b>：基础科学验证完成</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🏗️</span> BEST（建设中）</h4>
+      <div class="body">
+        <p><b>紧凑型聚变能实验装置</b></p>
+        <p>同样位于安徽合肥，EAST 的下一代</p>
+        <p><b>2025-10</b>：杜瓦底座研制成功交付</p>
+        <p><b>2027 年</b>：整体装置初步建成</p>
+        <p><b>2030 年</b>：率先实现聚变净功率增益（Q > 1）</p>
+        <p><b>状态</b>：工程化验证中</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⚛️</span> CFETR（远景）</h4>
+      <div class="body">
+        <p><b>中国聚变工程实验堆</b></p>
+        <p>2035 年左右建成</p>
+        <p>尝试核聚变发电</p>
+        <p>2045 年示范堆</p>
+        <p>2050 年前后<b>全面商用</b></p>
+        <p><b>状态</b>：规划论证中</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2.2 全球主要实验项目对比</h3>
+  <table class="data">
+    <colgroup><col style="width:15%"><col style="width:18%"><col style="width:20%"><col style="width:23%"><col style="width:24%"></colgroup>
+    <thead><tr><th>项目</th><th>国家</th><th>技术路线</th><th>关键时间表</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>EAST → BEST</b></td>
+        <td>🇨🇳 中国</td>
+        <td>紧凑型高场</td>
+        <td>2027 建成 / 2030 发电</td>
+        <td><b>进度最快</b></td>
+      </tr>
+      <tr>
+        <td><b>ITER</b></td>
+        <td>🌍 7 国合作</td>
+        <td>大型托卡马克</td>
+        <td>2033-2034 等离子体 / 2040 全功率</td>
+        <td>第<b>六次延期</b>，预算 250 亿欧元</td>
+      </tr>
+      <tr>
+        <td><b>SPARC</b></td>
+        <td>🇺🇸 CFS</td>
+        <td>高温超导托卡马克</td>
+        <td>2027 首次等离子体</td>
+        <td>完成 75%，进度领先</td>
+      </tr>
+      <tr>
+        <td><b>Helion Orion</b></td>
+        <td>🇺🇸 Helion</td>
+        <td>FRC（场反位形）</td>
+        <td>2028 向微软供电 50MW</td>
+        <td>估值 155 亿美元</td>
+      </tr>
+      <tr>
+        <td><b>星火一号</b></td>
+        <td>🇨🇳 南昌</td>
+        <td>聚变-裂变混合</td>
+        <td>2030 发电 / Q > 30</td>
+        <td>投资 200 亿</td>
+      </tr>
+      <tr>
+        <td><b>环流三号</b></td>
+        <td>🇨🇳 成都</td>
+        <td>托卡马克升级</td>
+        <td>2026 完成改造</td>
+        <td>投资 60 亿</td>
+      </tr>
+      <tr>
+        <td><b>星环聚能 SUNIST-2</b></td>
+        <td>🇨🇳 西安</td>
+        <td>球形托卡马克</td>
+        <td>2027-2028 商业示范堆</td>
+        <td>已完成融资</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>⚠ ITER 第六次延期（2026-06 公布）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>首次等离子体放电：<b>2025 → 2033-2034</b>（推迟 8-9 年）</li>
+      <li>氘-氚实验：推迟到 <b>2039 年</b></li>
+      <li>全功率运行：<b>2040 年以后</b></li>
+      <li>预算：从 50 亿欧元飙升至 <b>250 亿欧元</b></li>
+      <li><b>意义</b>：中国走紧凑型路线（BEST）反而<b>领先 ITER 接近 10 年</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 3. 产业链 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>产业链全景与上中下游</h2>
+
+  <h3>3.1 产业链价值分布</h3>
+  <div class="chart-box">
+    <div class="chart-title">可控核聚变产业链价值分布（2030-2035）</div>
+    <div class="stack-bar-row">
+      <div class="name">托卡马克装置主机</div>
+      <div class="stack-bar"><div style="width:30%;background:linear-gradient(90deg,#5eead4,#60a5fa)">≈ 30% 总成本</div></div>
+      <div class="val">⭐ 最大</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">真空室内部件</div>
+      <div class="stack-bar"><div style="width:28%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">≈ 3,000 亿</div></div>
+      <div class="val">第一壁/偏滤器</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">高温超导带材</div>
+      <div class="stack-bar"><div style="width:25%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">≈ 2,740.8 亿</div></div>
+      <div class="val">⭐ 核心</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">低温制冷系统</div>
+      <div class="stack-bar"><div style="width:10%;background:linear-gradient(90deg,#fb923c,#fbbf24)">≈ 8-10%</div></div>
+      <div class="val">氦制冷</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">电源/控制系统</div>
+      <div class="stack-bar"><div style="width:7%;background:linear-gradient(90deg,#f87171,#fb923c)">≈ 5-7%</div></div>
+      <div class="val">辅助</div>
+    </div>
+    <div class="chart-note">资料来源：中信证券《可控核聚变》研报（2030-2035 年间预测）。</div>
+  </div>
+
+  <h3>3.2 上中下游分布</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">⬆</span> 上游：核心材料</h4>
+      <div class="body">
+        <p><b>高温超导带材（2G-HTS）</b></p>
+        <p>• <b>永鼎股份</b>（东部超导，YBCO 带材）</p>
+        <p>• <b>上海超导</b>（非上市，PLD 工艺）</p>
+        <p>• <b>西部超导</b>（NbTi 线材，ITER 供应商）</p>
+        <p><b>钨铜偏滤器 / 第一壁</b></p>
+        <p>• <b>安泰科技</b>（子公司安泰中科）</p>
+        <p>• 国光电气（真空部件）</p>
+        <p><b>需求</b>：年需 3000 公里带材（全球）</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> 中游：核心设备</h4>
+      <div class="body">
+        <p><b>超导磁体系统</b></p>
+        <p>• <b>联创光电</b>（参股 40% 联创超导，磁体 28% 成本占比）</p>
+        <p>• 中核集团（聚变-裂变混合堆）</p>
+        <p><b>低温制冷系统</b></p>
+        <p>• <b>联创光电</b>（首单大功率制冷项目）</p>
+        <p>• 兰石重装（真空容器）</p>
+        <p><b>电源系统</b></p>
+        <p>• 国电南瑞（脉冲电源）</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⚛️</span> 下游：实验堆 + 发电</h4>
+      <div class="body">
+        <p><b>EAST / BEST / CFETR</b>（中科院）</p>
+        <p><b>星火一号</b>（中核集团 + 南昌）</p>
+        <p><b>环流三号</b>（中核 585 所）</p>
+        <p><b>CRAFT 设施</b>（聚变堆主机）</p>
+        <p><b>商业发电运营</b>（2050 后）</p>
+        <p><b>民营聚变企业</b></p>
+        <p>• 新奥聚变（估值 106 亿，国内第一）</p>
+        <p>• 星环聚能、能量奇点、能聚变等</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. A股龙头 ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>A 股 12 家龙头深度对比</h2>
+
+  <h3>4.1 龙头综合卡片</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:10%"><col style="width:22%"><col style="width:18%"><col style="width:18%"><col style="width:18%"></colgroup>
+    <thead>
+      <tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心产品</th><th>2026 表现</th><th>推荐度</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.10)">
+        <td><b>⭐ 永鼎股份</b></td><td>600105</td>
+        <td>上游超导带材</td>
+        <td>第二代 YBCO 高温超导带材</td>
+        <td>多次涨停</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td><b>联创光电</b></td><td>600363</td>
+        <td>中游超导磁体</td>
+        <td>高温超导磁体 + 激光</td>
+        <td>涨停板（6/29）</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>安泰科技</td><td>000969</td>
+        <td>上游钨铜部件</td>
+        <td>钨铜偏滤器 + 第一壁</td>
+        <td>3 连板</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>西部超导</td><td>688122</td>
+        <td>上游超导线材</td>
+        <td>NbTi 超导线材（ITER 独家）</td>
+        <td>涨超 10%</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>国光电气</td><td>688776</td>
+        <td>中游真空部件</td>
+        <td>真空器件 + 偏滤器</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>百利电气</td><td>600468</td>
+        <td>中游特种设备</td>
+        <td>超导磁体配套设备</td>
+        <td>涨停</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>兰石重装</td><td>600169</td>
+        <td>中游压力容器</td>
+        <td>核聚变真空容器</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>国电南瑞</td><td>600406</td>
+        <td>中游电源控制</td>
+        <td>聚变脉冲电源系统</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>东方电气</td><td>600875</td>
+        <td>下游主机</td>
+        <td>聚变发电汽轮机（远景）</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>上海电气</td><td>601727</td>
+        <td>下游主机</td>
+        <td>核电 + 远景聚变</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>弘讯科技</td><td>603015</td>
+        <td>中游控制</td>
+        <td>聚变控制系统</td>
+        <td>跟涨</td>
+        <td class="num bear"><b>★★☆☆☆</b></td>
+      </tr>
+      <tr>
+        <td>中国核电</td><td>601985</td>
+        <td>下游运营</td>
+        <td>聚变-裂变混合（远景）</td>
+        <td>跟涨</td>
+        <td class="num bear"><b>★★☆☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 核心龙头深度分析</h3>
+
+  <h4>① 永鼎股份（600105）— 上游超导材料龙头</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏆</span> 卡位优势</h4>
+      <div class="body">
+        <p><b>子公司东部超导</b>主营第二代高温超导带材（YBCO），产能国内第一</p>
+        <p><b>良率提升至 90%+</b>，持续扩充产能</p>
+        <p>已与可控核聚变客户签订超导带材合同并按时交货</p>
+        <p>产品应用于 <b>EAST 装置、星环聚能 SUNIST-2</b> 等</p>
+        <p>全球需求 <b>3000 公里/年</b>，国内 <b>1500+ 公里</b></p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚠</span> 风险点</h4>
+      <div class="body">
+        <p>2023 年东部超导营收占比不足 <b>1%</b></p>
+        <p>子公司处于<b>亏损状态</b></p>
+        <p>公司整体毛利率仅 <b>17.96%</b></p>
+        <p>主业为光通信，核聚变业务<b>业绩贡献有限</b></p>
+        <p>总市值约 <b>449 亿</b>，主题溢价显著</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>② 联创光电（600363）— 中游超导磁体龙头</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏆</span> 三大业务协同</h4>
+      <div class="body">
+        <p><b>激光业务</b>：2025 营收 3.37 亿（+328%），万瓦激光 + 激光反无人机</p>
+        <p><b>高温超导 "3+N" 矩阵</b>：商业航天电磁弹射、磁控硅单晶、感应加热</p>
+        <p><b>可控核聚变</b>：与中核聚变（成都）合作 <b>100MW 项目</b>，工程总投资 <b>200 亿+</b></p>
+        <p>磁体价值占工程验证堆成本 <b>~28%</b></p>
+        <p>2024-2026 订单约 <b>5 亿元</b></p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚠</span> 风险点</h4>
+      <div class="body">
+        <p><b>联创超导仅参股 40%</b>，非控股</p>
+        <p>2026-07-01 公司公告：<b>"主营业务不涉及高温超导、可控核聚变"</b></p>
+        <p>联创超导 2025 净利润 <b>-2,464.53 万元</b>（亏损）</p>
+        <p>核聚变业务<b>不属于公司主营业务</b></p>
+        <p>市场预期与公司披露存在<b>明显落差</b></p>
+      </div>
+    </div>
+  </div>
+
+  <h4>③ 安泰科技（000969）— 上游钨铜部件供应商</h4>
+  <div class="callout bull">
+    <strong>🏆 全球可控核聚变核心供应商</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>子公司安泰中科</b>：是全球可控核聚变装置核心供应商，全系列涉钨产品（钨铜偏滤器部件）</li>
+      <li><b>参与 EAST 装置和 ITER 国际项目</b>，技术储备深厚</li>
+      <li><b>2026/06/29</b>：CRAFT 环向场磁体验收 + 中心螺管测试，联创光电涨停、安泰科技 3 连板</li>
+      <li>2025 年股价累计涨 <b>13.36%</b></li>
+    </ul>
+  </div>
+
+  <h3>4.3 板块 5 大龙头排名</h3>
+  <table class="data">
+    <colgroup><col style="width:10%"><col style="width:14%"><col style="width:14%"><col style="width:38%"><col style="width:24%"></colgroup>
+    <thead><tr><th>排名</th><th>公司</th><th>代码</th><th>投资亮点</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.12)">
+        <td class="num nowrap"><b>🥇 1</b></td>
+        <td><b>⭐ 永鼎股份</b></td><td>600105</td>
+        <td>超导带材国内第一 + EAST 供应商 + 产能持续扩张</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td class="num nowrap"><b>🥈 2</b></td>
+        <td>联创光电</td><td>600363</td>
+        <td>激光 + 超导磁体双轮驱动 + 星火一号供应商</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>🥉 3</b></td>
+        <td>安泰科技</td><td>000969</td>
+        <td>全球钨铜偏滤器独家 + ITER 长期供应商</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>4</b></td>
+        <td>西部超导</td><td>688122</td>
+        <td>NbTi 超导线材 + 唯一商业化 + 估值溢价</td>
+        <td class="num bull nowrap"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap"><b>5</b></td>
+        <td>国光电气</td><td>688776</td>
+        <td>真空器件 + 偏滤器 + 中游设备</td>
+        <td class="num neutral nowrap"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 5. 技术路线 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>技术路线与商业化时间表</h2>
+
+  <h3>5.1 三大主流技术路线</h3>
+  <table class="data">
+    <colgroup><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>
+    <thead><tr><th>维度</th><th>磁约束托卡马克</th><th>惯性约束 (ICF)</th><th>FRC（场反位形）</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>原理</td>
+        <td>磁场约束高温等离子体</td>
+        <td>激光/粒子束轰击靶丸</td>
+        <td>无中心磁场的紧凑位形</td>
+      </tr>
+      <tr>
+        <td>代表项目</td>
+        <td>EAST / BEST / ITER / SPARC</td>
+        <td>NIF（美国国家点火装置）</td>
+        <td>Helion Orion / TAE</td>
+      </tr>
+      <tr>
+        <td>成熟度</td>
+        <td><b>最高（主流路线）</b></td>
+        <td>中等（Q > 1 已实现）</td>
+        <td>早期（商业化探索）</td>
+      </tr>
+      <tr>
+        <td>商业化时间</td>
+        <td>2035-2050</td>
+        <td>2040-2055</td>
+        <td>2028-2035（最快）</td>
+      </tr>
+      <tr>
+        <td>关键瓶颈</td>
+        <td>高温超导材料 / 第一壁</td>
+        <td>激光-电能转换效率低</td>
+        <td>等离子体稳定性</td>
+      </tr>
+      <tr>
+        <td>中国态度</td>
+        <td><b>主推 + 全力投入</b></td>
+        <td>辅助路线</td>
+        <td>民营参与（新奥等）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 中国主力装置时间表</h3>
+  <div class="chart-box">
+    <div class="chart-title">中国可控核聚变项目路线图（2025-2050）</div>
+    <div class="stack-bar-row">
+      <div class="name">2025（已实现）</div>
+      <div class="stack-bar"><div style="width:18%;background:linear-gradient(90deg,#34d399,#5eead4)">EAST 1 亿度 1066 秒</div></div>
+      <div class="val">✅ 科学验证</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2026（关键期）</div>
+      <div class="stack-bar"><div style="width:25%;background:linear-gradient(90deg,#60a5fa,#5eead4)">CRAFT 建成 + 环流三号改造</div></div>
+      <div class="val">⭐ 设备订单</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2027（拐点）</div>
+      <div class="stack-bar"><div style="width:35%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">BEST 主体建成 + 星环示范堆</div></div>
+      <div class="val">⭐ 工程化</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030（目标）</div>
+      <div class="stack-bar"><div style="width:50%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">BEST 发电 + 星火一号 Q>30</div></div>
+      <div class="val">⭐⭐ 第一度电</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2035（远景）</div>
+      <div class="stack-bar"><div style="width:70%;background:linear-gradient(90deg,#fb923c,#fbbf24)">CFETR 建成 + 并网</div></div>
+      <div class="val">⭐⭐⭐ 商业发电</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2050（终极）</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#f87171,#fb923c)">全面商用 + 40 万亿市场</div></div>
+      <div class="val">🚀 终极能源</div>
+    </div>
+    <div class="chart-note">资料来源：全国政协委员段旭如、聚变能科技与产业大会 2026、中信证券。</div>
+  </div>
+
+  <h3>5.3 商业化三阶段路径</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:28%"><col style="width:24%"><col style="width:30%"></colgroup>
+    <thead><tr><th>阶段</th><th>时间窗口</th><th>市场状态</th><th>A 股收益预期</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>① 概念导入期</b></td>
+        <td>2026 当前</td>
+        <td>BEST 建成 + CRAFT 验收 + 政策加码</td>
+        <td>主题溢价 +50%，已兑现多次涨停</td>
+      </tr>
+      <tr>
+        <td><b>② 工程化期</b></td>
+        <td>2027-2030</td>
+        <td>主机订单释放 + 超导带材量产</td>
+        <td>订单开始放量，业绩兑现</td>
+      </tr>
+      <tr>
+        <td><b>③ 商业回报期</b></td>
+        <td>2030+</td>
+        <td>发电演示 + 电网接入</td>
+        <td>新增长曲线贡献 <b>5-20% 营收</b></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 6. 估值 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>估值定价与情景分析</h2>
+
+  <h3>6.1 板块整体估值锚定</h3>
+  <div class="grid-3">
+    <div class="card neutral">
+      <h4><span class="icon">📐</span> PE 估值（主题溢价）</h4>
+      <div class="body">
+        <p>2027E 板块净利 <b>30 亿+</b></p>
+        <p>合理 PE：<b>50-80x</b>（含主题溢价）</p>
+        <p>对应市值：<b>1500-2400 亿</b></p>
+        <p><b>结论</b>：当前市值基本反映中性预期</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">🔮</span> SOTP 估值（分部加总）</h4>
+      <div class="body">
+        <p>现有主业（光通信/激光等）：<b>600 亿</b></p>
+        <p>高温超导带材（2030E）：<b>500-800 亿</b></p>
+        <p>超导磁体（2030E）：<b>400-600 亿</b></p>
+        <p><b>合理市值</b>：<b>1500-2000 亿</b></p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⚡</span> 重置成本（Safety Net）</h4>
+      <div class="body">
+        <p>高温超导带材 <b>2740 亿</b>（2030-2035）</p>
+        <p>真空室内部件 <b>3000 亿+</b></p>
+        <p>磁体系统 <b>530 亿</b>（2035 年均）</p>
+        <p><b>结论</b>：长期价值底线</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <strong>🎯 估值结论</strong>：当前 12 家龙头整体市值约 <b>1500-2000 亿</b>，已<b>部分反映主题溢价</b>。后续上涨需依赖：① BEST 2027 建成里程碑；② 星火一号 2030 发电演示；③ 全球订单兑现。板块整体 <b>5 年空间 2-3 倍</b>。
+  </div>
+
+  <h3>6.2 三档情景推演（板块整体）</h3>
+  <div class="grid-3">
+    <div class="card bear">
+      <h4><span class="icon">📉</span> 悲观情景（概率 30%）</h4>
+      <div class="body">
+        <p><b>假设</b>：ITER 继续延期 + 私营聚变失败 + 主题退潮</p>
+        <p>板块 2026E 净利：<b>10 亿</b></p>
+        <p>目标估值：<b>30-40x</b></p>
+        <p>板块总市值：<b>300-400 亿</b></p>
+        <p>触发：BEST 延期 + 主业恶化</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📊</span> 中性情景（概率 50%）</h4>
+      <div class="body">
+        <p><b>假设</b>：BEST 2027 建成 + CRAFT 全面交付</p>
+        <p>板块 2026E 净利：<b>20 亿</b></p>
+        <p>目标估值：<b>50-70x</b></p>
+        <p>板块总市值：<b>1000-1400 亿</b></p>
+        <p>触发：CRAFT 验收 + 超导订单</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 乐观情景（概率 20%）</h4>
+      <div class="body">
+        <p><b>假设</b>：2030 发电演示成功 + 全球订单爆发</p>
+        <p>板块 2026E 净利：<b>30 亿+</b></p>
+        <p>目标估值：<b>80-120x</b></p>
+        <p>板块总市值：<b>2400-3600 亿</b></p>
+        <p>触发：聚变发电 + 海外订单</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. 操盘策略 ========== -->
+<section id="s7">
+  <h2><span class="num">07</span>操盘策略与买卖节奏</h2>
+
+  <!-- 评级 -->
+  <div class="verdict bull">
+    <div class="rating bull">⚛️ 主题 + 政策双驱动 · 高弹性标的</div>
+    <div class="horizon">12 个月投资视角</div>
+    <div class="logic">
+      可控核聚变是 <b>A 股最具想象空间的终极能源赛道</b>。当前中国 <b>EAST 已实现 1 亿度 1066 秒</b>，<b>BEST 2027 建成</b>，<b>2030 发电演示</b>，节奏<b>领先全球</b>。<b>建议作为主题仓位配置</b>（单只 ≤5%），采取"<b>分批建仓 + 主题轮动</b>"策略，目标 2026 年 <b>+30-50%</b> 收益。
+    </div>
+  </div>
+
+  <!-- 评分 -->
+  <h3>7.1 多维度评分</h3>
+  <div class="score-board">
+    <div class="score"><div class="label">技术成熟度</div><div class="val" style="color:var(--bull)">7.0 / 10</div><div class="desc">EAST 验证完成</div></div>
+    <div class="score"><div class="label">政策催化</div><div class="val" style="color:var(--bull)">8.5 / 10</div><div class="desc">《三倍核能》</div></div>
+    <div class="score"><div class="label">估值水平</div><div class="val" style="color:var(--bull)">7.0 / 10</div><div class="desc">合理溢价</div></div>
+    <div class="score"><div class="label">业绩兑现</div><div class="val" style="color:var(--orange)">4.5 / 10</div><div class="desc">业绩占比低</div></div>
+    <div class="score"><div class="label">资金活跃度</div><div class="val" style="color:var(--bull)">8.0 / 10</div><div class="desc">涨停频发</div></div>
+    <div class="score"><div class="label">商业化进度</div><div class="val" style="color:var(--orange)">4.0 / 10</div><div class="desc">距发电仍远</div></div>
+    <div class="score"><div class="label">综合评分</div><div class="val" style="color:var(--bull)">6.5 / 10</div><div class="desc">⭐ 偏多</div></div>
+  </div>
+
+  <h3>7.2 三档操盘方案</h3>
+  <div class="strategy-grid">
+    <div class="strategy conservative">
+      <h4>🛡 保守型（风险厌恶）</h4>
+      <div class="target">目标：龙头公司 + 长期持有</div>
+      <div class="price">建仓区间：<b>回调 -10%</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>3%</b></li>
+        <li>配置：永鼎 + 安泰 + 西部超导</li>
+        <li><b>止损位</b>：单只 -15%</li>
+        <li><b>止盈位</b>：分批 +50%/+100%</li>
+        <li>持有周期：12-24 个月</li>
+        <li>逻辑：龙头确定性 + 主题稀缺</li>
+      </ul>
+    </div>
+
+    <div class="strategy balanced">
+      <h4>⚖ 平衡型（推荐）</h4>
+      <div class="target">目标：龙头组合 + 主题轮动</div>
+      <div class="price">建仓区间：<b>5 家龙头分批</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>8%</b></li>
+        <li>配置：永鼎 30% + 联创 25% + 安泰 20% + 西部 15% + 国光 10%</li>
+        <li><b>止损位</b>：组合 -10%</li>
+        <li><b>止盈位</b>：分批 +30%/+60%</li>
+        <li>持有周期：6-12 个月</li>
+        <li>逻辑：龙头组合 + 主题博弈</li>
+      </ul>
+    </div>
+
+    <div class="strategy aggressive">
+      <h4>⚡ 激进型（涨停板套利）</h4>
+      <div class="target">目标：政策催化 + 涨停板</div>
+      <div class="price">建仓区间：<b>政策窗口前</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>15%</b></li>
+        <li>配置：弹性标的（永鼎 + 联创）</li>
+        <li><b>止损位</b>：单只 -8%</li>
+        <li><b>止盈位</b>：涨停后分批止盈</li>
+        <li>持有周期：1-3 个月</li>
+        <li>逻辑：事件驱动 + 短线博弈</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>7.3 关键买卖节奏</h3>
+  <div class="callout bull">
+    <strong>🟢 买入触发条件（任一满足）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>BEST 装置 <b>2027 年主体建成</b>（关键里程碑）</li>
+      <li>星火一号 <b>2030 发电演示</b></li>
+      <li>CRAFT 设施 <b>2026 全面建成</b> 验收</li>
+      <li>国家发布 <b>聚变能专项规划</b></li>
+      <li>高温超导带材 <b>大额订单公告</b>（如 ITER / SPARC）</li>
+      <li>北向资金 <b>净流入</b>，单周 > 5 亿</li>
+    </ul>
+  </div>
+  <div class="callout bear">
+    <strong>🔴 卖出/止损触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>股价跌破 <b>支撑位 -15%</b>，<b>减半仓</b></li>
+      <li>股价跌破 <b>支撑位 -25%</b>，<b>清仓离场</b></li>
+      <li>BEST 项目 <b>延期超 6 个月</b></li>
+      <li>ITER 项目 <b>再次延期</b></li>
+      <li>全球订单 <b>低于预期</b></li>
+      <li>公司公告 <b>主营业务不涉核聚变</b>（如联创光电 2026/07 公告事件）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 8. 回报测算 ========== -->
+<section id="s8">
+  <h2><span class="num">08</span>回报测算与终极展望</h2>
+
+  <div class="callout purple">
+    <strong>⚛️ 终极结论</strong>：可控核聚变是 <b>21 世纪最具颠覆性的终极能源</b>。2026 是"<b>政策+技术+资本</b>"三重共振的产业化拐点。中国通过 <b>EAST → BEST → CFETR</b> 三步走战略，节奏<b>领先全球</b>。A 股市场上，<b>上游材料 + 中游设备</b> 是确定性最高的环节，<b>2030 年板块有望迎来戴维斯双击</b>。
+  </div>
+
+  <h3>8.1 三阶段回报预测</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 短期（2026 当前）</h4>
+      <div class="body">
+        <p><b>主题炒作弹性</b>：已兑现多次涨停</p>
+        <p><b>典型催化</b>：CRAFT 验收、聚变大会、《三倍核能》</p>
+        <p><b>风险</b>：纯主题，缺乏业绩支撑</p>
+        <p><b>建议</b>：小仓位（≤5%）波段操作</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">💰</span> 中期（2027-2030）</h4>
+      <div class="body">
+        <p><b>营收增量</b>：超导带材 / 磁体订单释放</p>
+        <p><b>板块业绩</b>：从 0 增至 <b>30-50 亿/年</b></p>
+        <p><b>估值溢价</b>：PE <b>60-80x</b>，板块冲击 <b>2400 亿</b></p>
+        <p><b>目标价</b>：<b>龙头 +50-100%</b></p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🚀</span> 长期（2030+ 商业化）</h4>
+      <div class="body">
+        <p><b>2030</b>：BEST 发电演示，第一度电</p>
+        <p><b>2035</b>：CFETR 建成，<b>并网发电</b></p>
+        <p><b>2050</b>：全面商用，<b>40 万亿美元市场</b></p>
+        <p><b>板块长期空间</b>：5-10 倍</p>
+        <p><b>终极能源</b>：人类文明的下一程</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.2 投资逻辑三阶段</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🥇</span> 第一阶段（2026-2027）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>主题投资</b></p>
+        <p><b>受益</b>：超导带材、超导磁体</p>
+        <p><b>预期</b>：板块 +30-50%</p>
+        <p><b>关键节点</b>：BEST 2027 建成</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🥈</span> 第二阶段（2028-2030）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>成长投资</b></p>
+        <p><b>受益</b>：核心设备供应商</p>
+        <p><b>预期</b>：板块 +50-100%</p>
+        <p><b>关键节点</b>：BEST 发电演示</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🥉</span> 第三阶段（2030+）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>价值投资</b></p>
+        <p><b>受益</b>：聚变电力运营商</p>
+        <p><b>预期</b>：板块 +200-500%</p>
+        <p><b>关键节点</b>：CFETR 商业发电</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.3 终极展望：可控核聚变 = 终极能源</h3>
+  <div class="verdict bull">
+    <div class="rating bull">⚛️ 人类文明的下一程 · 40 万亿美元市场</div>
+    <div class="horizon">2026 → 2050 远景</div>
+    <div class="logic">
+      <b>为什么是终极能源</b>：① 燃料丰富（海水中的氘，地球够用 100 亿年）；② 零碳排放；③ 无放射性废料；④ 无熔毁风险；⑤ 能量密度是化石燃料的 <b>1000 万倍</b>。<br><br>
+      <b>商业化路线</b>：2030 发电演示 → 2035 并网 → 2050 全面商用，市场规模 <b>40 万亿美元</b>，相当于<b>再造一个全球能源市场</b>。<br><br>
+      <b>A 股机会</b>：12 家龙头股覆盖产业链全环节，<b>中国走紧凑型路线领先 ITER 10 年</b>，是全球核聚变产业化<b>最大受益方</b>之一。<br><br>
+      <b>投资哲学</b>：这是<b>人类能源史的最后一次革命</b>，错过它 = 错过整个人类文明的下一程。
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. 风险 ========== -->
+<section id="s9">
+  <h2><span class="num">09</span>风险提示与投资纪律</h2>
+
+  <h3>9.1 主要风险因素</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 技术与工程风险</h4>
+      <div class="body">
+        <p><b>① BEST 延期</b>：紧凑型路线技术挑战大，2027 建成存在不确定性</p>
+        <p><b>② 高温超导产能</b>：良率提升 + 大规模量产瓶颈</p>
+        <p><b>③ 第一壁材料</b>：抗中子辐照寿命待验证</p>
+        <p><b>④ 氚自持</b>：氚增殖率仍未达标</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 商业化与时间表风险</h4>
+      <div class="body">
+        <p><b>① ITER 第六次延期</b>：2033-2034 才能首次等离子体</p>
+        <p><b>② 私营公司失败</b>：Helion/CFS 可能延期或失败</p>
+        <p><b>③ 替代技术</b>：小型模块化反应堆（SMR）等竞争</p>
+        <p><b>④ 资金需求巨大</b>：单座 BEST 工程 200 亿+</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 投资风险</h4>
+      <div class="body">
+        <p><b>① 主题溢价高</b>：A 股板块已大幅上涨</p>
+        <p><b>② 业绩占比低</b>：12 家公司中真正涉核聚变业务的营收占比 < 5%</p>
+        <p><b>③ 公司澄清风险</b>：联创光电已澄清"<b>主营业务不涉核聚变</b>"</p>
+        <p><b>④ 高波动</b>：涨停 + 跌停频发</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📋</span> 投资纪律建议</h4>
+      <div class="body">
+        <p><b>① 仓位管理</b>：单一龙头 ≤ 5%，主题仓位 ≤ 15%</p>
+        <p><b>② 止损纪律</b>：跌破 -15% 无条件减仓</p>
+        <p><b>③ 跟踪 BEST 进度</b>：每季关注装置建设</p>
+        <p><b>④ 政策跟踪</b>：聚变能专项、《三倍核能》落地</p>
+        <p><b>⑤ 心理建设</b>：长期赛道，避免追涨杀跌</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bear">
+    <strong>🚨 最重要纪律</strong>：可控核聚变是 <b>10-30 年长期赛道</b>，<b>短期主题波动剧烈</b>。<b>必须</b>坚持：<br>
+    • <b>组合配置</b>（不重仓单只），分散至 5 家龙头<br>
+    • <b>分批建仓</b>（主题回调 10%+ 再加仓）<br>
+    • <b>严格止损</b>（跌破 -15% 立即减仓）<br>
+    • <b>跟踪里程碑</b>（BEST 2027、星火 2030、CFETR 2035）<br>
+    • <b>耐心持有</b>：这是人类文明级别的赛道，<b>不要被短期波动影响长期判断</b>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，<b>不构成任何投资建议</b>。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询，市场有风险，投资需谨慎。
+  </div>
+  © 2026 可控核聚变：终极能源赛道 全产业链投研分析 · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
