@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隆基绿能(601012) 专业投研分析与操盘策略</title>
+<style>
+:root{
+  --bg:#0a0f1e;
+  --bg-2:#0f1729;
+  --panel:#15203b;
+  --panel-2:#1c2a4a;
+  --line:#2a3656;
+  --text:#e8eef9;
+  --muted:#94a3c1;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+.wrap{max-width:1500px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#15203b 0%,#0a0f1e 60%,#1c2a4a 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(94,234,212,.18),transparent 70%);border-radius:50%}
+header.hero::after{content:"";position:absolute;bottom:-120px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(248,113,113,.12),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;position:relative}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px;position:relative}
+header.hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;position:relative}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:36px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 34px;margin-bottom:22px}
+section h2{font-size:21px;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--neutral);margin:18px 0 10px;font-weight:600}
+section h4{font-size:14px;color:var(--accent-2);margin:14px 0 8px}
+section p{color:var(--text);margin-bottom:10px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.kpi.bull::before{background:var(--bull)}
+.kpi.bear::before{background:var(--bear)}
+.kpi.neutral::before{background:var(--neutral)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:20px;font-weight:700;color:var(--accent)}
+.kpi.bull .val{color:var(--bull)}
+.kpi.bear .val{color:var(--bear)}
+.kpi.neutral .val{color:var(--neutral)}
+.kpi .delta{font-size:11px;margin-top:4px;color:var(--muted)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;table-layout:fixed}
+table.data th,table.data td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;white-space:nowrap;font-size:12.5px;letter-spacing:.2px}
+table.data th.wrap{white-space:normal;font-size:12px;line-height:1.3}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:center;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace;white-space:nowrap}
+table.data td.nowrap{white-space:nowrap}
+table.data td.bull{color:var(--bull);font-weight:600}
+table.data td.bear{color:var(--bear);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+table.data col{display:table-column}
+table.data td .tag{margin:0 auto}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.stack-bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center;margin:6px 0}
+.stack-bar-row .name{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack-bar{height:26px;border-radius:4px;overflow:hidden;background:var(--panel-2);display:flex;border:1px solid var(--line)}
+.stack-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a0f1e;font-weight:600;transition:width .3s;white-space:nowrap;padding:0 6px;min-width:fit-content}
+.stack-bar-row .val{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.bull{border-left-color:var(--bull);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent)}
+.callout.bear{border-left-color:var(--bear);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.callout.purple{border-left-color:var(--purple);background:linear-gradient(90deg,rgba(167,139,250,.08),transparent)}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2);font-weight:500}
+.tag.bull{background:rgba(52,211,153,.15);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.15);color:var(--bear)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--neutral)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.bull{border-left:3px solid var(--bull)}
+.card.bear{border-left:3px solid var(--bear)}
+.card.neutral{border-left:3px solid var(--neutral)}
+.card.purple{border-left:3px solid var(--purple)}
+.card h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h4 .icon{font-size:16px}
+.card .body{font-size:12.5px;color:var(--muted);line-height:1.7}
+.card .body p{margin-bottom:6px}
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.strategy{background:var(--panel-2);border-radius:10px;padding:18px;border:1px solid var(--line)}
+.strategy.aggressive{border-top:3px solid var(--bull)}
+.strategy.balanced{border-top:3px solid var(--neutral)}
+.strategy.conservative{border-top:3px solid var(--bear)}
+.strategy h4{font-size:14px;color:var(--accent);margin-bottom:8px}
+.strategy .target{font-size:11px;color:var(--muted);margin-bottom:4px}
+.strategy .price{font-size:18px;font-weight:700;color:var(--accent);margin:6px 0}
+.score-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.score{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.score .label{font-size:11px;color:var(--muted);margin-bottom:4px}
+.score .val{font-size:22px;font-weight:700}
+.score .desc{font-size:10px;color:var(--muted);margin-top:2px}
+.flow-meter{background:var(--bg-2);border-radius:6px;height:24px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.flow-meter .fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0a0f1e}
+.verdict{background:linear-gradient(135deg,var(--panel-2),var(--bg-2));border:2px solid var(--accent);border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+.verdict.bull{border-color:var(--bull)}
+.verdict.bear{border-color:var(--bear)}
+.verdict.neutral{border-color:var(--neutral)}
+.verdict .rating{font-size:32px;font-weight:700;color:var(--accent)}
+.verdict .rating.bull{color:var(--bull)}
+.verdict .rating.bear{color:var(--bear)}
+.verdict .rating.neutral{color:var(--neutral)}
+.verdict .horizon{font-size:13px;color:var(--muted);margin:8px 0}
+.verdict .logic{font-size:13px;color:var(--text);max-width:780px;margin:10px auto;text-align:left;line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:22px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>隆基绿能 <span class="em">(601012.SH)</span> 专业投研分析与操盘策略</h1>
+  <div class="sub">基于公开年报、行情数据与产业链调研 · 站在基金经理视角 · 兼顾基本面、技术面、资金面与政策博弈</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>🏭 光伏一体化龙头</span>
+    <span>🧪 BC 技术路线领跑</span>
+    <span>⚠ 行业反内卷</span>
+    <span>📊 含 2026H1 预亏</span>
+    <span>💼 操盘建议</span>
+    <span>🥇 5 龙头对比</span>
+    <span>⭐ 隆基首选</span>
+    <span>🚀 太空光伏布局</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、当前股价与核心数据快照</a></li>
+    <li><a href="#s2">二、公司基本面深度解析</a></li>
+    <li><a href="#s3">三、行业景气与政策博弈</a></li>
+    <li><a href="#s4">四、技术分析与筹码结构</a></li>
+    <li><a href="#s5">五、资金面与机构动向</a></li>
+    <li><a href="#s6">六、估值定价与同业对比</a></li>
+    <li><a href="#s6b">七、同行业 5 大龙头全方位对比 ⭐</a></li>
+    <li><a href="#s6c">八、技术路线竞争格局分析</a></li>
+    <li><a href="#s6d">九、综合投资推荐与买入时机</a></li>
+    <li><a href="#s7">十、情景预测与敏感性分析</a></li>
+    <li><a href="#s8">十一、操盘策略与买卖节奏</a></li>
+    <li><a href="#s10">十二、太空光伏：第二增长曲线 🚀</a></li>
+    <li><a href="#s9">十三、风险提示与投资纪律</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 股价快照 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>当前股价与核心数据快照</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi neutral"><div class="label">最新股价</div><div class="val">12.81 元</div><div class="delta">2026-07-29</div></div>
+    <div class="kpi neutral"><div class="label">总市值</div><div class="val">971 亿</div><div class="delta">总股本 75.78 亿</div></div>
+    <div class="kpi bear"><div class="label">动态 PE</div><div class="val">亏损</div><div class="delta">TTM -45x</div></div>
+    <div class="kpi neutral"><div class="label">市净率 PB</div><div class="val">1.76 x</div><div class="delta">接近历史底部</div></div>
+    <div class="kpi bear"><div class="label">52 周区间</div><div class="val">11.41-23.57</div><div class="delta">距低点仅 +12%</div></div>
+    <div class="kpi bull"><div class="label">资产负债率</div><div class="val">≈ 60%</div><div class="delta">维持行业可控</div></div>
+  </div>
+
+  <h3>1.1 近期股价节奏</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:14%"><col style="width:14%"><col style="width:54%"></colgroup>
+    <thead><tr><th>时点</th><th>股价(元)</th><th>涨跌幅</th><th>事件/解读</th></tr></thead>
+    <tbody>
+      <tr><td class="nowrap">2026-02-25</td><td class="num nowrap">17.08</td><td class="num bear nowrap"><b>-10.01%</b></td><td>极端波动，单日成交 93 亿，主力净流出 8.03 亿</td></tr>
+      <tr><td class="nowrap">2026-05-29</td><td class="num nowrap">13.89</td><td class="num bear nowrap">-3.21%</td><td>行业反内卷政策预期与半年报预亏博弈</td></tr>
+      <tr><td class="nowrap">2026-07-17</td><td class="num warn nowrap">11.75</td><td class="num bear nowrap">-0.93%</td><td>接近 52 周低点</td></tr>
+      <tr><td class="nowrap">2026-07-29</td><td class="num nowrap">12.81</td><td class="num bull nowrap">+1.03%</td><td>反弹迹象，月内波动 11.71-12.89</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout bear">
+    <strong>🚨 核心提示</strong>：当前股价 <b>12.81 元</b>，距 52 周低点（11.41）仅 +12%，距 52 周高点（23.57）已腰斩过半。从 2026/02 高点 17.08 元至 7 月底，<b>累计跌幅约 25%</b>，技术上处于<a href="#s4">深度弱势格局</a>。
+  </div>
+</section>
+
+<!-- ========== 2. 公司基本面 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>公司基本面深度解析</h2>
+
+  <h3>2.1 2025 年报关键数据</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:16%"><col style="width:16%"><col style="width:18%"><col style="width:32%"></colgroup>
+    <thead>
+      <tr><th>指标</th><th>2024 年</th><th>2025 年</th><th>同比变化</th><th>解读</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>营业收入</td><td class="num nowrap">826.0 亿</td><td class="num nowrap">703.47 亿</td><td class="num bear nowrap">-14.82%</td><td>组件价格下行 + 出货结构调整</td></tr>
+      <tr><td>归母净利润</td><td class="num nowrap">-85.93 亿</td><td class="num nowrap">-64.20 亿</td><td class="num bull nowrap">减亏 21.73 亿</td><td>经营底部修复</td></tr>
+      <tr><td>扣非归母</td><td class="num nowrap">-87.22 亿</td><td class="num nowrap">-73.62 亿</td><td class="num bull nowrap">减亏 13.60 亿</td><td>主业造血能力恢复</td></tr>
+      <tr><td>经营现金流</td><td class="num warn nowrap">负值</td><td class="num bull nowrap">+43.59 亿</td><td class="num bull nowrap">由负转正</td><td><b>最大亮点</b>，现金流转正</td></tr>
+      <tr><td>基本 EPS</td><td class="num nowrap">-1.14 元</td><td class="num nowrap">-0.85 元</td><td class="num bull nowrap">亏损收窄</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.2 2026 半年度业绩预告（2026-07-14）</h3>
+  <div class="callout bear">
+    <strong>⚠ 半年报预亏扩大</strong><br>
+    • 归母净利预亏：<b>-34 至 -38 亿元</b>（2025H1 为 -52.42 亿，减亏）<br>
+    • 扣非净利预亏：-37 至 -42 亿元<br>
+    • <b>主因</b>：光伏行业供需关系未有显著改善，国内上半年新增光伏装机阶段性大幅回落（同比 -66%）<br>
+    • <b>亮点</b>：BC 组件出货约 8GW（2026Q1），HPBC 2.0 良率稳定 97%+
+  </div>
+
+  <h3>2.3 主营业务结构（2025）</h3>
+  <div class="chart-box">
+    <div class="chart-title">2025 年营收结构（亿元 / 占比）</div>
+    <div class="stack-bar-row"><div class="name">组件及电池</div><div class="stack-bar"><div style="width:85%;background:linear-gradient(90deg,#5eead4,#60a5fa)">599.20 亿 (85.2%)</div></div><div class="val">85.2%</div></div>
+    <div class="stack-bar-row"><div class="name">硅片及硅棒</div><div class="stack-bar"><div style="width:9%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">65.40 (9.3%)</div></div><div class="val">9.3%</div></div>
+    <div class="stack-bar-row"><div class="name">电站业务</div><div class="stack-bar"><div style="width:3%;background:linear-gradient(90deg,#fbbf24,#fb923c)">21.44 (3%)</div></div><div class="val">3.0%</div></div>
+    <div class="stack-bar-row"><div class="name">其他</div><div class="stack-bar"><div style="width:2.5%;background:linear-gradient(90deg,#fb923c,#a78bfa)">17.42 (2.5%)</div></div><div class="val">2.5%</div></div>
+    <div class="chart-note">公司持续向产业链终端集中，组件占比 85%+，但硅片业务收缩明显（同比下滑）。</div>
+  </div>
+
+  <h3>2.4 BC 技术路线核心护城河</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🔬</span> HPBC 2.0（主力）</h4>
+      <div class="body">
+        <p>量产效率：<b>26.6%</b></p>
+        <p>组件效率：24.43%（双面率 70%+）</p>
+        <p>良率：<b>≥ 97%</b></p>
+        <p>Hi-MO 9 主流功率 660W</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🧬</span> HBC 异质结背接触</h4>
+      <div class="body">
+        <p>光电转换效率：<b>27.3%</b>（德国 ISFH 认证）</p>
+        <p>世界单结晶硅纪录</p>
+        <p>与金阳、钜能合资西安基地</p>
+        <p>升级 4 条 PERC → HBC</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> ACM 技术平台</h4>
+      <div class="body">
+        <p>纳米合金矩阵式接触</p>
+        <p>新型金属化材料突破</p>
+        <p>2026 年 6 月建成 <b>20GW 产线</b></p>
+        <p>贱金属降本方案</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2.5 产能规划与出货目标</h3>
+  <table class="data">
+    <colgroup><col style="width:22%"><col style="width:78%"></colgroup>
+    <thead><tr><th>时间节点</th><th>关键里程碑</th></tr></thead>
+    <tbody>
+      <tr><td class="nowrap">2024 年底</td><td>BC 产品出货量超 <b>17GW</b>，HPBC 2.0 进入规模上市</td></tr>
+      <tr><td class="nowrap">2025 年底</td><td>BC 电池产能 <b>70GW</b>（HPBC 2.0 约 50GW）</td></tr>
+      <tr><td class="nowrap">2026 年 6 月</td><td>ACM 技术平台建成 <b>20GW</b> 产线</td></tr>
+      <tr><td class="nowrap">2026 年底</td><td>国内电池产能 <b>全部切换至 BC 产品</b></td></tr>
+      <tr><td class="nowrap">2026 全年目标</td><td>BC 组件出货占比达 <b>≥ 65%</b></td></tr>
+      <tr><td class="nowrap">研发投入</td><td>HPBC 1.0→2.0 累计投入超 <b>20 亿</b>，BC 专利近 <b>200 项</b></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 3. 行业景气 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>行业景气与政策博弈</h2>
+
+  <h3>3.1 2026 全球需求展望</h3>
+  <div class="callout warn">
+    <strong>⚠ 历史性拐点信号</strong><br>
+    • BNEF 预警：2026 全球新增装机 <b>649 GW</b>，较 2025 小幅下滑，<b>20 年来首次年度萎缩</b><br>
+    • 中电协：国内 2026 新增装机 <b>180-240 GW</b>（较 2025 实际 315 GW 下降 24%-43%）<br>
+    • 2025 国内实际新增 <b>315.07 GW</b>（+13%），2026H1 国内装机 <b>同比 -66%</b>
+  </div>
+
+  <h3>3.2 供需失衡现状</h3>
+  <table class="data">
+    <colgroup><col style="width:24%"><col style="width:24%"><col style="width:24%"><col style="width:28%"></colgroup>
+    <thead><tr><th>环节</th><th>现有产能</th><th>实际需求</th><th>供需比</th></tr></thead>
+    <tbody>
+      <tr><td>硅料</td><td class="num warn nowrap">350+ 万吨</td><td class="num nowrap">120 万吨</td><td class="num bear nowrap"><b>~2.9 : 1</b></td></tr>
+      <tr><td>硅片/电池/组件</td><td class="num warn nowrap">1000+ GW</td><td class="num nowrap">550-600 GW</td><td class="num bear nowrap"><b>~1.7 : 1</b></td></tr>
+      <tr><td>硅料价格</td><td colspan="3">跌破 <b>4 万元/吨</b>，组件 <b>≈ 0.7 元/瓦</b>（历史低位）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.3 反内卷政策时间线（核心博弈点）</h3>
+  <div class="callout bull">
+    <strong>🏛 政策催化加码</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>2025/12</b>：多晶硅产能整合平台成立（政府引导 + 市场化并购）</li>
+      <li><b>2026/04/17</b>：工信部等四部门联合召开光伏行业座谈会，部署产能调控、价格执法、质量监管、<b>兼并重组</b></li>
+      <li><b>2026/04/28</b>：中央政治局会议明确"产能调控 + 价格监管 + 标准引领"组合拳，<b>首次将兼并重组纳入反内卷综合治理</b></li>
+      <li><b>技术分级管理</b>：按效率对产能分级，差别化对待</li>
+      <li><b>能耗约束</b>：电耗限额设为强制淘汰门槛</li>
+    </ul>
+  </div>
+
+  <h3>3.4 海外需求分化</h3>
+  <table class="data">
+    <colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+    <thead><tr><th>区域</th><th>2025 表现</th><th>2026 展望</th></tr></thead>
+    <tbody>
+      <tr><td>东南亚</td><td class="num bull nowrap">4 月组件出口 +267%</td><td>持续高景气</td></tr>
+      <tr><td>欧洲</td><td class="num neutral nowrap">渗透率触顶</td><td>增速放缓</td></tr>
+      <tr><td>中东/拉美</td><td class="num bull nowrap">订单饱满</td><td>满负荷生产</td></tr>
+      <tr><td>太空光伏</td><td class="num warn nowrap">概念阶段</td><td>增量空间打开</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple">
+    <strong>🚀 新增量</strong>：<b>太空光伏/太空算力</b> 打开光伏新需求想象空间，近两周电池与光伏设备在申万二级行业中涨幅分别位列 <b>第一、第二</b>（+9.59%、+7.23%）。
+  </div>
+</section>
+
+<!-- ========== 4. 技术分析 ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>技术分析与筹码结构</h2>
+
+  <h3>4.1 关键技术位</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">📉</span> 支撑位（防守）</h4>
+      <div class="body">
+        <p><b>第一支撑</b>：16.80-17.00 元（前低 + 筹码密集区，但 2026/02 已跌破）</p>
+        <p><b>第二支撑</b>：16.30 元（箱体下沿）</p>
+        <p><b>第三支撑</b>：15.50 元（年内低点，已失守）</p>
+        <p><b>当前价格</b>：12.81 元，已进入 <b>52 周区间下沿</b></p>
+        <p><b>新支撑位</b>：<b>11.41 元（52 周低点）</b></p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 阻力位（进攻）</h4>
+      <div class="body">
+        <p><b>第一阻力</b>：13.50-14.00 元（短期反弹阻力）</p>
+        <p><b>第二阻力</b>：15.00 元（5/10/20 日均线密集区）</p>
+        <p><b>第三阻力</b>：17.00 元（2 月低点 + 心理关口）</p>
+        <p><b>强阻力</b>：18.00-18.50 元（5/10/20 日均线）</p>
+        <p><b>关键突破位</b>：19.00-20.50 元（前期跳空缺口）</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.2 技术指标信号</h3>
+  <table class="data">
+    <colgroup><col style="width:24%"><col style="width:32%"><col style="width:44%"></colgroup>
+    <thead><tr><th>指标</th><th>当前状态</th><th>信号解读</th></tr></thead>
+    <tbody>
+      <tr><td>月线 MACD</td><td class="warn nowrap"><b>顶背离</b></td><td>2 月高点确认弱势格局</td></tr>
+      <tr><td>月线 KDJ</td><td class="bear nowrap"><b>死叉确认</b></td><td>中长期弱势</td></tr>
+      <tr><td>5/10/20 日均线</td><td class="bear nowrap">空头排列</td><td>反弹高度受限</td></tr>
+      <tr><td>BOLL 通道</td><td class="warn nowrap">下轨附近运行</td><td>超卖但弱势</td></tr>
+      <tr><td>成交量</td><td class="neutral nowrap">7 月萎缩</td><td>买卖双方观望</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>📐 技术面综合判定</strong>：<b>弱势格局未改</b>。月线 MACD 顶背离 + KDJ 死叉显示 2 月 17.08 元大概率成为中期顶部；当前 12.81 元处于"寻找阶段性底部"阶段，<b>未确认反转信号</b>。需观察：① 11.41 支撑能否守住；② MACD 在零轴下方是否金叉；③ 成交量温和放大配合反弹。
+  </div>
+
+  <h3>4.3 筹码结构（股东户数演变）</h3>
+  <div class="chart-box">
+    <div class="chart-title">股东户数变化（2025-2026）</div>
+    <div class="stack-bar-row"><div class="name">2025-09-30</div><div class="stack-bar"><div style="width:73%;background:linear-gradient(90deg,#34d399,#5eead4)">69.85 万</div></div><div class="val">低集中度</div></div>
+    <div class="stack-bar-row"><div class="name">2025-12-31</div><div class="stack-bar"><div style="width:87%;background:linear-gradient(90deg,#34d399,#60a5fa)">82.62 万</div></div><div class="val">+18.2%</div></div>
+    <div class="stack-bar-row"><div class="name">2026-02-27</div><div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#fb923c,#f87171)">94.73 万</div></div><div class="val"><b>峰值</b></div></div>
+    <div class="stack-bar-row"><div class="name">2026-05-29</div><div class="stack-bar"><div style="width:95%;background:linear-gradient(90deg,#fbbf24,#fb923c)">90.20 万</div></div><div class="val">微减</div></div>
+    <div class="chart-note">股东户数从 2025/09 的 69.85 万激增至 2026/02 高点 94.73 万，<b>散户高位接盘</b>特征明显；后逐步回落说明部分套牢盘止损/换手。</div>
+  </div>
+</section>
+
+<!-- ========== 5. 资金面 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>资金面与机构动向</h2>
+
+  <h3>5.1 机构持仓</h3>
+  <table class="data">
+    <colgroup><col style="width:22%"><col style="width:18%"><col style="width:14%"><col style="width:26%"><col style="width:20%"></colgroup>
+    <thead><tr><th>主体</th><th>持股</th><th>占比</th><th>变动</th><th>信号</th></tr></thead>
+    <tbody>
+      <tr><td>机构投资者（126 家）</td><td class="num nowrap">14.68 亿股</td><td class="num nowrap">19.37%</td><td class="num bear nowrap">Q3 减仓 50+ 家</td><td><span class="tag bear">撤离</span></td></tr>
+      <tr><td>北向资金（香港中央结算）</td><td class="num nowrap">2.568 亿股</td><td class="num nowrap">3.39%</td><td class="num bear nowrap">-8210 万股(-1.08%)</td><td><span class="tag bear">大幅减持</span></td></tr>
+      <tr><td>李振国（实控人）</td><td class="num nowrap">10.67 亿股</td><td class="num nowrap">14.08%</td><td class="num neutral nowrap">不变</td><td><span class="tag gold">质押 2.06 亿股</span></td></tr>
+      <tr><td>李喜燕</td><td class="num nowrap">3.81 亿股</td><td class="num nowrap">5.02%</td><td class="num neutral nowrap">不变</td><td><span class="tag purple">长期持有</span></td></tr>
+      <tr><td>钟宝申（董事长）</td><td class="num nowrap">1.11 亿股</td><td class="num nowrap">1.46%</td><td class="num bull nowrap">持续增持</td><td><span class="tag bull">信心信号</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 高管增持信号</h3>
+  <div class="callout bull">
+    <strong>🟢 钟宝申董事长持续增持（信心信号）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>2023-10：宣布 1-1.5 亿增持计划</li>
+      <li>2024-10：完成第一轮增持，<b>累计 1.018 亿</b></li>
+      <li>2024-11：宣布新一轮 <b>≥ 1 亿</b> 增持计划</li>
+      <li>2025-02-04 至 02-25：增持 332.3 万股，5445 万</li>
+      <li>2025-04-08：增持 105 万股，1501 万</li>
+      <li>2025-11-21：<b>计划完成</b>，累计 613.19 万股，<b>1.007 亿</b></li>
+    </ul>
+  </div>
+  <div class="callout warn">
+    <strong>⚠ 控股股东李振国质押动态</strong><br>
+    2026-06-22 解除质押 8000 万股（占其持股 7.50%，占总股本 1.06%），<b>剩余质押 2.06 亿股</b>。质押比例仍较高，需关注大股东资金链情况。
+  </div>
+
+  <h3>5.3 主力资金动向</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:34%"><col style="width:24%"></colgroup>
+    <thead><tr><th>日期</th><th>事件</th><th>主力资金</th><th>信号</th></tr></thead>
+    <tbody>
+      <tr><td class="nowrap">2026-02-25</td><td>单日 -10.01%</td><td class="num bear nowrap"><b>净流出 8.03 亿</b></td><td>恐慌盘涌出</td></tr>
+      <tr><td class="nowrap">2026-05-29</td><td>单日 -3.21%</td><td class="num warn nowrap">持续流出</td><td>业绩博弈期</td></tr>
+      <tr><td class="nowrap">2026-07 至今</td><td>缩量震荡</td><td class="num neutral nowrap">买卖均衡</td><td>观望为主</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 6. 估值 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>估值定价与同业对比</h2>
+
+  <h3>6.1 行业估值横向对比</h3>
+  <table class="data">
+    <colgroup><col style="width:16%"><col style="width:10%"><col style="width:14%"><col style="width:14%"><col style="width:18%"><col style="width:14%"><col style="width:14%"></colgroup>
+    <thead>
+      <tr><th>公司</th><th>代码</th><th>2025 营收</th><th>2025 归母</th><th>2026H1 预告</th><th>市值(亿)</th><th>PE/PB</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>隆基绿能</b></td><td class="nowrap">601012</td><td class="num">703.47</td><td class="num bear">-64.20</td><td class="num bear">-34~-38</td><td class="num">971</td><td class="num">PB 1.76</td>
+      </tr>
+      <tr>
+        <td>通威股份</td><td class="nowrap">600438</td><td class="num warn">n.a.</td><td class="num warn">—</td><td class="num bear">Q1 -25.93</td><td class="num">—</td><td class="num">亏损</td>
+      </tr>
+      <tr>
+        <td>晶澳科技</td><td class="nowrap">002459</td><td class="num warn">—</td><td class="num warn">—</td><td class="num bear">Q1 -16.96</td><td class="num">—</td><td class="num">亏损</td>
+      </tr>
+      <tr>
+        <td>TCL 中环</td><td class="nowrap">002129</td><td class="num warn">—</td><td class="num warn">—</td><td class="num bear">Q1 -22.20</td><td class="num">—</td><td class="num">亏损</td>
+      </tr>
+      <tr>
+        <td>天合光能</td><td class="nowrap">688599</td><td class="num warn">—</td><td class="num warn">—</td><td class="num bear">Q1 -19.09</td><td class="num">—</td><td class="num">亏损</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="chart-note">注：同业 2026Q1 全部亏损，行业整体处于深度调整；隆基是头部一体化龙头，PB 1.76 处于历史低位，反映市场已 price-in 极度悲观预期。</div>
+
+  <h3>6.2 估值方法切换</h3>
+  <div class="grid-3">
+    <div class="card neutral">
+      <h4><span class="icon">📐</span> PB 估值（当前可用）</h4>
+      <div class="body">
+        <p>当前 PB：<b>1.76x</b></p>
+        <p>历史中位：3.5-4.5x</p>
+        <p>历史低位：1.5x（2018）</p>
+        <p><b>结论</b>：接近极端低位</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">🔮</span> PE 估值（2027E）</h4>
+      <div class="body">
+        <p>假设 2027 净利 30 亿</p>
+        <p>合理 PE：25-35x</p>
+        <p>对应市值：750-1050 亿</p>
+        <p><b>结论</b>：当前市值基本反映中性预期</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⚡</span> 重置成本（Safety Net）</h4>
+      <div class="body">
+        <p>固定资产 + 研发投入</p>
+        <p>BC 产能重置：<b>1500 亿+</b></p>
+        <p>当前市值 971 亿</p>
+        <p><b>结论</b>：长期价值底线</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <strong>🎯 估值结论</strong>：当前 12.81 元、971 亿市值已反映 <b>极度悲观预期</b>（行业继续恶化、BC 渗透不及预期、产能出清失败）。从重置成本和历史 PB 角度看，<b>11-13 元区间已接近安全边际下沿</b>，但需业绩拐点确认。
+  </div>
+</section>
+
+<!-- ========== 6B. 同业对比 ========== -->
+<section id="s6b">
+  <h2><span class="num">07</span>同行业 5 大龙头全方位对比 ⭐</h2>
+  <p>为更准确评估隆基绿能的投资性价比，本节对 <span class="hl">5 家 A 股光伏一体化龙头</span>（隆基、通威、晶澳、天合、TCL 中环）进行多维度横向对比。核心结论：<b>5 家全部亏损，2026 是行业出清的关键年份</b>。</p>
+
+  <h3>7.1 财务全景横向对比（2024-2025）</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:8%"><col style="width:12%"><col style="width:11%"><col style="width:12%"><col style="width:12%"><col style="width:14%"><col style="width:17%"></colgroup>
+    <thead>
+      <tr>
+        <th>公司</th>
+        <th>代码</th>
+        <th>2025 营收(亿)</th>
+        <th>营收 YoY</th>
+        <th>2025 归母(亿)</th>
+        <th>2024 归母(亿)</th>
+        <th>亏损变化</th>
+        <th>经营现金流</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.08)">
+        <td><b>⭐ 隆基绿能</b></td><td class="nowrap">601012</td>
+        <td class="num nowrap"><b>703.47</b></td><td class="num bear nowrap">-14.82%</td>
+        <td class="num nowrap"><b>-64.20</b></td><td class="num nowrap">-85.93</td>
+        <td class="num bull nowrap"><b>减亏 21.7 亿</b></td>
+        <td class="num bull nowrap"><b>+43.6 亿</b></td>
+      </tr>
+      <tr>
+        <td>通威股份</td><td class="nowrap">600438</td>
+        <td class="num nowrap">1051</td><td class="num warn nowrap">-12.7%</td>
+        <td class="num nowrap">-65.0</td><td class="num nowrap">-70.4</td>
+        <td class="num bull nowrap">减亏 5.4 亿</td>
+        <td class="num warn nowrap">—</td>
+      </tr>
+      <tr>
+        <td>天合光能</td><td class="nowrap">688599</td>
+        <td class="num nowrap">669.75</td><td class="num bear nowrap">-16.6%</td>
+        <td class="num nowrap">-70.31</td><td class="num nowrap">-34.43</td>
+        <td class="num bear nowrap"><b>亏扩大 35.9 亿</b></td>
+        <td class="num bull nowrap">+69.0 亿</td>
+      </tr>
+      <tr>
+        <td>晶澳科技</td><td class="nowrap">002459</td>
+        <td class="num nowrap">491.29</td><td class="num bear nowrap">-29.9%</td>
+        <td class="num nowrap">-46.08</td><td class="num nowrap">-46.55</td>
+        <td class="num neutral nowrap">基本持平</td>
+        <td class="num bull nowrap">+42.8 亿</td>
+      </tr>
+      <tr>
+        <td>TCL 中环</td><td class="nowrap">002129</td>
+        <td class="num warn nowrap">≈ 322</td><td class="num bear nowrap">-50%</td>
+        <td class="num warn nowrap">≈ -100</td><td class="num nowrap">-105.1</td>
+        <td class="num bull nowrap">微减亏</td>
+        <td class="num warn nowrap">+30 亿</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="chart-note">注：通威 2025 营收 1051 亿为业绩快报初值（数据待 2026 年 4 月年报正式披露），TCL 中环 2025 数据为反推估算（年报尚未完整披露）。5 家龙头经营现金流均为正，反映行业整体经营造血能力仍存。</div>
+
+  <h3>7.2 2026H1 业绩预告对比</h3>
+  <table class="data">
+    <colgroup><col style="width:16%"><col style="width:24%"><col style="width:30%"><col style="width:30%"></colgroup>
+    <thead>
+      <tr><th>公司</th><th>2026H1 归母预告</th><th>YoY 对照</th><th>解读</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.08)">
+        <td><b>⭐ 隆基绿能</b></td>
+        <td class="num nowrap"><b>-34 至 -38 亿</b></td>
+        <td class="num bull nowrap">vs 2025H1 -52.42 亿（减亏）</td>
+        <td>亏损同比收窄，<b>BC 组件放量 + 现金流转正</b></td>
+      </tr>
+      <tr>
+        <td>通威股份</td>
+        <td class="num warn nowrap">预计减亏</td>
+        <td class="num bull nowrap">多晶硅价格触底反弹</td>
+        <td>硅料价格回升受益</td>
+      </tr>
+      <tr>
+        <td>天合光能</td>
+        <td class="num nowrap"><b>-1.8 至 -3.6 亿</b></td>
+        <td class="num bull nowrap"><b>接近扭亏</b></td>
+        <td><b>减亏幅度最大</b>，组件 + 储能双驱动</td>
+      </tr>
+      <tr>
+        <td>晶澳科技</td>
+        <td class="num warn nowrap">—</td>
+        <td class="num bull nowrap">2026Q1 净利 -10.67 亿(同比 -34.89%)</td>
+        <td>海外占比 77% 提供韧性</td>
+      </tr>
+      <tr>
+        <td>TCL 中环</td>
+        <td class="num warn nowrap">—</td>
+        <td class="num warn nowrap">—</td>
+        <td>硅片环节压力最大，扭亏尚远</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>7.3 当前股价与市值快照（2026 年 7 月）</h3>
+  <div class="chart-box">
+    <div class="chart-title">5 家龙头市值对比（2026-07）</div>
+    <div class="stack-bar-row"><div class="name">隆基绿能 (12.81 元)</div><div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#5eead4,#60a5fa)">971 亿市值</div></div><div class="val">⭐ 头部</div></div>
+    <div class="stack-bar-row"><div class="name">通威股份 (≈17 元)</div><div class="stack-bar"><div style="width:79%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">≈ 770 亿</div></div><div class="val">硅料龙头</div></div>
+    <div class="stack-bar-row"><div class="name">天合光能 (≈15 元)</div><div class="stack-bar"><div style="width:34%;background:linear-gradient(90deg,#fbbf24,#fb923c)">≈ 327 亿</div></div><div class="val">组件 + 储能</div></div>
+    <div class="stack-bar-row"><div class="name">TCL 中环 (≈8 元)</div><div class="stack-bar"><div style="width:26%;background:linear-gradient(90deg,#f87171,#a78bfa)">≈ 254 亿</div></div><div class="val">硅片最弱</div></div>
+    <div class="stack-bar-row"><div class="name">晶澳科技 (7.13 元)</div><div class="stack-bar"><div style="width:24%;background:linear-gradient(90deg,#fb923c,#f87171)">≈ 236 亿</div></div><div class="val">海外占比高</div></div>
+    <div class="chart-note">隆基作为行业绝对龙头，市值约 971 亿，是第二名通威的 1.26 倍、第三名天合的 2.97 倍，反映市场给予"龙头溢价"。</div>
+  </div>
+
+  <h3>7.4 5 家龙头多维度评分卡</h3>
+  <table class="data">
+    <colgroup><col style="width:16%"><col style="width:17%"><col style="width:17%"><col style="width:17%"><col style="width:16%"><col style="width:17%"></colgroup>
+    <thead>
+      <tr><th>维度</th><th>⭐ 隆基绿能</th><th>通威股份</th><th>天合光能</th><th>晶澳科技</th><th>TCL 中环</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2025 营收</td><td class="num">703 亿</td><td class="num">1051 亿</td><td class="num">670 亿</td><td class="num">491 亿</td><td class="num">322 亿</td>
+      </tr>
+      <tr>
+        <td>2025 归母</td><td class="num bull"><b>-64 亿</b></td><td class="num bear">-65 亿</td><td class="num bear"><b>-70 亿</b></td><td class="num bull">-46 亿</td><td class="num bear"><b>-100 亿</b></td>
+      </tr>
+      <tr>
+        <td>亏损改善</td><td class="num bull"><b>★★★★</b></td><td class="num bull">★★★</td><td class="num bear">★</td><td class="num neutral">★★</td><td class="num bull">★★★</td>
+      </tr>
+      <tr>
+        <td>技术路线</td><td class="num bull">BC 领先</td><td class="num neutral">TOPCon</td><td class="num neutral">TOPCon</td><td class="num neutral">TOPCon</td><td class="num neutral">硅片</td>
+      </tr>
+      <tr>
+        <td>海外占比</td><td class="num bull">40%+</td><td class="num neutral">中等</td><td class="num bull">50%+</td><td class="num bull"><b>77%</b></td><td class="num neutral">中低</td>
+      </tr>
+      <tr>
+        <td>经营现金流</td><td class="num bull"><b>+43.6</b></td><td class="num warn">中等</td><td class="num bull"><b>+69.0</b></td><td class="num bull">+42.8</td><td class="num neutral">+30</td>
+      </tr>
+      <tr>
+        <td>2026H1 预期</td><td class="num bull">减亏</td><td class="num bull">减亏</td><td class="num bull"><b>接近扭亏</b></td><td class="num bull">减亏</td><td class="num bear">仍承压</td>
+      </tr>
+      <tr>
+        <td>市值（亿）</td><td class="num bull"><b>971</b></td><td class="num bull">770</td><td class="num neutral">327</td><td class="num neutral">236</td><td class="num neutral">254</td>
+      </tr>
+      <tr>
+        <td>PB（参考）</td><td class="num bull">1.76</td><td class="num warn">1.5-2.0</td><td class="num warn">1.0-1.5</td><td class="num bull">1.14</td><td class="num warn">0.8-1.2</td>
+      </tr>
+      <tr>
+        <td><b>综合评分</b></td><td class="num bull"><b>4.5/5</b></td><td class="num bull">4.0/5</td><td class="num bull">4.2/5</td><td class="num neutral">3.5/5</td><td class="num bear">2.5/5</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>🏆 同业对比核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>⭐ 隆基绿能</b>：综合实力第一，技术（BC）、规模（千亿市值）、现金流（+43.6 亿）、亏损改善（21.7 亿）均领先，<b>适合中长期价值投资</b></li>
+      <li><b>天合光能</b>：2026H1 <b>扭亏预期最强</b>（-1.8 至 -3.6 亿），储能业务高增长，<b>适合中短期博弈</b></li>
+      <li><b>通威股份</b>：硅料龙头地位稳固，2025 营收第一，<b>弹性大但波动大</b>，适合周期博弈</li>
+      <li><b>晶澳科技</b>：海外占比 <b>77%</b>（业内最高），抗贸易摩擦能力强，但市值偏小</li>
+      <li><b>TCL 中环</b>：<b>亏损最大（-100 亿）</b>、硅片环节压力最重，<b>暂不建议介入</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 6C. 技术路线 ========== -->
+<section id="s6c">
+  <h2><span class="num">08</span>技术路线竞争格局分析</h2>
+
+  <h3>8.1 三大主流技术路线全景对比</h3>
+  <table class="data">
+    <colgroup><col style="width:22%"><col style="width:24%"><col style="width:24%"><col style="width:30%"></colgroup>
+    <thead>
+      <tr><th>维度</th><th>TOPCon</th><th>HJT</th><th>BC（含 HBC/TBC）</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>理论效率极限</td><td class="num">28.7%</td><td class="num">28.5%</td><td class="num bull"><b>29.56%</b></td>
+      </tr>
+      <tr>
+        <td>实验室最高</td><td class="num">26.89%</td><td class="num">26.3%</td><td class="num bull"><b>27.42%</b></td>
+      </tr>
+      <tr>
+        <td>量产平均</td><td class="num">25.7-26.5%</td><td class="num">25%+</td><td class="num bull"><b>26-26.8%</b></td>
+      </tr>
+      <tr>
+        <td>良率</td><td class="num">90-98.5%</td><td class="num">~98%</td><td class="num">95%+</td>
+      </tr>
+      <tr>
+        <td>设备投资</td><td class="num bull">1.6-2 亿/GW</td><td class="num neutral">2.5-3.5 亿/GW</td><td class="num bear">4.5-5 亿/GW</td>
+      </tr>
+      <tr>
+        <td>非硅成本</td><td class="num bull">0.14-0.16 元/W</td><td class="num neutral">0.197 元/W</td><td class="num neutral">0.190 元/W</td>
+      </tr>
+      <tr>
+        <td>组件招标均价</td><td class="num bull">0.696 元/W</td><td class="num neutral">0.763 元/W</td><td class="num bear">0.839 元/W</td>
+      </tr>
+      <tr>
+        <td>市场份额</td><td class="num bull"><b>~80%</b></td><td class="num neutral">~15%</td><td class="num neutral">~5%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.2 各家技术路线站队</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🔬</span> BC 阵营</h4>
+      <div class="body">
+        <p><b>代表</b>：隆基绿能、爱旭股份</p>
+        <p><b>优势</b>：效率最高（29.56%）、高端分布式溢价</p>
+        <p><b>劣势</b>：设备投资高（4.5-5 亿/GW）、工艺复杂</p>
+        <p><b>战略</b>：技术驱动差异化</p>
+        <p><b>当前进展</b>：隆基 HPBC 2.0 良率 97%+，2026/06 ACM 20GW 投产</p>
+      </div>
+    </div>
+
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> TOPCon 阵营</h4>
+      <div class="body">
+        <p><b>代表</b>：晶科、晶澳、天合、通威、TCL 中环</p>
+        <p><b>优势</b>：兼容 PERC 产线、设备便宜（1.6-2 亿/GW）、市场份额 80%</p>
+        <p><b>劣势</b>：效率天花板较低（28.7%）、同质化严重</p>
+        <p><b>战略</b>：规模 + 成本</p>
+        <p><b>突破</b>：晶科 26.66% 工业级效率新纪录</p>
+      </div>
+    </div>
+
+    <div class="card purple">
+      <h4><span class="icon">🧬</span> HJT 阵营</h4>
+      <div class="body">
+        <p><b>代表</b>：东方日升、阿特斯</p>
+        <p><b>优势</b>：工序精简（7 道）、温度系数最优、钙钛矿叠层基础</p>
+        <p><b>劣势</b>：设备投资高（2.5-3.5 亿/GW）</p>
+        <p><b>战略</b>：叠层电池长期路线</p>
+        <p><b>突破</b>：钙钛矿叠层实验室效率 35%+，2026 进入量产</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.3 BC 路线的胜出概率评估</h3>
+  <div class="callout bull">
+    <strong>🧬 BC 路线的胜出概率分析</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>优势端</b>：效率天花板最高 + 高端市场溢价 + 隆基/爱旭已实现规模量产 + 技术专利近 200 项形成壁垒</li>
+      <li><b>劣势端</b>：设备成本高 + 工艺复杂 + 良率提升难 + 中低端市场接受度有限</li>
+      <li><b>关键变量</b>：① TOPCon 是否突破 27%；② HJT 叠层量产节奏；③ BC 良率/成本下降曲线</li>
+      <li><b>结论</b>：BC 路线 <b>胜率约 40-50%</b>（高端分布式 + 部分集中式），隆基 + 爱旭是核心受益方</li>
+      <li><b>隆基的护城河</b>：HPBC 2.0 良率 97% + HBC 27.3% 世界纪录 + ACM 平台 20GW，三重技术叠加优势明显</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 6D. 投资推荐 ========== -->
+<section id="s6d">
+  <h2><span class="num">09</span>综合投资推荐与买入时机 ⭐</h2>
+
+  <h3>9.1 5 家龙头投资性价比综合排名</h3>
+  <table class="data">
+    <colgroup><col style="width:10%"><col style="width:14%"><col style="width:38%"><col style="width:26%"><col style="width:12%"></colgroup>
+    <thead>
+      <tr><th>排名</th><th>公司</th><th>投资亮点</th><th>主要风险</th><th>推荐度</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.12)">
+        <td class="num nowrap"><b>🥇 1</b></td>
+        <td><b>⭐ 隆基绿能</b></td>
+        <td>BC 技术领跑 + 现金流转正 + 龙头溢价 + 反内卷最大受益</td>
+        <td>半年报预亏扩大、市值偏大弹性受限</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td class="num nowrap"><b>🥈 2</b></td>
+        <td>天合光能</td>
+        <td>2026H1 <b>接近扭亏</b>、储能高增长、海外占比 50%+</td>
+        <td>2025 亏损扩大 35.9 亿、组件价格仍承压</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+      <tr style="background:rgba(167,139,250,.08)">
+        <td class="num nowrap"><b>🥉 3</b></td>
+        <td>通威股份</td>
+        <td>硅料龙头 + 2025 营收第一 + 周期反转弹性</td>
+        <td>硅料价格波动大、净利润持续亏损</td>
+        <td class="num bull nowrap"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>4</b></td>
+        <td>晶澳科技</td>
+        <td>海外占比 77%业内最高、2026Q1 减亏 34.89%</td>
+        <td>市值偏小(236 亿)、弹性受限</td>
+        <td class="num neutral nowrap"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>5</b></td>
+        <td>TCL 中环</td>
+        <td>硅片龙头位置、技术沉淀深</td>
+        <td><b>亏损最大(-100 亿)</b>、硅片环节最弱</td>
+        <td class="num bear nowrap"><b>★★☆☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>9.2 哪个更值得期待？投资逻辑分类</h3>
+
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏆</span> 隆基绿能：龙头价值修复</h4>
+      <div class="body">
+        <p><b>投资逻辑</b>：行业反内卷最大受益方 + BC 技术溢价兑现 + 龙头估值修复</p>
+        <p><b>持有周期</b>：<b>12-18 个月</b></p>
+        <p><b>目标收益</b>：<b>+30% 至 +70%</b>（中性 13-15 元 / 乐观 18-22 元）</p>
+        <p><b>适合资金</b>：稳健型、价值投资风格</p>
+      </div>
+    </div>
+
+    <div class="card bull">
+      <h4><span class="icon">⚡</span> 天合光能：扭亏博弈</h4>
+      <div class="body">
+        <p><b>投资逻辑</b>：2026H1 接近扭亏 + 储能业务高增长 + 业绩弹性最大</p>
+        <p><b>持有周期</b>：<b>6-12 个月</b></p>
+        <p><b>目标收益</b>：<b>+40% 至 +100%</b>（若 H1 扭亏兑现）</p>
+        <p><b>适合资金</b>：激进型、事件驱动风格</p>
+      </div>
+    </div>
+
+    <div class="card neutral">
+      <h4><span class="icon">📊</span> 通威股份：周期反转</h4>
+      <div class="body">
+        <p><b>投资逻辑</b>：硅料价格触底反弹 + 一体化优势</p>
+        <p><b>持有周期</b>：<b>6-9 个月</b></p>
+        <p><b>目标收益</b>：<b>+25% 至 +50%</b></p>
+        <p><b>适合资金</b>：周期博弈、波段操作</p>
+      </div>
+    </div>
+
+    <div class="card neutral">
+      <h4><span class="icon">🌍</span> 晶澳科技：海外防御</h4>
+      <div class="body">
+        <p><b>投资逻辑</b>：海外占比 77% + 抗贸易摩擦 + 减亏兑现</p>
+        <p><b>持有周期</b>：<b>9-12 个月</b></p>
+        <p><b>目标收益</b>：<b>+20% 至 +40%</b></p>
+        <p><b>适合资金</b>：防御型、海外敞口偏好</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>9.3 哪个更值得投资？（终极推荐）</h3>
+  <div class="verdict bull">
+    <div class="rating bull">🏆 隆基绿能 = 长期价值首选</div>
+    <div class="horizon">配置策略 + 持仓周期 12-18 个月</div>
+    <div class="logic">
+      <b>综合判断</b>：在 5 家龙头中，<b>隆基绿能</b>是<b>确定性最高、护城河最深、反弹弹性合理</b>的首选；<b>天合光能</b>是<b>弹性最大、博弈空间最强</b>的次选；通威、晶澳适合波段操作；TCL 中环暂回避。<br><br>
+      <b>核心逻辑链</b>：行业反内卷（政策催化）→ 供给收缩（价格回升）→ BC 渗透率兑现（隆基差异化）→ 业绩拐点（2026Q4-2027Q1）→ 估值修复（PB 从 1.76 回到 2.5-3.0）→ 戴维斯双击。
+    </div>
+  </div>
+
+  <h3>9.4 最佳投资时机 ⏰</h3>
+
+  <div class="callout">
+    <strong>📅 时间窗口推演（按确定性排序）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>🟢 最佳买点 1：2026/08-09（半年报披露后）</b>
+        <ul style="margin-top:4px;padding-left:18px">
+          <li>条件：半年报实际亏损 <b>≤ 35 亿</b>（好于预告中值），股价未创新低</li>
+          <li>逻辑：利空兑现 = 估值见底 + 散户出清 + 机构低位建仓</li>
+          <li>预期买点：11.5-12.5 元</li>
+        </ul>
+      </li>
+      <li><b>🟢 最佳买点 2：2026/10-11（Q4 政策窗口）</b>
+        <ul style="margin-top:4px;padding-left:18px">
+          <li>条件：工信部供给侧文件出台 + 硅料价格反弹至 5 万+/吨</li>
+          <li>逻辑：政策催化 + 周期反转预期共振</li>
+          <li>预期买点：12.5-14.0 元</li>
+        </ul>
+      </li>
+      <li><b>🟡 次优买点：2027/01-03（业绩窗口）</b>
+        <ul style="margin-top:4px;padding-left:18px">
+          <li>条件：2026 年报预亏大幅收窄 + BC 占比超 60%</li>
+          <li>逻辑：业绩拐点确认，但弹性空间已缩小</li>
+          <li>预期买点：14-16 元</li>
+        </ul>
+      </li>
+      <li><b>🔴 规避时点：2026/07-08（半年报窗口）</b>
+        <ul style="margin-top:4px;padding-left:18px">
+          <li>原因：业绩预亏 + 情绪面承压 + 技术面弱势</li>
+          <li>建议：观望为主，等待利空兑现</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <h3>9.5 投资组合建议</h3>
+  <div class="strategy-grid">
+    <div class="strategy balanced">
+      <h4>💼 组合配置方案</h4>
+      <div class="target">推荐组合（光伏仓位占总资金 15-20%）</div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li><b>隆基绿能</b>：60%（核心仓位，龙头确定性）</li>
+        <li><b>天合光能</b>：25%（弹性仓位，扭亏博弈）</li>
+        <li><b>通威股份</b>：10%（周期仓位，硅料反弹）</li>
+        <li><b>晶澳科技</b>：5%（防御仓位，海外占比）</li>
+        <li><b>TCL 中环</b>：0%（暂回避）</li>
+        <li><b>止损纪律</b>：单一标的 ≤ 8%</li>
+      </ul>
+    </div>
+
+    <div class="strategy aggressive">
+      <h4>⚡ 激进型方案</h4>
+      <div class="target">博弈组合（光伏仓位占总资金 20-25%）</div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li><b>天合光能</b>：40%（H1 扭亏博弈）</li>
+        <li><b>隆基绿能</b>：35%（龙头保底）</li>
+        <li><b>爱旭股份</b>：15%（ABC 弹性）</li>
+        <li><b>通威股份</b>：10%（周期博弈）</li>
+        <li><b>持有周期</b>：3-6 个月</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>9.6 同业对比总结</h3>
+  <div class="callout bull">
+    <strong>📊 5 家龙头对比总览</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>亏损最少</b>：晶澳科技 -46 亿（最接近扭亏）</li>
+      <li><b>亏损改善最快</b>：隆基绿能（减亏 21.7 亿）</li>
+      <li><b>亏损最大</b>：TCL 中环 ≈ -100 亿（硅片环节压力）</li>
+      <li><b>现金流转正最强</b>：天合光能 +69 亿</li>
+      <li><b>技术路线最领先</b>：隆基绿能（HPBC 2.0 良率 97%+）</li>
+      <li><b>海外占比最高</b>：晶澳科技 77%</li>
+      <li><b>2026H1 扭亏预期最强</b>：天合光能（接近扭亏）</li>
+      <li><b>市值龙头</b>：隆基绿能 971 亿（绝对龙头）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 7. 情景预测 ========== -->
+<section id="s7">
+  <h2><span class="num">10</span>情景预测与敏感性分析</h2>
+
+  <h3>7.1 三档情景推演（12 个月视角）</h3>
+
+  <div class="grid-3">
+    <div class="card bear">
+      <h4><span class="icon">📉</span> 悲观情景（概率 25%）</h4>
+      <div class="body">
+        <p><b>假设</b>：行业反内卷失败 + 装机进一步下滑 + BC 出货不及预期</p>
+        <p>2026 营收：<b>650 亿</b>（-7.6%）</p>
+        <p>2026 归母：<b>-50 亿</b>（继续亏损）</p>
+        <p>目标股价：<b>9-10 元</b></p>
+        <p>对应市值：<b>680-760 亿</b></p>
+        <p>触发条件：行业整合失败、价格再下台阶</p>
+      </div>
+    </div>
+
+    <div class="card neutral">
+      <h4><span class="icon">📊</span> 中性情景（概率 50%）</h4>
+      <div class="body">
+        <p><b>假设</b>：反内卷温和推进 + 行业触底 + BC 渗透达 50%</p>
+        <p>2026 营收：<b>720 亿</b>（+2.4%）</p>
+        <p>2026 归母：<b>-15 至 +5 亿</b>（盈亏平衡附近）</p>
+        <p>目标股价：<b>13-15 元</b></p>
+        <p>对应市值：<b>980-1140 亿</b></p>
+        <p>触发条件：行业基本面修复 + BC 量产兑现</p>
+      </div>
+    </div>
+
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 乐观情景（概率 25%）</h4>
+      <div class="body">
+        <p><b>假设</b>：供给侧改革超预期 + BC 占比超 65% + 海外订单爆发</p>
+        <p>2026 营收：<b>850 亿</b>（+20.8%）</p>
+        <p>2026 归母：<b>+30 至 +50 亿</b>（扭亏为盈）</p>
+        <p>目标股价：<b>18-22 元</b></p>
+        <p>对应市值：<b>1360-1670 亿</b></p>
+        <p>触发条件：硅料价格反弹 + BC 高溢价 + 太空光伏催化</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>7.2 敏感性分析</h3>
+  <table class="data">
+    <colgroup><col style="width:24%"><col style="width:18%"><col style="width:18%"><col style="width:18%"><col style="width:22%"></colgroup>
+    <thead>
+      <tr><th>变量</th><th>悲观</th><th>中性</th><th>乐观</th><th>对股价影响</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2026 国内装机</td><td class="nowrap">150 GW</td><td class="nowrap">200 GW</td><td class="nowrap">250 GW</td><td>± 20%</td></tr>
+      <tr><td>硅料价格</td><td class="nowrap">3.5 万/吨</td><td class="nowrap">5 万/吨</td><td class="nowrap">7 万/吨</td><td>± 15%</td></tr>
+      <tr><td>BC 组件溢价</td><td class="nowrap">+0.05 元/W</td><td class="nowrap">+0.10 元/W</td><td class="nowrap">+0.15 元/W</td><td>± 25%</td></tr>
+      <tr><td>海外市占率</td><td class="nowrap">15%</td><td class="nowrap">20%</td><td class="nowrap">25%</td><td>± 10%</td></tr>
+      <tr><td>综合目标价区间</td><td><b>9-10 元</b></td><td><b>13-15 元</b></td><td><b>18-22 元</b></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.3 时间节奏推演</h3>
+  <div class="callout">
+    <strong>📅 关键时间节点</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>2026Q3</b>（7-9 月）：半年报披露（亏损扩大），情绪面可能继续承压</li>
+      <li><b>2026Q4</b>（10-12 月）：行业反内卷实质性政策落地 + 装机旺季，<b>关键拐点窗口</b></li>
+      <li><b>2027Q1</b>：BC 产能完全切换 + ACM 20GW 投产，业绩兑现窗口</li>
+      <li><b>2027 上半年</b>：若供给侧改革成功，可能进入盈利修复期</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 8. 操盘策略 ========== -->
+<section id="s8">
+  <h2><span class="num">11</span>操盘策略与买卖节奏</h2>
+
+  <!-- 评级总览 -->
+  <div class="verdict neutral">
+    <div class="rating">中性偏谨慎 · 左侧布局</div>
+    <div class="horizon">12 个月投资视角</div>
+    <div class="logic">
+      当前 12.81 元已接近 <b>52 周低点</b>，估值进入 <b>极端低位</b>（PB 1.76x，接近历史底部）；但行业反内卷效果尚未兑现、半年报预亏扩大、技术面弱势，<b>不建议在当前位置重仓抄底</b>。建议采取"<b>分批建仓 + 严格止损</b>"的左侧布局策略，目标价区间 <b>13-15 元（中性）</b>，关键阻力位 17 元，强支撑 11.41 元。
+    </div>
+  </div>
+
+  <!-- 评分 -->
+  <h3>8.1 多维度评分</h3>
+  <div class="score-board">
+    <div class="score"><div class="label">基本面</div><div class="val" style="color:var(--orange)">4.5 / 10</div><div class="desc">亏损但减亏中</div></div>
+    <div class="score"><div class="label">技术面</div><div class="val" style="color:var(--bear)">3.0 / 10</div><div class="desc">弱势格局</div></div>
+    <div class="score"><div class="label">资金面</div><div class="val" style="color:var(--bear)">3.5 / 10</div><div class="desc">北向减持</div></div>
+    <div class="score"><div class="label">政策面</div><div class="val" style="color:var(--bull)">7.0 / 10</div><div class="desc">反内卷催化</div></div>
+    <div class="score"><div class="label">行业景气</div><div class="val" style="color:var(--orange)">4.0 / 10</div><div class="desc">需求底部</div></div>
+    <div class="score"><div class="label">估值水平</div><div class="val" style="color:var(--bull)">7.5 / 10</div><div class="desc">PB 极端低位</div></div>
+    <div class="score"><div class="label">综合评分</div><div class="val" style="color:var(--orange)">4.9 / 10</div><div class="desc">中性偏空</div></div>
+  </div>
+
+  <h3>8.2 三档操盘方案</h3>
+
+  <div class="strategy-grid">
+    <div class="strategy conservative">
+      <h4>🛡 保守型（风险厌恶）</h4>
+      <div class="target">目标：等待右侧确认信号</div>
+      <div class="price">建仓区间：<b>11.5-12.5 元</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>5%</b></li>
+        <li>分 3 批建仓（11.5 / 12.0 / 12.5）</li>
+        <li><b>止损位</b>：10.50 元（破 52 周低点）</li>
+        <li><b>止盈位</b>：14.5 / 16.5 / 18.5 元分批</li>
+        <li>持有周期：6-12 个月</li>
+        <li>逻辑：极端估值 + 高安全边际</li>
+      </ul>
+    </div>
+
+    <div class="strategy balanced">
+      <h4>⚖ 平衡型（推荐）</h4>
+      <div class="target">目标：左侧分批布局</div>
+      <div class="price">建仓区间：<b>11.0-13.5 元</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>10%</b></li>
+        <li>分 4 批建仓（13 / 12 / 11.5 / 11）</li>
+        <li><b>止损位</b>：10.30 元（关键支撑失守）</li>
+        <li><b>止盈位</b>：15 / 17 / 19 元分批</li>
+        <li>持有周期：12-18 个月</li>
+        <li>逻辑：PB 1.76x + 反内卷催化 + BC 渗透</li>
+      </ul>
+    </div>
+
+    <div class="strategy aggressive">
+      <h4>⚡ 激进型（波段高手）</h4>
+      <div class="target">目标：博弈政策催化</div>
+      <div class="price">建仓区间：<b>10.5-11.5 元</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>15%</b></li>
+        <li>分 2 批建仓（11.5 / 10.8）</li>
+        <li><b>止损位</b>：10.00 元（破位减半仓）</li>
+        <li><b>止盈位</b>：14 / 17 / 20 元分批</li>
+        <li>持有周期：3-9 个月</li>
+        <li>逻辑：博弈 Q4 政策落地 + 业绩拐点</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>8.3 关键买卖节奏</h3>
+
+  <div class="callout bull">
+    <strong>🟢 买入触发条件（任一满足）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>股价企稳 <b>11.41 元（52 周低点）</b>不破，且日线 MACD 金叉</li>
+      <li>工信部/发改委出台 <b>实质性供给侧文件</b>（如产能整合具体名单）</li>
+      <li>半年报披露后股价 <b>不创新低</b>，且 Q3 业绩预告减亏幅度扩大</li>
+      <li>硅料价格反弹至 <b>5 万元/吨以上</b>，组件价格回升至 <b>0.8 元/W+</b></li>
+      <li>北向资金转为 <b>净流入</b>，单周净买入超 1 亿</li>
+      <li>BC 组件单季出货 <b>超 12GW</b>，市场对 BC 渗透率预期上修</li>
+    </ul>
+  </div>
+
+  <div class="callout bear">
+    <strong>🔴 卖出/止损触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>股价跌破 <b>10.30 元</b>，技术面确认破位，<b>减半仓</b></li>
+      <li>股价跌破 <b>9.50 元</b>，行业出现系统性风险，<b>清仓离场</b></li>
+      <li>半年报实际亏损 <b>超过 40 亿</b>，业绩拐点延后</li>
+      <li>实控人李振国 <b>质押爆仓或被动减持</b></li>
+      <li>行业反内卷政策 <b>力度低于预期</b>或被搁置</li>
+      <li>BC 技术路线 <b>被 TOPCon/HJT 反超</b>，丧失差异化</li>
+    </ul>
+  </div>
+
+  <h3>8.4 加减仓节奏图</h3>
+  <div class="chart-box">
+    <div class="chart-title">推荐分批建仓节奏（平衡型方案）</div>
+    <div class="stack-bar-row"><div class="name">第一批 (40%)</div><div class="stack-bar"><div style="width:43%;background:linear-gradient(90deg,#34d399,#60a5fa)">13.0 元</div></div><div class="val">D 0 当前</div></div>
+    <div class="stack-bar-row"><div class="name">第二批 (30%)</div><div class="stack-bar"><div style="width:39%;background:linear-gradient(90deg,#5eead4,#60a5fa)">12.0 元</div></div><div class="val">-7%</div></div>
+    <div class="stack-bar-row"><div class="name">第三批 (20%)</div><div class="stack-bar"><div style="width:38%;background:linear-gradient(90deg,#fbbf24,#fb923c)">11.5 元</div></div><div class="val">-12%</div></div>
+    <div class="stack-bar-row"><div class="name">第四批 (10%)</div><div class="stack-bar"><div style="width:36%;background:linear-gradient(90deg,#fb923c,#f87171)">11.0 元</div></div><div class="val">-15%</div></div>
+    <div class="chart-note">每批建仓间隔 1-2 周观察基本面/政策信号；如期间出现明确利好（如政策落地），可加速建仓。</div>
+  </div>
+</section>
+
+<!-- ========== 10. 太空光伏 ========== -->
+<section id="s10">
+  <h2><span class="num">12</span>太空光伏：隆基的第二增长曲线 🚀</h2>
+  <p><b>引言</b>：2026 年 1 月 23 日，隆基绿能因"政策暖风 + 太空光伏"双重催化，<b>10.01% 涨停封板</b>，主力资金净流入 <b>26 亿+</b> 元登顶沪市增仓榜，太空光伏已成为隆基最具想象空间的第二增长曲线。本章将系统性分析隆基在太空光伏的布局、行业进展、商业化时间表、投资回报与挑战。</p>
+
+  <div class="callout purple">
+    <strong>🔭 核心结论</strong>：太空光伏是 2026-2035 年间<b>最具颠覆性的清洁能源新赛道</b>，钙钛矿/叠层技术是最适合太空应用的方案，<b>2026-2028 是产业化关键窗口期</b>，<b>2028-2030 是商业化拐点</b>，<b>2030+ 进入 GW 级商业部署</b>。<b>隆基作为 BC 技术龙头 + 叠层效率世界纪录保持者</b>，是 A 股最具确定性的太空光伏受益标的之一。
+  </div>
+
+  <h3>12.1 太空光伏的概念与战略意义</h3>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🛰</span> 什么是太空光伏？</h4>
+      <div class="body">
+        <p>太空光伏（Space-based Solar Power，SBSP）指<b>部署在太空（卫星、空间站、月球）的太阳能电池系统</b>，通过无线传能（激光/微波）将电力输送回地面或卫星间。</p>
+        <p><b>3 大应用方向</b>：① <b>卫星太阳翼</b>（已商用）② <b>卫星星座供能</b>（LEO/MEO）③ <b>太空发电站</b>（GEO，月球）</p>
+        <p><b>核心优势</b>：无大气衰减（AM0 ≈ 1361 W/m²）、无昼夜、无天气、效率比地面高 30-40%</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">💡</span> 为什么是第二增长曲线？</h4>
+      <div class="body">
+        <p>① <b>市场想象空间</b>：全球 2035 年预计达 <b>10 亿美元</b>，中国供应链捕获 1.5 亿+ 美元</p>
+        <p>② <b>资本密集</b>：2023-2025 中国钙钛矿相关太空光伏融资 <b>28 亿美元</b></p>
+        <p>③ <b>差异化技术</b>：高效率、抗辐射、轻量化需求与隆基的 HPBC/HBC/叠层储备完美契合</p>
+        <p>④ <b>政策驱动</b>：千帆星座计划部署 <b>14,000 颗 LEO 卫星</b>，需求爆发</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>12.2 隆基在太空光伏的深度布局</h3>
+
+  <h4>① 未来能源太空实验室（2022 年成立）</h4>
+  <div class="callout bull">
+    <strong>🚀 隆基早已布局</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>2022 年 9 月</b>：隆基成立"<b>未来能源太空实验室</b>"，专注太空光伏前沿技术研发</li>
+      <li>实验室核心工作：钙钛矿/晶硅叠层在太空环境下的<b>抗辐射、轻量化、温度稳定性</b>验证</li>
+      <li><b>战略意义</b>：比 2026 年市场炒作太空光伏概念<b>领先 4 年布局</b></li>
+    </ul>
+  </div>
+
+  <h4>② 技术储备：四代技术矩阵（覆盖地面 + 太空全场景）</h4>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🔬</span> HPBC 2.0（主力）</h4>
+      <div class="body">
+        <p>量产效率：<b>26.6%</b></p>
+        <p>良率：<b>≥ 97%</b></p>
+        <p><b>太空应用潜力</b>：高效率 + 抗辐射封装潜力</p>
+        <p>状态：已规模量产</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🧬</span> HBC 异质结背接触</h4>
+      <div class="body">
+        <p>转换效率：<b>27.30%</b>（世界纪录）</p>
+        <p><b>太空应用潜力</b>：HJT 温度系数最优（-0.25%/℃），最适合<b>高温太空环境</b></p>
+        <p>状态：中试量产</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> HIBC（太空专用）</h4>
+      <div class="body">
+        <p>HIBC 转换效率：<b>28.13%</b></p>
+        <p>基于 HIBC 组件效率：<b>26.4%+</b></p>
+        <p><b>太空应用潜力</b>：HJT+BC 双重优势，最适合太空</p>
+        <p>状态：德国 ISFH 认证</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bull" style="margin-top:14px">
+    <strong>🏆 钙钛矿/晶硅叠层 = 太空光伏终极方案</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>2026 年 7 月 14 日</b>：隆基晶硅-钙钛矿叠层太阳电池转换效率达 <b>35.5%</b>，<b>再次刷新世界纪录</b>（欧洲 ESTI 权威认证）</li>
+      <li><b>核心优势</b>：① 效率比晶硅高 50%+；② 抗辐射能力远超砷化镓和晶硅；③ 轻质柔性可卷曲；④ 制造成本低</li>
+      <li><b>行业判断</b>：浙商证券明确指出"<b>钙钛矿正成为太空光伏应用的理想选择，有望率先实现大规模商业化</b>"</li>
+    </ul>
+  </div>
+
+  <h4>③ 2026 年太空光伏催化大事件</h4>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:30%"><col style="width:28%"></colgroup>
+    <thead><tr><th>日期</th><th>事件</th><th>技术意义</th><th>市场反应</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nowrap">2022-09</td>
+        <td><b>未来能源太空实验室</b>成立</td>
+        <td>提前 4 年布局太空光伏</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-01-23</td>
+        <td><b>太空光伏概念股涨停</b></td>
+        <td>政策暖风 + 太空光伏双重催化</td>
+        <td><b>主力净流入 26 亿+</b>，登顶沪市增仓榜</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-07-14</td>
+        <td><b>钙钛矿叠层效率 35.5%</b></td>
+        <td>刷新世界纪录，欧洲 ESTI 认证</td>
+        <td>技术溢价兑现</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026 计划</td>
+        <td>BC 占比 ≥65%、海外占比 ≥50%</td>
+        <td>为太空产品储备产能与技术</td>
+        <td>BC 技术护城河强化</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026 长期</td>
+        <td><b>HIBC/HBC 太空产品迭代</b></td>
+        <td>HJT+BC 双重优势适合太空</td>
+        <td>潜在客户：卫星厂商</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>12.3 全球太空光伏产业进展</h3>
+
+  <h4>主要经济体布局对比</h4>
+  <table class="data">
+    <colgroup><col style="width:15%"><col style="width:22%"><col style="width:21%"><col style="width:42%"></colgroup>
+    <thead><tr><th>国家/地区</th><th>核心计划</th><th>关键时间表</th><th>技术路线</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>🇨🇳 中国</b></td>
+        <td>航天局 SBSP 路线图 + 千帆星座 14000 颗</td>
+        <td>2028-2029 100kW 示范；2030 MW 级试点；2050 GW 级商业</td>
+        <td><b>钙钛矿/叠层 + 砷化镓</b>（协鑫、中航、宁德时代）</td>
+      </tr>
+      <tr>
+        <td>🇬🇧 英国</td>
+        <td>Space Energy Initiative</td>
+        <td>2030 年 30MW 示范；2040 年全面商业</td>
+        <td>无线微波传能</td>
+      </tr>
+      <tr>
+        <td>🇺🇸 美国</td>
+        <td>Caltech SSPD-1（2023 发射）</td>
+        <td>2026-2030 多项示范</td>
+        <td>模块化超轻光伏 + 无线传能</td>
+      </tr>
+      <tr>
+        <td>🇯🇵 日本</td>
+        <td>JAXA / METI 联合</td>
+        <td>2025 已完成 1kW 微波传能；~2040 GW 级系统</td>
+        <td>轻量模块化光伏</td>
+      </tr>
+      <tr>
+        <td>🇪🇺 欧空局</td>
+        <td>SOLARIS 研发计划</td>
+        <td>2030+ 决策点</td>
+        <td>无线激光 + 微波传能</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>中国主要参与者（隆基的竞争对手与合作伙伴）</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏭</span> 协鑫光电（最强对手）</h4>
+      <div class="body">
+        <p><b>2025-10-29</b>：GW 级钙钛矿产线首片组件（2400×1150mm）下线，<b>全球钙钛矿尺寸最大</b></p>
+        <p><b>2023-12</b>：朱雀二号火箭将协鑫钙钛矿送上太空（首次"上天"）</p>
+        <p><b>2026 计划</b>：年底再发射搭载钙钛矿的算力卫星</p>
+        <p><b>融资</b>：2026/06 完成 5 亿 B+ 轮（红杉、IDG 参投）</p>
+        <p><b>核心观点</b>：朱共山认为"<b>耐辐射封装一旦过关，钙钛矿/叠层有望 5-10 年内切入太空应用</b>"</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🔋</span> 其他主要玩家</h4>
+      <div class="body">
+        <p><b>宁德时代-尚纬股份</b>：合资建 MW 级产线（四川甘孜）</p>
+        <p><b>中航工业 / 中电科</b>：2027 年前投入 ~150 亿</p>
+        <p><b>三安光电</b>：钙钛矿-CIGS 叠层</p>
+        <p><b>晶科能源</b>：钙钛矿/TOPCon 叠层</p>
+        <p><b>天合光能</b>：钙钛矿/晶硅叠层</p>
+        <p><b>宝馨科技</b>：钙钛矿/HJT 叠层</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>12.4 商业化时间表与里程碑</h3>
+  <div class="chart-box">
+    <div class="chart-title">太空光伏商业化关键时间表（2026-2050）</div>
+    <div class="stack-bar-row">
+      <div class="name">2026（短期）</div>
+      <div class="stack-bar"><div style="width:18%;background:linear-gradient(90deg,#34d399,#5eead4)">LEO 示范</div></div>
+      <div class="val">200-500W</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2027-2028（关键期）</div>
+      <div class="stack-bar"><div style="width:35%;background:linear-gradient(90deg,#60a5fa,#5eead4)">MW 级产线</div></div>
+      <div class="val">MW 级</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2029-2030（拐点）</div>
+      <div class="stack-bar"><div style="width:50%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">GEO 示范</div></div>
+      <div class="val">2-5kW</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030-2032（试点）</div>
+      <div class="stack-bar"><div style="width:65%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">SPS 试点</div></div>
+      <div class="val">10-50MW</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2033+（商业化）</div>
+      <div class="stack-bar"><div style="width:80%;background:linear-gradient(90deg,#fb923c,#fbbf24)">SBSP 商业</div></div>
+      <div class="val">100MW+</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2050（远景）</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#f87171,#fb923c)">GW 级商业</div></div>
+      <div class="val">GW 级</div>
+    </div>
+    <div class="chart-note">资料来源：浙商证券、协鑫 SNEC 2026、英国 Space Energy Initiative、Caltech SSPD-1、JAXA、ESA SOLARIS 等公开资料。</div>
+  </div>
+
+  <h4>三阶段节奏预测</h4>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:30%"><col style="width:24%"><col style="width:28%"></colgroup>
+    <thead><tr><th>阶段</th><th>时间窗口</th><th>市场状态</th><th>隆基收益预期</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>① 概念导入期</b></td>
+        <td>2026（当前）</td>
+        <td>LEO 卫星示范，市场概念炒作</td>
+        <td>估值溢价 +50%，但无实质业绩</td>
+      </tr>
+      <tr>
+        <td><b>② 技术验证期</b></td>
+        <td>2027-2029</td>
+        <td>MW 级产线投产、抗辐射验证</td>
+        <td>钙钛矿/叠层技术验证后<b>订单开始放量</b></td>
+      </tr>
+      <tr>
+        <td><b>③ 商业回报期</b></td>
+        <td>2030+</td>
+        <td>GEO 示范 + 卫星星座部署 + SBSP 商业</td>
+        <td>新增长曲线贡献 <b>5-10% 营收</b>（2030E）+ 估值重估</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>12.5 投资价值与回报测算</h3>
+
+  <h4>① 概念期回报（2026 当前）</h4>
+  <div class="callout">
+    <strong>📈 A 股主题炒作弹性</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>案例</b>：2026-01-23 隆基单日涨停 10.01%，主力净流入 <b>26 亿+</b></li>
+      <li><b>主题驱动</b>：政策暖风 + 太空光伏概念叠加，<b>估值溢价短期可达 30-50%</b></li>
+      <li><b>风险</b>：纯概念炒作，缺乏业绩支撑，回撤风险大</li>
+    </ul>
+  </div>
+
+  <h4>② 中期回报（2027-2030）</h4>
+  <div class="callout bull">
+    <strong>💰 中长期价值锚定</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>营收增量</b>：2030 年全球太空光伏市场 <b>10 亿美元</b>，中国供应链 1.5 亿+ 美元</li>
+      <li><b>隆基份额</b>：若占中国钙钛矿产能 30%（按 BC 70GW+ 储备）</li>
+      <li><b>增量营收</b>：2030E 太空业务 <b>30-50 亿元</b>，对应公司占比 <b>3-5%</b></li>
+      <li><b>估值溢价</b>：类比马斯克 SpaceX 星链估值模式，<b>PE 可上修 20-30%</b></li>
+    </ul>
+  </div>
+
+  <h4>③ 长期回报（2030+ 商业化阶段）</h4>
+  <div class="callout purple">
+    <strong>🚀 终极回报测算（2050 年远景）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>中国 SBSP 目标</b>：2050 年 GW 级商业部署</li>
+      <li><b>市场规模</b>：保守按 LCOE 1 元/kWh、年发电 1000 小时计算，<b>GW 级年发电收入数十亿元</b></li>
+      <li><b>隆基角色</b>：钙钛矿/叠层组件核心供应商，市占率 20-30%</li>
+      <li><b>潜在回报</b>：长期看，<b>太空光伏有望成为隆基第三大业务（光伏制造 + 储能 + 太空）</b></li>
+      <li><b>估值锚</b>：参考全球 SBSP 独角兽估值（Caltech SSPD 项目公司估数十亿美元），隆基作为 A 股龙头将享有<b>主题稀缺性溢价</b></li>
+    </ul>
+  </div>
+
+  <h3>12.6 关键挑战与风险</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 技术挑战</h4>
+      <div class="body">
+        <p><b>① 抗辐射封装</b>：特殊玻璃价格<b>可能远超材料本身</b>（协鑫田清勇警告）</p>
+        <p><b>② 太空环境</b>：极端温差（-180℃ ~ +150℃）、原子氧侵蚀、紫外衰减</p>
+        <p><b>③ 轻量化</b>：卫星每减重 1kg 价值 5-10 万美元，柔性钙钛矿是方向</p>
+        <p><b>④ 寿命要求</b>：低轨 5-7 年，GEO 15+ 年，远超地面 25 年质保</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 工程与商业挑战</h4>
+      <div class="body">
+        <p><b>① 发射成本</b>：Starship 等可重复使用火箭是经济性门槛（每 kg 成本需降至 &lt;$500）</p>
+        <p><b>② 无线传能</b>：GW 级空间-地面传能效率需突破，频谱分配待定</p>
+        <p><b>③ 在轨组装</b>：公里级结构的机器人/自主组装未解决</p>
+        <p><b>④ 资本密集</b>：首批商业 SBSP 单位成本 $1000-2000/W，需规模化降本</p>
+        <p><b>⑤ 替代竞争</b>：地面光伏+储能、核电 SMR、地热等也在快速进步</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚠</span> 投资风险</h4>
+      <div class="body">
+        <p><b>① 估值泡沫</b>：A 股主题炒作热度高，业绩兑现周期长达 5-10 年</p>
+        <p><b>② 政策不及预期</b>：若国家航天局 SBSP 路线图推迟，商业化延后</p>
+        <p><b>③ 技术替代</b>：若出现比钙钛矿更适合太空的方案（如多结砷化镓突破成本瓶颈）</p>
+        <p><b>④ 国际竞争</b>：英国/美国/日本 SBSP 进度追赶，专利壁垒</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">💎</span> 隆基相对优势</h4>
+      <div class="body">
+        <p><b>① 技术领先</b>：HPBC 2.0 良率 97%、HIBC 28.13%、叠层 35.5% 世界纪录</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>12.7 太空光伏对隆基估值的影响</h3>
+
+  <h4>估值情景分析</h4>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 乐观情景（2030E）</h4>
+      <div class="body">
+        <p><b>太空业务营收</b>：50-80 亿元（占比 5-8%）</p>
+        <p><b>毛利率</b>：35-45%（远高于地面 8%）</p>
+        <p><b>贡献净利</b>：15-30 亿元</p>
+        <p><b>估值溢价</b>：PE 上修至 <b>30-40x</b>，市值冲击 <b>1500-2000 亿</b></p>
+        <p><b>目标价</b>：<b>20-26 元</b></p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📊</span> 中性情景（2030E）</h4>
+      <div class="body">
+        <p><b>太空业务营收</b>：20-30 亿元（占比 2-3%）</p>
+        <p><b>毛利率</b>：25-30%</p>
+        <p><b>贡献净利</b>：5-10 亿元</p>
+        <p><b>估值溢价</b>：PE 上修至 <b>22-28x</b>，市值 <b>1100-1300 亿</b></p>
+        <p><b>目标价</b>：<b>15-17 元</b></p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">📉</span> 悲观情景（2030E）</h4>
+      <div class="body">
+        <p><b>太空业务营收</b>：5-10 亿元（占比 &lt;1%）</p>
+        <p><b>毛利率</b>：15-20%</p>
+        <p><b>贡献净利</b>：≤2 亿元</p>
+        <p><b>估值不变</b>：仅维持地面光伏逻辑</p>
+        <p><b>目标价</b>：<b>9-12 元</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict bull">
+    <div class="rating bull">🚀 太空光伏 = 隆基估值溢价的关键变量</div>
+    <div class="horizon">2026-2030 主题催化 + 业绩兑现双驱动</div>
+    <div class="logic">
+      <b>结论</b>：太空光伏是隆基 <b>2026-2030 年最具想象空间的第二增长曲线</b>。从概念导入（2026 当前）到技术验证（2027-2029）再到商业回报（2030+），三阶段对应不同的投资逻辑：<br><br>
+      <b>① 短期</b>（2026）：A 股主题炒作期，<b>弹性最大</b>，但需注意回撤风险<br>
+      <b>② 中期</b>（2027-2030）：业绩验证期，<b>估值与业绩共振</b>，是最佳布局窗口<br>
+      <b>③ 长期</b>（2030+）：商业兑现期，<b>第三大业务成型</b>，享受长期复利<br><br>
+      <b>关键里程碑</b>：2027 年 MW 级产线投产、2029 年 GEO 示范、2030 年商业试点，这三个节点将是估值重估的关键催化点。
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>⚠ 太空光伏投资纪律</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>①</b> 太空光伏是 <b>5-10 年长期赛道</b>，不适合短线博弈</li>
+      <li><b>②</b> 短期主题炒作情绪化严重，<b>避免追高</b></li>
+      <li><b>③</b> 关注协鑫、宁德时代、中航工业等竞争对手进度</li>
+      <li><b>④</b> 跟踪国家航天局 SBSP 路线图进展</li>
+      <li><b>⑤</b> 隆基作为 A 股龙头，<b>享受主题稀缺性溢价</b>但也需警惕"利好出尽"</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 9. 风险 ========== -->
+<section id="s9">
+  <h2><span class="num">13</span>风险提示与投资纪律</h2>
+
+  <h3>9.1 主要风险因素</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 行业层面风险</h4>
+      <div class="body">
+        <p><b>① 全球需求收缩超预期</b>：BNEF 预警 2026 全球装机 20 年来首跌，若实际跌幅超 15% 则行业出清时间延长</p>
+        <p><b>② 反内卷政策不及预期</b>：若 2026Q4 政策力度低于预期或被搁置，行业整合时间延后</p>
+        <p><b>③ 技术路线被反超</b>：BC 占比若不能突破 65%，可能被 TOPCon/HJT 抢占高端市场</p>
+        <p><b>④ 海外贸易摩擦</b>：东南亚/欧洲反倾销 + 美国关税</p>
+      </div>
+    </div>
+
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 公司层面风险</h4>
+      <div class="body">
+        <p><b>① 半年报预亏扩大</b>：-34~-38 亿，若实际超 40 亿则业绩拐点延后</p>
+        <p><b>② 应收账款风险</b>：下游电站开发商资金链紧张，回款周期延长</p>
+        <p><b>③ 存货跌价风险</b>：硅料/组件价格继续下跌可能引发大额减值</p>
+        <p><b>④ 实控人质押风险</b>：李振国剩余质押 2.06 亿股，需关注质押率变化</p>
+      </div>
+    </div>
+
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 市场层面风险</h4>
+      <div class="body">
+        <p><b>① 估值陷阱</b>：PB 1.76 看似低位，但若业绩继续恶化可能"低估值陷阱"</p>
+        <p><b>② 北向资金持续流出</b>：2026Q1 已减持 8210 万股，外资看空情绪仍在</p>
+        <p><b>③ 散户高位接盘</b>：股东户数从 70 万 → 95 万，散户筹码较重，反弹阻力大</p>
+        <p><b>④ 板块联动</b>：半导体/AI 板块虹吸效应，光伏资金被分流</p>
+      </div>
+    </div>
+
+    <div class="card neutral">
+      <h4><span class="icon">📋</span> 投资纪律建议</h4>
+      <div class="body">
+        <p><b>① 仓位管理</b>：单一标的 ≤ 10%，行业敞口 ≤ 20%</p>
+        <p><b>② 止损纪律</b>：跌破 10.30 元无条件减仓</p>
+        <p><b>③ 业绩跟踪</b>：每月跟踪硅料/组件价格、BC 出货、机构持仓</p>
+        <p><b>④ 政策跟踪</b>：关注工信部、发改委光伏行业文件</p>
+        <p><b>⑤ 心理建设</b>：左侧布局需耐心，避免追涨杀跌</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bear">
+    <strong>🚨 最重要纪律</strong>：隆基绿能当前处于"<b>基本面左侧 + 技术面左侧 + 资金面左侧</b>"，属于"<b>三杀</b>"格局。这意味着：<br>
+    • 即使 PB 极端低位，也不构成立即买入理由<br>
+    • 必须等待"<b>三好信号</b>"：基本面（业绩拐点）+ 技术面（MACD 金叉）+ 资金面（北向回流）<br>
+    • 期间任何单一信号出现，可分批建仓 <b>30%-50%</b> 仓位<br>
+    • 三好信号齐现，才考虑 <b>重仓</b>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，<b>不构成任何投资建议</b>。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询，市场有风险，投资需谨慎。
+  </div>
+  © 2026 隆基绿能 (601012.SH) 专业投研分析与操盘策略（含 5 龙头全方位对比） · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
