@@ -1,11 +1,753 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 投研视界 · A股行业深度分析报告</title>
+<style>
+:root{
+  --bg:#0a0e1a;
+  --bg-2:#0f1729;
+  --panel:#1a2440;
+  --panel-2:#243358;
+  --line:#2d3d68;
+  --text:#e8eef9;
+  --muted:#8d9bb8;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+a{text-decoration:none;color:inherit}
+
+body{background:
+  radial-gradient(circle at 15% 20%,rgba(94,234,212,.08),transparent 40%),
+  radial-gradient(circle at 85% 80%,rgba(167,139,250,.08),transparent 40%),
+  radial-gradient(circle at 50% 50%,rgba(96,165,250,.05),transparent 50%),
+  var(--bg);
+  min-height:100vh}
+
+header.hero{
+  border-bottom:1px solid var(--line);
+  padding:80px 24px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header.hero::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+.hero-badge{
+  display:inline-block;
+  padding:6px 16px;
+  background:rgba(94,234,212,.08);
+  border:1px solid rgba(94,234,212,.25);
+  color:var(--accent);
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:20px;
+  font-weight:500;
+}
+h1.title{
+  font-size:48px;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 50%,var(--purple) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:16px;
+  letter-spacing:-1px;
+}
+h1.title .em{font-size:48px}
+.hero-sub{
+  font-size:16px;
+  color:var(--muted);
+  max-width:680px;
+  margin:0 auto 32px;
+}
+.hero-stats{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  margin-top:32px;
+  flex-wrap:wrap;
+}
+.hero-stats .stat{
+  text-align:center;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px 28px;
+  min-width:140px;
+}
+.hero-stats .stat .num{
+  font-size:28px;
+  font-weight:800;
+  color:var(--accent);
+  display:block;
+}
+.hero-stats .stat .desc{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.wrap{max-width:1400px;margin:0 auto;padding:0 24px}
+
+nav.toc-section{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px 28px;
+  margin:-30px auto 40px;
+  position:relative;
+  z-index:10;
+  backdrop-filter:blur(10px);
+  max-width:1320px;
+}
+nav.toc-section h3{
+  font-size:14px;
+  color:var(--accent);
+  margin-bottom:14px;
+  font-weight:600;
+  letter-spacing:.5px;
+}
+.cat-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.cat-nav a{
+  padding:8px 16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:13px;
+  color:var(--text);
+  transition:all .2s;
+}
+.cat-nav a:hover{
+  background:rgba(94,234,212,.12);
+  border-color:var(--accent);
+  color:var(--accent);
+  transform:translateY(-2px);
+}
+
+/* 分类区块 */
+.cat-block{
+  margin-bottom:36px;
+}
+.cat-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+  padding:0 4px;
+}
+.cat-icon{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  flex-shrink:0;
+}
+.cat-icon.energy{background:linear-gradient(135deg,var(--orange),var(--purple))}
+.cat-icon.future{background:linear-gradient(135deg,var(--purple),var(--accent-2))}
+.cat-icon.app{background:linear-gradient(135deg,var(--accent),var(--bull))}
+.cat-icon.semi{background:linear-gradient(135deg,var(--neutral),var(--orange))}
+.cat-title{
+  font-size:18px;
+  font-weight:700;
+  color:var(--text);
+}
+.cat-desc{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:2px;
+}
+.cat-count{
+  margin-left:auto;
+  background:rgba(94,234,212,.12);
+  color:var(--accent);
+  padding:4px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* 4 列统一网格，每行 4 块 */
+.articles{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.article{
+  background:linear-gradient(145deg,var(--panel),var(--bg-2));
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  transition:all .3s;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.article:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent);
+  box-shadow:0 12px 30px rgba(94,234,212,.12);
+}
+.article::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s;
+}
+.article:hover::before{transform:scaleX(1)}
+.article-header{
+  padding:16px 18px 12px;
+  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.article-tags{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.tag{
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:4px;
+  font-size:10px;
+  font-weight:600;
+  background:rgba(96,165,250,.12);
+  color:var(--accent-2);
+}
+.tag.bull{background:rgba(52,211,153,.12);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.12);color:var(--bear)}
+.tag.purple{background:rgba(167,139,250,.12);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.12);color:var(--orange)}
+.tag.pink{background:rgba(244,114,182,.12);color:var(--pink)}
+.article-title{
+  font-size:14.5px;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.4;
+  margin-bottom:4px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.article-meta{
+  display:flex;
+  gap:10px;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:6px;
+}
+.article-meta span{display:flex;align-items:center;gap:4px}
+.article-body{
+  padding:12px 18px;
+  flex:1;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.article-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:6px;
+  padding:0 18px 12px;
+}
+.stat-item{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:6px 8px;
+  text-align:center;
+}
+.stat-item .label{
+  font-size:9px;
+  color:var(--muted);
+}
+.stat-item .val{
+  font-size:13px;
+  font-weight:700;
+  color:var(--accent);
+  margin-top:1px;
+}
+.article-footer{
+  padding:10px 18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,.2);
+}
+.read-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 14px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:var(--bg);
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+  transition:all .2s;
+}
+.read-btn:hover{
+  transform:translateX(3px);
+  box-shadow:0 4px 12px rgba(94,234,212,.3);
+}
+.article-date{
+  font-size:10px;
+  color:var(--muted);
+}
+
+.feature-block{
+  background:linear-gradient(135deg,rgba(94,234,212,.08),rgba(96,165,250,.05));
+  border:1px solid rgba(94,234,212,.25);
+  border-radius:16px;
+  padding:24px 28px;
+  margin-bottom:40px;
+  position:relative;
+  overflow:hidden;
+}
+.feature-block::before{
+  content:"";position:absolute;top:-50%;right:-5%;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(94,234,212,.15),transparent 60%);
+  border-radius:50%;
+}
+.feature-title{
+  font-size:18px;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:6px;
+  position:relative;
+}
+.feature-desc{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:14px;
+  position:relative;
+}
+.feature-tags{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  position:relative;
+}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:40px 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:60px;
+}
+footer .links{
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
+footer .links a{
+  color:var(--text);
+  font-size:13px;
+  transition:color .2s;
+}
+footer .links a:hover{color:var(--accent)}
+footer .copy{margin-top:10px;opacity:.7}
+
+@media(max-width:1280px){
+  .articles{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:960px){
+  .articles{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .articles{grid-template-columns:1fr}
+  header.hero{padding:50px 20px 40px}
+  h1.title{font-size:32px}
+  .hero-stats{gap:12px}
+  .hero-stats .stat{padding:12px 16px;min-width:110px}
+  .hero-stats .stat .num{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-badge">📈 INVESTMENT RESEARCH PORTAL</div>
+  <h1 class="title">投研视界 · <span class="em">A股行业深度分析</span></h1>
+  <p class="hero-sub">
+    聚焦未来产业、新质生产力、终极能源等核心赛道<br>
+    站在基金经理视角 · 系统性投研分析 · 可落地的操盘策略
+  </p>
+  <div class="hero-stats">
+    <div class="stat"><span class="num">9</span><span class="desc">深度报告</span></div>
+    <div class="stat"><span class="num">10+</span><span class="desc">行业方向</span></div>
+    <div class="stat"><span class="num">70+</span><span class="desc">A 股龙头</span></div>
+    <div class="stat"><span class="num">2026.07</span><span class="desc">最新数据</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- 分类导航 -->
+<nav class="toc-section">
+  <h3>🏷️ 报告主题分类</h3>
+  <div class="cat-nav">
+    <span class="tag" style="background:rgba(251,146,60,.12);color:var(--orange)">⚡ 终极能源</span>
+    <span class="tag" style="background:rgba(167,139,250,.12);color:var(--purple)">🚀 未来产业</span>
+    <span class="tag" style="background:rgba(52,211,153,.12);color:var(--bull)">🤖 智能应用</span>
+    <span class="tag" style="background:rgba(251,191,36,.12);color:var(--neutral)">🔌 半导体</span>
+  </div>
+</nav>
+
+<!-- 特别推荐 -->
+<div class="feature-block">
+  <div class="feature-title">⭐ 编辑特别推荐</div>
+  <div class="feature-desc">9 篇深度报告，按 4 大主题分类，每行 4 块均匀布局</div>
+  <div class="feature-tags">
+    <span class="tag pink">太空光伏</span>
+    <span class="tag orange">可控核聚变</span>
+    <span class="tag purple">具身智能</span>
+    <span class="tag bear">脑机接口</span>
+    <span class="tag">商业航天</span>
+    <span class="tag">6G 通信</span>
+    <span class="tag purple">十五五未来产业</span>
+  </div>
+</div>
+
+<!-- ========== ⚡ 终极能源（4 篇）========== -->
+<div class="cat-block">
+  <div class="cat-header">
+    <div class="cat-icon energy">⚡</div>
+    <div>
+      <div class="cat-title">终极能源</div>
+      <div class="cat-desc">太空光伏 · 可控核聚变 · 隆基绿能 · 半导体底座</div>
+    </div>
+    <span class="cat-count">4 篇</span>
+  </div>
+  <div class="articles">
+    <a href="太空光伏_vs_可控核聚变_终极能源对比.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag pink">太空光伏</span>
+          <span class="tag orange">核聚变</span>
+          <span class="tag purple">终极能源</span>
+        </div>
+        <div class="article-title">🚀 太空光伏 vs ⚛️ 可控核聚变：终极能源对决</div>
+        <div class="article-meta">
+          <span>📊 9 维度对比</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        太空光伏（2026 已商用，领先 5 年）vs 可控核聚变（2050 终极能源，40 万亿市场）。9 维度全方位对比：双线平衡配置，太空 60% + 核聚变 40%。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">商业化领先</div><div class="val">5 年</div></div>
+        <div class="stat-item"><div class="label">2050 市场</div><div class="val">40 万亿</div></div>
+        <div class="stat-item"><div class="label">2026 市场</div><div class="val">1.5 万亿</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">6.5 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">深度对比 →</span>
+      </div>
+    </a>
+
+    <a href="隆基绿能601012_专业投研分析与操盘策略.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag">光伏龙头</span>
+          <span class="tag pink">太空光伏</span>
+          <span class="tag bull">BC 技术</span>
+        </div>
+        <div class="article-title">隆基绿能 601012 · 专业投研分析</div>
+        <div class="article-meta">
+          <span>🏭 光伏一体化龙头</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        隆基作为 BC 技术全球龙头 + 钙钛矿叠层 35.5% 世界纪录保持者，详细分析其在太空光伏的深度布局 + 12 章系统性投研框架。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">当前股价</div><div class="val">12.81</div></div>
+        <div class="stat-item"><div class="label">PE</div><div class="val">168x</div></div>
+        <div class="stat-item"><div class="label">2025 钙钛矿</div><div class="val">35.5%</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">4.9 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="可控核聚变_产业链投研分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag orange">可控核聚变</span>
+          <span class="tag">12 家龙头</span>
+          <span class="tag purple">终极能源</span>
+        </div>
+        <div class="article-title">⚛️ 可控核聚变：终极能源 全产业链</div>
+        <div class="article-meta">
+          <span>🔥 长期投资标的</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        EAST 1 亿度 1066 秒世界纪录 + BEST 2027 建成 + CFETR 2035 + 2050 商用。永鼎/联创/安泰等 12 家 A 股龙头深度对比 + 商业化三阶段路径。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">2035 中国</div><div class="val">2.26 万亿</div></div>
+        <div class="stat-item"><div class="label">2050 全球</div><div class="val">40 万亿</div></div>
+        <div class="stat-item"><div class="label">EAST 纪录</div><div class="val">1066 秒</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">6.5 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="A股半导体上市公司2024-2025财务全景与股价分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag">半导体</span>
+          <span class="tag bull">存储涨价</span>
+          <span class="tag">寒武纪</span>
+        </div>
+        <div class="article-title">A 股半导体 12 家龙头 2024-2025 财务全景</div>
+        <div class="article-meta">
+          <span>💾 存储 + 5 大龙头</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        覆盖中芯国际/海光信息/寒武纪/北方华创/中微公司/韦尔股份/兆易创新/澜起科技/长电科技/通富微电 12 家 A 股代表性半导体龙头。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">A 股龙头</div><div class="val">12 家</div></div>
+        <div class="stat-item"><div class="label">2025 合计</div><div class="val">2389 亿</div></div>
+        <div class="stat-item"><div class="label">报告章节</div><div class="val">13 章</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">⭐</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ========== 🚀 未来产业（4 篇）========== -->
+<div class="cat-block">
+  <div class="cat-header">
+    <div class="cat-icon future">🚀</div>
+    <div>
+      <div class="cat-title">未来产业</div>
+      <div class="cat-desc">十五五 · 6G 通信 · 商业航天 · 脑机接口</div>
+    </div>
+    <span class="cat-count">4 篇</span>
+  </div>
+  <div class="articles">
+    <a href="十五五六大未来产业_投研分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag purple">十五五</span>
+          <span class="tag pink">量子科技</span>
+          <span class="tag">具身智能</span>
+        </div>
+        <div class="article-title">🏛 十五五六大未来产业：全方位投研分析</div>
+        <div class="article-meta">
+          <span>🏛 政策驱动</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        量子科技、具身智能、6G、脑机接口、生物制造、未来能源六大方向系统性分析。2030 总市场 7-10 万亿，20+ A 股龙头全面覆盖。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">2030 市场</div><div class="val">7-10 万亿</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">6.7 / 10</div></div>
+        <div class="stat-item"><div class="label">六大方向</div><div class="val">6 个</div></div>
+        <div class="stat-item"><div class="label">报告章节</div><div class="val">10 章</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="6G通信_全产业链投研分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag">6G 通信</span>
+          <span class="tag purple">卫星互联网</span>
+          <span class="tag">1Tbps</span>
+        </div>
+        <div class="article-title">📡 6G 通信：下一代制高点 全产业链</div>
+        <div class="article-meta">
+          <span>📶 2030 商用</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        6G 是下一代通信制高点。从 5G 的 1 Gbps 到 6G 的 1 Tbps（1000 倍跃升）。中兴通讯 / 中国卫通 / 信科移动等 20+ 龙头深度对比。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">峰值速率</div><div class="val">1 Tbps</div></div>
+        <div class="stat-item"><div class="label">2030 全球</div><div class="val">4000 亿 $</div></div>
+        <div class="stat-item"><div class="label">2035 全球</div><div class="val">2 万亿 $</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">6.5 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="商业航天_全产业链投研分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag">政策强催化</span>
+          <span class="tag bull">千帆星座</span>
+          <span class="tag">三年计划</span>
+        </div>
+        <div class="article-title">🚀 商业航天：万亿新蓝海 全产业链</div>
+        <div class="article-meta">
+          <span>🛰️ 1.4 万颗部署</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        2026 年中国商业航天市场 1.5 万亿，2025-2030 CAGR 18-22%。中国卫星/上海瀚讯/信维通信/中国卫通/海格通信 15+ 龙头深度对比。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">2026 市场</div><div class="val">1.5 万亿</div></div>
+        <div class="stat-item"><div class="label">2026Q1 融资</div><div class="val">215 亿</div></div>
+        <div class="stat-item"><div class="label">A 股龙头</div><div class="val">15+ 家</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">7.0 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+
+    <a href="三博脑科301293_脑机接口投研分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag bear">脑机接口</span>
+          <span class="tag purple">神经外科</span>
+          <span class="tag">医保落地</span>
+        </div>
+        <div class="article-title">🧠 三博脑科 301293 + 脑机接口：投研分析</div>
+        <div class="article-meta">
+          <span>🏥 A 股稀缺</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        2026 量产元年：Neuralink 大规模生产 + 博睿康国内首证 + 医保编码 6552 元/次落地。三博脑科 A 股唯一拥有 BCI 临床成果。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">当前股价</div><div class="val">52.93</div></div>
+        <div class="stat-item"><div class="label">市值</div><div class="val">109 亿</div></div>
+        <div class="stat-item"><div class="label">2030 中国</div><div class="val">120 亿</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">5.8 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ========== 🤖 智能应用（1 篇）========== -->
+<div class="cat-block">
+  <div class="cat-header">
+    <div class="cat-icon app">🤖</div>
+    <div>
+      <div class="cat-title">智能应用</div>
+      <div class="cat-desc">人形机器人量产元年 · 减速器 + 丝杠 + 伺服电机</div>
+    </div>
+    <span class="cat-count">1 篇</span>
+  </div>
+  <div class="articles">
+    <a href="具身智能_产业链投研分析.html" class="article">
+      <div class="article-header">
+        <div class="article-tags">
+          <span class="tag bull">量产元年</span>
+          <span class="tag purple">人形机器人</span>
+          <span class="tag">减速器</span>
+        </div>
+        <div class="article-title">🤖 具身智能：人形机器人量产元年</div>
+        <div class="article-meta">
+          <span>⚡ Optimus 百万台</span>
+          <span>⏱ 2026-07-30</span>
+        </div>
+      </div>
+      <div class="article-body">
+        特斯拉 Optimus 2026 百万台量产 + 宇树 IPO 104 天过会 + 智元 1000 台下线。绿的谐波 / 汇川技术 / 双环传动等 20+ 龙头深度对比。
+      </div>
+      <div class="article-stats">
+        <div class="stat-item"><div class="label">中国 2025</div><div class="val">9150 亿</div></div>
+        <div class="stat-item"><div class="label">2035 中国</div><div class="val">≥ 1 万亿</div></div>
+        <div class="stat-item"><div class="label">2050 全球</div><div class="val">5 万亿 $</div></div>
+        <div class="stat-item"><div class="label">综合评分</div><div class="val">7.0 / 10</div></div>
+      </div>
+      <div class="article-footer">
+        <span class="article-date">2026-07-30</span>
+        <span class="read-btn">阅读全文 →</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- 底部 -->
+<footer>
+  <div class="links">
+    <a href="#">⚡ 终极能源</a>
+    <a href="#">🚀 未来产业</a>
+    <a href="#">🤖 智能应用</a>
+    <a href="#">🔌 半导体</a>
+  </div>
+  <div style="margin:14px 0;color:var(--text);font-size:14px;font-weight:600">投研视界 · A 股行业深度分析报告</div>
+  <div>聚焦未来产业 · 新质生产力 · 终极能源 · 站在基金经理视角</div>
+  <div class="copy">© 2026 投研视界 · 数据截至 2026-07-30 · 内容仅供研究学习，不构成投资建议</div>
+</footer>
+
+</div>
+
+</body>
 </html>
