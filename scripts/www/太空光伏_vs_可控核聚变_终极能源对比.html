@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>太空光伏 vs 可控核聚变：终极能源对决 全方位对比分析</title>
+<style>
+:root{
+  --bg:#0a0f1e;
+  --bg-2:#0f1729;
+  --panel:#15203b;
+  --panel-2:#1c2a4a;
+  --line:#2a3656;
+  --text:#e8eef9;
+  --muted:#94a3c1;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+.wrap{max-width:1500px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#15203b 0%,#0a0f1e 60%,#1c2a4a 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(94,234,212,.18),transparent 70%);border-radius:50%}
+header.hero::after{content:"";position:absolute;bottom:-120px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(248,113,113,.12),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;position:relative}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px;position:relative}
+header.hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;position:relative}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:36px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 34px;margin-bottom:22px}
+section h2{font-size:21px;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--neutral);margin:18px 0 10px;font-weight:600}
+section h4{font-size:14px;color:var(--accent-2);margin:14px 0 8px}
+section p{color:var(--text);margin-bottom:10px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.kpi.bull::before{background:var(--bull)}
+.kpi.bear::before{background:var(--bear)}
+.kpi.neutral::before{background:var(--neutral)}
+.kpi.purple::before{background:var(--purple)}
+.kpi.space::before{background:var(--purple)}
+.kpi.fusion::before{background:var(--orange)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:20px;font-weight:700;color:var(--accent)}
+.kpi.bull .val{color:var(--bull)}
+.kpi.bear .val{color:var(--bear)}
+.kpi.neutral .val{color:var(--neutral)}
+.kpi.purple .val{color:var(--purple)}
+.kpi.space .val{color:var(--purple)}
+.kpi.fusion .val{color:var(--orange)}
+.kpi .delta{font-size:11px;margin-top:4px;color:var(--muted)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;table-layout:fixed}
+table.data th,table.data td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;white-space:nowrap;font-size:12.5px;letter-spacing:.2px}
+table.data th.wrap{white-space:normal;font-size:12px;line-height:1.3}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:center;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace;white-space:nowrap}
+table.data td.nowrap{white-space:nowrap}
+table.data td.bull{color:var(--bull);font-weight:600}
+table.data td.bear{color:var(--bear);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+table.data col{display:table-column}
+table.data td .tag{margin:0 auto}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.bull{border-left-color:var(--bull);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent)}
+.callout.bear{border-left-color:var(--bear);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.callout.purple{border-left-color:var(--purple);background:linear-gradient(90deg,rgba(167,139,250,.08),transparent)}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2);font-weight:500}
+.tag.bull{background:rgba(52,211,153,.15);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.15);color:var(--bear)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--neutral)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.tag.space{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.fusion{background:rgba(251,146,60,.15);color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.bull{border-left:3px solid var(--bull)}
+.card.bear{border-left:3px solid var(--bear)}
+.card.neutral{border-left:3px solid var(--neutral)}
+.card.purple{border-left:3px solid var(--purple)}
+.card.space{border-left:3px solid var(--purple)}
+.card.fusion{border-left:3px solid var(--orange)}
+.card h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h4 .icon{font-size:16px}
+.card .body{font-size:12.5px;color:var(--muted);line-height:1.7}
+.card .body p{margin-bottom:6px}
+.score-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.score{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.score .label{font-size:11px;color:var(--muted);margin-bottom:4px}
+.score .val{font-size:22px;font-weight:700}
+.score .desc{font-size:10px;color:var(--muted);margin-top:2px}
+.verdict{background:linear-gradient(135deg,var(--panel-2),var(--bg-2));border:2px solid var(--accent);border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+.verdict.bull{border-color:var(--bull)}
+.verdict.bear{border-color:var(--bear)}
+.verdict.neutral{border-color:var(--neutral)}
+.verdict .rating{font-size:32px;font-weight:700;color:var(--accent)}
+.verdict .rating.bull{color:var(--bull)}
+.verdict .rating.bear{color:var(--bear)}
+.verdict .rating.neutral{color:var(--neutral)}
+.verdict .horizon{font-size:13px;color:var(--muted);margin:8px 0}
+.verdict .logic{font-size:13px;color:var(--text);max-width:780px;margin:10px auto;text-align:left;line-height:1.7}
+.verdict .vs{font-size:14px;color:var(--accent);margin:12px 0;font-weight:600}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:22px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>🚀 太空光伏 vs ⚛️ 可控核聚变 · 终极能源对决</h1>
+  <div class="sub">全方位专业对比分析 · 商业化时间 + 商用性价比 + 投资价值 · 含技术路线、市场规模、A 股龙头、风险对比、操盘策略</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>🚀 太空光伏</span>
+    <span>⚛️ 可控核聚变</span>
+    <span>💰 性价比对比</span>
+    <span>📈 投资价值</span>
+    <span>⚖️ 综合评判</span>
+    <span>🎯 操盘建议</span>
+    <span>⭐ 终极对决</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、终极能源双雄对决框架</a></li>
+    <li><a href="#s2">二、技术路线深度对比</a></li>
+    <li><a href="#s3">三、商业化时间表对比</a></li>
+    <li><a href="#s4">四、商用性价比全方位对比</a></li>
+    <li><a href="#s5">五、投资价值多维对比</a></li>
+    <li><a href="#s6">六、A 股龙头对比与组合</a></li>
+    <li><a href="#s7">七、关键风险对比</a></li>
+    <li><a href="#s8">八、终极裁决与操盘策略</a></li>
+    <li><a href="#s9">九、长期展望与结论</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 框架 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>终极能源双雄对决框架</h2>
+
+  <div class="callout purple">
+    <strong>🎯 核心问题</strong>：<b>太空光伏</b>（Space PV）和<b>可控核聚变</b>（Fusion）都是 21 世纪人类追寻的<b>终极能源方案</b>。两者代表了<b>两条截然不同的技术路径</b>：太空光伏走"<b>上天借地</b>"路线，可控核聚变走"<b>人造太阳</b>"路线。<b>哪个更快实现商用？哪个性价比更高？哪个更值得投资？</b>本报告将系统性回答这三大问题。
+  </div>
+
+  <h3>1.1 双雄速览</h3>
+  <div class="grid-2">
+    <div class="card space">
+      <h4><span class="icon">🚀</span> 太空光伏（Space PV）</h4>
+      <div class="body">
+        <p><b>核心思路</b>：把光伏组件送上太空（LEO/GEO），<b>24 小时持续发电</b>，再通过无线传能（微波/激光）送回地面</p>
+        <p><b>核心优势</b>：① AM0 能量密度是地面 3 倍；② GEO 99% 时间有光照；③ 无大气衰减</p>
+        <p><b>已商用形态</b>：<b>卫星太阳翼</b>（100% 商用）、太空算力卫星</p>
+        <p><b>代表项目</b>：中国"逐日工程"、千帆星座、JAXA、Caltech SSPD</p>
+        <p><b>2026 定位</b>：<b>商业化元年</b>（LEO 示范 + GW 量产产线）</p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">⚛️</span> 可控核聚变（Fusion）</h4>
+      <div class="body">
+        <p><b>核心思路</b>：在地球上<b>模拟太阳核聚变反应</b>，实现近乎无限的清洁能源</p>
+        <p><b>核心优势</b>：① 燃料丰富（海水氘够用 100 亿年）；② 零碳排放；③ 能量密度 <b>1000 万倍</b>于化石燃料</p>
+        <p><b>已商用形态</b>：<b>无</b>（仍处于实验阶段）</p>
+        <p><b>代表项目</b>：EAST（1 亿度 1066 秒）、BEST 2027、CFETR 2035</p>
+        <p><b>2026 定位</b>：<b>工程化验证期</b>（BEST 2027 建成，2030 发电演示）</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>1.2 核心对决维度</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:36%"><col style="width:36%"><col style="width:10%"></colgroup>
+    <thead><tr><th>维度</th><th>🚀 太空光伏</th><th>⚛️ 可控核聚变</th><th>结论</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>技术成熟度</b></td>
+        <td>⭐⭐⭐⭐ 卫星太阳翼已商用</td>
+        <td>⭐⭐ EAST 实验验证完成</td>
+        <td class="bull">太空胜</td>
+      </tr>
+      <tr>
+        <td><b>商业化时间</b></td>
+        <td><b>2026 LEO 示范</b> / 2030 GEO / 2033+ SBSP</td>
+        <td><b>2027 BEST 建成</b> / 2030 发电 / 2035 并网 / 2050 商用</td>
+        <td class="bull">太空胜</td>
+      </tr>
+      <tr>
+        <td><b>能量密度</b></td>
+        <td>⭐⭐⭐⭐ 地面 3 倍（AM0）</td>
+        <td>⭐⭐⭐⭐⭐ <b>1000 万倍</b>化石燃料</td>
+        <td class="bull">核聚变胜</td>
+      </tr>
+      <tr>
+        <td><b>燃料成本</b></td>
+        <td>⭐⭐⭐ 太阳能（免费但装置贵）</td>
+        <td>⭐⭐⭐⭐⭐ 海水氘（近乎零成本）</td>
+        <td class="bull">核聚变胜</td>
+      </tr>
+      <tr>
+        <td><b>商业 LCOE</b></td>
+        <td><b>$1000-2000/W</b>（初期）→ 长期难估</td>
+        <td><b>$1000-2000/W</b>（初期）→ 远景 0.1 元/kWh</td>
+        <td class="neutral">相当</td>
+      </tr>
+      <tr>
+        <td><b>A 股主题热度</b></td>
+        <td>⭐⭐⭐⭐⭐ 万得板块 <b>+26.48%</b></td>
+        <td>⭐⭐⭐⭐⭐ 涨停频发</td>
+        <td class="neutral">相当</td>
+      </tr>
+      <tr>
+        <td><b>市场规模</b></td>
+        <td><b>800 亿~3 万亿</b>元（2030，中信证券）</td>
+        <td><b>40 万亿美元</b>（2050，全球）</td>
+        <td class="bull">核聚变胜</td>
+      </tr>
+      <tr>
+        <td><b>中国地位</b></td>
+        <td>⭐⭐⭐⭐⭐ <b>全球 80%+ 制造份额</b></td>
+        <td>⭐⭐⭐⭐⭐ 紧凑型路线<b>领先全球 10 年</b></td>
+        <td class="neutral">双强</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 2. 技术路线对比 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>技术路线深度对比</h2>
+
+  <h3>2.1 太空光伏技术体系</h3>
+  <div class="grid-3">
+    <div class="card space">
+      <h4><span class="icon">🛰️</span> 卫星太阳翼（已商用）</h4>
+      <div class="body">
+        <p><b>原理</b>：在卫星/空间站部署光伏组件</p>
+        <p><b>应用</b>：100% 商用，<b>已规模化</b></p>
+        <p><b>技术</b>：三结砷化镓 / 钙钛矿叠层</p>
+        <p><b>能量密度</b>：AM0 1361 W/m²（地面 3 倍）</p>
+        <p><b>效率纪录</b>：协鑫 30.23%（2042cm²）/ 黑晶 29.67%（16.2cm² 三结）/ 晶澳 &gt;30%（60 微米超薄叠层）</p>
+        <p><b>比功率</b>：黑晶约 <b>1200 W/kg</b>，晶澳 &gt;2 W/g</p>
+        <p><b>耐受</b>：黑晶通过 -100~+100℃ 冷热冲击 110 次 + 高剂量质子辐照防护测试</p>
+        <p><b>寿命</b>：LEO 5-7 年 / GEO 15+ 年</p>
+        <p><b>代表</b>：千帆星座、Starlink、北斗</p>
+      </div>
+    </div>
+    <div class="card space">
+      <h4><span class="icon">📡</span> 太空算力卫星（2026 新兴）</h4>
+      <div class="body">
+        <p><b>原理</b>：在轨 AI 推理 + 通信 + 太阳能</p>
+        <p><b>应用</b>：2026 兴起，中国"千帆星座"</p>
+        <p><b>技术</b>：抗辐射钙钛矿叠层 + AI 芯片</p>
+        <p><b>市场规模</b>：低轨卫星 <b>100 亿元+</b></p>
+        <p><b>代表</b>：协鑫钙钛矿、星纪魅族、华为</p>
+        <p><b>关键</b>：耐辐射封装一旦过关即可大规模商用</p>
+      </div>
+    </div>
+    <div class="card space">
+      <h4><span class="icon">🛰️</span> SBSP 太空发电站（远期）</h4>
+      <div class="body">
+        <p><b>原理</b>：GEO 部署 GW 级光伏阵列 + 无线传能</p>
+        <p><b>应用</b>：<b>2033+ 商业部署</b>（中国"逐日工程"目标 2035）</p>
+        <p><b>技术</b>：薄膜 + 卷迭式 + 高功率微波/激光传能</p>
+        <p><b>挑战</b>：发射成本 + 公里级组装 + 无线传能</p>
+        <p><b>代表</b>：Caltech SSPD-1、JAXA、ESA SOLARIS</p>
+        <p><b>微波传能</b>：日本已验证 55 公里</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2.2 可控核聚变技术体系</h3>
+  <div class="grid-3">
+    <div class="card fusion">
+      <h4><span class="icon">🔬</span> EAST（已验证）</h4>
+      <div class="body">
+        <p><b>原理</b>：全超导托卡马克，磁场约束高温等离子体</p>
+        <p><b>状态</b>：<b>1 亿度 1066 秒</b>（2025-01-20）</p>
+        <p><b>意义</b>：科学验证阶段完成</p>
+        <p><b>位置</b>：安徽合肥科学岛</p>
+        <p><b>累计</b>：15 万+ 次实验 / 2000+ 专利</p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">🏗️</span> BEST（建设中）</h4>
+      <div class="body">
+        <p><b>原理</b>：紧凑型聚变能实验装置</p>
+        <p><b>状态</b>：2025-10 主机部件交付</p>
+        <p><b>目标</b>：2027 整体建成，2030 发电</p>
+        <p><b>意义</b>：紧凑型路线<b>领先 ITER 10 年</b></p>
+        <p><b>技术</b>：高温超导 + 高场</p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">⚛️</span> CFETR（远景）</h4>
+      <div class="body">
+        <p><b>原理</b>：中国聚变工程实验堆</p>
+        <p><b>状态</b>：规划论证中</p>
+        <p><b>目标</b>：2035 建成，2050 商用</p>
+        <p><b>意义</b>：示范堆 → 商业堆</p>
+        <p><b>挑战</b>：氚自持 + 第一壁寿命 + 工程经济性</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2.3 技术成熟度对比矩阵</h3>
+  <table class="data">
+    <colgroup><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>
+    <thead><tr><th>技术维度</th><th>🚀 太空光伏</th><th>⚛️ 可控核聚变</th><th>差异分析</th><th>结论</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>能量来源</b></td>
+        <td>太阳能（免费）</td>
+        <td>氘-氚聚变（近乎零成本）</td>
+        <td>两者燃料成本都极低</td>
+        <td class="neutral">平</td>
+      </tr>
+      <tr>
+        <td><b>核心瓶颈</b></td>
+        <td>发射成本 + 无线传能</td>
+        <td>高温超导 + 第一壁 + 氚自持</td>
+        <td>聚变瓶颈更多</td>
+        <td class="bull">太空易</td>
+      </tr>
+      <tr>
+        <td><b>能量密度</b></td>
+        <td>AM0 1361 W/m²（地面 3 倍）</td>
+        <td>聚变 <b>1000 万倍</b>化石燃料</td>
+        <td>聚变能量密度极高</td>
+        <td class="bull">聚变强</td>
+      </tr>
+      <tr>
+        <td><b>转换效率</b></td>
+        <td>光伏 30%+（PERC/HJT/钙钛矿）</td>
+        <td>聚变 Q 值目标 > 30</td>
+        <td>两者都追求高效</td>
+        <td class="neutral">相当</td>
+      </tr>
+      <tr>
+        <td><b>材料要求</b></td>
+        <td>抗辐射、轻量化</td>
+        <td>抗中子辐照、超导磁体</td>
+        <td>聚变材料难度更高</td>
+        <td class="bull">太空易</td>
+      </tr>
+      <tr>
+        <td><b>装置规模</b></td>
+        <td>MW-GW 级（柔性部署）</td>
+        <td>100MW-1GW 单堆</td>
+        <td>聚变装置更大</td>
+        <td class="bull">太空灵活</td>
+      </tr>
+      <tr>
+        <td><b>中国优势</b></td>
+        <td>光伏全产业链 + 商业航天</td>
+        <td>EAST/BEST/CFETR + 完整聚变堆</td>
+        <td>两者中国都领先</td>
+        <td class="bull">双领先</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>2.4 2026 关键事件与产业链最新动态</h3>
+  <div class="grid-2">
+    <div class="card space">
+      <h4><span class="icon">🚀</span> 马斯克 100GW 产能规划（2026/01 达沃斯）</h4>
+      <div class="body">
+        <p><b>表态</b>：AI 发展最大瓶颈是<b>电力</b>而非芯片，终极解决方案是<b>太空光伏</b></p>
+        <p><b>规划</b>：特斯拉 + SpaceX 组建专项团队，<b>3 年内</b>美/各建一座<b>年产 100GW</b>太阳能电池工厂</p>
+        <p><b>进展</b>：2026/05 已推进<b>10GW 级别</b>工厂落地筹备</p>
+        <p><b>核心</b>：依赖 Starship 把入轨成本压到 $200–500/kg</p>
+        <p><b>应用场景</b>：太空光伏 + AI 算力卫星 + 轨道数据中心</p>
+      </div>
+    </div>
+    <div class="card space">
+      <h4><span class="icon">🤝</span> SNEC 2026 两大太空能源联盟成立</h4>
+      <div class="body">
+        <p><b>联盟成员</b>：协鑫光电、天合光能、晶澳科技、钧达股份</p>
+        <p><b>协鑫 × 紫微宇通</b>：2026 年内开展<b>多次太空搭载技术实验</b></p>
+        <p><b>协鑫 2042cm²</b> 大面积钙钛矿/晶硅叠层组件认证效率达<b>30.23%</b></p>
+        <p><b>晶澳 60 微米</b> 超薄 P 型晶硅+钙钛矿叠层组件，效率<b>&gt;30%</b>，功率重量比<b>&gt;2 瓦/克</b></p>
+        <p><b>钧达</b>：展出柔性异质结晶硅电池 + 下一代薄膜型太空光伏算力卫星模型</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bull">
+    <strong>📌 2026 三大政策+产业催化剂</strong>：<br>
+    • <b>广东省</b>印发《加快培育发展新赛道行动规划 2026—2035》，明确鼓励<b>太空算力中心、太空光伏、太空资源利用</b><br>
+    • <b>SNEC 2026</b> 两大联盟成立 → 光伏龙头<b>集体跨界航天</b><br>
+    • <b>马斯克百 GW</b> 规划 → 全球巨头押注，太空光伏从"概念"升级为"在轨验证+量产准备"双轨<br>
+    • 业内判断（协鑫集团董事长<b>朱共山</b>）：耐辐射封装一旦过关，<b>5–10 年内</b>有望切入太空应用序列
+  </div>
+</section>
+
+<!-- ========== 3. 商业化时间表 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>商业化时间表对比</h2>
+
+  <h3>3.1 太空光伏商业化路径</h3>
+  <div class="chart-box">
+    <div class="chart-title">🚀 太空光伏商业化时间表（2026-2050）</div>
+    <div class="stack-bar-row">
+      <div class="name">2026 当前（已商用）</div>
+      <div class="stack-bar"><div style="width:18%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">卫星太阳翼 100% 商用</div></div>
+      <div class="val">✅ 已实现</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2026-2028（LEO 示范）</div>
+      <div class="stack-bar"><div style="width:25%;background:linear-gradient(90deg,#60a5fa,#5eead4)">千帆星座 + 太空算力</div></div>
+      <div class="val">⭐ 加速</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2028-2030（GW 量产）</div>
+      <div class="stack-bar"><div style="width:40%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">GW 级产线投产</div></div>
+      <div class="val">⭐ 规模化</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030-2033（商业验证）</div>
+      <div class="stack-bar"><div style="width:55%;background:linear-gradient(90deg,#fb923c,#fbbf24)">GEO 10-50MW 示范</div></div>
+      <div class="val">⭐⭐ 商业化</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2033-2040（GW 商业）</div>
+      <div class="stack-bar"><div style="width:80%;background:linear-gradient(90deg,#f87171,#fb923c)">SBSP 试点 + 100MW+</div></div>
+      <div class="val">⭐⭐⭐ 全面商用</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2040+（终极）</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#a78bfa,#f87171)">欧洲 80% 来自太空</div></div>
+      <div class="val">🚀 万亿</div>
+    </div>
+    <div class="chart-note">资料来源：中国"逐日工程"、JAXA、ESA SOLARIS、千寻智能预测。</div>
+  </div>
+
+  <h3>3.2 可控核聚变商业化路径</h3>
+  <div class="chart-box">
+    <div class="chart-title">⚛️ 可控核聚变商业化时间表（2025-2050）</div>
+    <div class="stack-bar-row">
+      <div class="name">2025（已实现）</div>
+      <div class="stack-bar"><div style="width:18%;background:linear-gradient(90deg,#34d399,#5eead4)">EAST 1 亿度 1066 秒</div></div>
+      <div class="val">✅ 科学验证</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2026-2027（关键期）</div>
+      <div class="stack-bar"><div style="width:25%;background:linear-gradient(90deg,#60a5fa,#5eead4)">CRAFT 验收 + 环流三号改造</div></div>
+      <div class="val">⭐ 设备订单</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2027-2030（工程化）</div>
+      <div class="stack-bar"><div style="width:35%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">BEST 主体建成 + 星火一号</div></div>
+      <div class="val">⭐ 工程化</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030（目标）</div>
+      <div class="stack-bar"><div style="width:50%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">BEST 发电 + 星火一号 Q>30</div></div>
+      <div class="val">⭐⭐ 第一度电</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2035（远景）</div>
+      <div class="stack-bar"><div style="width:70%;background:linear-gradient(90deg,#fb923c,#fbbf24)">CFETR 建成 + 并网</div></div>
+      <div class="val">⭐⭐⭐ 商业发电</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2050（终极）</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#f87171,#fb923c)">全面商用 + 40 万亿市场</div></div>
+      <div class="val">🚀 终极能源</div>
+    </div>
+    <div class="chart-note">资料来源：全国政协委员段旭如、聚变能科技与产业大会 2026、中信证券。</div>
+  </div>
+
+  <h3>3.3 时间表关键节点对比</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:36%"><col style="width:36%"><col style="width:10%"></colgroup>
+    <thead><tr><th>时间节点</th><th>🚀 太空光伏</th><th>⚛️ 可控核聚变</th><th>差异</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>2026 当前</b></td>
+        <td>⭐ <b>卫星太阳翼已商用</b></td>
+        <td>EAST 科学验证完成</td>
+        <td class="bull">太空<strong>领先 5 年</strong></td>
+      </tr>
+      <tr>
+        <td><b>2027 关键期</b></td>
+        <td>GW 级产线投产</td>
+        <td>⭐ <b>BEST 主体建成</b></td>
+        <td>聚变<strong>里程碑</strong></td>
+      </tr>
+      <tr>
+        <td><b>2030 节点</b></td>
+        <td>GEO 10-50MW 示范</td>
+        <td>⭐ <b>第一度电演示</b></td>
+        <td>两者都重要</td>
+      </tr>
+      <tr>
+        <td><b>2033 节点</b></td>
+        <td>⭐ <b>SBSP 商业部署</b></td>
+        <td>示范堆建设</td>
+        <td class="bull">太空<strong>全面商用</strong></td>
+      </tr>
+      <tr>
+        <td><b>2035 节点</b></td>
+        <td>SBSP 100MW+</td>
+        <td>⭐ <b>CFETR 并网</b></td>
+        <td>聚变<strong>里程碑</strong></td>
+      </tr>
+      <tr>
+        <td><b>2050 节点</b></td>
+        <td>欧洲 80% 来自太空</td>
+        <td>⭐ <b>40 万亿美元</b></td>
+        <td>聚变<strong>终极规模</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>⏱ 关键结论</strong>：<b>太空光伏商业化领先可控核聚变约 5-7 年</b>。<br>
+    • 太空光伏：<b>2026 已商用</b>（卫星太阳翼），2030 GEO 示范，2033+ SBSP 全面部署<br>
+    • 可控核聚变：<b>2030 发电演示</b>，2035 并网，2050 全面商用<br>
+    • <b>结论</b>：短期（2026-2030）太空光伏领先，中期（2030-2035）两者并行，长期（2050）核聚变反超
+  </div>
+</section>
+
+<!-- ========== 4. 性价比对比 ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>商用性价比全方位对比</h2>
+
+  <h3>4.1 LCOE（平准化度电成本）对比</h3>
+  <table class="data">
+    <colgroup><col style="width:22%"><col style="width:24%"><col style="width:24%"><col style="width:14%"><col style="width:16%"></colgroup>
+    <thead><tr><th>能源类型</th><th>当前 LCOE（元/kWh）</th><th>2030 预期</th><th>降幅</th><th>评价</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>地面光伏</td>
+        <td>0.15-0.3</td>
+        <td>0.10-0.20</td>
+        <td>30-50%</td>
+        <td class="bull">⭐ 最低</td>
+      </tr>
+      <tr>
+        <td>陆上风电</td>
+        <td>0.20-0.35</td>
+        <td>0.15-0.25</td>
+        <td>25-30%</td>
+        <td class="bull">⭐ 低</td>
+      </tr>
+      <tr>
+        <td><b>🚀 太空光伏</b></td>
+        <td>5-10（初期）</td>
+        <td>0.5-2（远景）</td>
+        <td>80%+</td>
+        <td class="neutral">⭐ 高</td>
+      </tr>
+      <tr>
+        <td>核电（裂变）</td>
+        <td>0.35-0.50</td>
+        <td>0.30-0.40</td>
+        <td>15%</td>
+        <td class="neutral">中等</td>
+      </tr>
+      <tr>
+        <td>燃气发电</td>
+        <td>0.45-0.65</td>
+        <td>0.50-0.70</td>
+        <td>—</td>
+        <td class="bear">偏高</td>
+      </tr>
+      <tr>
+        <td><b>⚛️ 可控核聚变</b></td>
+        <td>N/A（未商用）</td>
+        <td><b>0.10-0.30</b>（远景）</td>
+        <td>—</td>
+        <td class="bull">⭐⭐⭐⭐ 终极</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 性价比 9 维度对比</h3>
+  <div class="grid-2">
+    <div class="card space">
+      <h4><span class="icon">🚀</span> 太空光伏性价比</h4>
+      <div class="body">
+        <p><b>✅ 优势</b></p>
+        <p>① <b>已商用</b>（卫星太阳翼）</p>
+        <p>② <b>技术成熟度高</b>（光伏 30%+ 效率）</p>
+        <p>③ <b>商业化快</b>（2026-2030）</p>
+        <p>④ <b>产业链完整</b>（中国占 80%）</p>
+        <p>⑤ <b>应用场景丰富</b>（卫星 + 太空算力 + SBSP）</p>
+        <p>⑥ <b>初始投资较低</b>（卫星千万级）</p>
+        <p>⑦ <b>风险可控</b>（卫星失联损失有限）</p>
+        <p><b>❌ 劣势</b></p>
+        <p>① <b>总市场规模小于核聚变</b>（2030 中信证券测算 800 亿~3 万亿元 vs 2050 聚变 40 万亿美元）</p>
+        <p>② <b>能量密度一般</b>（地面 3 倍）</p>
+        <p>③ <b>依赖发射成本</b>（Starship 是关键）</p>
+        <p>④ <b>无线传能技术未完全成熟</b></p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">⚛️</span> 可控核聚变性价比</h4>
+      <div class="body">
+        <p><b>✅ 优势</b></p>
+        <p>① <b>能量密度极高</b>（化石燃料 1000 万倍）</p>
+        <p>② <b>燃料近乎无限</b>（海水氘够用 100 亿年）</p>
+        <p>③ <b>零碳排放</b>、无放射性废料</p>
+        <p>④ <b>总市场规模巨大</b>（2050 40 万亿美元）</p>
+        <p>⑤ <b>终极能源方案</b></p>
+        <p>⑥ <b>中国紧凑型路线领先</b>（领先 ITER 10 年）</p>
+        <p><b>❌ 劣势</b></p>
+        <p>① <b>未商用</b>（仅实验）</p>
+        <p>② <b>商业化遥远</b>（2035+）</p>
+        <p>③ <b>初始投资巨大</b>（单座 200 亿+）</p>
+        <p>④ <b>技术挑战多</b>（氚自持 + 第一壁）</p>
+        <p>⑤ <b>主题溢价高</b>（PE 100x+）</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.3 性价比核心结论</h3>
+  <div class="callout purple">
+    <strong>⚖️ 性价比核心结论</strong>：<br><br>
+    <b>🚀 太空光伏：商业性价比更高</b><br>
+    • <b>短期（2026-2030）</b>：<b>已商用</b>，性价比极高，技术成熟，风险可控<br>
+    • 适合：<b>短期投资</b>、主题博弈、商业化兑现<br><br>
+    <b>⚛️ 可控核聚变：终极性价比更高</b><br>
+    • <b>长期（2050+）</b>：能量密度 + 燃料成本 + 市场规模<b>碾压</b>太空光伏<br>
+    • 适合：<b>长期投资</b>、终极能源布局、价值复利<br><br>
+    <b>结论</b>：<br>
+    • <b>短期（5 年）</b>：太空光伏 <b>性价比更高</b>（已商用）<br>
+    • <b>长期（10-20 年）</b>：可控核聚变 <b>性价比更高</b>（终极能源）
+  </div>
+</section>
+
+<!-- ========== 5. 投资价值对比 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>投资价值多维对比</h2>
+
+  <h3>5.1 投资价值评分卡</h3>
+  <div class="grid-3">
+    <div class="card space">
+      <h4><span class="icon">🚀</span> 太空光伏（6.5/10）</h4>
+      <div class="body">
+        <p><b>① 商业化</b>：⭐⭐⭐⭐⭐ 已商用</p>
+        <p><b>② 政策</b>：⭐⭐⭐⭐ 写入未来产业</p>
+        <p><b>③ 估值</b>：⭐⭐⭐ 部分透支</p>
+        <p><b>④ 业绩兑现</b>：⭐⭐⭐⭐ 有真实订单</p>
+        <p><b>⑤ 资金</b>：⭐⭐⭐⭐⭐ 板块 +26.48%</p>
+        <p><b>⑥ 空间</b>：⭐⭐⭐⭐ 2030 中信 800 亿~3 万亿</p>
+        <p><b>⑦ 风险</b>：⭐⭐⭐ 发射成本</p>
+        <p><b>综合</b>：<b>6.5/10</b> 偏多</p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">⚛️</span> 可控核聚变（6.5/10）</h4>
+      <div class="body">
+        <p><b>① 商业化</b>：⭐⭐ 2030+ 演示</p>
+        <p><b>② 政策</b>：⭐⭐⭐⭐⭐ 写入未来能源</p>
+        <p><b>③ 估值</b>：⭐⭐ 部分透支</p>
+        <p><b>④ 业绩兑现</b>：⭐⭐ 占比 < 5%</p>
+        <p><b>⑤ 资金</b>：⭐⭐⭐⭐⭐ 涨停频发</p>
+        <p><b>⑥ 空间</b>：⭐⭐⭐⭐⭐ 40 万亿</p>
+        <p>⑦ <b>风险</b>：⭐⭐ 工程延期</p>
+        <p><b>综合</b>：<b>6.5/10</b> 偏多</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">💎</span> 双雄对比要点</h4>
+      <div class="body">
+        <p>两者综合评分 <b>相当</b>（均 6.5/10）</p>
+        <p>但<b>投资逻辑</b>截然不同：</p>
+        <p>• 太空光伏：<b>已商用 + 主题</b></p>
+        <p>• 可控核聚变：<b>远期 + 终极</b></p>
+        <p><b>建议</b>：双线配置</p>
+        <p>• 短期仓位：太空光伏 60%</p>
+        <p>• 长期仓位：可控核聚变 40%</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>5.2 投资价值 8 维度对比矩阵</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:24%"><col style="width:18%"><col style="width:16%"></colgroup>
+    <thead><tr><th>维度</th><th>🚀 太空光伏</th><th>⚛️ 可控核聚变</th><th>差距</th><th>结论</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>商业化时间</b></td>
+        <td><b>2026 已商用</b></td>
+        <td>2030 演示</td>
+        <td>太空领先 4 年</td>
+        <td class="bull">太空胜</td>
+      </tr>
+      <tr>
+        <td><b>短期投资价值</b></td>
+        <td>⭐⭐⭐⭐⭐ 主题+业绩</td>
+        <td>⭐⭐⭐ 主题溢价</td>
+        <td>太空优势明显</td>
+        <td class="bull">太空胜</td>
+      </tr>
+      <tr>
+        <td><b>长期投资价值</b></td>
+        <td>⭐⭐⭐⭐ 2030 中信 800 亿~3 万亿</td>
+        <td>⭐⭐⭐⭐⭐ 2050 40 万亿美元</td>
+        <td>核聚变碾压</td>
+        <td class="bull">聚变胜</td>
+      </tr>
+      <tr>
+        <td><b>风险可控性</b></td>
+        <td>⭐⭐⭐⭐⭐ 卫星失联损失有限</td>
+        <td>⭐⭐ 装置投资巨大</td>
+        <td>太空优势</td>
+        <td class="bull">太空胜</td>
+      </tr>
+      <tr>
+        <td><b>A 股龙头数</b></td>
+        <td>10+ 家</td>
+        <td>12+ 家</td>
+        <td>相当</td>
+        <td class="neutral">平</td>
+      </tr>
+      <tr>
+        <td><b>主题热度</b></td>
+        <td>⭐⭐⭐⭐⭐ +26.48%</td>
+        <td>⭐⭐⭐⭐⭐ 涨停频发</td>
+        <td>两者都热</td>
+        <td class="bull">双强</td>
+      </tr>
+      <tr>
+        <td><b>国产替代</b></td>
+        <td>⭐⭐⭐⭐ 全球 80% 制造</td>
+        <td>⭐⭐⭐⭐⭐ 紧凑型领先</td>
+        <td>核聚变略胜</td>
+        <td class="bull">聚变胜</td>
+      </tr>
+      <tr>
+        <td><b>长期复利</b></td>
+        <td>⭐⭐ 行业天花板低</td>
+        <td>⭐⭐⭐⭐⭐ 终极能源</td>
+        <td>核聚变碾压</td>
+        <td class="bull">聚变胜</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5.3 投资逻辑差异</h3>
+  <div class="grid-2">
+    <div class="card space">
+      <h4><span class="icon">🚀</span> 太空光伏投资逻辑</h4>
+      <div class="body">
+        <p><b>① 商业航天驱动</b>：千帆星座 + SpaceX + 商业航天</p>
+        <p><b>② 卫星太阳翼已 100% 商用</b></p>
+        <p><b>③ 太空算力兴起</b>：AI + 卫星 + 光伏</p>
+        <p><b>④ 钙钛矿叠层</b>：耐辐射 + 轻量化</p>
+        <p><b>⑤ 主题炒作 + 业绩兑现双驱动</b></p>
+        <p><b>6 阶段</b>：2026 LEO → 2030 GEO → 2033 SBSP</p>
+        <p><b>目标价</b>：12-18 个月 <b>+30-50%</b></p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">⚛️</span> 可控核聚变投资逻辑</h4>
+      <div class="body">
+        <p><b>① 终极能源</b>：燃料近乎无限</p>
+        <p><b>② 中国领先全球 10 年</b>（紧凑型）</p>
+        <p><b>③ EAST 1 亿度 1066 秒</b>（世界纪录）</p>
+        <p><b>④ BEST 2027 建成 + CFETR 2035</b></p>
+        <p><b>⑤ 高温超导 + 真空部件全产业链</b></p>
+        <p><b>⑥ 主题稀缺溢价</b>（A 股稀缺标的）</p>
+        <p><b>6 阶段</b>：2027 BEST → 2030 发电 → 2050 商用</p>
+        <p><b>目标价</b>：12-24 个月 <b>+50-100%</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. A股龙头对比 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>A 股龙头对比与组合</h2>
+
+  <h3>6.1 太空光伏 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>核心卡位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>⭐ 隆基绿能</b></td><td>601012</td>
+        <td>BC + 钙钛矿叠层</td>
+        <td>未来能源太空实验室 + 35.5% 效率世界纪录</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td><b>协鑫光电</b></td><td>未上市</td>
+        <td>钙钛矿</td>
+        <td>全球最大钙钛矿组件 + 太空应用</td>
+        <td class="num neutral">—</td>
+      </tr>
+      <tr>
+        <td>天合光能</td><td>688599</td>
+        <td>钙钛矿叠层</td>
+        <td>钙钛矿/晶硅叠层</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>晶澳科技</td><td>002459</td>
+        <td>太空光伏</td>
+        <td>SNEC 2026 推出 60 微米超薄叠层，效率 &gt;30%，比功率 &gt;2W/g</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td><b>⭐ 钧达股份</b></td><td>002865</td>
+        <td>柔性异质结 + 太空算力</td>
+        <td>SNEC 2026 展出薄膜型太空光伏算力卫星模型；<b>参股星翼芯能</b>、<b>收购巡天千河 60%</b> 股权切入星座运营</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td>东方日升</td><td>300118</td>
+        <td>HJT 卫星电池</td>
+        <td>50-70μm 超薄 HJT，已用于低轨卫星</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>帝科股份</td><td>300842</td>
+        <td>导电浆料</td>
+        <td>已实现商用卫星太阳翼使用</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>海目星</td><td>688559</td>
+        <td>激光设备</td>
+        <td>钙钛矿激光设备龙头</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>迈为股份</td><td>300751</td>
+        <td>光伏设备</td>
+        <td>太阳能电池生产设备全球领先</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple">
+    <strong>🆕 SNEC 2026 后新晋标的 & 非上市潜力股</strong>：<br>
+    • <b>钧达股份（002865）</b>：从纯电池厂升级为"光伏+星座运营商"，<b>参股星翼芯能</b>、<b>收购巡天千河 60%</b> 股权，直接对接卫星/算力终端<br>
+    • <b>协鑫光电（未上市）</b>：与北京<b>紫微宇通</b>签署战略合作，2026 年内开展<b>多次太空搭载技术实验</b>，技术验证节奏最快<br>
+    • <b>晶澳科技（002459）</b>：60 微米超薄叠层组件效率突破 30%，<b>功率重量比 &gt;2W/g</b>，瞄准低轨算力卫星供电<br>
+    • <b>黑晶光电（HIKING PV，未上市）</b>：三结叠层效率 29.67%、比功率 1200W/kg，已通过质子辐照防护测试——业内关注的"非上市潜力标的"<br>
+    • <b>烁威光电（未上市）</b>：完成 Pre-A1/A2 两轮合计超亿元融资，加速钙钛矿太空验证
+  </div>
+
+  <h3>6.2 可控核聚变 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>核心卡位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>⭐ 永鼎股份</b></td><td>600105</td>
+        <td>高温超导带材</td>
+        <td>YBCO 带材国内第一 + EAST 供应商</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td>联创光电</td><td>600363</td>
+        <td>超导磁体</td>
+        <td>星火一号供应商 + 激光</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>安泰科技</td><td>000969</td>
+        <td>钨铜偏滤器</td>
+        <td>全球独家 + ITER 长期供应商</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>西部超导</td><td>688122</td>
+        <td>NbTi 线材</td>
+        <td>唯一商业化生产</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>国光电气</td><td>688776</td>
+        <td>真空部件</td>
+        <td>真空器件 + 偏滤器</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>百利电气</td><td>600468</td>
+        <td>特种设备</td>
+        <td>超导磁体配套设备</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>兰石重装</td><td>600169</td>
+        <td>压力容器</td>
+        <td>核聚变真空容器</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>国电南瑞</td><td>600406</td>
+        <td>电源控制</td>
+        <td>聚变脉冲电源系统</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.3 双雄组合配置（推荐）</h3>
+  <div class="card bull">
+    <h4><span class="icon">💼</span> 终极能源双线组合</h4>
+    <div class="body">
+      <p><b>🚀 太空光伏仓位（60% 主题资金）</b></p>
+      <p>• 隆基绿能（601012）：20%</p>
+      <p>• 东方日升（300118）：15%</p>
+      <p>• 帝科股份（300842）：10%</p>
+      <p>• 天合光能（688599）：10%</p>
+      <p>• 晶澳科技（002459）：5%</p>
+      <p><b>⚛️ 可控核聚变仓位（40% 主题资金）</b></p>
+      <p>• 永鼎股份（600105）：15%</p>
+      <p>• 联创光电（600363）：10%</p>
+      <p>• 安泰科技（000969）：8%</p>
+      <p>• 西部超导（688122）：7%</p>
+      <p><b>总仓位</b>：主题资金合计 <b>15-25% 总资金</b>，单只 ≤ 5%</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. 风险对比 ========== -->
+<section id="s7">
+  <h2><span class="num">07</span>关键风险对比</h2>
+
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 🚀 太空光伏风险</h4>
+      <div class="body">
+        <p><b>① 发射成本</b>：依赖 Starship 等可重复使用火箭</p>
+        <p><b>② 无线传能</b>：GW 级空间-地面传能技术待突破</p>
+        <p><b>③ 频谱分配</b>：监管框架待定</p>
+        <p><b>④ 卫星事故</b>：发射失败 / 太空垃圾</p>
+        <p><b>⑤ 钙钛矿稳定性</b>：长期太空环境验证</p>
+        <p><b>⑥ 抗辐射封装</b>：玻璃成本可能超材料</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> ⚛️ 可控核聚变风险</h4>
+      <div class="body">
+        <p><b>① BEST 延期</b>：紧凑型路线技术挑战大</p>
+        <p><b>② 高温超导产能</b>：良率提升 + 量产瓶颈</p>
+        <p><b>③ 第一壁材料</b>：抗中子辐照寿命待验证</p>
+        <p><b>④ 氚自持</b>：氚增殖率仍未达标</p>
+        <p><b>⑤ ITER 第六次延期</b>：2033-2034 才能首次等离子体</p>
+        <p><b>⑥ 私营公司失败</b>：Helion/CFS 可能延期或失败</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bear">
+    <strong>⚠ 风险对比结论</strong>：<br>
+    • <b>太空光伏风险：可控性更高</b>（卫星失联损失有限，技术已商用）<br>
+    • <b>可控核聚变风险：工程挑战更大</b>（装置投资巨大，氚自持未解决）<br>
+    • <b>共同风险</b>：政策低于预期 + 公司澄清"主营业务不涉" + 估值泡沫 + 高波动
+  </div>
+</section>
+
+<!-- ========== 8. 终极裁决 ========== -->
+<section id="s8">
+  <h2><span class="num">08</span>终极裁决与操盘策略</h2>
+
+  <div class="verdict">
+    <div class="rating">🚀⚛️ 双雄对决 · 各有千秋</div>
+    <div class="horizon">12-24 个月投资视角</div>
+    <div class="logic">
+      <b>🚀 太空光伏（短期赢家）</b><br>
+      • 商业化时间：<b>2026 已商用</b>，领先可控核聚变 5-7 年<br>
+      • 商用性价比：<b>短期更高</b>（已商用 + 风险可控）<br>
+      • 短期投资价值：⭐⭐⭐⭐⭐（主题 + 业绩双驱动）<br><br>
+      <b>⚛️ 可控核聚变（长期赢家）</b><br>
+      • 商业化时间：2030 演示，2035 并网，2050 商用<br>
+      • 商用性价比：<b>长期更高</b>（终极能源 + 40 万亿市场）<br>
+      • 长期投资价值：⭐⭐⭐⭐⭐（终极能源 + 5-10 倍空间）<br><br>
+      <b>🎯 终极裁决</b>：<br>
+      • <b>短期（2026-2030）</b>：<b>太空光伏更值得投资</b>（已商用，业绩可兑现）<br>
+      • <b>长期（2030-2050）</b>：<b>可控核聚变更值得投资</b>（终极能源，市场天花板高）<br>
+      • <b>最佳策略</b>：<b>双线配置</b>（太空 60% + 核聚变 40%）<br>
+      • <b>分阶段切换</b>：2030 后逐步减太空、加核聚变
+    </div>
+    <div class="vs">综合评分：太空光伏 6.5/10 vs 可控核聚变 6.5/10</div>
+  </div>
+
+  <h3>8.1 三档操盘方案</h3>
+  <div class="grid-3">
+    <div class="card space">
+      <h4><span class="icon">🚀</span> 偏太空光伏</h4>
+      <div class="body">
+        <p><b>逻辑</b>：已商用 + 短期可兑现</p>
+        <p><b>配置</b>：太空光伏 80% + 核聚变 20%</p>
+        <p><b>目标</b>：12 个月 <b>+30-50%</b></p>
+        <p><b>适合</b>：稳健型 / 价值投资</p>
+        <p><b>风险</b>：发射成本 + 无线传能</p>
+        <p><b>核心龙头</b>：隆基、东方日升、帝科</p>
+      </div>
+    </div>
+    <div class="card fusion">
+      <h4><span class="icon">⚛️</span> 偏可控核聚变</h4>
+      <div class="body">
+        <p><b>逻辑</b>：终极能源 + 长期复利</p>
+        <p><b>配置</b>：核聚变 80% + 太空光伏 20%</p>
+        <p><b>目标</b>：24 个月 <b>+50-100%</b></p>
+        <p><b>适合</b>：激进型 / 长期持有</p>
+        <p><b>风险</b>：BEST 延期 + 主题溢价</p>
+        <p><b>核心龙头</b>：永鼎、联创、安泰</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">⚖️</span> 双线平衡（推荐）</h4>
+      <div class="body">
+        <p><b>逻辑</b>：短长结合 + 双轮驱动</p>
+        <p><b>配置</b>：太空 60% + 核聚变 40%</p>
+        <p><b>目标</b>：18 个月 <b>+40-80%</b></p>
+        <p><b>适合</b>：平衡型 / 资产配置</p>
+        <p><b>优势</b>：分散风险 + 双主题轮动</p>
+        <p><b>推荐</b>：⭐⭐⭐⭐⭐</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.2 关键买卖节奏</h3>
+  <div class="callout bull">
+    <strong>🟢 双雄共同买入触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>国家发布 <b>"未来能源"专项规划</b></li>
+      <li>十五五规划正式发布，<b>两大方向均入列</b></li>
+      <li><b>千帆星座二期</b>招标（太空光伏订单）</li>
+      <li><b>BEST 2027 主体建成</b>（核聚变里程碑）</li>
+      <li><b>SpaceX Starship 全面运营</b>（太空光伏催化）</li>
+      <li>聚变-光伏板块指数 <b>企稳反弹 + 20%</b></li>
+    </ul>
+  </div>
+  <div class="callout bear">
+    <strong>🔴 双雄共同卖出/止损触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>股价跌破 <b>支撑位 -15%</b>，<b>减半仓</b></li>
+      <li>股价跌破 <b>支撑位 -25%</b>，<b>清仓离场</b></li>
+      <li>公司公告 <b>"主营业务不涉"</b>（如联创光电 2026/07 案例）</li>
+      <li>重大技术延期超 <b>6 个月</b></li>
+      <li>聚变/光伏板块 <b>连续 2 周净流出</b> 10 亿+</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 9. 长期展望 ========== -->
+<section id="s9">
+  <h2><span class="num">09</span>长期展望与终极结论</h2>
+
+  <div class="callout purple">
+    <strong>🚀⚛️ 终极结论</strong>：<b>太空光伏</b>和<b>可控核聚变</b>代表人类能源的<b>两条终极路径</b>。两者并非相互排斥，而是<b>互补共存</b>：太空光伏<b>快速商业化</b>解决短期能源增量；可控核聚变<b>终极替代</b>重塑长期能源结构。<br><br>
+    <b>🚀 太空光伏 = 上天借地</b>（短期赢家）<br>
+    <b>⚛️ 可控核聚变 = 人造太阳</b>（长期赢家）<br><br>
+    <b>投资哲学</b>：<br>
+    • 短期（2026-2030）<b>重仓太空光伏</b>（已商用 + 业绩可兑现）<br>
+    • 长期（2030-2050）<b>重仓可控核聚变</b>（终极能源 + 5-10 倍空间）<br>
+    • 终极组合：<b>双线配置 + 动态切换</b>，最大化两个时代的红利
+  </div>
+
+  <h3>9.1 终极对比裁决</h3>
+  <table class="data">
+    <colgroup><col style="width:24%"><col style="width:24%"><col style="width:24%"><col style="width:14%"><col style="width:14%"></colgroup>
+    <thead><tr><th>评价维度</th><th>🚀 太空光伏</th><th>⚛️ 可控核聚变</th><th>胜出</th><th>差距</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>哪个更快商用</b></td>
+        <td>⭐⭐⭐⭐⭐ 2026 已商用</td>
+        <td>⭐⭐ 2030 演示</td>
+        <td class="bull">🚀 太空</td>
+        <td>领先 5 年</td>
+      </tr>
+      <tr>
+        <td><b>短期性价比</b></td>
+        <td>⭐⭐⭐⭐⭐ 已商用低风险</td>
+        <td>⭐⭐ 装置投资巨大</td>
+        <td class="bull">🚀 太空</td>
+        <td>明显胜出</td>
+      </tr>
+      <tr>
+        <td><b>长期性价比</b></td>
+        <td>⭐⭐ 行业天花板低</td>
+        <td>⭐⭐⭐⭐⭐ 40 万亿市场</td>
+        <td class="bull">⚛️ 核聚变</td>
+        <td>碾压级</td>
+      </tr>
+      <tr>
+        <td><b>短期投资价值</b></td>
+        <td>⭐⭐⭐⭐⭐ 主题 + 业绩</td>
+        <td>⭐⭐⭐ 主题溢价</td>
+        <td class="bull">🚀 太空</td>
+        <td>明显胜出</td>
+      </tr>
+      <tr>
+        <td><b>长期投资价值</b></td>
+        <td>⭐⭐⭐ 2030 中信 800 亿~3 万亿</td>
+        <td>⭐⭐⭐⭐⭐ 5-10 倍空间</td>
+        <td class="bull">⚛️ 核聚变</td>
+        <td>碾压级</td>
+      </tr>
+      <tr>
+        <td><b>风险可控性</b></td>
+        <td>⭐⭐⭐⭐⭐ 卫星损失有限</td>
+        <td>⭐⭐ 装置投资巨大</td>
+        <td class="bull">🚀 太空</td>
+        <td>明显胜出</td>
+      </tr>
+      <tr>
+        <td><b>终极裁决</b></td>
+        <td><b>短期王者（5 年）</b></td>
+        <td><b>长期王者（20+ 年）</b></td>
+        <td class="bull">双胜</td>
+        <td>互补</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="verdict bull">
+    <div class="rating bull">🚀⚛️ 终极能源双轨投资 · 共赢未来</div>
+    <div class="horizon">2026 → 2050 终极能源转型</div>
+    <div class="logic">
+      <b>🚀 太空光伏</b> = 商业化快 + 短期胜出 + 已商用 + 风险可控<br>
+      <b>⚛️ 可控核聚变</b> = 终极能源 + 长期胜出 + 40 万亿市场 + 5-10 倍空间<br><br>
+      <b>最终答案</b>：<br>
+      • <b>短期投资（2026-2030）</b>：<b>太空光伏更优</b>（性价比更高）<br>
+      • <b>长期投资（2030-2050）</b>：<b>可控核聚变更优</b>（投资价值更高）<br>
+      • <b>最佳策略</b>：<b>双线平衡 + 动态切换</b>，最大化两个时代的红利<br><br>
+      <b>终极信仰</b>：两者都是<b>人类文明级别的能源革命</b>，错过任何一个 = 错过人类下一程。中国凭借<b>完整的产业链布局 + 政策强催化 + 资本市场支持</b>，将在两大方向<b>同时领先全球</b>，这是<b>A 股未来 20 年最确定的方向之一</b>。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，<b>不构成任何投资建议</b>。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询，市场有风险，投资需谨慎。
+  </div>
+  © 2026 太空光伏 vs 可控核聚变：终极能源对决 全方位对比分析 · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
