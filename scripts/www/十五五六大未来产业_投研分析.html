@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"十五五"六大未来产业 全方位投研分析与操盘策略</title>
+<style>
+:root{
+  --bg:#0a0f1e;
+  --bg-2:#0f1729;
+  --panel:#15203b;
+  --panel-2:#1c2a4a;
+  --line:#2a3656;
+  --text:#e8eef9;
+  --muted:#94a3c1;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+.wrap{max-width:1500px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#15203b 0%,#0a0f1e 60%,#1c2a4a 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(94,234,212,.18),transparent 70%);border-radius:50%}
+header.hero::after{content:"";position:absolute;bottom:-120px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(167,139,250,.12),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;position:relative}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px;position:relative}
+header.hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;position:relative}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:36px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 34px;margin-bottom:22px}
+section h2{font-size:21px;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--neutral);margin:18px 0 10px;font-weight:600}
+section h4{font-size:14px;color:var(--accent-2);margin:14px 0 8px}
+section p{color:var(--text);margin-bottom:10px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.kpi.bull::before{background:var(--bull)}
+.kpi.bear::before{background:var(--bear)}
+.kpi.neutral::before{background:var(--neutral)}
+.kpi.purple::before{background:var(--purple)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:20px;font-weight:700;color:var(--accent)}
+.kpi.bull .val{color:var(--bull)}
+.kpi.bear .val{color:var(--bear)}
+.kpi.neutral .val{color:var(--neutral)}
+.kpi.purple .val{color:var(--purple)}
+.kpi .delta{font-size:11px;margin-top:4px;color:var(--muted)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;table-layout:fixed}
+table.data th,table.data td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;white-space:nowrap;font-size:12.5px;letter-spacing:.2px}
+table.data th.wrap{white-space:normal;font-size:12px;line-height:1.3}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:center;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace;white-space:nowrap}
+table.data td.nowrap{white-space:nowrap}
+table.data td.bull{color:var(--bull);font-weight:600}
+table.data td.bear{color:var(--bear);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+table.data col{display:table-column}
+table.data td .tag{margin:0 auto}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.stack-bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center;margin:6px 0}
+.stack-bar-row .name{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack-bar{height:26px;border-radius:4px;overflow:hidden;background:var(--panel-2);display:flex;border:1px solid var(--line)}
+.stack-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a0f1e;font-weight:600;transition:width .3s;white-space:nowrap;padding:0 6px;min-width:fit-content}
+.stack-bar-row .val{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.bull{border-left-color:var(--bull);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent)}
+.callout.bear{border-left-color:var(--bear);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.callout.purple{border-left-color:var(--purple);background:linear-gradient(90deg,rgba(167,139,250,.08),transparent)}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2);font-weight:500}
+.tag.bull{background:rgba(52,211,153,.15);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.15);color:var(--bear)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--neutral)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.bull{border-left:3px solid var(--bull)}
+.card.bear{border-left:3px solid var(--bear)}
+.card.neutral{border-left:3px solid var(--neutral)}
+.card.purple{border-left:3px solid var(--purple)}
+.card.quantum{border-left:3px solid var(--pink)}
+.card.bci{border-left:3px solid var(--accent-2)}
+.card.fusion{border-left:3px solid var(--orange)}
+.card.bio{border-left:3px solid var(--bull)}
+.card.embodied{border-left:3px solid var(--purple)}
+.card.telecom{border-left:3px solid var(--accent)}
+.card h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h4 .icon{font-size:16px}
+.card .body{font-size:12.5px;color:var(--muted);line-height:1.7}
+.card .body p{margin-bottom:6px}
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.strategy{background:var(--panel-2);border-radius:10px;padding:18px;border:1px solid var(--line)}
+.strategy.aggressive{border-top:3px solid var(--bull)}
+.strategy.balanced{border-top:3px solid var(--neutral)}
+.strategy.conservative{border-top:3px solid var(--bear)}
+.strategy h4{font-size:14px;color:var(--accent);margin-bottom:8px}
+.strategy .target{font-size:11px;color:var(--muted);margin-bottom:4px}
+.strategy .price{font-size:18px;font-weight:700;color:var(--accent);margin:6px 0}
+.score-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.score{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.score .label{font-size:11px;color:var(--muted);margin-bottom:4px}
+.score .val{font-size:22px;font-weight:700}
+.score .desc{font-size:10px;color:var(--muted);margin-top:2px}
+.verdict{background:linear-gradient(135deg,var(--panel-2),var(--bg-2));border:2px solid var(--accent);border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+.verdict.bull{border-color:var(--bull)}
+.verdict.bear{border-color:var(--bear)}
+.verdict.neutral{border-color:var(--neutral)}
+.verdict .rating{font-size:32px;font-weight:700;color:var(--accent)}
+.verdict .rating.bull{color:var(--bull)}
+.verdict .rating.bear{color:var(--bear)}
+.verdict .rating.neutral{color:var(--neutral)}
+.verdict .horizon{font-size:13px;color:var(--muted);margin:8px 0}
+.verdict .logic{font-size:13px;color:var(--text);max-width:780px;margin:10px auto;text-align:left;line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:22px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>"十五五"六大未来产业 🚀 全方位投研分析</h1>
+  <div class="sub">基于 2026 政府工作报告 + 七部门联合发文 · 涵盖量子科技 / 具身智能 / 6G / 脑机接口 / 生物制造 / 未来能源 · 含市场预测、A 股龙头、估值定价、操盘策略</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>⚛️ 六大未来产业</span>
+    <span>📊 7-10 万亿市场</span>
+    <span>🏛 写入十五五规划</span>
+    <span>💰 政策+资本双驱动</span>
+    <span>💼 操盘建议</span>
+    <span>🚀 投资下一程</span>
+    <span>⭐ 主题稀缺</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、政策框架与产业总览</a></li>
+    <li><a href="#s2">二、量子科技：信息革命的下一程</a></li>
+    <li><a href="#s3">三、具身智能：人形机器人量产元年</a></li>
+    <li><a href="#s4">四、6G：通信制高点的下一战</a></li>
+    <li><a href="#s5">五、脑机接口：神经科技颠覆</a></li>
+    <li><a href="#s6">六、生物制造：新质生产力引擎</a></li>
+    <li><a href="#s7">七、未来能源：氢能 + 核聚变</a></li>
+    <li><a href="#s8">八、六大产业横向对比与估值</a></li>
+    <li><a href="#s9">九、综合投资组合建议</a></li>
+    <li><a href="#s10">十、风险提示与投资纪律</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 政策总览 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>政策框架与产业总览</h2>
+
+  <h3>1.1 政策时间线</h3>
+  <div class="callout purple">
+    <strong>🏛 政策催化加码</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>2025/03 政府工作报告</b>：首次提出建立未来产业投资增长机制，培育<b>生物制造、量子科技、具身智能、6G</b></li>
+      <li><b>2025/12 中央经济工作会议</b>：明确部署打造<b>商业航天等新增长引擎</b></li>
+      <li><b>2026/03 政府工作报告</b>：扩展为<b>六大未来产业</b>（增加未来能源、脑机接口），新增<b>风险共担机制</b></li>
+      <li><b>2026 七部门联合发文</b>：明确 <b>2027/2030 两步走目标</b></li>
+      <li><b>十五五规划（2026-2030）</b>：将六大未来产业列为<b>新质生产力核心方向</b></li>
+    </ul>
+  </div>
+
+  <h3>1.2 六大未来产业总览</h3>
+  <div class="kpi-grid">
+    <div class="kpi purple"><div class="label">2030 总市场规模</div><div class="val">7-10 万亿</div><div class="delta">⭐ 综合预测</div></div>
+    <div class="kpi bull"><div class="label">产业 1</div><div class="val">量子科技</div><div class="delta">⚛️ 信息革命</div></div>
+    <div class="kpi bull"><div class="label">产业 2</div><div class="val">具身智能</div><div class="delta">🤖 量产元年</div></div>
+    <div class="kpi bull"><div class="label">产业 3</div><div class="val">6G</div><div class="delta">📡 制高点</div></div>
+    <div class="kpi bull"><div class="label">产业 4</div><div class="val">脑机接口</div><div class="delta">🧠 神经科技</div></div>
+    <div class="kpi bull"><div class="label">产业 5</div><div class="val">生物制造</div><div class="delta">🧬 新质生产力</div></div>
+    <div class="kpi bull"><div class="label">产业 6</div><div class="val">未来能源</div><div class="delta">⚡ 氢能 + 核聚变</div></div>
+  </div>
+
+  <h3>1.3 六大产业横向对比</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:15%"><col style="width:15%"></colgroup>
+    <thead><tr><th>产业</th><th>商业化阶段</th><th>政策强度</th><th>市场空间(2030)</th><th>A股龙头数</th><th>主题热度</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>量子科技</b></td>
+        <td>早期</td>
+        <td class="bull">★★★★★</td>
+        <td>1.5 万亿</td>
+        <td>15+ 家</td>
+        <td class="bull">⭐⭐⭐⭐⭐</td>
+        <td class="bull">★★★★★</td>
+      </tr>
+      <tr>
+        <td><b>具身智能</b></td>
+        <td>量产元年</td>
+        <td class="bull">★★★★★</td>
+        <td>1 万亿</td>
+        <td>20+ 家</td>
+        <td class="bull">⭐⭐⭐⭐⭐</td>
+        <td class="bull">★★★★★</td>
+      </tr>
+      <tr>
+        <td><b>6G</b></td>
+        <td>研发期</td>
+        <td class="bull">★★★★☆</td>
+        <td>1.2 万亿</td>
+        <td>30+ 家</td>
+        <td class="bull">⭐⭐⭐⭐</td>
+        <td class="bull">★★★★☆</td>
+      </tr>
+      <tr>
+        <td><b>脑机接口</b></td>
+        <td>临床+消费</td>
+        <td class="bull">★★★★★</td>
+        <td>1200 亿</td>
+        <td>10+ 家</td>
+        <td class="bull">⭐⭐⭐⭐⭐</td>
+        <td class="bull">★★★★☆</td>
+      </tr>
+      <tr>
+        <td><b>生物制造</b></td>
+        <td>早期</td>
+        <td class="bull">★★★★☆</td>
+        <td>1.5 万亿</td>
+        <td>25+ 家</td>
+        <td class="neutral">⭐⭐⭐</td>
+        <td class="neutral">★★★☆☆</td>
+      </tr>
+      <tr>
+        <td><b>未来能源</b></td>
+        <td>早期/工程化</td>
+        <td class="bull">★★★★★</td>
+        <td>2 万亿+</td>
+        <td>15+ 家</td>
+        <td class="bull">⭐⭐⭐⭐</td>
+        <td class="bull">★★★★☆</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 2. 量子科技 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>量子科技：信息革命的下一程 ⚛️</h2>
+
+  <div class="card quantum" style="margin-bottom:14px">
+    <h4><span class="icon">⚛️</span> 量子科技产业链全景</h4>
+    <div class="body">
+      <p><b>上游</b>：量子芯片（超导/离子阱/光量子）+ 稀释制冷剂 + 真空设备</p>
+      <p><b>中游</b>：量子计算机整机（国盾、本源、量羲）+ 量子通信设备</p>
+      <p><b>下游</b>：量子云服务 + 量子安全通信 + 后量子密码 + 量子精密测量</p>
+    </div>
+  </div>
+
+  <h3>2.1 核心数据</h3>
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">市场规模(2030)</div><div class="val">1.5 万亿</div><div class="delta">⭐ 国内预测</div></div>
+    <div class="kpi purple"><div class="label">全球公共投资</div><div class="val">$420-540 亿</div><div class="delta">麦肯锡统计</div></div>
+    <div class="kpi bull"><div class="label">九章三号</div><div class="val">255 量子比特</div><div class="delta">⭐ 中国领先</div></div>
+    <div class="kpi bull"><div class="label">墨子号卫星</div><div class="val">1000+ km</div><div class="delta">⭐ 全球首颗</div></div>
+  </div>
+
+  <h3>2.2 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>国盾量子</b></td><td>688027</td>
+        <td>量子通信龙头</td>
+        <td>墨子号卫星核心 + 量子保密通信网络</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td><b>本源量子</b></td><td>未上市</td>
+        <td>量子计算整机</td>
+        <td>悟空、夸父量子计算机</td>
+        <td class="num neutral">—</td>
+      </tr>
+      <tr>
+        <td>神州信息</td><td>000555</td>
+        <td>量子通信应用</td>
+        <td>量子密钥分发 (QKD) 集成</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>中科曙光</td><td>603019</td>
+        <td>量子超算中心</td>
+        <td>量子计算 + 经典超算混合</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>科大国创</td><td>300520</td>
+        <td>量子软件</td>
+        <td>量子算法 + 操作系统</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>银轮股份</td><td>002126</td>
+        <td>稀释制冷剂</td>
+        <td>量子计算必备耗材</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>吉大正元</td><td>003029</td>
+        <td>后量子密码</td>
+        <td>抗量子加密技术</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>⚛️ 量子科技核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>① 2026 是量子计算商业化拐点</b>：本源量子交付数百台，IBM、Google 持续突破 1000+ 比特</li>
+      <li><b>② 中国"九章三号"领先</b>：255 量子比特超导量子计算原型机，<b>墨子号量子卫星</b>保持领先</li>
+      <li><b>③ 投资节奏</b>：2026 概念导入 → 2027-2028 工程化 → 2030+ 商业化</li>
+      <li><b>④ 风险</b>：技术路径未完全收敛（超导 vs 离子阱 vs 光量子），商业化时间不确定</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 3. 具身智能 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>具身智能：人形机器人量产元年 🤖</h2>
+
+  <div class="card embodied" style="margin-bottom:14px">
+    <h4><span class="icon">🤖</span> 具身智能产业链全景</h4>
+    <div class="body">
+      <p><b>上游</b>：减速器（谐波/RV）+ 伺服电机 + 丝杠 + 传感器 + AI 芯片</p>
+      <p><b>中游</b>：本体厂商（特斯拉 Optimus / Figure / 宇树 / 智元）+ 系统集成</p>
+      <p><b>下游</b>：工厂搬运、家庭服务、医疗护理、教育娱乐</p>
+    </div>
+  </div>
+
+  <h3>3.1 核心数据</h3>
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">2035 市场规模</div><div class="val">≥ 1 万亿</div><div class="delta">⭐ 国内预测</div></div>
+    <div class="kpi purple"><div class="label">特斯拉 Optimus</div><div class="val">2026 量产</div><div class="delta">目标年产百万台</div></div>
+    <div class="kpi bull"><div class="label">宇树 H1</div><div class="val">9.9 万</div><div class="delta">⭐ 全球最低价</div></div>
+    <div class="kpi bull"><div class="label">智元机器人</div><div class="val">10000+ 台</div><div class="delta">⭐ 国内交付第一</div></div>
+  </div>
+
+  <h3>3.2 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>绿的谐波</b></td><td>688017</td>
+        <td>谐波减速器</td>
+        <td>国产谐波减速器龙头，市占率领先</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td><b>双环传动</b></td><td>002472</td>
+        <td>RV 减速器</td>
+        <td>RV 减速器龙头 + 新能源齿轮</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>鸣志电器</td><td>603728</td>
+        <td>伺服电机</td>
+        <td>空心杯电机 + 伺服系统</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>贝斯特</td><td>300580</td>
+        <td>精密零部件</td>
+        <td>丝杠 + 涡轮增压器</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>五洲新春</td><td>603667</td>
+        <td>轴承 + 丝杠</td>
+        <td>行星滚柱丝杠量产</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>柯力传感</td><td>603662</td>
+        <td>力矩传感器</td>
+        <td>六维力传感器龙头</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>奥比中光</td><td>688322</td>
+        <td>3D 视觉</td>
+        <td>机器人视觉感知</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>兆威机电</td><td>003021</td>
+        <td>微型传动</td>
+        <td>灵巧手微型减速器</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>🤖 具身智能核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>① 2026 量产元年</b>：特斯拉 Optimus 量产 + 宇树/智元大规模交付 + 国内政策密集</li>
+      <li><b>② 减速器 / 伺服 / 丝杠</b>是产业链最确定的环节（国产替代空间大）</li>
+      <li><b>③ 投资节奏</b>：2026 量产 → 2027-2028 工厂规模化 → 2030+ 家庭普及</li>
+      <li><b>④ 风险</b>：单台成本仍高，工厂应用先于家庭普及</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 4. 6G ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>6G：通信制高点的下一战 📡</h2>
+
+  <div class="card telecom" style="margin-bottom:14px">
+    <h4><span class="icon">📡</span> 6G 产业链全景</h4>
+    <div class="body">
+      <p><b>上游</b>：高频材料（毫米波/太赫兹）+ GaN/GaAs 器件 + 光器件</p>
+      <p><b>中游</b>：基站设备（华为/中兴/信科）+ 卫星互联网 + 核心网</p>
+      <p><b>下游</b>：运营商（中国移动/电信/联通）+ 垂直行业（车联网/工业互联网/VR/AR）</p>
+    </div>
+  </div>
+
+  <h3>4.1 核心数据</h3>
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">市场规模(2030)</div><div class="val">1.2 万亿</div><div class="delta">⭐ 国内预测</div></div>
+    <div class="kpi purple"><div class="label">峰值速率</div><div class="val">1 Tbps</div><div class="delta">5G 的 100 倍</div></div>
+    <div class="kpi bull"><div class="label">延迟</div><div class="val">< 0.1 ms</div><div class="delta">⭐ 实时控制</div></div>
+    <div class="kpi bull"><div class="label">中国 6G 试验</div><div class="val">2025 启动</div><div class="delta">⭐ 工信部</div></div>
+  </div>
+
+  <h3>4.2 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>中国移动</b></td><td>600941</td>
+        <td>运营商龙头</td>
+        <td>全球最大 5G 运营商 + 6G 试验</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td><b>华为/中兴</b></td><td>未上市</td>
+        <td>设备龙头</td>
+        <td>5G/6G 设备全球领先</td>
+        <td class="num neutral">—</td>
+      </tr>
+      <tr>
+        <td>中兴通讯</td><td>000063</td>
+        <td>5G/6G 设备</td>
+        <td>中国 6G 试验核心参与方</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>中国电信</td><td>601728</td>
+        <td>运营商</td>
+        <td>6G 试验 + 卫星互联网</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>信科移动</td><td>688387</td>
+        <td>6G 先锋</td>
+        <td>中国信通院系 + 太赫兹</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>硕贝德</td><td>300322</td>
+        <td>天线射频</td>
+        <td>毫米波天线</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>中际旭创</td><td>300308</td>
+        <td>光模块</td>
+        <td>高速光模块龙头</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>三安光电</td><td>600703</td>
+        <td>化合物半导体</td>
+        <td>GaN/GaAs 器件</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>华工科技</td><td>000988</td>
+        <td>光通信器件</td>
+        <td>激光 + 光模块</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>📡 6G 核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>① 2025 中国启动 6G 试验</b>：工信部 + 中国信通院《6G 总体愿景与关键技术》白皮书</li>
+      <li><b>② 商业化时间</b>：2030 商用（与全球同步）</li>
+      <li><b>③ 卫星互联网 + 6G</b>：中国"千帆星座"等低轨卫星 + 6G 天地融合</li>
+      <li><b>④ 投资节奏</b>：2026-2027 主题 → 2028-2029 工程 → 2030 商用</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 5. 脑机接口 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>脑机接口：神经科技颠覆 🧠</h2>
+
+  <div class="card bci" style="margin-bottom:14px">
+    <h4><span class="icon">🧠</span> 脑机接口产业链全景</h4>
+    <div class="body">
+      <p><b>上游</b>：BCI 芯片（电极/放大器/采集设备）+ 高精密机械臂</p>
+      <p><b>中游</b>：技术集成商（Neuralink/博睿康/脑虎/强脑）+ 临床试验</p>
+      <p><b>下游</b>：神经专科医院（三博/宣武/天坛）+ 康复应用 + 消费医疗</p>
+    </div>
+  </div>
+
+  <h3>5.1 核心数据</h3>
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">中国市场(2030)</div><div class="val">120 亿元</div><div class="delta">⭐ 信通院</div></div>
+    <div class="kpi purple"><div class="label">中国(2035)</div><div class="val">949 亿元</div><div class="delta">⭐ IPO 研究</div></div>
+    <div class="kpi bull"><div class="label">2026 量产元年</div><div class="val">Neuralink + 博睿康</div><div class="delta">⭐ 全球首证</div></div>
+    <div class="kpi bull"><div class="label">医保编码</div><div class="val">6552 元/次</div><div class="delta">⭐ 全国首项</div></div>
+  </div>
+
+  <h3>5.2 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>三博脑科</b></td><td>301293</td>
+        <td>神经外科医院</td>
+        <td>A 股唯一 BCI 临床成果 + 福建三博完成 1 例</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td>创新医疗</td><td>002173</td>
+        <td>医院 + 投资</td>
+        <td>多次涨停龙头</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>美好医疗</td><td>301363</td>
+        <td>医疗器械</td>
+        <td>神经康复设备</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>爱朋医疗</td><td>300753</td>
+        <td>疼痛管理</td>
+        <td>神经康复周边</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>翔宇医疗</td><td>688626</td>
+        <td>康复医疗器械</td>
+        <td>BCI 康复应用</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>诚益通</td><td>300430</td>
+        <td>康复设备</td>
+        <td>BCI 配套</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>倍益康</td><td>301566</td>
+        <td>康复设备</td>
+        <td>消费康复</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>🧠 脑机接口核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>① 2026 量产元年</b>：Neuralink 大规模生产 + 博睿康全球首张侵入式医疗器械注册证</li>
+      <li><b>② 医保编码落地</b>：国家医保局首次设立独立收费项目（6552 元/次）</li>
+      <li><b>③ 三博脑科稀缺</b>：A 股唯一拥有 BCI 临床成果的上市企业</li>
+      <li><b>④ 投资节奏</b>：2026 量产 → 2027-2028 临床规模化 → 2030+ 商业化</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 6. 生物制造 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>生物制造：新质生产力引擎 🧬</h2>
+
+  <div class="card bio" style="margin-bottom:14px">
+    <h4><span class="icon">🧬</span> 生物制造产业链全景</h4>
+    <div class="body">
+      <p><b>上游</b>：基因合成、酶工程、底盘细胞、培养基</p>
+      <p><b>中游</b>：合成生物学企业（华恒生物/蓝晶微生物/恩和生物/凯赛生物）</p>
+      <p><b>下游</b>：医药、化工、食品、材料、能源（生物基替代石油化工）</p>
+    </div>
+  </div>
+
+  <h3>6.1 核心数据</h3>
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">中国市场(2030)</div><div class="val">1.5 万亿</div><div class="delta">⭐ 国内预测</div></div>
+    <div class="kpi purple"><div class="label">全球市场(2030)</div><div class="val">≈ 5 万亿</div><div class="delta">⭐ 麦肯锡</div></div>
+    <div class="kpi bull"><div class="label">技术成熟度</div><div class="val">早期→中期</div><div class="delta">⭐ 加速期</div></div>
+    <div class="kpi bull"><div class="label">CAGR</div><div class="val">20%+</div><div class="delta">⭐ 高速增长</div></div>
+  </div>
+
+  <h3>6.2 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>华恒生物</b></td><td>688639</td>
+        <td>合成生物学龙头</td>
+        <td>丙氨酸、L-丙氨酸全球第一</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td><b>凯赛生物</b></td><td>688065</td>
+        <td>生物基聚酰胺</td>
+        <td>生物基长链二元酸龙头</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>川宁生物</td><td>301301</td>
+        <td>抗生素中间体</td>
+        <td>发酵工程 + 合成生物学</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>富祥药业</td><td>300497</td>
+        <td>医药中间体</td>
+        <td>生物合成 + 化学合成双驱</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>蔚蓝生物</td><td>603739</td>
+        <td>酶制剂</td>
+        <td>工业酶 + 饲料酶</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>浙江震元</td><td>000705</td>
+        <td>生物发酵</td>
+        <td>氨基酸 + 发酵原料</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>利尔化学</td><td>002258</td>
+        <td>生物农药</td>
+        <td>草铵膦 + 绿色农药</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>🧬 生物制造核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>① 政策强力支持</b>：2025 政府工作报告首提培育生物制造</li>
+      <li><b>② 替代石油化工</b>：生物基替代传统化工是大势所趋，CAGR 20%+</li>
+      <li><b>③ A 股稀缺</b>：真正意义的合成生物学龙头不多（华恒、凯赛、川宁）</li>
+      <li><b>④ 投资节奏</b>：2026 概念 → 2027-2028 商业化 → 2030+ 规模化</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 7. 未来能源 ========== -->
+<section id="s7">
+  <h2><span class="num">07</span>未来能源：氢能 + 核聚变 ⚡</h2>
+
+  <div class="card fusion" style="margin-bottom:14px">
+    <h4><span class="icon">⚡</span> 未来能源双主线</h4>
+    <div class="body">
+      <p><b>① 氢能</b>：制氢（电解水）+ 储氢（高压/液氢/固态）+ 用氢（燃料电池/工业）</p>
+      <p><b>② 核聚变</b>：托卡马克装置 + 高温超导带材 + 真空部件 + 磁体系统</p>
+    </div>
+  </div>
+
+  <h3>7.1 核心数据</h3>
+  <div class="kpi-grid">
+    <div class="kpi bull"><div class="label">氢能市场(2030)</div><div class="val">≈ 5000 亿</div><div class="delta">⭐ 国内</div></div>
+    <div class="kpi purple"><div class="label">核聚变(2035)</div><div class="val">2.26 万亿</div><div class="delta">⭐ 装置市场</div></div>
+    <div class="kpi bull"><div class="label">EAST 世界纪录</div><div class="val">1 亿度 1066 秒</div><div class="delta">⭐ 2025-01-20</div></div>
+    <div class="kpi bull"><div class="label">BEST 建成</div><div class="val">2027 年</div><div class="delta">⭐ 2030 发电</div></div>
+  </div>
+
+  <h3>7.2 A 股龙头</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:12%"><col style="width:24%"><col style="width:30%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心进展</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.08)">
+        <td colspan="5"><b>⚛️ 核聚变方向</b></td>
+      </tr>
+      <tr>
+        <td><b>永鼎股份</b></td><td>600105</td>
+        <td>高温超导带材</td>
+        <td>YBCO 带材国内第一 + EAST 供应商</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td>联创光电</td><td>600363</td>
+        <td>超导磁体</td>
+        <td>星火一号供应商</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>安泰科技</td><td>000969</td>
+        <td>钨铜偏滤器</td>
+        <td>全球独家 + ITER 长期供应商</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>西部超导</td><td>688122</td>
+        <td>NbTi 线材</td>
+        <td>唯一商业化生产</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr style="background:rgba(94,234,212,.08)">
+        <td colspan="5"><b>🟢 氢能方向</b></td>
+      </tr>
+      <tr>
+        <td><b>隆基绿能</b></td><td>601012</td>
+        <td>光伏制氢</td>
+        <td>绿氢 + BC 技术 + 光伏龙头</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td>阳光电源</td><td>300274</td>
+        <td>电解槽</td>
+        <td>碱性电解槽龙头</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>亿华通</td><td>688339</td>
+        <td>燃料电池</td>
+        <td>氢燃料电池龙头</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>雄韬股份</td><td>002733</td>
+        <td>氢能应用</td>
+        <td>氢能产业链布局</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>美锦能源</td><td>000723</td>
+        <td>氢能全产业链</td>
+        <td>制氢 + 储氢 + 加氢站</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout bull">
+    <strong>⚡ 未来能源核心结论</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>① 双主线并行</b>：氢能（中短期） + 核聚变（长期）</li>
+      <li><b>② 氢能 2026</b>：电解水制氢成本下降，规模化应用启动</li>
+      <li><b>③ 核聚变 2026</b>：EAST 1 亿度 1066 秒 + BEST 2027 建成</li>
+      <li><b>④ 投资节奏</b>：氢能先商业化（2026-2030），核聚变长期（2030-2050）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 8. 横向对比 ========== -->
+<section id="s8">
+  <h2><span class="num">08</span>六大产业横向对比与估值</h2>
+
+  <h3>8.1 综合对比矩阵</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:13%"><col style="width:13%"></colgroup>
+    <thead>
+      <tr><th>维度</th><th>量子科技</th><th>具身智能</th><th>6G</th><th>脑机接口</th><th>生物制造</th><th>未来能源</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>商业化阶段</b></td><td>早期</td><td>量产元年</td><td>研发期</td><td>临床+消费</td><td>早期</td><td>早期/工程</td></tr>
+      <tr><td><b>2030 市场规模</b></td><td>1.5 万亿</td><td>1 万亿</td><td>1.2 万亿</td><td>1200 亿</td><td>1.5 万亿</td><td>2 万亿+</td></tr>
+      <tr><td><b>政策强度</b></td><td class="bull">★★★★★</td><td class="bull">★★★★★</td><td class="bull">★★★★☆</td><td class="bull">★★★★★</td><td class="bull">★★★★☆</td><td class="bull">★★★★★</td></tr>
+      <tr><td><b>A 股龙头数</b></td><td>15+</td><td>20+</td><td>30+</td><td>10+</td><td>25+</td><td>15+</td></tr>
+      <tr><td><b>主题热度</b></td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="neutral">⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐</td></tr>
+      <tr><td><b>短期弹性</b></td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="neutral">⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐</td></tr>
+      <tr><td><b>长期空间</b></td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td><td class="bull">⭐⭐⭐⭐⭐</td></tr>
+      <tr><td><b>商业化时点</b></td><td>2030+</td><td>2027-2028</td><td>2030</td><td>2027-2028</td><td>2028-2030</td><td>2030+</td></tr>
+      <tr><td><b>投资风险</b></td><td class="bear">高</td><td class="bear">中高</td><td class="neutral">中</td><td class="bear">高</td><td class="neutral">中</td><td class="bear">高</td></tr>
+    </tbody>
+  </table>
+
+  <h3>8.2 投资优先级排序</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🥇</span> 第一梯队（首选）</h4>
+      <div class="body">
+        <p><b>① 具身智能</b>：量产元年，最确定</p>
+        <p><b>② 量子科技</b>：九章三号领先</p>
+        <p><b>③ 脑机接口</b>：医保落地 + 临床突破</p>
+        <p><b>④ 未来能源</b>：氢能先商业化 + 核聚变远景</p>
+        <p><b>建议仓位</b>：30%/25%/20%/15%</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🥈</span> 第二梯队（次选）</h4>
+      <div class="body">
+        <p><b>⑤ 6G</b>：研发期，时间窗口长</p>
+        <p><b>⑥ 生物制造</b>：早期，A 股标的少</p>
+        <p><b>建议仓位</b>：各 5-10%</p>
+        <p><b>适合</b>：长期定投</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">💡</span> 综合配置建议</h4>
+      <div class="body">
+        <p>主题仓位合计 <b>≤ 25% 总资金</b></p>
+        <p>每只龙头 <b>≤ 5%</b></p>
+        <p>6 大产业分散配置</p>
+        <p>优先布局第一梯队</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. 投资组合 ========== -->
+<section id="s9">
+  <h2><span class="num">09</span>综合投资组合建议</h2>
+
+  <div class="verdict bull">
+    <div class="rating bull">🚀 六大未来产业 = 15-20 年长周期投资机会</div>
+    <div class="horizon">12-24 个月投资视角</div>
+    <div class="logic">
+      <b>核心判断</b>："十五五"六大未来产业是中国<b>新质生产力核心方向</b>，<b>2030 总市场 7-10 万亿</b>。<br><br>
+      <b>投资框架</b>：① <b>主题仓位 25%</b>（6 大产业分散）② <b>每只龙头 ≤ 5%</b> ③ <b>第一梯队优先</b> ④ <b>长期持有 + 分批建仓</b><br><br>
+      <b>节奏</b>：2026-2027 主题催化 → 2028-2030 工程化 → 2030+ 商业化兑现
+    </div>
+  </div>
+
+  <!-- 评分 -->
+  <h3>9.1 板块整体评分</h3>
+  <div class="score-board">
+    <div class="score"><div class="label">政策强度</div><div class="val" style="color:var(--bull)">9.0 / 10</div><div class="desc">⭐ 写入十五五</div></div>
+    <div class="score"><div class="label">市场空间</div><div class="val" style="color:var(--bull)">9.0 / 10</div><div class="desc">⭐ 7-10 万亿</div></div>
+    <div class="score"><div class="label">商业化进度</div><div class="val" style="color:var(--neutral)">5.0 / 10</div><div class="desc">⭐ 整体早期</div></div>
+    <div class="score"><div class="label">业绩兑现</div><div class="val" style="color:var(--neutral)">4.0 / 10</div><div class="desc">⭐ 主题溢价</div></div>
+    <div class="score"><div class="label">技术领先</div><div class="val" style="color:var(--bull)">8.0 / 10</div><div class="desc">⭐ 多项全球第一</div></div>
+    <div class="score"><div class="label">估值水平</div><div class="val" style="color:var(--neutral)">5.5 / 10</div><div class="desc">⭐ 整体偏高</div></div>
+    <div class="score"><div class="label">综合评分</div><div class="val" style="color:var(--bull)">6.7 / 10</div><div class="desc">⭐⭐ 偏多</div></div>
+  </div>
+
+  <h3>9.2 三档操盘方案</h3>
+  <div class="strategy-grid">
+    <div class="strategy conservative">
+      <h4>🛡 保守型（稳健）</h4>
+      <div class="target">目标：核心龙头 + 长期持有</div>
+      <div class="price">主题仓位：<b>≤ 15% 总资金</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>配置：每只龙头 ≤ 3%</li>
+        <li>选择：第一梯队龙头</li>
+        <li><b>止损位</b>：单只 -15%</li>
+        <li><b>止盈位</b>：分批 +50%/+100%</li>
+        <li>持有周期：<b>12-24 个月</b></li>
+        <li>逻辑：龙头确定性 + 主题稀缺</li>
+      </ul>
+    </div>
+
+    <div class="strategy balanced">
+      <h4>⚖ 平衡型（推荐）</h4>
+      <div class="target">目标：6 大产业分散配置</div>
+      <div class="price">主题仓位：<b>20-25% 总资金</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>配置：① 具身 25% ② 量子 20% ③ 脑机 15% ④ 能源 15% ⑤ 6G 15% ⑥ 生物制造 10%</li>
+        <li>每只龙头 ≤ 5%</li>
+        <li><b>止损位</b>：组合 -10%</li>
+        <li><b>止盈位</b>：分批 +30%/+60%</li>
+        <li>持有周期：<b>12-18 个月</b></li>
+        <li>逻辑：6 大产业轮动 + 主题博弈</li>
+      </ul>
+    </div>
+
+    <div class="strategy aggressive">
+      <h4>⚡ 激进型（高弹性）</h4>
+      <div class="target">目标：主题轮动 + 涨停板套利</div>
+      <div class="price">主题仓位：<b>≤ 35% 总资金</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>配置：弹性标的（具身 + 量子 + 脑机）</li>
+        <li>每只龙头 ≤ 6%</li>
+        <li><b>止损位</b>：单只 -8%</li>
+        <li><b>止盈位</b>：涨停后分批</li>
+        <li>持有周期：<b>3-9 个月</b></li>
+        <li>逻辑：事件驱动 + 短线博弈</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>9.3 关键买卖节奏</h3>
+  <div class="callout bull">
+    <strong>🟢 板块级买入触发条件（任一满足）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>十五五规划正式发布，<b>六大产业政策细化</b></li>
+      <li>重大技术突破（如人形机器人量产 / 九章四号 / 6G 试验）</li>
+      <li>大额订单公告（如脑机医保扩面 / 量子订单 / 核聚变订单）</li>
+      <li>具身智能 / 量子 / 脑机板块指数 <b>企稳反弹 + 20%</b></li>
+      <li>北向资金 <b>净流入</b>，单周 > 10 亿（板块合计）</li>
+      <li>国务院 / 七部门 <b>重磅政策</b>落地</li>
+    </ul>
+  </div>
+  <div class="callout bear">
+    <strong>🔴 板块级卖出/止损触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>组合跌破 <b>-10%</b>，<b>减半仓</b></li>
+      <li>组合跌破 <b>-20%</b>，<b>清仓离场</b></li>
+      <li>重大技术失败 / 医疗事故 / 监管收紧</li>
+      <li>商业化延期超 <b>1 年</b></li>
+      <li>政策低于预期或被搁置</li>
+      <li>主线资金 <b>连续 2 周净流出</b> 10 亿+</li>
+    </ul>
+  </div>
+
+  <h3>9.4 推荐组合（平衡型）</h3>
+  <div class="card bull">
+    <h4><span class="icon">💼</span> 6 大产业组合配置</h4>
+    <div class="body">
+      <p><b>① 具身智能（25% 仓位）</b>：绿的谐波 5% + 双环传动 5% + 鸣志电器 5% + 五洲新春 5% + 柯力传感 5%</p>
+      <p><b>② 量子科技（20% 仓位）</b>：国盾量子 5% + 中科曙光 5% + 神州信息 5% + 银轮股份 5%</p>
+      <p><b>③ 脑机接口（15% 仓位）</b>：三博脑科 5% + 创新医疗 5% + 美好医疗 5%</p>
+      <p><b>④ 未来能源（15% 仓位）</b>：永鼎股份 5% + 隆基绿能 5% + 阳光电源 5%</p>
+      <p><b>⑤ 6G（15% 仓位）</b>：中国移动 5% + 中兴通讯 5% + 中际旭创 5%</p>
+      <p><b>⑥ 生物制造（10% 仓位）</b>：华恒生物 5% + 凯赛生物 5%</p>
+      <p style="margin-top:10px;color:var(--accent)"><b>合计 20 只龙头，平均每只 5%，主题仓位 25%</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 10. 风险 ========== -->
+<section id="s10">
+  <h2><span class="num">10</span>风险提示与投资纪律</h2>
+
+  <h3>10.1 六大产业共性风险</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 技术与商业化风险</h4>
+      <div class="body">
+        <p><b>① 技术路径不确定</b>：量子（超导 vs 离子阱）/ 具身（人形 vs 四足）等</p>
+        <p><b>② 商业化延期</b>：6G 2030 商用 / 核聚变 2030 发电 / 脑机 2027 临床</p>
+        <p><b>③ 替代技术</b>：SMR（小堆）vs 聚变 / 非侵入式脑机 vs 侵入式</p>
+        <p><b>④ 伦理监管</b>：脑机接口 / 合成生物学 / AI 安全</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 估值与主题风险</h4>
+      <div class="body">
+        <p><b>① 主题溢价高</b>：A 股板块已大幅上涨</p>
+        <p><b>② 业绩占比低</b>：多数公司涉主题业务营收占比 < 10%</p>
+        <p><b>③ 公司澄清风险</b>：多家公司公告"<b>主营业务不涉及</b>"未来产业</p>
+        <p><b>④ 高波动</b>：涨停 + 跌停频发</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 政策与监管风险</h4>
+      <div class="body">
+        <p><b>① 政策不及预期</b>：十五五规划细则推迟</p>
+        <p><b>② 出口管制</b>：6G / 量子 / 半导体相关出口限制</p>
+        <p><b>③ 数据安全</b>：脑机接口 + AI 数据合规</p>
+        <p><b>④ 国际竞争</b>：美欧日韩在多个领域追赶</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📋</span> 投资纪律建议</h4>
+      <div class="body">
+        <p><b>① 仓位管理</b>：单一龙头 ≤ 5%，主题仓位 ≤ 25%</p>
+        <p><b>② 止损纪律</b>：跌破 -15% 立即减仓</p>
+        <p><b>③ 分散配置</b>：6 大产业分别布局 10-25%</p>
+        <p><b>④ 政策跟踪</b>：十五五规划 + 各部委细则</p>
+        <p><b>⑤ 心理建设</b>：长周期赛道，避免追涨杀跌</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bear">
+    <strong>🚨 最重要纪律</strong>：六大未来产业是 <b>15-20 年长期赛道</b>，<b>短期主题波动剧烈</b>。<br>
+    • 必须坚持"<b>六六原则</b>"：6 大产业 + 各 ≤ 5% + 每只 ≤ 6%<br>
+    • 必须跟踪"<b>三好信号</b>"：① 政策加码 ② 技术突破 ③ 业绩兑现<br>
+    • 必须设置"<b>三层止损</b>"：单只 -15% / 组合 -10% / 板块 -20%<br>
+    • 必须保持"<b>三心</b>"：耐心（不追涨）+ 信心（不放弃）+ 狠心（破位止损）<br>
+    • 这是<b>中国未来 20 年的产业升级方向</b>，<b>不要被短期波动影响长期判断</b>
+  </div>
+
+  <div class="verdict bull">
+    <div class="rating bull">🚀 六大未来产业 = 人类文明下一程</div>
+    <div class="horizon">2026-2030 主题 + 商业化共振</div>
+    <div class="logic">
+      <b>终极结论</b>：<b>"十五五"六大未来产业</b>（量子科技、具身智能、6G、脑机接口、生物制造、未来能源）是中国<b>新质生产力的核心方向</b>，<b>2030 总市场 7-10 万亿元</b>，<b>2050 年</b>有望突破 <b>40 万亿美元</b>（含未来能源）。<br><br>
+      <b>投资逻辑</b>：① <b>政策强催化</b>（写入十五五规划）② <b>技术领先</b>（多项全球第一）③ <b>商业化兑现</b>（2027-2030 集中爆发）④ <b>A 股 100+ 龙头</b>（覆盖产业链全环节）<br><br>
+      <b>终极哲学</b>：这<b>不是一次普通的投资机会</b>，而是<b>押注中国未来 20 年的产业升级方向</b>。错过它 = 错过这个时代最伟大的科技革命之一。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，<b>不构成任何投资建议</b>。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询，市场有风险，投资需谨慎。
+  </div>
+  © 2026 "十五五"六大未来产业全方位投研分析 · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
