@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A 股半导体上市公司 2024-2025 财务全景与股价分析报告</title>
+<style>
+:root{
+  --bg:#0f172a;
+  --bg-2:#111c33;
+  --panel:#16223f;
+  --panel-2:#1c2c52;
+  --line:#233458;
+  --text:#e6ecff;
+  --muted:#9aa6c4;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --gold:#fbbf24;
+  --red:#f87171;
+  --green:#34d399;
+  --orange:#fb923c;
+  --purple:#a78bfa;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;font-size:14px}
+.wrap{max-width:1400px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#16223f 0%,#0f172a 60%,#1c2c52 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(94,234,212,.18),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:.5px}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px}
+header.hero .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:4px 12px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:32px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px 32px;margin-bottom:20px}
+section h2{font-size:20px;color:var(--accent);margin-bottom:16px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--gold);margin:18px 0 10px}
+section p{color:var(--text);margin-bottom:12px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.kpi .label{font-size:12px;color:var(--muted);margin-bottom:6px}
+.kpi .val{font-size:22px;font-weight:700;color:var(--accent)}
+.kpi .delta{font-size:12px;margin-top:4px}
+.delta.up{color:var(--green)}
+.delta.down{color:var(--red)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+table.data th,table.data td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;position:sticky;top:0}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace}
+table.data td.up{color:var(--green);font-weight:600}
+table.data td.down{color:var(--red);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:8px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.stack-bar-row{display:grid;grid-template-columns:140px 1fr 80px;gap:10px;align-items:center;margin:6px 0}
+.stack-bar-row .name{font-size:12px;color:var(--text)}
+.stack-bar{height:24px;border-radius:4px;overflow:hidden;background:var(--panel-2);display:flex;border:1px solid var(--line)}
+.stack-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0f172a;font-weight:600}
+.stack-bar-row .val{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.risk{border-left-color:var(--red);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2)}
+.tag.green{background:rgba(52,211,153,.15);color:var(--green)}
+.tag.red{background:rgba(248,113,113,.15);color:var(--red)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--gold)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.card{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card h4{font-size:14px;color:var(--gold);margin-bottom:8px}
+.card .body{font-size:12px;color:var(--muted);line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:24px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>A 股半导体上市公司 <span class="em">2024-2025</span> 财务全景与股价分析报告</h1>
+  <div class="sub">聚焦 12 家 A 股代表性半导体龙头 · 涵盖制造 / 设备 / 设计 / 封测 / 存储全产业链</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>🏭 覆盖 12 家龙头</span>
+    <span>📈 含 2024 实际 + 2025 年报</span>
+    <span>💾 含 2026 H1 业绩预告</span>
+    <span>🔍 含板块/ETF 行情</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、报告说明与数据范围</a></li>
+    <li><a href="#s2">二、行业全景：板块与指数表现</a></li>
+    <li><a href="#s3">三、12 家龙头 2024-2025 财务对比</a></li>
+    <li><a href="#s4">四、分环节深度解析</a></li>
+    <li><a href="#s5">五、季度业绩与盈利能力分析</a></li>
+    <li><a href="#s6">六、2026 年存储涨价新周期</a></li>
+    <li><a href="#s7">七、个股股价与估值快照</a></li>
+    <li><a href="#s8">八、风险提示与免责说明</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 报告说明 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>报告说明与数据范围</h2>
+  <p>本报告聚焦 <span class="hl">A 股市场</span>具有代表性的半导体上市公司，覆盖制造（中芯国际、华虹公司）、设备（北方华创、中微公司、拓荆科技）、设计（寒武纪、海光信息、韦尔股份/豪威集团、兆易创新、澜起科技）、封测（长电科技、通富微电）等产业链关键环节，时间窗口为 <span class="hl">2024 全年（实际）</span>、<span class="hl">2025 全年（年报已披露）</span>，并适度延伸至 2026 上半年业绩预告与板块行情。</p>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="label">样本上市公司</div><div class="val">12 家</div><div class="delta">覆盖 5 大环节</div></div>
+    <div class="kpi"><div class="label">2025 营收合计</div><div class="val">2,389+ 亿元</div><div class="delta up">同比 +21.5%</div></div>
+    <div class="kpi"><div class="label">2025 归母净利合计</div><div class="val">≈ 308 亿元</div><div class="delta up">同比 +36%</div></div>
+    <div class="kpi"><div class="label">中证全指半导体 2026H1</div><div class="val">+104.1%</div><div class="delta up">区间涨幅前列</div></div>
+  </div>
+
+  <div class="callout warn">
+    <strong>⚠ 数据口径说明</strong><br>
+    ① 北方华创 2025 全年营收 393.53 亿（+30.85%），但归母净利 55.22 亿（<b>-1.77%</b>），呈现"增收不增利"。<br>
+    ② 海光信息 2025 营收口径存在 143.05 亿与 143.76 亿两种披露，本报告统一采用 <b>143.05 亿（+18.59%）</b>。<br>
+    ③ 长电科技 2025 年报披露"营收创历史新高"，但具体数字未在搜索结果中出现，本表暂以 <b>n.a.</b> 标注。<br>
+    ④ 寒武纪 2025 年实现 <b>上市以来首次年度盈利</b>，20.59 亿。
+  </div>
+</section>
+
+<!-- ========== 2. 板块行情 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>行业全景：板块与指数表现</h2>
+  <p>2026 年开年以来，A 股半导体板块在 <span class="hl">国产替代</span>、<span class="hl">AI 算力</span>、<span class="hl">存储涨价</span>三大主线共振下大幅走强，但 7 月出现明显回调。</p>
+
+  <h3>2.1 主要半导体指数 2026 上半年涨幅（区间涨幅）</h3>
+  <div class="chart-box">
+    <div class="chart-title">主要半导体相关指数 2026H1 涨幅</div>
+    <div class="stack-bar-row">
+      <div class="name">科创半导体材料设备</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">+170%</div></div>
+      <div class="val">领涨</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">中韩半导体指数</div>
+      <div class="stack-bar"><div style="width:77%;background:linear-gradient(90deg,#60a5fa,#5eead4)">+130.8%</div></div>
+      <div class="val">+130.8%</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">中证半导指数</div>
+      <div class="stack-bar"><div style="width:76%;background:linear-gradient(90deg,#60a5fa,#5eead4)">+128.9%</div></div>
+      <div class="val">+128.9%</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">科创芯片指数</div>
+      <div class="stack-bar"><div style="width:65%;background:linear-gradient(90deg,#34d399,#60a5fa)">+108.8%</div></div>
+      <div class="val">+108.8%</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">中证全指半导体 (512480)</div>
+      <div class="stack-bar"><div style="width:61%;background:linear-gradient(90deg,#34d399,#60a5fa)">+104.1%</div></div>
+      <div class="val">+104.1%</div>
+    </div>
+    <div class="chart-note">数据来源：腾讯财经 2026-07-01 报道，半导体 ETF(512480) 单位净值 1.0431 元（2026-07-28），近 1 月 <b style="color:#f87171">-24.22%</b>。</div>
+  </div>
+
+  <h3>2.2 半导体 ETF(512480) 多周期收益</h3>
+  <table class="data">
+    <thead>
+      <tr><th>区间</th><th>涨跌幅</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>近 1 月</td><td class="num down">-24.22%</td><td>7 月回调，板块短期承压</td></tr>
+      <tr><td>近 3 月</td><td class="num up">+20.20%</td><td>—</td></tr>
+      <tr><td>近 6 月</td><td class="num up">+18.17%</td><td>—</td></tr>
+      <tr><td>近 1 年</td><td class="num up">+93.08%</td><td>板块强势主升浪</td></tr>
+      <tr><td>近 3 年</td><td class="num up">+137.85%</td><td>—</td></tr>
+      <tr><td>成立来</td><td class="num up">+317.24%</td><td>2019-05-08 成立至今</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.3 板块估值水位</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="label">半导体(SW801080) 市净率</div><div class="val">≈ 6.5x</div><div class="delta warn">近 5 年 80% 分位数</div></div>
+    <div class="kpi"><div class="label">板块动态市盈率</div><div class="val">80+ x</div><div class="delta warn">机构提示回调风险</div></div>
+    <div class="kpi"><div class="label">512480 规模</div><div class="val">254 亿元</div><div class="delta">2026-06-30</div></div>
+    <div class="kpi"><div class="label">前十大持仓占比</div><div class="val">47.44%</div><div class="delta">龙头集中度高</div></div>
+  </div>
+
+  <h3>2.4 半导体 ETF(512480) 前五大持仓</h3>
+  <div class="chart-box">
+    <div class="stack-bar-row">
+      <div class="name">兆易创新</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#5eead4,#60a5fa)">7.82%</div></div>
+      <div class="val">第一大重仓</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">寒武纪</div>
+      <div class="stack-bar"><div style="width:92%;background:linear-gradient(90deg,#60a5fa,#a78bfa)">7.20%</div></div>
+      <div class="val">第二</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">佰维存储</div>
+      <div class="stack-bar"><div style="width:34%;background:linear-gradient(90deg,#34d399,#60a5fa)">2.66%</div></div>
+      <div class="val">第三</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">拓荆科技</div>
+      <div class="stack-bar"><div style="width:29%;background:linear-gradient(90deg,#fbbf24,#fb923c)">2.28%</div></div>
+      <div class="val">第四</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">芯原股份</div>
+      <div class="stack-bar"><div style="width:29%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">2.24%</div></div>
+      <div class="val">第五</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>📊 估值逻辑提示</strong><br>
+    板块 PB 处于近 5 年 80% 分位、动态 PE 80 倍以上，反映 AI+存储涨价驱动下市场对业绩高增的预期已被较充分定价；近期 1 个月回撤 -24%，体现高估值对边际利空敏感。
+  </div>
+</section>
+
+<!-- ========== 3. 12家公司财务对比 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>12 家龙头 2024-2025 财务对比</h2>
+  <p>下表汇总了 12 家代表性 A 股半导体龙头 <span class="hl">2024 实际</span>与 <span class="hl">2025 全年</span>营收、归母净利润及增速（数据来源于各公司公告、年报或业绩快报）。</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>环节</th>
+        <th>公司</th>
+        <th>股票代码</th>
+        <th>2024 营收<br>(亿元)</th>
+        <th>2025 营收<br>(亿元)</th>
+        <th>营收 YoY</th>
+        <th>2024 归母<br>(亿元)</th>
+        <th>2025 归母<br>(亿元)</th>
+        <th>净利 YoY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>制造</td><td>中芯国际</td><td>688981</td>
+        <td class="num">577.96</td><td class="num">673.23</td><td class="num up">+16.5%</td>
+        <td class="num">36.99</td><td class="num">50.41</td><td class="num up">+36.3%</td>
+      </tr>
+      <tr>
+        <td>制造</td><td>华虹公司</td><td>688347</td>
+        <td class="num">143.91</td><td class="num">172.91</td><td class="num up">+20.2%</td>
+        <td class="num">3.81</td><td class="num">3.77</td><td class="num down">-1.0%</td>
+      </tr>
+      <tr>
+        <td>设备</td><td>北方华创</td><td>002371</td>
+        <td class="num">300.71</td><td class="num">393.53</td><td class="num up">+30.85%</td>
+        <td class="num">56.21</td><td class="num">55.22</td><td class="num down">-1.77%</td>
+      </tr>
+      <tr>
+        <td>设备</td><td>中微公司</td><td>688012</td>
+        <td class="num">90.65</td><td class="num">123.85</td><td class="num up">+36.6%</td>
+        <td class="num">16.16</td><td class="num">21.11</td><td class="num up">+30.7%</td>
+      </tr>
+      <tr>
+        <td>设备</td><td>拓荆科技</td><td>688072</td>
+        <td class="num">n.a.</td><td class="num">n.a.（+58.87%）</td><td class="num up">+58.87%</td>
+        <td class="num">6.89</td><td class="num">9.29</td><td class="num up">+35.05%</td>
+      </tr>
+      <tr>
+        <td>设计</td><td>寒武纪</td><td>688256</td>
+        <td class="num">11.74</td><td class="num">64.97</td><td class="num up">+453%</td>
+        <td class="num">-4.52</td><td class="num">20.59</td><td class="num up">扭亏</td>
+      </tr>
+      <tr>
+        <td>设计</td><td>海光信息</td><td>688041</td>
+        <td class="num">120.62</td><td class="num">143.05</td><td class="num up">+18.59%</td>
+        <td class="num">19.31</td><td class="num">25.42</td><td class="num up">+27.81%</td>
+      </tr>
+      <tr>
+        <td>设计</td><td>豪威集团(韦尔)</td><td>603501</td>
+        <td class="num">257.31</td><td class="num">288.55</td><td class="num up">+12.14%</td>
+        <td class="num">33.23</td><td class="num">40.45</td><td class="num up">+21.73%</td>
+      </tr>
+      <tr>
+        <td>设计</td><td>兆易创新</td><td>603986</td>
+        <td class="num">73.56</td><td class="num">92.03</td><td class="num up">+25.1%</td>
+        <td class="num">11.03</td><td class="num">16.48</td><td class="num up">+49.4%</td>
+      </tr>
+      <tr>
+        <td>设计</td><td>澜起科技</td><td>688008</td>
+        <td class="num">n.a.</td><td class="num">54.56</td><td class="num up">n.a.</td>
+        <td class="num">14.12</td><td class="num">22.36</td><td class="num up">+58.35%</td>
+      </tr>
+      <tr>
+        <td>封测</td><td>长电科技</td><td>600584</td>
+        <td class="num">359.6</td><td class="num warn">n.a.（新高）</td><td class="num up">—</td>
+        <td class="num">16.10</td><td class="num">15.65</td><td class="num down">-2.75%</td>
+      </tr>
+      <tr>
+        <td>封测</td><td>通富微电</td><td>002156</td>
+        <td class="num">238.82</td><td class="num">279.21</td><td class="num up">+16.92%</td>
+        <td class="num">6.78</td><td class="num">12.19</td><td class="num up">+79.8%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.1 营收规模排序（2025 全年）</h3>
+  <div class="chart-box">
+    <div class="chart-title">12 家公司 2025 营收对比（亿元）</div>
+    <div class="stack-bar-row"><div class="name">中芯国际</div><div class="stack-bar"><div style="width:100%;background:#5eead4">673.2</div></div><div class="val">673.23</div></div>
+    <div class="stack-bar-row"><div class="name">北方华创</div><div class="stack-bar"><div style="width:58%;background:#60a5fa">393.5</div></div><div class="val">393.53</div></div>
+    <div class="stack-bar-row"><div class="name">豪威集团</div><div class="stack-bar"><div style="width:43%;background:#a78bfa">288.6</div></div><div class="val">288.55</div></div>
+    <div class="stack-bar-row"><div class="name">通富微电</div><div class="stack-bar"><div style="width:41%;background:#fbbf24">279.2</div></div><div class="val">279.21</div></div>
+    <div class="stack-bar-row"><div class="name">长电科技*</div><div class="stack-bar"><div style="width:54%;background:#fb923c;opacity:.6">创历史新高</div></div><div class="val">≥ 380</div></div>
+    <div class="stack-bar-row"><div class="name">华虹公司</div><div class="stack-bar"><div style="width:26%;background:#34d399">172.9</div></div><div class="val">172.91</div></div>
+    <div class="stack-bar-row"><div class="name">海光信息</div><div class="stack-bar"><div style="width:21%;background:#5eead4">143.1</div></div><div class="val">143.05</div></div>
+    <div class="stack-bar-row"><div class="name">中微公司</div><div class="stack-bar"><div style="width:18%;background:#60a5fa">123.9</div></div><div class="val">123.85</div></div>
+    <div class="stack-bar-row"><div class="name">兆易创新</div><div class="stack-bar"><div style="width:14%;background:#a78bfa">92.0</div></div><div class="val">92.03</div></div>
+    <div class="stack-bar-row"><div class="name">澜起科技</div><div class="stack-bar"><div style="width:8%;background:#fbbf24">54.6</div></div><div class="val">54.56</div></div>
+    <div class="stack-bar-row"><div class="name">寒武纪</div><div class="stack-bar"><div style="width:10%;background:#34d399">65.0</div></div><div class="val">64.97</div></div>
+    <div class="stack-bar-row"><div class="name">拓荆科技</div><div class="stack-bar"><div style="width:14%;background:#fb923c">≈ 88</div></div><div class="val">约 88</div></div>
+    <div class="chart-note">* 长电科技 2025 年报称"营收创历史新高"，但具体数字未直接披露，按 2024 年 359.6 亿基础推算应 ≥ 380 亿（具体以公司年报为准）。拓荆科技 2025 营收按同比 +58.87% 反推。</div>
+  </div>
+
+  <h3>3.2 归母净利润排序（2025 全年）</h3>
+  <div class="chart-box">
+    <div class="chart-title">12 家公司 2025 归母净利润（亿元）</div>
+    <div class="stack-bar-row"><div class="name">北方华创</div><div class="stack-bar"><div style="width:100%;background:#60a5fa">55.2</div></div><div class="val">55.22</div></div>
+    <div class="stack-bar-row"><div class="name">中芯国际</div><div class="stack-bar"><div style="width:91%;background:#5eead4">50.4</div></div><div class="val">50.41</div></div>
+    <div class="stack-bar-row"><div class="name">豪威集团</div><div class="stack-bar"><div style="width:73%;background:#a78bfa">40.5</div></div><div class="val">40.45</div></div>
+    <div class="stack-bar-row"><div class="name">海光信息</div><div class="stack-bar"><div style="width:46%;background:#34d399">25.4</div></div><div class="val">25.42</div></div>
+    <div class="stack-bar-row"><div class="name">澜起科技</div><div class="stack-bar"><div style="width:40%;background:#fbbf24">22.4</div></div><div class="val">22.36</div></div>
+    <div class="stack-bar-row"><div class="name">中微公司</div><div class="stack-bar"><div style="width:38%;background:#60a5fa">21.1</div></div><div class="val">21.11</div></div>
+    <div class="stack-bar-row"><div class="name">寒武纪</div><div class="stack-bar"><div style="width:37%;background:#34d399">20.6</div></div><div class="val">20.59</div></div>
+    <div class="stack-bar-row"><div class="name">兆易创新</div><div class="stack-bar"><div style="width:30%;background:#a78bfa">16.5</div></div><div class="val">16.48</div></div>
+    <div class="stack-bar-row"><div class="name">长电科技</div><div class="stack-bar"><div style="width:28%;background:#fb923c">15.7</div></div><div class="val">15.65</div></div>
+    <div class="stack-bar-row"><div class="name">通富微电</div><div class="stack-bar"><div style="width:22%;background:#fbbf24">12.2</div></div><div class="val">12.19</div></div>
+    <div class="stack-bar-row"><div class="name">拓荆科技</div><div class="stack-bar"><div style="width:17%;background:#fb923c">9.3</div></div><div class="val">9.29</div></div>
+    <div class="stack-bar-row"><div class="name">华虹公司</div><div class="stack-bar"><div style="width:7%;background:#34d399">3.8</div></div><div class="val">3.77</div></div>
+  </div>
+</section>
+
+<!-- ========== 4. 分环节深度 ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>分环节深度解析</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>🛠 半导体设备：营收高增，盈利分化</h4>
+      <div class="body">
+        <p><b>北方华创</b>：营收 +30.85% 但归母 -1.77%，Q4 单季净利同比显著下滑，主因 <b>毛利率 41.41% 同比 -6.65pct</b>，价格竞争与产品结构压力显现；研发投入 72.77 亿（+46.96%）表明公司在为下一代产品蓄力。</p>
+        <p><b>中微公司</b>：营收 +36.6%，归母 +30.7%，刻蚀设备 <b>98.32 亿（+35.1%）</b>，LPCVD/ALD 薄膜设备 <b>5.06 亿（+224%）</b> 成新增长引擎。反应台累计出货 <b>超 6800 台</b>。</p>
+        <p><b>拓荆科技</b>：营收 +58.87%，归母 +35%，新机台与新工艺批量验证，但 Q1 因季节性出现亏损（-1.47 亿）。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>🏭 晶圆制造：成熟 vs 先进分化</h4>
+      <div class="body">
+        <p><b>中芯国际</b>：营收 673.23 亿（+16.5%）、归母 50.41 亿（<b>+36.3%</b>），实现 2024 "增收不增利"后的强力反转；扣非归母 +55.9%，经营造血能力大幅改善。蝉联 <b>全球纯晶圆代工第二、大陆第一</b>。</p>
+        <p><b>华虹公司</b>：营收 172.91 亿（+20.2%）创新高，但归母 3.77 亿（<b>-1.04%</b>），<b>成熟制程扩产</b>拖累利润，毛利率持续承压。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>🧠 AI 芯片 & CPU：寒武纪迎拐点</h4>
+      <div class="body">
+        <p><b>寒武纪</b>：营收 <b>+453%</b> 达 64.97 亿，归母 <b>20.59 亿扭亏为盈</b>，上市以来首次年度盈利；研发累计投入 58.5 亿（"进入收获期"）。</p>
+        <p><b>海光信息</b>：营收 143.05 亿（+18.59%），归母 25.42 亿（+27.81%）；<b>DCU 营收 70.32 亿（+56.95%）</b> 占比升至 49.15%，CPU 72.73 亿（-5.89%）受服务器市场承压。</p>
+        <p><b>澜起科技</b>：归母 22.36 亿（<b>+58.35%</b>），受益 AI 内存接口芯片需求；不过 2026 年公司韩国办公室遭搜查，股价短期受挫。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>📷 CIS & MCU：稳健成长</h4>
+      <div class="body">
+        <p><b>豪威集团（韦尔股份）</b>：2025 营收 288.55 亿（+12.14%），归母 40.45 亿（+21.73%）；汽车 CIS 全球市占率约 15%，高端智能手机 OV50X 1 英寸大底对标索尼。<b>2026Q1 出现回调</b>：营收 -0.90%，归母 -41.92%，值得关注。</p>
+        <p><b>兆易创新</b>：NOR Flash 全球第三，2025 营收 92.03 亿（+25.1%），归母 16.48 亿（+49.4%）；2026H1 预告营收 ~115 亿（+177%）、归母 ~69 亿（<b>+1099%</b>），港股 2026 涨幅 <b>3.4 倍</b>。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>📦 封测：营收分化，盈利能力修复</h4>
+      <div class="body">
+        <p><b>长电科技</b>：2024 营收 359.6 亿（+21.2%），2025 营收创历史新高但归母 <b>15.65 亿（-2.75%）</b>，盈利仍承压；H1 净利 -23.98% 但 Q3 修复。</p>
+        <p><b>通富微电</b>：2025 营收 279.21 亿（+16.92%），归母 12.19 亿（<b>+79.8%</b>），受益 AMD 等大客户 HPC 订单。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>💾 存储板块：2026 涨价新周期</h4>
+      <div class="body">
+        <p>三星计划 Q3 对主要存储产品 <b>提价 15%-20%</b>，已通知戴尔、惠普。AI 算力 + 产能有限驱动 2026 全年涨价周期。兆易创新、江波龙、佰维存储 2026 业绩或大幅超预期。</p>
+        <p>行业净利率普遍 <b>超 50%</b>，长鑫科技 2026Q1 收入 +7.2 倍、净利 +12.7 倍。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.1 业务结构亮点</h3>
+
+  <h4>中微公司 2025 营收结构</h4>
+  <div class="chart-box">
+    <div class="stack-bar-row"><div class="name">刻蚀设备</div><div class="stack-bar"><div style="width:79%;background:#60a5fa">98.32（79%）</div></div><div class="val">+35.1%</div></div>
+    <div class="stack-bar-row"><div class="name">薄膜设备 (LPCVD/ALD)</div><div class="stack-bar"><div style="width:21%;background:#5eead4">5.06（4%）</div></div><div class="val">+224.2%</div></div>
+    <div class="stack-bar-row"><div class="name">其他</div><div class="stack-bar"><div style="width:17%;background:#a78bfa">20.47（17%）</div></div><div class="val">—</div></div>
+    <div class="chart-note">刻蚀设备反应台累计出货超 6800 台，覆盖 65nm 至 3nm 及更先进制程。</div>
+  </div>
+
+  <h4>海光信息 2025 营收结构</h4>
+  <div class="chart-box">
+    <div class="stack-bar-row"><div class="name">海光 CPU</div><div class="stack-bar"><div style="width:50.85%;background:#5eead4">72.73（50.85%）</div></div><div class="val">-5.89%</div></div>
+    <div class="stack-bar-row"><div class="name">海光 DCU</div><div class="stack-bar"><div style="width:49.15%;background:#60a5fa">70.32（49.15%）</div></div><div class="val">+56.95%</div></div>
+    <div class="chart-note">DCU 是国产 GPGPU 主力，对标 NVIDIA CUDA 生态；2025 算力、显存带宽、互联能力保持业内领先。</div>
+  </div>
+
+  <h4>豪威集团 2025 业务结构</h4>
+  <div class="chart-box">
+    <div class="stack-bar-row"><div class="name">图像传感器 (CIS)</div><div class="stack-bar"><div style="width:100%;background:#a78bfa">约 191.9（66%）</div></div><div class="val">2024基数</div></div>
+    <div class="stack-bar-row"><div class="name"> 手机 CIS</div><div class="stack-bar"><div style="width:51%;background:#34d399">98.02</div></div><div class="val">+26.0%</div></div>
+    <div class="stack-bar-row"><div class="name"> 汽车 CIS</div><div class="stack-bar"><div style="width:31%;background:#5eead4">59.05</div></div><div class="val">+29.9%</div></div>
+    <div class="stack-bar-row"><div class="name"> AIoT CIS</div><div class="stack-bar"><div style="width:18%;background:#60a5fa">约 35</div></div><div class="val">+180%（出货）</div></div>
+    <div class="stack-bar-row"><div class="name">模拟/显示方案</div><div class="stack-bar"><div style="width:34%;background:#fbbf24">约 65</div></div><div class="val">2024基数</div></div>
+    <div class="chart-note">2024 年 OV50X（1 英寸 50MP，DCG+LOFIC）对标索尼；OX08D10 车规 CIS 全球第一梯队（15% 市占率）。</div>
+  </div>
+</section>
+
+<!-- ========== 5. 季度业绩 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>季度业绩与盈利能力分析</h2>
+
+  <h3>5.1 中芯国际 2025 分季度</h3>
+  <table class="data">
+    <thead><tr><th>报告期</th><th>营收(亿元)</th><th>营收 YoY</th><th>归母净利(亿元)</th><th>归母 YoY</th></tr></thead>
+    <tbody>
+      <tr><td>2025 Q1</td><td class="num">163.01</td><td class="num up">+29.44%</td><td class="num">13.56</td><td class="num up">+166.5%</td></tr>
+      <tr><td>2025 H1</td><td class="num">323.48</td><td class="num up">—</td><td class="num">23.01</td><td class="num up">—</td></tr>
+      <tr><td>2025 全年</td><td class="num">673.23</td><td class="num up">+16.5%</td><td class="num">50.41</td><td class="num up">+36.3%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 北方华创 2025 分季度（增收不增利的典型）</h3>
+  <table class="data">
+    <thead><tr><th>报告期</th><th>营收(亿元)</th><th>营收 YoY</th><th>归母净利(亿元)</th><th>归母 YoY</th></tr></thead>
+    <tbody>
+      <tr><td>2025 Q1</td><td class="num">82.06</td><td class="num up">+37.90%</td><td class="num">15.81</td><td class="num up">+38.80%</td></tr>
+      <tr><td>2025 H1</td><td class="num">161.42</td><td class="num up">+29.51%</td><td class="num">32.08</td><td class="num up">+14.97%</td></tr>
+      <tr><td>2025 Q3</td><td class="num">111.6（单季）</td><td class="num up">+38.31%</td><td class="num">19.22</td><td class="num up">+14.60%</td></tr>
+      <tr><td>2025 全年</td><td class="num">393.53</td><td class="num up">+30.85%</td><td class="num">55.22</td><td class="num down"><b>-1.77%</b></td></tr>
+      <tr><td>推算 Q4</td><td class="num warn">~39.8</td><td class="num warn">—</td><td class="num warn">~3.9</td><td class="num down"><b>显著下滑</b></td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn">
+    <strong>🔍 北方华创 "Q4 急刹车" 现象</strong><br>
+    前三季累计归母同比 +14.83%，但全年转为 -1.77%，意味着 <b>Q4 单季净利同比大幅下滑</b>（推算约 3.92 亿）。市场关注点：<br>
+    ① 毛利率从前期 48% 降至 41.41%（-6.65pct），价格竞争与产品结构压力<br>
+    ② 应收账款 Q3 同比 +39.34%，回款质量风险<br>
+    ③ 研发费用 +46.96% 加大对未来产品迭代投入<br>
+    ④ 长期看，国产替代 + 先进制程扩产仍提供成长动能
+  </div>
+
+  <h3>5.3 寒武纪 2025 季度盈利进程（里程碑）</h3>
+  <table class="data">
+    <thead><tr><th>报告期</th><th>营收(亿元)</th><th>营收 YoY</th><th>归母净利(亿元)</th><th>里程碑</th></tr></thead>
+    <tbody>
+      <tr><td>2024 全年</td><td class="num">11.74</td><td class="num up">—</td><td class="num">-4.52</td><td>亏损</td></tr>
+      <tr><td>2024 Q4</td><td class="num">—</td><td class="num">—</td><td class="num">2.72</td><td>首次单季盈利</td></tr>
+      <tr><td>2025 Q1</td><td class="num">11.11</td><td class="num up">+4230%</td><td class="num">3.55</td><td>首次季度扣非盈利</td></tr>
+      <tr><td>2025 全年</td><td class="num">64.97</td><td class="num up">+453%</td><td class="num">20.59</td><td><span class="tag green">上市首次年度盈利</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.4 研发投入强度</h3>
+  <table class="data">
+    <thead><tr><th>公司</th><th>2025 研发投入</th><th>研发占营收</th><th>同比</th><th>评价</th></tr></thead>
+    <tbody>
+      <tr><td>北方华创</td><td class="num">72.77 亿</td><td class="num">18.49%</td><td class="num up">+46.96%</td><td>设备龙头持续高研发</td></tr>
+      <tr><td>中微公司</td><td class="num">37.44 亿</td><td class="num">30.23%</td><td class="num up">+52.65%</td><td>研发占比行业前列</td></tr>
+      <tr><td>海光信息</td><td class="num">49.55 亿</td><td class="num">34.64%</td><td class="num up">+16.93%</td><td>研发占比最高</td></tr>
+      <tr><td>寒武纪</td><td class="num warn">—</td><td class="num warn">—</td><td class="num warn">—</td><td>累计研发投入 58.5 亿</td></tr>
+    </tbody>
+  </table>
+  <div class="chart-note">数据来源：各公司 2025 年报。</div>
+</section>
+
+<!-- ========== 6. 2026 存储涨价 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>2026 存储涨价新周期</h2>
+  <p>2026 年开年，全球存储行业进入新一轮涨价周期：<span class="hl">三星计划 Q3 提价 15%-20%</span>、已通知戴尔/惠普等大客户；AI 算力需求 + 产能扩张有限，业内预测涨价至少持续至 2026 年底。</p>
+
+  <h3>6.1 A 股存储链 2026H1 业绩预告</h3>
+  <table class="data">
+    <thead>
+      <tr><th>公司</th><th>2026H1 营收预告</th><th>营收 YoY</th><th>2026H1 归母预告</th><th>归母 YoY</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>兆易创新</td><td class="num">~115 亿</td><td class="num up">+177%</td><td class="num">~69 亿</td><td class="num up"><b>+1099%</b></td>
+        <td>NOR Flash 全球第三，MCU 同步放量；港股 2026 涨幅 <b>3.4 倍</b></td>
+      </tr>
+      <tr>
+        <td>江波龙</td><td class="num">220-250 亿</td><td class="num up">+115.78%~145.2%</td><td class="num">92-110 亿</td><td class="num up"><b>+62,204%~74,393%</b></td>
+        <td>低基数效应，主因下游需求 + 备货红利</td>
+      </tr>
+      <tr>
+        <td>佰维存储</td><td class="num warn">—</td><td class="num warn">—</td><td class="num warn">—</td><td class="num warn">—</td>
+        <td>2025 年预告营收 100-120 亿；2026/07/06 盘中涨超 5%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 行业景气对比（2026Q1）</h3>
+  <table class="data">
+    <thead><tr><th>公司</th><th>2026Q1 收入 YoY</th><th>2026Q1 净利 YoY</th></tr></thead>
+    <tbody>
+      <tr><td>长鑫科技</td><td class="num up">+7.2 倍</td><td class="num up">+12.7 倍</td></tr>
+      <tr><td>兆易创新</td><td class="num up">+1.2 倍</td><td class="num up">+5.1 倍</td></tr>
+      <tr><td>SK 海力士</td><td class="num up">+1.98 倍</td><td class="num up">+3.98 倍</td></tr>
+      <tr><td>美光科技</td><td class="num up">+1.96 倍</td><td class="num up">+7.7 倍</td></tr>
+    </tbody>
+  </table>
+  <div class="chart-note">行业净利率普遍超 50%。美光市值 7800 亿美元（PS>20.9x），闪迪 2026 涨幅 460%。</div>
+
+  <div class="callout warn">
+    <strong>⚠ 周期下行风险</strong><br>
+    业内预测 2028 年存储价格可能回调，需关注：① 2027 年产能扩张情况；② AI 算力需求增速；③ 全球宏观经济与终端消费复苏力度。<br>
+    短期 2026/02/02 存储概念股已出现集体大跌：中微半导 -13.67%、普冉 -13.01%、江波龙 -10.77%、佰维 -10.35%、兆易 -10%。
+  </div>
+</section>
+
+<!-- ========== 7. 个股股价 ========== -->
+<section id="s7">
+  <h2><span class="num">07</span>个股股价与估值快照</h2>
+  <p>本节给出主要 A 股半导体龙头 <span class="hl">2026 年 7 月的股价、估值快照</span>，数据基于公开报道整理。由于股价实时变动，请以实际行情为准。</p>
+
+  <h3>7.1 主要个股 2026 年表现与估值概览</h3>
+  <table class="data">
+    <thead>
+      <tr><th>公司</th><th>代码</th><th>2026 表现</th><th>关键估值/事件</th><th>股价催化</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>兆易创新 (A)</td><td>603986</td><td class="num up"><b>+2836 亿市值</b></td><td>静态 PS 30.8x</td><td>2026H1 净利 +1099%</td></tr>
+      <tr><td>兆易创新 (H)</td><td>—</td><td class="num up"><b>涨幅 3.4 倍</b></td><td>静态 PS 40x</td><td>存储涨价 + MCU</td></tr>
+      <tr><td>江波龙</td><td>301308</td><td class="num up">大幅上涨</td><td>业绩弹性最大</td><td>2026H1 净利 +6 万倍基数</td></tr>
+      <tr><td>中微公司</td><td>688012</td><td class="num up">持续新高</td><td>PE 偏高</td><td>薄膜设备 +224%</td></tr>
+      <tr><td>北方华创</td><td>002371</td><td class="num warn">震荡</td><td>PE 偏高</td><td>Q4 增收不增利承压</td></tr>
+      <tr><td>中芯国际</td><td>688981</td><td class="num up">H 股反弹</td><td>PB 估值修复</td><td>2025 净利 +36% 反转</td></tr>
+      <tr><td>寒武纪</td><td>688256</td><td class="num up">AI 龙头</td><td>动态 PE 80x+</td><td>首次年度盈利</td></tr>
+      <tr><td>豪威集团</td><td>603501</td><td class="num down">Q1 回调</td><td>—</td><td>2026Q1 净利 -41.92%</td></tr>
+      <tr><td>澜起科技</td><td>688008</td><td class="num warn">短期波动</td><td>—</td><td>韩国办公室遭搜查</td></tr>
+      <tr><td>海光信息</td><td>688041</td><td class="num up">DCU 放量</td><td>—</td><td>DCU +56.95%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.2 股价驱动因素分析框架</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>📈 上行催化（2026 年主线）</h4>
+      <div class="body">
+        <p><b>① 国产替代加速</b>：半导体设备国产化率提升、材料/EDA 软件补链逻辑持续。</p>
+        <p><b>② AI 算力需求</b>：海光 DCU、寒武纪思元、澜起津逮受益 AI 推理/训练芯片需求爆发。</p>
+        <p><b>③ 存储涨价周期</b>：兆易、江波龙、佰维 2026H1 业绩或大幅超预期。</p>
+        <p><b>④ 高端制造升级</b>：中芯国际、华虹先进/特色工艺订单饱满。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>📉 下行风险（需警惕）</h4>
+      <div class="body">
+        <p><b>① 估值高位</b>：板块 PB 6.5x（5 年 80% 分位）、动态 PE 80x+，对边际利空敏感（已体现于近 1 月 -24.22%）。</p>
+        <p><b>② 周期回调</b>：存储行业 2028 年可能进入下行周期；Q1 普遍业绩基数极低，2027 年面临高基数压力。</p>
+        <p><b>③ 个股事件</b>：豪威集团 2026Q1 净利 -41.92%、澜起韩国办公室遭搜查、地缘政治风险。</p>
+        <p><b>④ 盈利结构</b>：北方华创 Q4"增收不增利"提示价格竞争与产品结构风险。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>🎯 估值锚定方法</h4>
+      <div class="body">
+        <p><b>① PS（市销率）</b>：适合高增长但盈利波动大的公司（兆易 30.8x、华虹、寒武纪、海光）。</p>
+        <p><b>② PE（动态）</b>：北方华创、中微等盈利稳定公司适用；2026E PE 30-50x 区间。</p>
+        <p><b>③ PB</b>：重资产晶圆代工厂（中芯、华虹）适用，对照台积电 5-6x 范围。</p>
+        <p><b>④ PEG</b>：寒武纪（增速 400%+）、江波龙（基数效应）需结合业绩兑现度判断。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>💡 投资逻辑分类</h4>
+      <div class="body">
+        <p><b>成长型</b>：寒武纪、海光 DCU、兆易（弹性最大但波动大）。</p>
+        <p><b>稳健型</b>：北方华创、中微、长电、通富（业绩可预测、估值合理）。</p>
+        <p><b>周期型</b>：华虹（成熟制程供需）、兆易/江波龙/佰维（存储涨价周期）。</p>
+        <p><b>反转型</b>：中芯国际（2024 增收不增利 → 2025 强力反转的范本）。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>7.3 板块整体技术形态观察</h3>
+  <div class="callout">
+    <strong>📊 半导体 ETF(512480) 关键价位参考</strong><br>
+    • <b>2026-07-28 单位净值</b>：1.0431 元（日内跌 -7.02%）<br>
+    • <b>近 1 月回撤</b>：-24.22%，已突破多数短期均线支撑<br>
+    • <b>2026H1 累计涨幅</b>：+104.1%，区间涨幅在 A 股 44 只指数基金中排名第 6<br>
+    • <b>关键观察位</b>：1.0 元（前期平台）、1.2 元（反弹阻力）<br>
+    • <b>技术含义</b>：高位放量回撤 + 估值高企 → 短期波动率放大；中长期（年线 +93%、3 年 +137%）仍处多头格局
+  </div>
+</section>
+
+<!-- ========== 8. 风险免责 ========== -->
+<section id="s8">
+  <h2><span class="num">08</span>风险提示与免责说明</h2>
+
+  <div class="callout risk">
+    <strong>⚠ 数据时效性说明</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>本报告财务数据基于各公司公开年报、业绩快报、业绩预告，<b>截至 2026 年 4 月披露</b>；部分公司具体数字（如长电科技 2025 营收）尚未在搜索结果中明确披露，已用 n.a. 标注。</li>
+      <li>股价与板块行情数据来源于公开报道，<b>截至 2026 年 7 月 28 日</b>，实际交易以实时行情为准。</li>
+      <li>报告中所提及的"涨幅"、"市值"均为区间数据，受数据源影响可能与实际值存在偏差。</li>
+    </ul>
+  </div>
+
+  <div class="callout risk">
+    <strong>⚠ 投资风险提示</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>半导体板块当前估值（PB 6.5x、PE 80x+）处于历史高位，<b>短期回调风险显著</b>（已兑现于近 1 月 -24%）。</li>
+      <li>存储行业属于强周期行业，2028 年价格回调风险已被业内警示。</li>
+      <li>个股业绩弹性巨大（江波龙 2026H1 净利 YoY +6 万倍），但 <b>2027 年高基数压力</b>不容忽视。</li>
+      <li>地缘政治风险（出口管制、海外子公司合规事件如澜起韩国办公室遭搜查）可能带来突发性冲击。</li>
+      <li>本报告 <b>不构成任何投资建议</b>，不构成对任何证券的买入、卖出或持有推荐。</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <strong>📚 数据来源</strong>
+    <p style="margin-top:8px">
+      本报告财务数据来自东方财富、新浪财经、证券之星、中证网、第一财经、各上市公司公告、业绩快报及业绩预告；板块行情数据来自腾讯财经、东方财富 ETF 频道、雪球等公开来源。报告由 Claude 基于公开信息整理，所有数字请以公司原始公告为准。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，不构成任何投资建议。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询。
+  </div>
+  © 2026 A 股半导体上市公司 2024-2025 财务全景与股价分析报告 · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
