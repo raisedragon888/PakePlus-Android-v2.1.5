@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>具身智能：人形机器人量产元年 全产业链投研分析</title>
+<style>
+:root{
+  --bg:#0a0f1e;
+  --bg-2:#0f1729;
+  --panel:#15203b;
+  --panel-2:#1c2a4a;
+  --line:#2a3656;
+  --text:#e8eef9;
+  --muted:#94a3c1;
+  --bull:#34d399;
+  --bear:#f87171;
+  --neutral:#fbbf24;
+  --accent:#5eead4;
+  --accent-2:#60a5fa;
+  --purple:#a78bfa;
+  --orange:#fb923c;
+  --pink:#f472b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;font-size:14px}
+.wrap{max-width:1500px;margin:0 auto;padding:32px 24px}
+header.hero{background:linear-gradient(135deg,#15203b 0%,#0a0f1e 60%,#1c2a4a 100%);border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden}
+header.hero::before{content:"";position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(96,165,250,.20),transparent 70%);border-radius:50%}
+header.hero::after{content:"";position:absolute;bottom:-120px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(94,234,212,.15),transparent 70%);border-radius:50%}
+header.hero h1{font-size:28px;font-weight:700;margin-bottom:8px;position:relative}
+header.hero h1 .em{color:var(--accent)}
+header.hero .sub{color:var(--muted);font-size:14px;position:relative}
+header.hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;position:relative}
+header.hero .meta span{background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.25);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:12px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:24px}
+nav.toc h3{font-size:14px;color:var(--accent);margin-bottom:10px;font-weight:600}
+nav.toc ol{columns:2;column-gap:36px;list-style:none}
+nav.toc li{padding:4px 0;font-size:13px;color:var(--muted)}
+nav.toc li::before{content:"▸ ";color:var(--accent-2)}
+nav.toc a{color:var(--text);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 34px;margin-bottom:22px}
+section h2{font-size:21px;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+section h2 .num{color:var(--accent-2);font-family:monospace;margin-right:8px}
+section h3{font-size:16px;color:var(--neutral);margin:18px 0 10px;font-weight:600}
+section h4{font-size:14px;color:var(--accent-2);margin:14px 0 8px}
+section p{color:var(--text);margin-bottom:10px}
+section p .hl{color:var(--accent);font-weight:600}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.kpi.bull::before{background:var(--bull)}
+.kpi.bear::before{background:var(--bear)}
+.kpi.neutral::before{background:var(--neutral)}
+.kpi.purple::before{background:var(--purple)}
+.kpi .label{font-size:11px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:20px;font-weight:700;color:var(--accent)}
+.kpi.bull .val{color:var(--bull)}
+.kpi.bear .val{color:var(--bear)}
+.kpi.neutral .val{color:var(--neutral)}
+.kpi.purple .val{color:var(--purple)}
+.kpi .delta{font-size:11px;margin-top:4px;color:var(--muted)}
+table.data{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;table-layout:fixed}
+table.data th,table.data td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;overflow-wrap:break-word;word-break:break-word}
+table.data th{background:var(--panel-2);color:var(--accent);font-weight:600;white-space:nowrap;font-size:12.5px;letter-spacing:.2px}
+table.data th.wrap{white-space:normal;font-size:12px;line-height:1.3}
+table.data tbody tr:hover{background:rgba(96,165,250,.05)}
+table.data td.num{text-align:center;font-variant-numeric:tabular-nums;font-family:"SF Mono",Consolas,monospace;white-space:nowrap}
+table.data td.nowrap{white-space:nowrap}
+table.data td.bull{color:var(--bull);font-weight:600}
+table.data td.bear{color:var(--bear);font-weight:600}
+table.data td.warn{color:var(--orange);font-weight:600}
+table.data col{display:table-column}
+table.data td .tag{margin:0 auto}
+.chart-box{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto}
+.chart-title{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:600}
+.chart-note{font-size:11px;color:var(--muted);margin-top:8px}
+.stack-bar-row{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center;margin:6px 0}
+.stack-bar-row .name{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack-bar{height:26px;border-radius:4px;overflow:hidden;background:var(--panel-2);display:flex;border:1px solid var(--line)}
+.stack-bar div{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a0f1e;font-weight:600;transition:width .3s;white-space:nowrap;padding:0 6px;min-width:fit-content}
+.stack-bar-row .val{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout{background:linear-gradient(90deg,rgba(94,234,212,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13px}
+.callout.warn{border-left-color:var(--orange);background:linear-gradient(90deg,rgba(251,146,60,.08),transparent)}
+.callout.bull{border-left-color:var(--bull);background:linear-gradient(90deg,rgba(52,211,153,.08),transparent)}
+.callout.bear{border-left-color:var(--bear);background:linear-gradient(90deg,rgba(248,113,113,.08),transparent)}
+.callout.purple{border-left-color:var(--purple);background:linear-gradient(90deg,rgba(167,139,250,.08),transparent)}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;margin-right:4px;background:rgba(96,165,250,.15);color:var(--accent-2);font-weight:500}
+.tag.bull{background:rgba(52,211,153,.15);color:var(--bull)}
+.tag.bear{background:rgba(248,113,113,.15);color:var(--bear)}
+.tag.gold{background:rgba(251,191,36,.15);color:var(--neutral)}
+.tag.purple{background:rgba(167,139,250,.15);color:var(--purple)}
+.tag.orange{background:rgba(251,146,60,.15);color:var(--orange)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:linear-gradient(145deg,var(--panel-2),var(--bg-2));border:1px solid var(--line);border-radius:10px;padding:18px}
+.card.bull{border-left:3px solid var(--bull)}
+.card.bear{border-left:3px solid var(--bear)}
+.card.neutral{border-left:3px solid var(--neutral)}
+.card.purple{border-left:3px solid var(--purple)}
+.card h4{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h4 .icon{font-size:16px}
+.card .body{font-size:12.5px;color:var(--muted);line-height:1.7}
+.card .body p{margin-bottom:6px}
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.strategy{background:var(--panel-2);border-radius:10px;padding:18px;border:1px solid var(--line)}
+.strategy.aggressive{border-top:3px solid var(--bull)}
+.strategy.balanced{border-top:3px solid var(--neutral)}
+.strategy.conservative{border-top:3px solid var(--bear)}
+.strategy h4{font-size:14px;color:var(--accent);margin-bottom:8px}
+.strategy .target{font-size:11px;color:var(--muted);margin-bottom:4px}
+.strategy .price{font-size:18px;font-weight:700;color:var(--accent);margin:6px 0}
+.score-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.score{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center}
+.score .label{font-size:11px;color:var(--muted);margin-bottom:4px}
+.score .val{font-size:22px;font-weight:700}
+.score .desc{font-size:10px;color:var(--muted);margin-top:2px}
+.verdict{background:linear-gradient(135deg,var(--panel-2),var(--bg-2));border:2px solid var(--accent);border-radius:12px;padding:24px;margin:20px 0;text-align:center}
+.verdict.bull{border-color:var(--bull)}
+.verdict.bear{border-color:var(--bear)}
+.verdict.neutral{border-color:var(--neutral)}
+.verdict .rating{font-size:32px;font-weight:700;color:var(--accent)}
+.verdict .rating.bull{color:var(--bull)}
+.verdict .rating.bear{color:var(--bear)}
+.verdict .rating.neutral{color:var(--neutral)}
+.verdict .horizon{font-size:13px;color:var(--muted);margin:8px 0}
+.verdict .logic{font-size:13px;color:var(--text);max-width:780px;margin:10px auto;text-align:left;line-height:1.7}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+footer .disclaim{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px;text-align:left;color:var(--orange)}
+@media(max-width:768px){
+  .wrap{padding:16px}
+  section{padding:18px}
+  header.hero{padding:22px}
+  nav.toc ol{columns:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <h1>具身智能 🤖 人形机器人量产元年 · 全产业链投研分析</h1>
+  <div class="sub">基于特斯拉 Optimus 量产 + 宇树 IPO + 智元千台交付 · 涵盖产业链全景、A 股龙头、估值定价、操盘策略</div>
+  <div class="meta">
+    <span>📅 数据截至 2026-07-30</span>
+    <span>🤖 量产元年</span>
+    <span>⚡ Optimus 百万台</span>
+    <span>🦿 宇树 IPO 过会</span>
+    <span>💰 2035 万亿市场</span>
+    <span>💼 操盘建议</span>
+    <span>🔧 20+ A 股龙头</span>
+    <span>⭐ 主题稀缺</span>
+  </div>
+</header>
+
+<!-- ========== TOC ========== -->
+<nav class="toc">
+  <h3>目录导航</h3>
+  <ol>
+    <li><a href="#s1">一、赛道速览：核心数据与里程碑</a></li>
+    <li><a href="#s2">二、产业链全景与上中下游</a></li>
+    <li><a href="#s3">三、技术路线与本体厂商格局</a></li>
+    <li><a href="#s4">四、A 股 20+ 龙头深度对比</a></li>
+    <li><a href="#s5">五、商业化时间表与应用场景</a></li>
+    <li><a href="#s6">六、估值定价与情景分析</a></li>
+    <li><a href="#s7">七、操盘策略与买卖节奏</a></li>
+    <li><a href="#s8">八、回报测算与终极展望</a></li>
+    <li><a href="#s9">九、风险提示与投资纪律</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 1. 速览 ========== -->
+<section id="s1">
+  <h2><span class="num">01</span>赛道速览：核心数据与里程碑</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi neutral"><div class="label">全球市场(2025)</div><div class="val">≈ 44 亿美元</div><div class="delta">CAGR ≈ 39%</div></div>
+    <div class="kpi bull"><div class="label">中国市场(2025)</div><div class="val">≈ 9150 亿</div><div class="delta">⭐ 全球占比 80%</div></div>
+    <div class="kpi purple"><div class="label">2035 中国市场</div><div class="val">≥ 1 万亿元</div><div class="delta">⭐ 千寻智能预测</div></div>
+    <div class="kpi bull"><div class="label">2050 全球市场</div><div class="val">≈ 5 万亿美元</div><div class="delta">⭐ 大摩预测</div></div>
+    <div class="kpi neutral"><div class="label">单台成本(2025)</div><div class="val">10-30 万</div><div class="delta">⭐ 下降曲线</div></div>
+    <div class="kpi bull"><div class="label">特斯拉 Optimus</div><div class="val">2026 量产</div><div class="delta">⭐ 百万台目标</div></div>
+  </div>
+
+  <h3>1.1 关键事件节奏</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:58%"></colgroup>
+    <thead><tr><th>时点</th><th>事件</th><th>里程碑意义</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="nowrap">2025 政府工作报告</td>
+        <td><b>"具身智能"首次写入</b></td>
+        <td>写入"十五五"未来产业，<b>政策定调</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap">2025-11</td>
+        <td>特斯拉 Optimus V3 敲定</td>
+        <td>第三代设计 + 灵巧手 22 自由度</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026 年初</td>
+        <td>智元机器人 1000 台下线</td>
+        <td>国内 <b>首个千台级</b>交付企业</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-03</td>
+        <td>宇树科技 IPO 申请获受理</td>
+        <td>"科创板人形机器人第一股"</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026-07-02</td>
+        <td>宇树科创板 IPO 注册生效</td>
+        <td>仅用 <b>104 天</b>，创科创板最快纪录</td>
+      </tr>
+      <tr>
+        <td class="nowrap">2026 全年</td>
+        <td>Optimus 百万台量产启动</td>
+        <td>加州弗里蒙特第三代生产线投产</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple">
+    <strong>🤖 核心结论</strong>：具身智能是 <b>2026 年最具确定性的量产元年</b>。特斯拉 Optimus 百万台目标 + 宇树科创板 IPO + 智元千台交付 + 武汉"千台计划"，构成<b>"政策+技术+资本+订单"</b>四重共振。A 股市场上，<b>减速器 + 丝杠 + 伺服电机 + 传感器</b> 是产业链四大核心环节，孕育 <b>20+ 龙头股</b> 的主题机会。
+  </div>
+</section>
+
+<!-- ========== 2. 产业链全景 ========== -->
+<section id="s2">
+  <h2><span class="num">02</span>产业链全景与上中下游</h2>
+
+  <h3>2.1 产业链价值分布</h3>
+  <div class="chart-box">
+    <div class="chart-title">人形机器人产业链价值分布</div>
+    <div class="stack-bar-row">
+      <div class="name">上游：核心零部件</div>
+      <div class="stack-bar"><div style="width:65%;background:linear-gradient(90deg,#5eead4,#60a5fa)">≈ 65% 价值</div></div>
+      <div class="val">⭐ 最高</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">中游：本体制造</div>
+      <div class="stack-bar"><div style="width:30%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">≈ 30% 价值</div></div>
+      <div class="val">⭐ 整机集成</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">下游：应用场景</div>
+      <div class="stack-bar"><div style="width:5%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">≈ 5% 价值</div></div>
+      <div class="val">场景落地</div>
+    </div>
+    <div class="chart-note">资料来源：《2025 人形机器人与具身智能产业研究报告》。</div>
+  </div>
+
+  <h3>2.2 上中下游分布</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">⬆</span> 上游：核心零部件（53% 厂商）</h4>
+      <div class="body">
+        <p><b>① 减速器（35-40% 成本）</b></p>
+        <p>• 谐波：<b>绿的谐波</b>（全球第二）、丰立智能</p>
+        <p>• RV：<b>双环传动</b>、中大力德</p>
+        <p>• 单台用量：14-20 个</p>
+        <p><b>② 丝杠（15-25% 成本）</b></p>
+        <p>• 行星滚柱丝杠：<b>北特科技</b>、五洲新春</p>
+        <p>• 单台用量：10-14 根（Optimus 方案）</p>
+        <p><b>③ 伺服电机（25-30% 成本）</b></p>
+        <p>• 无框力矩电机：<b>汇川技术</b>、步科股份</p>
+        <p>• 空心杯电机（灵巧手）：<b>鸣志电器</b></p>
+        <p>• 单台用量：28-40 个</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> 中游：本体制造（35% 厂商）</h4>
+      <div class="body">
+        <p><b>第一梯队（已量产/交付）</b></p>
+        <p>• <b>优必选</b>（港股）：Walker S1/S2，工业应用</p>
+        <p>• <b>宇树科技</b>：H1、G1（<b>9.9 万</b>全球最低价）</p>
+        <p>• <b>智元机器人</b>：GO-1、灵犀 X1/X2（华为芯片）</p>
+        <p>• <b>特斯拉</b>：Optimus V2/V3（百万台计划）</p>
+        <p><b>第二梯队（快速跟进）</b></p>
+        <p>• 银河通用、星动纪元、傅利叶、逐际动力</p>
+        <p><b>第三梯队（新进入）</b></p>
+        <p>• 小米 CyberOne、奇瑞 Mornine、追觅</p>
+        <p>• 字节、华为、长安</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⬇</span> 下游：应用场景（12% 厂商）</h4>
+      <div class="body">
+        <p><b>① 工业制造</b>（最先落地）</p>
+        <p>• 汽车装配：特斯拉、比亚迪、东风</p>
+        <p>• 3C 产品组装、零部件搬运</p>
+        <p><b>② 物流仓储</b></p>
+        <p>• 京东、顺丰试点分拣配送</p>
+        <p><b>③ 商业服务</b></p>
+        <p>• 酒店接待、餐厅服务</p>
+        <p><b>④ 特种应用</b></p>
+        <p>• 电力巡检、矿山作业、危险环境</p>
+        <p><b>⑤ 医疗健康</b></p>
+        <p>• 康复、手术协助、老年陪护</p>
+        <p><b>⑥ 家庭服务</b>（远期）</p>
+        <p>• 家务、教育、陪伴</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>2.3 单台成本拆分（2025 估算）</h3>
+  <table class="data">
+    <colgroup><col style="width:22%"><col style="width:18%"><col style="width:18%"><col style="width:22%"><col style="width:20%"></colgroup>
+    <thead><tr><th>零部件</th><th>数量</th><th>单价（元）</th><th>总价（元）</th><th>成本占比</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>无框力矩电机</b></td>
+        <td>28-40 个</td>
+        <td>800-1500</td>
+        <td>25,000-50,000</td>
+        <td>25-30%</td>
+      </tr>
+      <tr>
+        <td><b>谐波/RV 减速器</b></td>
+        <td>14-20 个</td>
+        <td>1500-3000</td>
+        <td>25,000-45,000</td>
+        <td>20-25%</td>
+      </tr>
+      <tr>
+        <td><b>行星滚柱丝杠</b></td>
+        <td>10-14 根</td>
+        <td>3000-8000</td>
+        <td>30,000-80,000</td>
+        <td>15-25%</td>
+      </tr>
+      <tr>
+        <td><b>力矩传感器</b></td>
+        <td>10-14 个</td>
+        <td>2000-30000</td>
+        <td>20,000-100,000</td>
+        <td>10-15%</td>
+      </tr>
+      <tr>
+        <td><b>IMU/视觉/电池</b></td>
+        <td>多类</td>
+        <td>—</td>
+        <td>15,000-30,000</td>
+        <td>10-15%</td>
+      </tr>
+      <tr>
+        <td><b>芯片/控制板</b></td>
+        <td>1 套</td>
+        <td>8000-15000</td>
+        <td>8,000-15,000</td>
+        <td>5-8%</td>
+      </tr>
+      <tr style="background:rgba(94,234,212,.10)">
+        <td colspan="2"><b>合计成本</b></td>
+        <td colspan="2"><b>约 12-25 万元/台</b></td>
+        <td><b>100%</b></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 3. 技术路线 ========== -->
+<section id="s3">
+  <h2><span class="num">03</span>技术路线与本体厂商格局</h2>
+
+  <h3>3.1 核心零部件深度解析</h3>
+
+  <h4>① 减速器：单台价值最大环节</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">⚙</span> 谐波减速器（精度优先）</h4>
+      <div class="body">
+        <p><b>国内龙头</b>：<b>绿的谐波（688017）</b>（全球第二、市占率 ≈ 30%）</p>
+        <p><b>技术原理</b>：柔轮弹性变形传动，传动精度可达<b>角秒级</b></p>
+        <p><b>应用</b>：手臂、腕部等高精度关节</p>
+        <p><b>客户</b>：优必选、智元、特斯拉供应链</p>
+        <p><b>价格</b>：1000-2000 元/台</p>
+        <p><b>壁垒</b>：柔轮材料 + 齿形设计 + 批量一致性</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚙</span> RV 减速器（扭矩优先）</h4>
+      <div class="body">
+        <p><b>国内龙头</b>：<b>双环传动（002472）</b>、中大力德（002896）</p>
+        <p><b>技术原理</b>：行星齿轮结构，承载能力强、刚度高</p>
+        <p><b>应用</b>：腰部、髋部等<b>大扭矩</b>关节</p>
+        <p><b>技术指标</b>：扭矩可达数千牛米，寿命 >10000 小时</p>
+        <p><b>价格</b>：3000-8000 元/台</p>
+        <p><b>壁垒</b>：精密加工 + 装配工艺</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>② 丝杠：特斯拉 Optimus 核心方案</h4>
+  <div class="callout bull">
+    <strong>🧬 行星滚柱丝杠 = 高端人形机器人技术风向标</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>特斯拉 Optimus 采用行星滚柱丝杠</b>，单台用量达 <b>14 根</b>，是最贵重的核心零部件</li>
+      <li><b>壁垒最高</b>：精度等级 E0-E4（vs 滚珠丝杠 C5-C7）</li>
+      <li><b>国内布局</b>：<b>北特科技、五洲新春、贝斯特、鼎智科技、长盛轴承</b></li>
+      <li><b>价格</b>：3000-8000 元/根，<b>占整机成本 15-25%</b></li>
+      <li><b>国产替代窗口</b>：南京化纤收购德国厂商 + 国内自研双线推进</li>
+    </ul>
+  </div>
+
+  <h4>③ 伺服电机 + 传感器</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">⚡</span> 无框力矩电机</h4>
+      <div class="body">
+        <p><b>国内龙头</b>：<b>汇川技术（300124）</b>（伺服全国第一）、步科股份、雷赛智能、鸣志电器、禾川科技</p>
+        <p><b>应用</b>：单台机器人用量 <b>28-40 个</b></p>
+        <p><b>成本占比</b>：25-30%</p>
+        <p><b>空心杯电机（灵巧手用）</b>：鸣志电器全球领先</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">👁</span> 传感器（机器人五官）</h4>
+      <div class="body">
+        <p><b>力矩传感器</b>：宇立仪器（六维力国内龙头）</p>
+        <p><b>柔性/电子皮肤</b>：汉威科技、能斯达</p>
+        <p><b>IMU（姿态控制）</b>：芯动联科（六轴 IMU 国内龙头）</p>
+        <p><b>视觉</b>：奥比中光（3D 视觉）、速腾聚创、禾赛</p>
+        <p><b>壁垒</b>：六维力传感器<b>全球仅 3-4 家</b>可量产</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.2 本体厂商格局（第一/第二/第三梯队）</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:14%"><col style="width:20%"><col style="width:22%"><col style="width:30%"></colgroup>
+    <thead><tr><th>梯队</th><th>企业</th><th>代表产品</th><th>核心亮点</th><th>2025-2026 量产状态</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.08)">
+        <td colspan="5"><b>🥇 第一梯队（已实现量产或交付）</b></td>
+      </tr>
+      <tr>
+        <td>第一</td><td><b>优必选</b></td><td>Walker S1/S2</td><td>工业搬运、汽车装配</td><td>已交付东风、比亚迪</td>
+      </tr>
+      <tr>
+        <td>第一</td><td><b>宇树科技</b></td><td>H1、G1</td><td>强化学习 + 纯视觉感知</td><td>G1 售价 <b>9.9 万</b>，科创板 IPO 在即</td>
+      </tr>
+      <tr>
+        <td>第一</td><td><b>智元机器人</b></td><td>GO-1、灵犀 X1/X2</td><td>华为昇腾芯片、ViLLA 架构</td><td>2026Q1 <b>1000 台</b>下线</td>
+      </tr>
+      <tr>
+        <td>第一</td><td><b>特斯拉</b></td><td>Optimus V3</td><td>行星滚柱丝杠 + 全栈自研</td><td>2026 <b>百万台</b>量产启动</td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td colspan="5"><b>🥈 第二梯队（快速跟进）</b></td>
+      </tr>
+      <tr>
+        <td>第二</td><td><b>银河通用</b></td><td>G1</td><td>灵巧手 + 合成数据</td><td>融资中</td>
+      </tr>
+      <tr>
+        <td>第二</td><td><b>星动纪元</b></td><td>X1、X2</td><td>端到端神经网络控制</td><td>小批量</td>
+      </tr>
+      <tr>
+        <td>第二</td><td><b>傅利叶</b></td><td>GR-1、GR-2</td><td>通用人形机器人</td><td>已交付康复医院</td>
+      </tr>
+      <tr>
+        <td>第二</td><td><b>逐际动力</b></td><td>CL-1、CL-2</td><td><b>纯视觉感知</b>方案</td><td>无力控方案探索</td>
+      </tr>
+      <tr style="background:rgba(167,139,250,.08)">
+        <td colspan="5"><b>🥉 第三梯队（新进入者）</b></td>
+      </tr>
+      <tr>
+        <td>第三</td><td>小米</td><td>CyberOne（铁大）</td><td>消费电子延伸</td><td>研发中</td>
+      </tr>
+      <tr>
+        <td>第三</td><td>奇瑞</td><td>Mornine（墨茵）</td><td>车企跨界</td><td>研发中</td>
+      </tr>
+      <tr>
+        <td>第三</td><td>追觅</td><td>通用人形</td><td>家电延伸</td><td>研发中</td>
+      </tr>
+      <tr>
+        <td>第三</td><td>华为 / 字节</td><td>夸父 / 自研</td><td>科技巨头跨界</td><td>投资 + 自研</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 4. A股龙头 ========== -->
+<section id="s4">
+  <h2><span class="num">04</span>A 股 20+ 龙头深度对比</h2>
+
+  <h3>4.1 龙头综合卡片（按价值量排序）</h3>
+  <table class="data">
+    <colgroup><col style="width:14%"><col style="width:10%"><col style="width:18%"><col style="width:20%"><col style="width:18%"><col style="width:20%"></colgroup>
+    <thead><tr><th>公司</th><th>代码</th><th>产业链定位</th><th>核心产品</th><th>2026 表现</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.10)">
+        <td><b>⭐ 绿的谐波</b></td><td>688017</td>
+        <td>谐波减速器</td>
+        <td>国内龙头，全球第二（市占率 30%）</td>
+        <td>概念活跃</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td><b>汇川技术</b></td><td>300124</td>
+        <td>伺服系统</td>
+        <td>国内伺服龙头 + 人形机器人关节模组</td>
+        <td>持续新高</td>
+        <td class="num bull"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td><b>双环传动</b></td><td>002472</td>
+        <td>RV 减速器</td>
+        <td>国内 RV 龙头 + 新能源齿轮</td>
+        <td>持续走高</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>北特科技</td><td>603009</td>
+        <td>行星滚柱丝杠</td>
+        <td>小批量供货 + 特斯拉 Optimus 方案</td>
+        <td>涨幅居前</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>五洲新春</td><td>603667</td>
+        <td>滚珠/滚柱丝杠</td>
+        <td>轴承 + 丝杠双线</td>
+        <td>持续走高</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>鸣志电器</td><td>603728</td>
+        <td>空心杯电机</td>
+        <td>灵巧手核心 + 微特电机全球领先</td>
+        <td>持续走高</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>贝斯特</td><td>300580</td>
+        <td>丝杠 + 涡轮增压器</td>
+        <td>精密丝杠量产</td>
+        <td>跟涨</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>中大力德</td><td>002896</td>
+        <td>精密减速器</td>
+        <td>谐波 + RV 双线</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>雷赛智能</td><td>002979</td>
+        <td>伺服系统</td>
+        <td>步科 + 伺服 + 控制器</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>步科股份</td><td>688160</td>
+        <td>无框力矩电机</td>
+        <td>关节模组核心</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>丰立智能</td><td>301368</td>
+        <td>谐波 + RV</td>
+        <td>人形机器人推进</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>鼎智科技</td><td>300512</td>
+        <td>微型丝杠</td>
+        <td>微小型丝杠领先</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>长盛轴承</td><td>300718</td>
+        <td>丝杠制造</td>
+        <td>滚柱丝杠轴承</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>宇立仪器</td><td>未上市</td>
+        <td>六维力传感器</td>
+        <td>国内六维力传感器龙头</td>
+        <td>—</td>
+        <td class="num neutral">—</td>
+      </tr>
+      <tr>
+        <td>芯动联科</td><td>688582</td>
+        <td>六轴 IMU</td>
+        <td>姿态控制核心</td>
+        <td>跟涨</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>汉威科技</td><td>300007</td>
+        <td>柔性传感器</td>
+        <td>触觉感知 + 电子皮肤</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>奥比中光</td><td>688322</td>
+        <td>3D 视觉</td>
+        <td>机器人视觉感知</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>寒武纪</td><td>688256</td>
+        <td>AI 芯片</td>
+        <td>思元 590 + 690 + 通用大模型</td>
+        <td>持续新高</td>
+        <td class="num bull"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td>海光信息</td><td>688041</td>
+        <td>DCU + CPU</td>
+        <td>国产 AI 算力</td>
+        <td>持续走高</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+      <tr>
+        <td>恒立液压</td><td>601100</td>
+        <td>滚珠丝杠 + 液压</td>
+        <td>精密制造延伸</td>
+        <td>跟涨</td>
+        <td class="num neutral"><b>★★★☆☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 板块 5 大龙头排名</h3>
+  <table class="data">
+    <colgroup><col style="width:10%"><col style="width:14%"><col style="width:14%"><col style="width:38%"><col style="width:24%"></colgroup>
+    <thead><tr><th>排名</th><th>公司</th><th>代码</th><th>投资亮点</th><th>推荐度</th></tr></thead>
+    <tbody>
+      <tr style="background:rgba(94,234,212,.12)">
+        <td class="num nowrap"><b>🥇 1</b></td>
+        <td><b>⭐ 绿的谐波</b></td><td>688017</td>
+        <td>谐波减速器国内龙头 + 全球第二 + 直接对标人形机器人核心需求</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr style="background:rgba(96,165,250,.08)">
+        <td class="num nowrap"><b>🥈 2</b></td>
+        <td><b>汇川技术</b></td><td>300124</td>
+        <td>伺服全国第一 + 人形机器人关节模组 + 业绩兑现最确定</td>
+        <td class="num bull nowrap"><b>★★★★★</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>🥉 3</b></td>
+        <td>双环传动</td><td>002472</td>
+        <td>RV 减速器龙头 + 新能源齿轮 + 国产替代</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td class="num nowrap"><b>4</b></td>
+        <td>北特科技</td><td>603009</td>
+        <td>行星滚柱丝杠 + Optimus 方案 + 高壁垒</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+      <tr>
+        <td class="nowrap"><b>5</b></td>
+        <td>鸣志电器</td><td>603728</td>
+        <td>空心杯电机 + 灵巧手核心 + 全球微特电机领先</td>
+        <td class="num bull nowrap"><b>★★★★☆</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.3 核心龙头深度分析</h3>
+
+  <h4>① 绿的谐波（688017）— 谐波减速器国内龙头</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏆</span> 卡位优势</h4>
+      <div class="body">
+        <p><b>全球第二、国内第一</b>，谐波减速器市占率 ≈ 30%</p>
+        <p><b>单台机器人用量 14-20 个</b>，是<b>价值量最大</b>的核心零部件</p>
+        <p>已批量供货优必选、智元、特斯拉供应链</p>
+        <p>技术精度达<b>角秒级</b>，传动效率 80%+</p>
+        <p>柔轮材料 + 齿形设计 + 批量一致性</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚠</span> 风险点</h4>
+      <div class="body">
+        <p>人形机器人营收占比 <b>不足 5%</b>（短期）</p>
+        <p>传统业务（工业机器人）增速放缓</p>
+        <p>国际龙头哈默纳科、纽卡特竞争</p>
+        <p>价格年降压力（量产规模化后）</p>
+        <p><b>估值</b>：2026E PE 60-80x</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>② 汇川技术（300124）— 伺服系统龙头</h4>
+  <div class="grid-2">
+    <div class="card bull">
+      <h4><span class="icon">🏆</span> 三大业务协同</h4>
+      <div class="body">
+        <p><b>伺服系统</b>：国内市占率 <b>第一</b>，已推出<b>人形机器人专用关节模组</b></p>
+        <p><b>业务规模</b>：2025 营收超 350 亿（业绩最确定龙头）</p>
+        <p><b>客户</b>：覆盖国内所有头部本体厂商</p>
+        <p><b>通用自动化</b>：变频器 + PLC + 伺服 + 新能源车电控</p>
+        <p><b>2026 业绩</b>：人形机器人带来增量 <b>10-30%</b></p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">⚠</span> 风险点</h4>
+      <div class="body">
+        <p>传统业务（工控/电梯）周期波动</p>
+        <p>新能源车业务降价压力</p>
+        <p>人形机器人 <b>单台价值量</b>（伺服占 25-30%）</p>
+        <p>海外品牌（安川、三菱）竞争</p>
+        <p><b>估值</b>：2026E PE 35-45x（合理）</p>
+      </div>
+    </div>
+  </div>
+
+  <h4>③ 北特科技（603009）— 行星滚柱丝杠新锐</h4>
+  <div class="callout bull">
+    <strong>🏆 行星滚柱丝杠 = Optimus 核心方案</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>壁垒最高</b>：精度等级 E0-E4，是滚珠丝杠的 <b>5-10 倍</b></li>
+      <li><b>特斯拉 Optimus</b>采用行星滚柱丝杠，单台用量 <b>14 根</b></li>
+      <li>北特科技已<b>小批量供货</b>，国产替代窗口打开</li>
+      <li>价格 <b>3000-8000 元/根</b>，占整机成本 <b>15-25%</b></li>
+      <li>国内自研：南京化纤收购德国厂商 + 五洲新春等布局</li>
+      <li><b>2026 表现</b>：涨幅居前，主题龙头</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 5. 商业化时间表 ========== -->
+<section id="s5">
+  <h2><span class="num">05</span>商业化时间表与应用场景</h2>
+
+  <h3>5.1 商业化四阶段路径</h3>
+  <div class="chart-box">
+    <div class="chart-title">人形机器人商业化时间表（2025-2030）</div>
+    <div class="stack-bar-row">
+      <div class="name">2025-2026（试点期）</div>
+      <div class="stack-bar"><div style="width:18%;background:linear-gradient(90deg,#34d399,#5eead4)">汽车工厂 + 3C 组装</div></div>
+      <div class="val">⭐ 单台示范</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2027-2028（扩散期）</div>
+      <div class="stack-bar"><div style="width:35%;background:linear-gradient(90deg,#60a5fa,#5eead4)">工业制造 + 物流分拣</div></div>
+      <div class="val">⭐⭐ 成本 10-15 万</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2028-2030（爆发期）</div>
+      <div class="stack-bar"><div style="width:60%;background:linear-gradient(90deg,#a78bfa,#60a5fa)">服务业 + 巡检 + 医疗</div></div>
+      <div class="val">⭐⭐⭐ 百万级</div>
+    </div>
+    <div class="stack-bar-row">
+      <div class="name">2030+（普及期）</div>
+      <div class="stack-bar"><div style="width:100%;background:linear-gradient(90deg,#fbbf24,#a78bfa)">家庭服务 + 普及</div></div>
+      <div class="val">⭐⭐⭐⭐ 5 万以内</div>
+    </div>
+    <div class="chart-note">资料来源：《2025 人形机器人与具身智能产业研究报告》、千寻智能。</div>
+  </div>
+
+  <h3>5.2 主流技术路线对比</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:18%"><col style="width:20%"><col style="width:22%"><col style="width:22%"></colgroup>
+    <thead><tr><th>维度</th><th>特斯拉 Optimus</th><th>宇树 G1</th><th>智元 GO-1</th><th>国产其他</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>价格</td>
+        <td>2-2.5 万美元</td>
+        <td><b>9.9 万人民币</b></td>
+        <td>10-15 万人民币</td>
+        <td>15-30 万</td>
+      </tr>
+      <tr>
+        <td>丝杠方案</td>
+        <td>行星滚柱丝杠</td>
+        <td>谐波 + 行星</td>
+        <td>谐波 + RV</td>
+        <td>谐波为主</td>
+      </tr>
+      <tr>
+        <td>感知方案</td>
+        <td>纯视觉（HW4.0）</td>
+        <td>纯视觉</td>
+        <td>多激光雷达 + 视觉</td>
+        <td>多模态融合</td>
+      </tr>
+      <tr>
+        <td>AI 大脑</td>
+        <td>FSD + 端侧</td>
+        <td>自研强化学习</td>
+        <td>华为昇腾 + ViLLA</td>
+        <td>第三方大模型</td>
+      </tr>
+      <tr>
+        <td>量产状态</td>
+        <td><b>2026 百万台</b></td>
+        <td>2025 试产 5000 台</td>
+        <td>2026 1000 台</td>
+        <td>小批量</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5.3 价格下降曲线</h3>
+  <div class="callout bull">
+    <strong>💰 价格快速下探是关键</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li><b>2024</b>：50-100 万/台（实验室阶段）</li>
+      <li><b>2025</b>：10-30 万/台（小规模量产）</li>
+      <li><b>2027 目标</b>：< 10 万/台（宇树 G1 已实现 9.9 万）</li>
+      <li><b>2030 目标</b>：< 5 万/台（家庭普及价格）</li>
+      <li><b>关键驱动</b>：核心零部件国产替代 + 规模效应 + 设计优化</li>
+    </ul>
+  </div>
+
+  <h3>5.4 应用场景时间表</h3>
+  <table class="data">
+    <colgroup><col style="width:18%"><col style="width:30%"><col style="width:26%"><col style="width:26%"></colgroup>
+    <thead><tr><th>阶段</th><th>核心场景</th><th>出货规模</th><th>单台价值</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>2025-2026</b></td>
+        <td>汽车工厂搬运、3C 组装</td>
+        <td>1-5 万台</td>
+        <td>10-30 万</td>
+      </tr>
+      <tr>
+        <td><b>2027-2028</b></td>
+        <td>工业制造、物流分拣</td>
+        <td>30-50 万台</td>
+        <td>10-15 万</td>
+      </tr>
+      <tr>
+        <td><b>2028-2030</b></td>
+        <td>服务业、巡检、医疗陪护</td>
+        <td>百万级</td>
+        <td>5-10 万</td>
+      </tr>
+      <tr>
+        <td><b>2030+</b></td>
+        <td>家庭服务、教育、陪伴</td>
+        <td>千万级</td>
+        <td>< 5 万</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== 6. 估值 ========== -->
+<section id="s6">
+  <h2><span class="num">06</span>估值定价与情景分析</h2>
+
+  <h3>6.1 板块整体估值锚定</h3>
+  <div class="grid-3">
+    <div class="card neutral">
+      <h4><span class="icon">📐</span> PE 估值（主题溢价）</h4>
+      <div class="body">
+        <p>2027E 板块净利 <b>50 亿+</b></p>
+        <p>合理 PE：<b>50-80x</b>（含主题溢价）</p>
+        <p>对应市值：<b>2500-4000 亿</b></p>
+        <p><b>结论</b>：当前市值基本反映中性预期</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">🔮</span> SOTP 估值（分部加总）</h4>
+      <div class="body">
+        <p>传统工控主业：<b>1500 亿</b></p>
+        <p>减速器 / 丝杠（2030E）：<b>500-800 亿</b></p>
+        <p>伺服 / 传感器（2030E）：<b>600-900 亿</b></p>
+        <p><b>合理市值</b>：<b>2600-3200 亿</b></p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">⚡</span> 重置成本（Safety Net）</h4>
+      <div class="body">
+        <p>减速器产能 <b>500 亿+</b></p>
+        <p>丝杠产能 <b>300 亿+</b></p>
+        <p>整机厂订单 <b>2000 亿+</b></p>
+        <p><b>结论</b>：长期价值底线</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <strong>🎯 估值结论</strong>：当前板块 20+ 龙头整体市值约 <b>3000-4000 亿</b>，已<b>部分反映主题溢价</b>。后续上涨需依赖：① Optimus 量产兑现；② 宇树 IPO 表现；③ 国产订单兑现。板块整体 <b>5 年空间 3-5 倍</b>。
+  </div>
+
+  <h3>6.2 三档情景推演</h3>
+  <div class="grid-3">
+    <div class="card bear">
+      <h4><span class="icon">📉</span> 悲观情景（概率 25%）</h4>
+      <div class="body">
+        <p><b>假设</b>：Optimus 量产延期 + 国产替代不及预期 + 主题退潮</p>
+        <p>板块 2026E 净利：<b>30 亿</b></p>
+        <p>目标估值：<b>30-50x</b></p>
+        <p>板块总市值：<b>900-1500 亿</b></p>
+        <p>触发：量产延期 + 主业恶化</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📊</span> 中性情景（概率 50%）</h4>
+      <div class="body">
+        <p><b>假设</b>：Optimus 量产小批量 + 宇树 IPO 顺利</p>
+        <p>板块 2026E 净利：<b>50 亿</b></p>
+        <p>目标估值：<b>50-70x</b></p>
+        <p>板块总市值：<b>2500-3500 亿</b></p>
+        <p>触发：订单兑现 + 宇树上市</p>
+      </div>
+    </div>
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 乐观情景（概率 25%）</h4>
+      <div class="body">
+        <p><b>假设</b>：百万台量产兑现 + 全球订单爆发</p>
+        <p>板块 2026E 净利：<b>80 亿+</b></p>
+        <p>目标估值：<b>80-120x</b></p>
+        <p>板块总市值：<b>6000-9000 亿</b></p>
+        <p>触发：规模量产 + 国产替代</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. 操盘策略 ========== -->
+<section id="s7">
+  <h2><span class="num">07</span>操盘策略与买卖节奏</h2>
+
+  <div class="verdict bull">
+    <div class="rating bull">🤖 量产元年 · 主题 + 业绩双驱动</div>
+    <div class="horizon">12 个月投资视角</div>
+    <div class="logic">
+      具身智能是 <b>A 股最具确定性的量产元年赛道</b>。当前 <b>特斯拉 Optimus 百万台计划 + 宇树 IPO + 智元千台交付</b>，构成<b>"政策+技术+资本+订单"</b>四重共振。<b>建议作为主题仓位配置</b>（单只 ≤5%），采取"<b>分批建仓 + 龙头组合</b>"策略，目标 2026 年 <b>+30-60%</b> 收益。
+    </div>
+  </div>
+
+  <h3>7.1 多维度评分</h3>
+  <div class="score-board">
+    <div class="score"><div class="label">技术成熟度</div><div class="val" style="color:var(--bull)">8.0 / 10</div><div class="desc">⭐ 量产元年</div></div>
+    <div class="score"><div class="label">政策催化</div><div class="val" style="color:var(--bull)">8.5 / 10</div><div class="desc">⭐ 写入报告</div></div>
+    <div class="score"><div class="label">估值水平</div><div class="val" style="color:var(--orange)">5.0 / 10</div><div class="desc">⭐ 整体偏高</div></div>
+    <div class="score"><div class="label">业绩兑现</div><div class="val" style="color:var(--orange)">5.5 / 10</div><div class="desc">⭐ 部分兑现</div></div>
+    <div class="score"><div class="label">资金活跃度</div><div class="val" style="color:var(--bull)">8.5 / 10</div><div class="desc">⭐ 涨停频发</div></div>
+    <div class="score"><div class="label">订单确定性</div><div class="val" style="color:var(--bull)">7.5 / 10</div><div class="desc">⭐ 已现订单</div></div>
+    <div class="score"><div class="label">综合评分</div><div class="val" style="color:var(--bull)">7.0 / 10</div><div class="desc">⭐⭐ 偏多</div></div>
+  </div>
+
+  <h3>7.2 三档操盘方案</h3>
+  <div class="strategy-grid">
+    <div class="strategy conservative">
+      <h4>🛡 保守型（稳健）</h4>
+      <div class="target">目标：核心龙头 + 长期持有</div>
+      <div class="price">建仓区间：<b>回调 -10%</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>5%</b></li>
+        <li>配置：汇川 + 绿的 + 双环</li>
+        <li><b>止损位</b>：单只 -15%</li>
+        <li><b>止盈位</b>：分批 +50%/+100%</li>
+        <li>持有周期：12-24 个月</li>
+        <li>逻辑：龙头确定性 + 业绩兑现</li>
+      </ul>
+    </div>
+
+    <div class="strategy balanced">
+      <h4>⚖ 平衡型（推荐）</h4>
+      <div class="target">目标：龙头组合 + 主题轮动</div>
+      <div class="price">建仓区间：<b>5 家龙头分批</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>10%</b></li>
+        <li>配置：绿的 25% + 汇川 25% + 双环 20% + 北特 15% + 鸣志 15%</li>
+        <li><b>止损位</b>：组合 -10%</li>
+        <li><b>止盈位</b>：分批 +30%/+60%</li>
+        <li>持有周期：6-12 个月</li>
+        <li>逻辑：龙头组合 + 主题博弈</li>
+      </ul>
+    </div>
+
+    <div class="strategy aggressive">
+      <h4>⚡ 激进型（涨停板套利）</h4>
+      <div class="target">目标：主题催化 + 涨停板</div>
+      <div class="price">建仓区间：<b>政策窗口前</b></div>
+      <ul style="margin-top:10px;padding-left:18px;font-size:12.5px;color:var(--muted)">
+        <li>仓位上限：总资金 <b>15%</b></li>
+        <li>配置：弹性标的（北特 + 绿的 + 鸣志）</li>
+        <li><b>止损位</b>：单只 -8%</li>
+        <li><b>止盈位</b>：涨停后分批止盈</li>
+        <li>持有周期：1-3 个月</li>
+        <li>逻辑：事件驱动 + 短线博弈</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>7.3 关键买卖节奏</h3>
+  <div class="callout bull">
+    <strong>🟢 买入触发条件（任一满足）</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>特斯拉 Optimus <b>2026 百万台量产</b>兑现</li>
+      <li>宇树科技 <b>科创板 IPO 表现</b>超预期</li>
+      <li>智元机器人 <b>新一轮大额订单</b>（如华为/比亚迪）</li>
+      <li>中证机器人指数 <b>企稳反弹 + 20%</b></li>
+      <li>核心零部件公司 <b>2026Q3 业绩超预期</b></li>
+      <li>北向资金 <b>净流入</b>，单周 > 5 亿</li>
+    </ul>
+  </div>
+  <div class="callout bear">
+    <strong>🔴 卖出/止损触发条件</strong>
+    <ul style="margin-top:8px;padding-left:20px">
+      <li>股价跌破 <b>支撑位 -15%</b>，<b>减半仓</b></li>
+      <li>股价跌破 <b>支撑位 -25%</b>，<b>清仓离场</b></li>
+      <li>Optimus <b>量产延期超 6 个月</b></li>
+      <li>宇树 IPO <b>破发或表现不佳</b></li>
+      <li>人形机器人 <b>安全事故</b> / 监管收紧</li>
+      <li>核心零部件 <b>价格战</b>导致毛利率崩溃</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 8. 回报测算 ========== -->
+<section id="s8">
+  <h2><span class="num">08</span>回报测算与终极展望</h2>
+
+  <div class="callout purple">
+    <strong>🤖 终极结论</strong>：具身智能是 <b>2026 年最具确定性的量产元年赛道</b>。中国凭借<b>完整的产业链布局 + 政策支持 + 资本助推 + 量产交付</b>，占据全球 <b>80%+</b> 制造份额。A 股市场上，<b>减速器 + 丝杠 + 伺服电机</b> 是确定性最高的环节，<b>2030 年板块有望迎来戴维斯双击</b>。
+  </div>
+
+  <h3>8.1 三阶段回报预测</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">📈</span> 短期（2026 当前）</h4>
+      <div class="body">
+        <p><b>主题炒作弹性</b>：已兑现多次涨停</p>
+        <p><b>典型催化</b>：Optimus 量产、宇树 IPO、智元订单</p>
+        <p><b>风险</b>：估值高（部分 PE 100x+）</p>
+        <p><b>建议</b>：小仓位（≤10%）波段操作</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">💰</span> 中期（2027-2030）</h4>
+      <div class="body">
+        <p><b>营收增量</b>：核心零部件订单释放</p>
+        <p><b>板块业绩</b>：从 0 增至 <b>50-100 亿/年</b></p>
+        <p><b>估值溢价</b>：PE <b>50-80x</b>，板块冲击 <b>4000 亿</b></p>
+        <p><b>目标价</b>：<b>龙头 +50-100%</b></p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🚀</span> 长期（2030+ 商业化）</h4>
+      <div class="body">
+        <p><b>2030</b>：百万台量产 + 工厂规模化</p>
+        <p><b>2035</b>：千万台出货 + 服务业普及</p>
+        <p><b>2050</b>：<b>5 万亿美元</b>全球市场</p>
+        <p><b>板块长期空间</b>：5-10 倍</p>
+        <p><b>终极能源</b>：人类生活下一程</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.2 投资逻辑三阶段</h3>
+  <div class="grid-3">
+    <div class="card bull">
+      <h4><span class="icon">🥇</span> 第一阶段（2026-2027）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>主题投资</b></p>
+        <p><b>受益</b>：核心零部件（减速器、丝杠、伺服）</p>
+        <p><b>预期</b>：板块 +30-60%</p>
+        <p><b>关键节点</b>：Optimus 百万台量产 + 宇树 IPO</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">🥈</span> 第二阶段（2028-2030）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>成长投资</b></p>
+        <p><b>受益</b>：整机厂 + 应用方案商</p>
+        <p><b>预期</b>：板块 +50-100%</p>
+        <p><b>关键节点</b>：行业出货百万台</p>
+      </div>
+    </div>
+    <div class="card purple">
+      <h4><span class="icon">🥉</span> 第三阶段（2030+）</h4>
+      <div class="body">
+        <p><b>策略</b>：<b>价值投资</b></p>
+        <p><b>受益</b>：家庭服务机器人 + 通用 AI</p>
+        <p><b>预期</b>：板块 +200-500%</p>
+        <p><b>关键节点</b>：家庭普及 + 5 万亿市场</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>8.3 终极展望：具身智能 = 下一代计算平台</h3>
+  <div class="verdict bull">
+    <div class="rating bull">🤖 下一代人机交互入口 · 5 万亿美元市场</div>
+    <div class="horizon">2026 → 2050 远景</div>
+    <div class="logic">
+      <b>为什么是下一代入口</b>：① <b>AI 终极载体</b>（大模型必须物理化）；② <b>劳动力替代</b>（全球老龄化刚需）；③ <b>万亿市场</b>（手机 + 汽车规模叠加）；④ <b>中国主导</b>（全球 80% 制造份额）；⑤ <b>技术奇点临近</b>（VLA + 端到端模型）。<br><br>
+      <b>商业化路线</b>：2026 工厂量产 → 2028 服务业普及 → 2030+ 家庭普及，市场规模 <b>5 万亿美元</b>，相当于<b>再造一个全球汽车 + 手机市场</b>。<br><br>
+      <b>A 股机会</b>：20+ 龙头股覆盖减速器 / 丝杠 / 伺服 / 传感器 / AI 芯片全环节，<b>中国凭借完整产业链优势主导全球</b>，是 <b>A 股未来 5-10 年最确定的方向之一</b>。<br><br>
+      <b>投资哲学</b>：这是<b>AI 走出屏幕、走入物理世界的关键一步</b>，错过它 = 错过下一代计算平台的入场券。
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. 风险 ========== -->
+<section id="s9">
+  <h2><span class="num">09</span>风险提示与投资纪律</h2>
+
+  <h3>9.1 主要风险因素</h3>
+  <div class="grid-2">
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 技术与商业化风险</h4>
+      <div class="body">
+        <p><b>① 技术路线不确定</b>：纯视觉 vs 多模态 / 谐波 vs 行星 / 直驱 vs 减速</p>
+        <p><b>② 量产延期</b>：Optimus 百万台目标存在挑战</p>
+        <p><b>③ 成本下降不及预期</b>：当前核心零部件占成本 <b>67%</b></p>
+        <p><b>④ 替代方案</b>：四足机器人、轮式机器人竞争</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 商业化与时间表风险</h4>
+      <div class="body">
+        <p><b>① C 端家庭场景落地缓慢</b>：商业模式仍未跑通</p>
+        <p><b>② 工业场景替代效应有限</b>：专用机械臂成本更低</p>
+        <p><b>③ 应用场景有限</b>：工厂外落地困难</p>
+        <p><b>④ 量产爬坡风险</b>：特斯拉产能爬坡历史多次延期</p>
+      </div>
+    </div>
+    <div class="card bear">
+      <h4><span class="icon">⚠</span> 投资风险</h4>
+      <div class="body">
+        <p><b>① 估值泡沫</b>：部分核心零部件公司 PE 超 100x</p>
+        <p><b>② 业绩占比低</b>：多数公司涉具身智能营收占比 < 10%</p>
+        <p><b>③ 价格战风险</b>：核心零部件年降 20-30%</p>
+        <p><b>④ 高波动</b>：涨停 + 跌停频发</p>
+      </div>
+    </div>
+    <div class="card neutral">
+      <h4><span class="icon">📋</span> 投资纪律建议</h4>
+      <div class="body">
+        <p><b>① 仓位管理</b>：单一龙头 ≤ 5%，主题仓位 ≤ 15%</p>
+        <p><b>② 止损纪律</b>：跌破 -15% 立即减仓</p>
+        <p><b>③ 跟踪订单</b>：每季关注 Optimus + 宇树 + 智元交付</p>
+        <p><b>④ 业绩兑现</b>：跟踪核心零部件 Q3 业绩</p>
+        <p><b>⑤ 心理建设</b>：长期赛道，避免追涨杀跌</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout bear">
+    <strong>🚨 最重要纪律</strong>：具身智能是 <b>5-10 年长期赛道</b>，<b>短期主题波动剧烈</b>。<b>必须</b>坚持：<br>
+    • <b>组合配置</b>（不重仓单只），分散至 5-8 家龙头<br>
+    • <b>分批建仓</b>（主题回调 10%+ 再加仓）<br>
+    • <b>严格止损</b>（跌破 -15% 立即减仓）<br>
+    • <b>跟踪里程碑</b>（Optimus 百万台、宇树 IPO、家庭普及）<br>
+    • <b>耐心持有</b>：这是 AI 物理化的关键赛道，<b>不要被短期波动影响长期判断</b>
+  </div>
+</section>
+
+<footer>
+  <div class="disclaim">
+    <strong>📌 免责声明</strong>：本报告由 AI 基于公开资料整理生成，仅供研究、学习、内部参考使用，<b>不构成任何投资建议</b>。证券价格与基本面数据实时变化，请以官方公告与实时行情为准。任何投资决策应基于独立判断与专业咨询，市场有风险，投资需谨慎。
+  </div>
+  © 2026 具身智能：人形机器人量产元年 全产业链投研分析 · 数据截至 2026-07-30
+</footer>
+
+</div>
+</body>
+</html>
